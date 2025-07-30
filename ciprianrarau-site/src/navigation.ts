@@ -23,6 +23,10 @@ export const headerData = {
       href: getPermalink('/#resume'),
     },
     {
+      text: 'CV',
+      href: getPermalink('/cv'),
+    },
+    {
       text: 'Blog',
       href: getBlogPermalink(),
     },
@@ -49,6 +53,7 @@ export const footerData = {
         { text: 'About', href: getPermalink('/#about') },
         { text: 'Projects', href: getPermalink('/#projects') },
         { text: 'Resume', href: getPermalink('/#resume') },
+        { text: 'CV', href: getPermalink('/cv') },
         { text: 'Blog', href: getBlogPermalink() },
         { text: 'Contact', href: getPermalink('/contact') },
       ],
@@ -77,7 +82,7 @@ export const footerData = {
       links: [
         { text: 'LinkedIn', href: 'https://linkedin.com/in/ciprianrarau', target: '_blank' },
         { text: 'GitHub', href: 'https://github.com/crarau', target: '_blank' },
-        { text: 'Email', href: 'mailto:me@ciprianrarau.com' },
+        { text: 'Email', href: 'mailto:chip@ciprianrarau.com' },
         { text: 'Phone', href: 'tel:+15145605016' },
       ],
     },
@@ -89,7 +94,7 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://linkedin.com/in/ciprianrarau' },
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/crarau' },
-          { ariaLabel: 'Email', icon: 'tabler:mail', href: 'mailto:me@ciprianrarau.com' },
+          { ariaLabel: 'Email', icon: 'tabler:mail', href: 'mailto:chip@ciprianrarau.com' },
   ],
   footNote: `
     © ${new Date().getFullYear()} Ciprian Rarau. All rights reserved.
