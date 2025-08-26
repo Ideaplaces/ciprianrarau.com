@@ -1,0 +1,93 @@
+{
+  "containerDefinitions": [
+    {
+      "command": null,
+      "cpu": 256,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "dnsSearchDomains": null,
+      "dnsServers": [],
+      "dockerLabels": null,
+      "dockerSecurityOptions": null,
+      "entryPoint": null,
+      "environment": [],
+      "essential": true,
+      "extraHosts": null,
+      "firelensConfiguration": null,
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:3000/health-check || exit 1"
+        ],
+        "interval": 30,
+        "retries": 3,
+        "startPeriod": null,
+        "timeout": 5
+      },
+      "hostname": null,
+      "image": "766991228952.dkr.ecr.us-east-1.amazonaws.com/mentorly-website:latest",
+      "interactive": null,
+      "links": null,
+      "linuxParameters": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/mentorly-website-staging",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": null
+      },
+      "memory": 1024,
+      "memoryReservation": 1024,
+      "mountPoints": [],
+      "name": "mentorly-website-staging",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "privileged": null,
+      "pseudoTerminal": null,
+      "readonlyRootFilesystem": null,
+      "resourceRequirements": null,
+      "secrets": [
+        {
+          "name": "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/staging/NEXT_PUBLIC_GA_MEASUREMENT_ID"
+        },
+        {
+          "name": "NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/staging/NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID"
+        },
+        {
+          "name": "NEXT_PUBLIC_STRIPE_PK",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/staging/NEXT_PUBLIC_STRIPE_PK"
+        }
+      ],
+      "startTimeout": null,
+      "stopTimeout": null,
+      "systemControls": null,
+      "ulimits": null,
+      "user": null,
+      "volumesFrom": [],
+      "workingDirectory": null
+    }
+  ],
+  "cpu": "256",
+  "executionRoleArn": "arn:aws:iam::766991228952:role/ecsTaskExecutionRole",
+  "family": "mentorly-website-staging",
+  "inferenceAccelerators": null,
+  "ipcMode": null,
+  "memory": "1024",
+  "networkMode": "awsvpc",
+  "pidMode": null,
+  "placementConstraints": [],
+  "proxyConfiguration": null,
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "taskRoleArn": null,
+  "volumes": []
+}

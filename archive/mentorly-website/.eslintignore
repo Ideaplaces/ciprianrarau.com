@@ -1,0 +1,8 @@
+node_modules/
+lib/framer-motion.js
+types/graphql.ts
+coverage/
+graphql/
+src/gql/
+add-translation.js
+sort-translations.js

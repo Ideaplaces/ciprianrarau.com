@@ -1,0 +1,65 @@
+{
+  "source_image": "My Day in Music Screenshot Jun 29 2025.png",
+  "dimensions": {
+    "width": 1832,
+    "height": 16348
+  },
+  "sections_count": 5,
+  "sections": [
+    {
+      "type": "header",
+      "filename": "header_01.png",
+      "bounds": [
+        0,
+        0,
+        1832,
+        175
+      ],
+      "description": "Navigation and branding"
+    },
+    {
+      "type": "hero",
+      "filename": "hero_02.png",
+      "bounds": [
+        0,
+        175,
+        1832,
+        825
+      ],
+      "description": "Main banner or hero section"
+    },
+    {
+      "type": "features",
+      "filename": "features_03.png",
+      "bounds": [
+        0,
+        760,
+        1832,
+        8429
+      ],
+      "description": "Features or services section"
+    },
+    {
+      "type": "content",
+      "filename": "content_04.png",
+      "bounds": [
+        0,
+        8339,
+        1832,
+        15983
+      ],
+      "description": "Additional content section"
+    },
+    {
+      "type": "footer",
+      "filename": "footer_05.png",
+      "bounds": [
+        0,
+        15973,
+        1832,
+        16323
+      ],
+      "description": "Footer with links and information"
+    }
+  ]
+}

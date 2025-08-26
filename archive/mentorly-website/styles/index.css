@@ -1,0 +1,499 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700;900&display=swap');
+@import './animations.css';
+@import '~@uiw/react-md-editor/markdown-editor.css';
+@import '~@uiw/react-markdown-preview/markdown.css';
+@import '~@uiw/react-textarea-code-editor/dist.css';
+@import '~react-multi-carousel/lib/styles.css';
+@import '~react-tippy/dist/tippy.css';
+@tailwind base;
+@tailwind components;
+
+@font-face {
+  font-family: 'sherika';
+  src: url('https://s3.amazonaws.com/co.mentorly.prod/fonts/sherika/sherika-regular-webfont.woff')
+      format('woff2'),
+    url('https://s3.amazonaws.com/co.mentorly.prod/fonts/sherika/sherika-regular-webfont.woff2')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sherika';
+  src: url('https://s3.amazonaws.com/co.mentorly.prod/fonts/sherika/sherika-bold-webfont.woff2')
+      format('woff2'),
+    url('https://s3.amazonaws.com/co.mentorly.prod/fonts/sherika/sherika-bold-webfont.woff')
+      format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --headerLg: 85px;
+  --headerSm: 85px;
+  --accentColor: #7582fb;
+  --highlightColor: #7582fb;
+  --accentTextColor: #f7f7f7;
+  --backgroundColor: #fdde35;
+  --backgroundTextColor: #111111;
+  --buttonColor: #111111;
+  --buttonTextColor: #f7f7f7;
+  --fontName: 'Mulish';
+  --titleFontName: 'Mulish';
+  --reach-dialog: 1;
+}
+
+.flexbox-basis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  position: relative;
+  height: var(--headerSm);
+}
+@screen sm {
+  .header {
+    position: relative;
+    height: var(--headerLg);
+  }
+}
+
+.logoSmall {
+  height: 75px !important;
+}
+.logoHeader {
+  height: auto !important;
+}
+
+.mentorlyLogoPill {
+  background-color: #e6b629;
+}
+.mentorlyLogoPill div {
+  top: -2px;
+  left: 0;
+}
+
+.mobilenav {
+  margin-top: var(--headerSm);
+}
+@screen sm {
+  .mobilenav {
+    margin-top: var(--headerLg);
+  }
+}
+
+/* there's also a .wrapper in header.css */
+.wrapper {
+  @apply px-4;
+}
+.nowrap {
+  @apply -mx-4;
+}
+
+@screen sm {
+  .wrapper {
+    @apply px-8;
+  }
+  .nowrap {
+    @apply -mx-8;
+  }
+}
+@screen md {
+  .wrapper {
+    @apply px-12;
+  }
+  .nowrap {
+    @apply -mx-12;
+  }
+}
+@screen lg {
+  .wrapper {
+    @apply px-16;
+  }
+  .nowrap {
+    @apply -mx-16;
+  }
+}
+
+.halfContainer {
+  width: 100%;
+  height: 100%;
+}
+@screen sm {
+  .halfContainer {
+    max-width: 100%;
+  }
+}
+@screen md {
+  .halfContainer {
+    max-width: 384px;
+  }
+}
+@screen lg {
+  .halfContainer {
+    max-width: 512px;
+  }
+}
+@screen xl {
+  .halfContainer {
+    max-width: 640px;
+  }
+}
+
+/* footer 230px comes from tailwind config */
+/* @TODO: reference rather than hardcode? */
+.fillHeight {
+  min-height: calc(100vh - var(--headerSm) - 230px);
+}
+@screen sm {
+  .fillHeight {
+    min-height: calc(100vh - var(--headerLg) - 230px);
+  }
+}
+
+.min-h-screen-minus-navbar {
+  min-height: calc(100vh - var(--headerSm));
+}
+@screen sm {
+  .min-h-screen-minus-navbar {
+    min-height: calc(100vh - var(--headerLg));
+  }
+}
+
+.h-screen-minus-navbar {
+  height: calc(100vh - var(--headerSm));
+}
+@screen sm {
+  .h-screen-minus-navbar {
+    height: calc(100vh - var(--headerLg));
+  }
+}
+
+/* Hide scrollbar */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide the focus indicator if the element receives focus via the mouse */
+.js-focus-visible :focus:not(.focus-visible) {
+  @apply outline-none;
+}
+
+/* Indicator for keyboard focus. */
+.js-focus-visible .focus-visible {
+  @apply outline-none ring;
+}
+
+input[id^='react-select']:focus,
+.no-focus {
+  @apply shadow-none;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-tabs__tab--selected {
+  opacity: 0.5;
+}
+
+.react-datepicker__header select {
+  @apply py-1;
+}
+
+.fullwidth-react-datepicker .react-datepicker-wrapper,
+.fullwidth-react-datepicker .react-datepicker-wrapper button:first-child {
+  width: 100%;
+}
+.fullwidth-react-datepicker .react-datepicker-wrapper {
+  text-align: left !important;
+}
+
+/* Resize handle */
+/* Source: https://adamlynch.com/flexible-data-tables-with-css-grid/ */
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0;
+  width: 3px;
+  cursor: col-resize;
+}
+
+.resize-handle:hover,
+/* The following selector is needed so the handle is visible during resize even if the mouse isn't over the handle anymore */
+.header--being-resized .resize-handle {
+  opacity: 0.5;
+}
+
+th:hover .resize-handle {
+  opacity: 0.3;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  padding: 24px;
+}
+.Toastify__toast--dark {
+  background-color: #111111;
+}
+.Toastify__toast--default {
+  color: #111111;
+}
+.Toastify__toast--info {
+  background-color: #bbb;
+  color: #111;
+}
+.Toastify__toast--success {
+  background-color: #56be92;
+}
+.Toastify__toast--warning {
+  background-color: #f8de5a;
+  color: #111;
+}
+.Toastify__toast--error {
+  background-color: #d34c46;
+}
+
+[data-reach-dialog-overlay] {
+  background: hsla(0, 0%, 0%, 0.33);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  z-index: 1000;
+}
+
+[data-reach-dialog-content] {
+  margin: auto;
+}
+@screen sm {
+  [data-reach-dialog-content] {
+    margin: 10vh auto;
+    outline: none;
+    width: 100%;
+  }
+}
+
+[data-reach-combobox-popover] {
+  border: solid 1px hsla(0, 0%, 0%, 0.25);
+  background: hsla(0, 100%, 100%, 0.99);
+  font-size: 85%;
+}
+
+[data-reach-combobox-list] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+[data-reach-combobox-option] {
+  cursor: pointer;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+}
+
+[data-reach-combobox-option][aria-selected='true'] {
+  background: hsl(211, 10%, 95%);
+}
+
+[data-reach-combobox-option]:hover {
+  background: hsl(211, 10%, 92%);
+}
+
+[data-reach-combobox-option][aria-selected='true']:hover {
+  background: hsl(211, 10%, 90%);
+}
+
+[data-suggested-value] {
+  font-weight: bold;
+}
+
+.feature-list ul {
+  @apply list-none mb-4;
+}
+
+.feature-list li {
+  @apply mb-2 font-black;
+}
+
+.feature-list li:before {
+  @apply text-black mr-1;
+  content: '✓ ';
+}
+
+.page-content ul {
+  @apply mb-4 list-disc;
+}
+
+.page-content li {
+  @apply ml-6;
+}
+
+.extra-strong strong {
+  @apply font-black;
+}
+
+.rich-text p {
+  @apply mb-4;
+}
+
+.rich-text h2 {
+  @apply font-black mb-4 text-2xl;
+}
+
+.rich-text h3 {
+  @apply font-black mb-4 text-xl;
+}
+
+.rich-text a {
+  @apply underline;
+}
+
+.rich-text table {
+  @apply border border-darkGray mb-4;
+}
+.rich-text tr:nth-child(odd) {
+  @apply bg-gray;
+}
+
+.rich-text th,
+.rich-text td {
+  @apply p-2 align-top border border-darkGray;
+}
+
+.rich-text th {
+  @apply whitespace-nowrap;
+}
+
+.rich-text ol li {
+  @apply list-decimal list-inside mb-1;
+}
+
+.rich-text ul li {
+  @apply list-disc list-inside mb-1;
+}
+
+.stats h2 {
+  @apply font-black text-5xl;
+}
+
+.top-full {
+  top: 100%;
+}
+
+.rbc-calendar {
+  @apply mb-12;
+  margin-bottom: 0;
+}
+.rbc-show-more {
+  background: none;
+}
+
+.rbc-day-slot .rbc-background-event {
+  @apply bg-gray text-black border-0;
+}
+
+.rbc-event.rbc-selected {
+  /* Darken on click by 15% (down to 85%) */
+  @apply bg-gray;
+}
+
+.rbc-header {
+  white-space: normal;
+}
+
+.rbc-month-view,
+.rbc-day-view,
+.rbc-week-view,
+.rbc-time-view {
+  background-color: white;
+}
+
+.rbc-time-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.rbc-day-slot .rbc-event {
+  @apply border border-black border-opacity-10;
+}
+
+.rbc-off-range-bg {
+  background: #fff;
+}
+
+.rbc-today {
+  @apply bg-white;
+}
+
+.rbc-current-time-indicator {
+  @apply bg-black;
+}
+
+.rbc-allday-cell,
+.rbc-event-label {
+  display: none;
+}
+.rbc-time-view .rbc-header {
+  border-bottom: 0;
+  @apply flex flex-1 h-full items-center justify-center;
+}
+.rbc-header + .rbc-today {
+  @apply underline;
+}
+.rbc-time-view .rbc-row {
+  @apply flex flex-1 items-center min-h-12;
+}
+
+.rbc-time-header-gutter {
+  min-width: 3em !important;
+  @apply flex justify-center items-center;
+}
+.rbc-time-gutter {
+  min-width: 3em !important;
+}
+.rbc-agenda-view {
+  position: relative;
+}
+
+/* hide-label class for react-big-calendar */
+.hide-rbc-event-label .rbc-event-label {
+  display: none !important;
+}
+
+.emailStyle p {
+  padding: 10px 0;
+}
+
+.main-margin {
+  margin-top: 5.3rem;
+}
+
+/* wordpress */
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+@tailwind utilities;

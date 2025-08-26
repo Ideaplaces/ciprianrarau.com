@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "esnext",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "typeRoots": ["types", "node_modules/@types"],
+    "paths": {
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"],
+      "types/*": ["./types/*"],
+      "src/*": ["./src/*"],
+      "data/*": ["./data/*"],
+      "lang/*": ["./lang/*"],
+      "graphql/*": ["./graphql/*"],
+      "styles/*": ["./styles/*"]
+    },
+    "noEmit": false,
+    "incremental": true
+  },
+  "files": ["types/graphql.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

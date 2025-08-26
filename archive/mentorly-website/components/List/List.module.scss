@@ -1,0 +1,20 @@
+.checkmark {
+  list-style: none;
+  li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.25rem;
+    &.disabled {
+      @apply text-darkGray;
+    }
+    &:before {
+      position: absolute;
+      left: 0;
+      content: "✓ ";
+      @apply text-transparent;
+    }
+    &:not(.disabled):before {
+      @apply text-yellow;
+    }
+  }
+}

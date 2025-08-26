@@ -1,0 +1,73 @@
+.timeSlots {
+  min-height: 80px;
+  align-items: center;
+}
+.sessionTypes {
+  min-height: 120px;
+  align-items: center;
+  overflow-y: visible;
+}
+.timeSlotButton,
+.sessionTypeButton {
+  min-height: 45px;
+  align-items: center;
+  margin: 2px;
+}
+
+// @value calendar-gridCell-size: 50px;
+
+// @media screen and (min-width: 768px) {
+//   @value calendar-gridCell-size: 2.5em;
+// }
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 14%);
+  grid-template-rows: repeat(7, auto);
+  grid-template-areas:
+    'arrowLeft header header header header header arrowRight'
+    'day day day day day day day'
+    'w0 w0 w0 w0 w0 w0 w0'
+    'w1 w1 w1 w1 w1 w1 w1'
+    'w2 w2 w2 w2 w2 w2 w2'
+    'w3 w3 w3 w3 w3 w3 w3'
+    'w4 w4 w4 w4 w4 w4 w4'
+    'w5 w5 w5 w5 w5 w5 w5'
+    'checkbox checkbox checkbox checkbox checkbox checkbox checkbox';
+}
+
+.calendarArrowLeft {
+  text-align: center;
+  grid-area: arrowLeft;
+}
+
+.calendarMonth {
+  grid-area: header;
+  align-self: center;
+  justify-self: center;
+}
+
+.calendarArrowRight {
+  text-align: center;
+  grid-area: arrowRight;
+}
+
+.weekDays {
+  grid-area: day;
+  justify-content: space-around;
+  display: flex;
+}
+
+.weekDay {
+  width: 14%;
+  height: auto;
+}
+
+.unavailableTimes {
+  grid-area: checkbox;
+  justify-self: left;
+}
+
+.modal {
+  @apply mx-0 my-0;
+}

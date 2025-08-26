@@ -1,0 +1,54 @@
+{
+  "containerDefinitions": [
+    {
+      "cpu": 256,
+      "dnsServers": [],
+      "environment": [],
+      "essential": true,
+      "image": "766991228952.dkr.ecr.us-east-1.amazonaws.com/mentorly-website:latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/mentorly-website",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "memory": 1024,
+      "memoryReservation": 1024,
+      "mountPoints": [],
+      "name": "mentorly-website",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/production/NEXT_PUBLIC_GA_MEASUREMENT_ID"
+        },
+        {
+          "name": "NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/production/NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID"
+        },
+        {
+          "name": "NEXT_PUBLIC_STRIPE_PK",
+          "valueFrom": "arn:aws:ssm:us-east-1:766991228952:parameter/production/NEXT_PUBLIC_STRIPE_PK"
+        }
+      ],
+      "volumesFrom": []
+    }
+  ],
+  "cpu": "256",
+  "executionRoleArn": "arn:aws:iam::766991228952:role/ecsTaskExecutionRole",
+  "family": "mentorly-website",
+  "memory": "1024",
+  "networkMode": "awsvpc",
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "volumes": []
+}

@@ -1,0 +1,70 @@
+{
+  "source_image": "Screen Capture OneOps Cloud Jun 29 2025.png",
+  "dimensions": {
+    "width": 1830,
+    "height": 8625
+  },
+  "sections_count": 5,
+  "sections": [
+    {
+      "type": "header",
+      "filename": "header_01.png",
+      "bounds": [
+        0,
+        0,
+        1830,
+        150
+      ],
+      "position": 1,
+      "of_total": 5
+    },
+    {
+      "type": "hero",
+      "filename": "hero_02.png",
+      "bounds": [
+        0,
+        150,
+        1830,
+        800
+      ],
+      "position": 2,
+      "of_total": 5
+    },
+    {
+      "type": "features",
+      "filename": "features_03.png",
+      "bounds": [
+        0,
+        950,
+        1830,
+        3687
+      ],
+      "position": 3,
+      "of_total": 5
+    },
+    {
+      "type": "content",
+      "filename": "content_04.png",
+      "bounds": [
+        0,
+        4637,
+        1830,
+        3687
+      ],
+      "position": 4,
+      "of_total": 5
+    },
+    {
+      "type": "footer",
+      "filename": "footer_05.png",
+      "bounds": [
+        0,
+        8324,
+        1830,
+        301
+      ],
+      "position": 5,
+      "of_total": 5
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "projectId": "j72s7n",
+  "chromeWebSecurity": false,
+  "viewportWidth": 1400,
+  "viewportHeight": 660,
+  "baseUrl": "http://test.localtest.me:3010"
+}

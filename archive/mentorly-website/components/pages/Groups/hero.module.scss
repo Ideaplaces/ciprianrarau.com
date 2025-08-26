@@ -1,0 +1,19 @@
+.titleImage {
+  height: 275px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .titleImage {
+    height: 375px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .title {
+    font-size: 1.25rem !important;
+  }
+
+  .subtitle {
+    font-size: 1rem !important;
+  }
+}

@@ -1,0 +1,27 @@
+.common {
+  position: relative;
+  padding-left: 1.5em;
+}
+.common:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  color: green;
+  text-align: center;
+}
+.uncommon {
+  position: relative;
+  padding-left: 1.5em;
+  color: grey;
+}
+.uncommon:before {
+  content: '-';
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+  color: grey;
+}

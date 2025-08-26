@@ -1,0 +1,9 @@
+{
+  "bptn-networking": {
+    "form.tags": "Étiquette",
+    "menu.mentors": "Membres",
+    "term.mentor": "membre",
+    "term.mentors": "membres",
+    "term.unknownMentor": "Membre inconnu"
+  }
+}

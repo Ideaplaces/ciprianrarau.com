@@ -1,0 +1,109 @@
+/* Appear on page load */
+.fade-appear {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 600ms;
+}
+
+/* Enter */
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 600ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 600ms;
+}
+
+/* slide enter Right-Left */
+.slideRL-enter {
+  opacity: 0;
+  transform: translateX(500px);
+  z-index: 1;
+}
+.slideRL-enter.slideRL-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: 500ms ease;
+}
+
+/* slide exit Right-Left */
+.slideRL-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slideRL-exit.slideRL-exit-active {
+  opacity: 0;
+  transform: translateX(-500px);
+  transition: 500ms ease;
+}
+.slideRL-exit-done {
+  opacity: 0;
+}
+
+/* slide enter Left-Right */
+.slideLR-enter {
+  opacity: 0;
+  transform: translateX(-500px);
+  z-index: 1;
+}
+.slideLR-enter.slideLR-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: 500ms ease;
+}
+
+/* slide exit Left-Right */
+.slideLR-exit {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.slideLR-exit.slideLR-exit-active {
+  opacity: 0;
+  transform: translateX(500px);
+  transition: 500ms ease;
+}
+.slideLR-exit-done {
+  opacity: 0;
+}
+
+.pageSliderLeft-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.pageSliderLeft-enter.pageSliderLeft-enter-active {
+  transform: translate3d(0, 0, 0);
+  transition: all 600ms;
+}
+.pageSliderLeft-exit {
+  transform: translate3d(0, 0, 0);
+}
+.pageSliderLeft-exit.pageSliderLeft-exit-active {
+  transform: translate3d(100%, 0, 0);
+  transition: all 600ms;
+}
+
+.pageSliderRight-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.pageSliderRight-enter.pageSliderRight-enter-active {
+  transform: translate3d(0, 0, 0);
+  transition: all 600ms;
+}
+.pageSliderRight-exit {
+  transform: translate3d(0, 0, 0);
+}
+.pageSliderRight-exit.pageSliderRight-exit-active {
+  transform: translate3d(-100%, 0, 0);
+  transition: all 600ms;
+}

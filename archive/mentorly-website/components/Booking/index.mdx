@@ -1,0 +1,17 @@
+# Booking component
+
+This component loads in the Global Modal from two different contexts at the moment
+For example:
+
+- [Booking From Session Page](#booking-from-session-page)
+- [Booking From Mentor Profile Page](#booking-from-mentor-profile-page)
+
+### Booking From Session Page
+
+From the Session page, many of the parameters are already defined, so the selection panels are skipped.
+Instead, the values from the session page selection are passed, and the component shows the last step of the flow.
+After the user confirms these details the component then submits the mutation.
+
+### Booking From Mentor Profile Page
+
+In the mentor's profile page, if the disableButtonProps checks pass, the [Book Button](?path=/story/booking-bookbutton--user-in-another-group) becomes active and launches the modal.

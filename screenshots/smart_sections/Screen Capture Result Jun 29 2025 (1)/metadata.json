@@ -1,0 +1,65 @@
+{
+  "source_image": "Screen Capture Result Jun 29 2025 (1).png",
+  "dimensions": {
+    "width": 2112,
+    "height": 10188
+  },
+  "sections_count": 5,
+  "sections": [
+    {
+      "type": "header",
+      "filename": "header_01.png",
+      "bounds": [
+        0,
+        0,
+        2112,
+        200
+      ],
+      "description": "Navigation and branding"
+    },
+    {
+      "type": "hero",
+      "filename": "hero_02.png",
+      "bounds": [
+        0,
+        150,
+        2112,
+        850
+      ],
+      "description": "Main banner or hero section"
+    },
+    {
+      "type": "features",
+      "filename": "features_03.png",
+      "bounds": [
+        0,
+        800,
+        2112,
+        5349
+      ],
+      "description": "Features or services section"
+    },
+    {
+      "type": "content",
+      "filename": "content_04.png",
+      "bounds": [
+        0,
+        5204,
+        2112,
+        9878
+      ],
+      "description": "Additional content section"
+    },
+    {
+      "type": "footer",
+      "filename": "footer_05.png",
+      "bounds": [
+        0,
+        9788,
+        2112,
+        10188
+      ],
+      "description": "Footer with links and information"
+    }
+  ]
+}

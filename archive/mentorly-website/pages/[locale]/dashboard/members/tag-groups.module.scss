@@ -1,0 +1,10 @@
+.mosaic {
+  column-count: 1;
+  column-gap: 16;
+  @screen lg {
+    column-count: 2;
+  }
+  @screen xl {
+    column-count: 3;
+  }
+}

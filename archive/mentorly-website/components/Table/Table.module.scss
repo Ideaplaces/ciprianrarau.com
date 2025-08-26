@@ -1,0 +1,31 @@
+.FlexTable {
+  display: grid;
+  // overflow-x: scroll;
+  width: 100%;
+  max-width: 100%;
+  user-select: none;
+  thead,
+  tbody,
+  tr {
+    display: contents;
+  }
+  th,
+  td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: 0.07s background-color;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    text-align: left;
+  }
+
+  tr:nth-child(even) td {
+    // background: #f8f6ff;
+  }
+
+  tr:hover td {
+    background-color: #f8f8f8;
+  }
+}

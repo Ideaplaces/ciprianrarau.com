@@ -1,0 +1,65 @@
+{
+  "source_image": "Screen Capture OneOps Cloud Jun 29 2025.png",
+  "dimensions": {
+    "width": 1830,
+    "height": 8625
+  },
+  "sections_count": 5,
+  "sections": [
+    {
+      "type": "header",
+      "filename": "header_01.png",
+      "bounds": [
+        0,
+        0,
+        1830,
+        260
+      ],
+      "description": "Navigation and branding"
+    },
+    {
+      "type": "hero",
+      "filename": "hero_02.png",
+      "bounds": [
+        0,
+        205,
+        1830,
+        760
+      ],
+      "description": "Main banner or hero section"
+    },
+    {
+      "type": "features",
+      "filename": "features_03.png",
+      "bounds": [
+        0,
+        825,
+        1830,
+        4572
+      ],
+      "description": "Features or services section"
+    },
+    {
+      "type": "content",
+      "filename": "content_04.png",
+      "bounds": [
+        0,
+        4452,
+        1830,
+        8285
+      ],
+      "description": "Additional content section"
+    },
+    {
+      "type": "footer",
+      "filename": "footer_05.png",
+      "bounds": [
+        0,
+        8220,
+        1830,
+        8630
+      ],
+      "description": "Footer with links and information"
+    }
+  ]
+}

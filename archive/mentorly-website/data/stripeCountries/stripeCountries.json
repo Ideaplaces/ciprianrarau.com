@@ -1,0 +1,742 @@
+[
+  {
+    "name": "Australia",
+    "code": "AU",
+    "states": [],
+    "geonameId": 2077456,
+    "value": "AU",
+    "currency": "aud",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "12345678"
+    },
+    "routing_number": [
+      {
+        "id": "bsb",
+        "example": "123456"
+      }
+    ],
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Austria",
+    "code": "AT",
+    "states": [
+      "Burgenland",
+      "Kaernten",
+      "Niederoesterreich",
+      "Oberoesterreich",
+      "Salzburg",
+      "Steiermark",
+      "Tirol",
+      "Vorarlberg",
+      "Wien"
+    ],
+    "geonameId": 2782113,
+    "value": "AT",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "AT611904300235473201"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Belgium",
+    "code": "BE",
+    "states": [
+      "Antwerpen",
+      "Brabant Wallon",
+      "Brussels",
+      "Flanders",
+      "Hainaut",
+      "Liege",
+      "Limburg",
+      "Luxembourg",
+      "Namur",
+      "Oost-Vlaanderen",
+      "Vlaams-Brabant",
+      "Wallonia",
+      "West-Vlaanderen"
+    ],
+    "geonameId": 2802361,
+    "value": "BE",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "BE12345678912345"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Canada",
+    "code": "CA",
+    "states": [
+      "Alberta",
+      "British Columbia",
+      "Manitoba",
+      "New Brunswick",
+      "Newfoundland and Labrador",
+      "Northwest Territories",
+      "Nova Scotia",
+      "Nunavut",
+      "Ontario",
+      "Prince Edward Island",
+      "Quebec",
+      "Saskatchewan",
+      "Yukon Territory"
+    ],
+    "geonameId": 6251999,
+    "value": "CA",
+    "currency": "cad",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "000123456789"
+    },
+    "routing_number": [
+      {
+        "id": "transitNumber",
+        "example": "11000"
+      },
+      {
+        "id": "institutionNumber",
+        "example": "000"
+      }
+    ],
+    "personal_id_number": {
+      "id": "sin",
+      "example": "123 456 789"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Denmark",
+    "code": "DK",
+    "states": [
+      "Arhus",
+      "Bornholm",
+      "Frederiksberg",
+      "Frederiksborg",
+      "Fyn",
+      "Kobenhavn",
+      "Kobenhavns",
+      "Nordjylland",
+      "Ribe",
+      "Ringkobing",
+      "Roskilde",
+      "Sonderjylland",
+      "Storstrom",
+      "Vejle",
+      "Vestsjalland",
+      "Viborg"
+    ],
+    "geonameId": 2623032,
+    "value": "DK",
+    "currency": "dkk",
+    "account_number": {
+      "id": "iban",
+      "example": "DK5000400440116243"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Finland",
+    "code": "FI",
+    "states": [
+      "Aland",
+      "Etela-Suomen Laani",
+      "Ita-Suomen Laani",
+      "Lansi-Suomen Laani",
+      "Lappi",
+      "Oulun Laani"
+    ],
+    "geonameId": 660013,
+    "value": "FI",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "FI2112345600000785"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "France",
+    "code": "FR",
+    "states": [
+      "Alsace",
+      "Aquitaine",
+      "Auvergne",
+      "Basse-Normandie",
+      "Bourgogne",
+      "Bretagne",
+      "Centre",
+      "Champagne-Ardenne",
+      "Corse",
+      "Franche-Comte",
+      "Haute-Normandie",
+      "Ile-de-France",
+      "Languedoc-Roussillon",
+      "Limousin",
+      "Lorraine",
+      "Midi-Pyrenees",
+      "Nord-Pas-de-Calais",
+      "Pays de la Loire",
+      "Picardie",
+      "Poitou-Charentes",
+      "Provence-Alpes-Cote d'Azur",
+      "Rhone-Alpes"
+    ],
+    "geonameId": 3017382,
+    "value": "FR",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "FR1420041010050500013M02606"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Germany",
+    "code": "DE",
+    "states": [
+      "Baden-Wuerttemberg",
+      "Bayern",
+      "Berlin",
+      "Brandenburg",
+      "Bremen",
+      "Hamburg",
+      "Hessen",
+      "Mecklenburg-Vorpommern",
+      "Niedersachsen",
+      "Nordrhein-Westfalen",
+      "Rheinland-Pfalz",
+      "Saarland",
+      "Sachsen",
+      "Sachsen-Anhalt",
+      "Schleswig-Holstein",
+      "Thueringen"
+    ],
+    "geonameId": 2921044,
+    "value": "DE",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "DE89370400440532013000"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Hong Kong",
+    "code": "HK",
+    "states": [],
+    "geonameId": 1819730,
+    "value": "HK",
+    "currency": "hkd",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "123456-789"
+    },
+    "routing_number": [
+      {
+        "id": "clearingCode",
+        "example": "123"
+      },
+      {
+        "id": "branchCode",
+        "example": "456"
+      }
+    ],
+    "personal_id_number": {
+      "id": "hkid",
+      "example": "X123456(A)"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Ireland",
+    "code": "IE",
+    "states": [
+      "Carlow",
+      "Cavan",
+      "Clare",
+      "Cork",
+      "Donegal",
+      "Dublin",
+      "Galway",
+      "Kerry",
+      "Kildare",
+      "Kilkenny",
+      "Laois",
+      "Leitrim",
+      "Limerick",
+      "Longford",
+      "Louth",
+      "Mayo",
+      "Meath",
+      "Monaghan",
+      "Offaly",
+      "Roscommon",
+      "Sligo",
+      "Tipperary",
+      "Waterford",
+      "Westmeath",
+      "Wexford",
+      "Wicklow"
+    ],
+    "geonameId": 2963597,
+    "value": "IE",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "IE29AIBK93115212345678"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Italy",
+    "code": "IT",
+    "states": [
+      "Abruzzo",
+      "Basilicata",
+      "Calabria",
+      "Campania",
+      "Emilia-Romagna",
+      "Friuli-Venezia Giulia",
+      "Lazio",
+      "Liguria",
+      "Lombardia",
+      "Marche",
+      "Molise",
+      "Piemonte",
+      "Puglia",
+      "Sardegna",
+      "Sicilia",
+      "Toscana",
+      "Trentino-Alto Adige",
+      "Umbria",
+      "Valle d'Aosta",
+      "Veneto"
+    ],
+    "geonameId": 3175395,
+    "value": "IT",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "IT60X0542811101000000123456"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Luxembourg",
+    "code": "LU",
+    "states": ["Diekirch", "Grevenmacher", "Luxembourg"],
+    "geonameId": 2960313,
+    "value": "LU",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "LU280019400644750000"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Mexico",
+    "code": "MX",
+    "states": [
+      "Aguascalientes",
+      "Baja California",
+      "Baja California Sur",
+      "Chihuahua",
+      "Colima",
+      "Campeche",
+      "Coahuila",
+      "Chiapas",
+      "Federal District",
+      "Durango",
+      "Guerrero",
+      "Guanajuato",
+      "Hidalgo",
+      "Jalisco",
+      "México State",
+      "Michoacán",
+      "Morelos",
+      "Nayarit",
+      "Nuevo León",
+      "Oaxaca",
+      "Puebla",
+      "Querétaro",
+      "Quintana Roo",
+      "Sinaloa",
+      "San Luis Potosí",
+      "Sonora",
+      "Tabasco",
+      "Tlaxcala",
+      "Tamaulipas",
+      "Veracruz",
+      "Yucatán",
+      "Zacatecas"
+    ],
+    "value": "MX",
+    "currency": "mxn",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "000000001234567897"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Netherlands",
+    "code": "NL",
+    "states": [
+      "Drenthe",
+      "Flevoland",
+      "Friesland",
+      "Gelderland",
+      "Groningen",
+      "Limburg",
+      "Noord-Brabant",
+      "Noord-Holland",
+      "Overijssel",
+      "Utrecht",
+      "Zeeland",
+      "Zuid-Holland"
+    ],
+    "geonameId": 2750405,
+    "value": "NL",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "NL39RABO0300065264"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "New Zealand",
+    "code": "NZ",
+    "states": [
+      "Auckland",
+      "Bay of Plenty",
+      "Canterbury",
+      "Chatham Islands",
+      "Gisborne",
+      "Hawke's Bay",
+      "Manawatu-Wanganui",
+      "Marlborough",
+      "Nelson",
+      "Northland",
+      "Otago",
+      "Southland",
+      "Taranaki",
+      "Tasman",
+      "Waikato",
+      "Wellington",
+      "West Coast"
+    ],
+    "geonameId": 2186224,
+    "value": "NZ",
+    "currency": "nzd",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "0000000010"
+    },
+    "routing_number": [
+      {
+        "id": "routingNumber",
+        "example": "110000"
+      }
+    ],
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Norway",
+    "code": "NO",
+    "states": [
+      "Akershus",
+      "Aust-Agder",
+      "Buskerud",
+      "Finnmark",
+      "Hedmark",
+      "Hordaland",
+      "More og Romsdal",
+      "Nordland",
+      "Nord-Trondelag",
+      "Oppland",
+      "Oslo",
+      "Ostfold",
+      "Rogaland",
+      "Sogn og Fjordane",
+      "Sor-Trondelag",
+      "Telemark",
+      "Troms",
+      "Vest-Agder",
+      "Vestfold"
+    ],
+    "geonameId": 3144096,
+    "value": "NO",
+    "currency": "nok",
+    "account_number": {
+      "id": "iban",
+      "example": "NO9386011117947"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Portugal",
+    "code": "PT",
+    "states": [
+      "Aveiro",
+      "Acores",
+      "Beja",
+      "Braga",
+      "Braganca",
+      "Castelo Branco",
+      "Coimbra",
+      "Evora",
+      "Faro",
+      "Guarda",
+      "Leiria",
+      "Lisboa",
+      "Madeira",
+      "Portalegre",
+      "Porto",
+      "Santarem",
+      "Setubal",
+      "Viana do Castelo",
+      "Vila Real",
+      "Viseu"
+    ],
+    "geonameId": 2264397,
+    "value": "PT",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "PT50123443211234567890172"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Singapore",
+    "code": "SG",
+    "states": [],
+    "geonameId": 1880251,
+    "value": "SG",
+    "currency": "sgd",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "123456789012"
+    },
+    "routing_number": [
+      {
+        "id": "routingNumber",
+        "example": "1234-567"
+      }
+    ],
+    "personal_id_number": {
+      "id": "nric",
+      "example": "S0000000A"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Spain",
+    "code": "ES",
+    "states": [
+      "Andalucia",
+      "Aragon",
+      "Asturias",
+      "Baleares",
+      "Ceuta",
+      "Canarias",
+      "Cantabria",
+      "Castilla-La Mancha",
+      "Castilla y Leon",
+      "Cataluna",
+      "Comunidad Valenciana",
+      "Extremadura",
+      "Galicia",
+      "La Rioja",
+      "Madrid",
+      "Melilla",
+      "Murcia",
+      "Navarra",
+      "Pais Vasco"
+    ],
+    "geonameId": 2510769,
+    "value": "ES",
+    "currency": "eur",
+    "account_number": {
+      "id": "iban",
+      "example": "ES9121000418450200051332"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "Sweden",
+    "code": "SE",
+    "states": [
+      "Blekinge",
+      "Dalarnas",
+      "Gavleborgs",
+      "Gotlands",
+      "Hallands",
+      "Jamtlands",
+      "Jonkopings",
+      "Kalmar",
+      "Kronobergs",
+      "Norrbottens",
+      "Orebro",
+      "Ostergotlands",
+      "Skane",
+      "Sodermanlands",
+      "Stockholms",
+      "Uppsala",
+      "Varmlands",
+      "Vasterbottens",
+      "Vasternorrlands",
+      "Vastmanlands",
+      "Vastra Gotalands"
+    ],
+    "geonameId": 2661886,
+    "value": "SE",
+    "currency": "sek",
+    "account_number": {
+      "id": "iban",
+      "example": "SE3550000000054910000003"
+    },
+    "validWithoutProvince": true
+  },
+  {
+    "name": "Switzerland",
+    "code": "CH",
+    "states": [
+      "Aargau",
+      "Appenzell Ausser-Rhoden",
+      "Appenzell Inner-Rhoden",
+      "Basel-Landschaft",
+      "Basel-Stadt",
+      "Bern",
+      "Fribourg",
+      "Geneve",
+      "Glarus",
+      "Graubunden",
+      "Jura",
+      "Luzern",
+      "Neuchatel",
+      "Nidwalden",
+      "Obwalden",
+      "Sankt Gallen",
+      "Schaffhausen",
+      "Schwyz",
+      "Solothurn",
+      "Thurgau",
+      "Ticino",
+      "Uri",
+      "Valais",
+      "Vaud",
+      "Zug",
+      "Zurich"
+    ],
+    "geonameId": 2658434,
+    "value": "CH",
+    "currency": "chf",
+    "account_number": {
+      "id": "iban",
+      "example": "CH9300762011623852957"
+    },
+    "validWithoutProvince": false
+  },
+  {
+    "name": "United Kingdom",
+    "code": "GB",
+    "states": [],
+    "geonameId": 2635167,
+    "value": "GB",
+    "currency": "gbp",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "01234567"
+    },
+    "routing_number": [
+      {
+        "id": "sortCode",
+        "example": "12-34-56"
+      }
+    ],
+    "validWithoutProvince": true
+  },
+  {
+    "name": "United States",
+    "code": "US",
+    "states": [
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "California",
+      "Colorado",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Florida",
+      "Georgia",
+      "Hawaii",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Maryland",
+      "Massachusetts",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "North Carolina",
+      "North Dakota",
+      "Ohio",
+      "Oklahoma",
+      "Oregon",
+      "Pennsylvania",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "Texas",
+      "Utah",
+      "Vermont",
+      "Virginia",
+      "Washington",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming"
+    ],
+    "geonameId": 6252001,
+    "value": "US",
+    "currency": "usd",
+    "account_number": {
+      "id": "accountNumber",
+      "example": "000123456789"
+    },
+    "routing_number": [
+      {
+        "id": "routingNumber",
+        "example": "091000022"
+      }
+    ],
+    "personal_id_number": {
+      "id": "ssn",
+      "example": "123-45-6789"
+    },
+    "validWithoutProvince": false
+  }
+]

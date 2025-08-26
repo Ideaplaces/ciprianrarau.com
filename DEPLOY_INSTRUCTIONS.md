@@ -1,44 +1,48 @@
-# Vercel Deployment Setup
+# Deployment Instructions
 
-This repository is configured to automatically deploy the `ciprianrarau-site` to Vercel on every push to the main branch.
+## Vercel Deployment
 
-## Setup Instructions
+We use a custom deployment script to manage Vercel deployments securely.
 
-### 1. Configure GitHub Secrets
+### Setup
 
-Go to your GitHub repository settings:
-https://github.com/crarau/ciprianrarau.com/settings/secrets/actions
+The `vercel-deploy.sh` script is already configured with your Vercel token. This file is gitignored and should **never** be committed to version control.
 
-Add the following secrets:
-
-1. **VERCEL_TOKEN**: `REDACTED_VERCEL_TOKEN` (already provided)
-2. **VERCEL_ORG_ID**: `REDACTED_VERCEL_ORG_ID`
-3. **VERCEL_PROJECT_ID**: `REDACTED_VERCEL_PROJECT_ID`
-
-### 2. Get Vercel IDs
-
-To get the VERCEL_ORG_ID and VERCEL_PROJECT_ID:
+### Usage
 
 ```bash
-cd ciprianrarau-site
-npx vercel link
+# Pull latest project settings from Vercel
+./vercel-deploy.sh pull
+
+# Deploy to production
+./vercel-deploy.sh deploy
+
+# Start development server
+./vercel-deploy.sh dev
+
+# Build project locally
+./vercel-deploy.sh build
+
+# Link to Vercel project
+./vercel-deploy.sh link
+
+# Manage environment variables
+./vercel-deploy.sh env [command]
 ```
 
-This will create a `.vercel/project.json` file with the required IDs.
+### Security Notes
 
-### 3. Deployment
+- The `vercel-deploy.sh` file contains sensitive authentication tokens
+- It's automatically excluded from git via `.gitignore`
+- Never share or commit this file
+- If you need to update the token, edit the `VERCEL_TOKEN` variable in the script
 
-Once the secrets are configured, the site will automatically deploy to Vercel when you:
-- Push to the main branch
-- Create a pull request
+### Mermaid Diagrams
 
-The GitHub Action workflow is located at `.github/workflows/deploy-vercel.yml`.
-
-## Manual Deployment
-
-If you need to deploy manually:
+Before deploying, if you've added or modified any Mermaid diagrams in your blog posts:
 
 ```bash
-cd ciprianrarau-site
-vercel --prod --token=REDACTED_VERCEL_TOKEN
+npm run process-mermaid
 ```
+
+This will generate static PNG images with your branded footer for all Mermaid diagrams.

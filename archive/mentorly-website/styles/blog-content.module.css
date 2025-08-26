@@ -1,0 +1,174 @@
+/* Blog Content Styling for Markdown Posts */
+.blogContent {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Enhanced paragraph spacing */
+.blogContent p {
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+/* Better heading spacing */
+.blogContent h1 {
+  margin: 2rem 0 1.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.blogContent h2 {
+  margin: 3rem 0 1.5rem 0;
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.blogContent h3 {
+  margin: 2.5rem 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Lists with better spacing */
+.blogContent ul,
+.blogContent ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.blogContent li {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+/* Strong text styling */
+.blogContent strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Code blocks */
+.blogContent pre {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+.blogContent code {
+  background-color: #f1f3f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+}
+
+/* Mermaid diagrams - Enhanced styling for better text display */
+.blogContent :global(.mermaid) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  overflow-x: auto;
+  min-height: 300px;
+}
+
+.blogContent :global(.mermaid svg) {
+  max-width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+/* Ensure mermaid text doesn't get cut off */
+.blogContent :global(.mermaid .nodeLabel) {
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  text-align: center !important;
+}
+
+/* Style mermaid flowchart nodes for better text handling */
+.blogContent :global(.mermaid .node rect),
+.blogContent :global(.mermaid .node circle),
+.blogContent :global(.mermaid .node polygon) {
+  stroke-width: 2px;
+}
+
+/* Better spacing for emphasis */
+.blogContent em {
+  font-style: italic;
+  color: #555;
+}
+
+/* Links */
+.blogContent a {
+  color: #0066cc;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s ease;
+}
+
+.blogContent a:hover {
+  border-bottom-color: #0066cc;
+}
+
+/* Blockquotes */
+.blogContent blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #e5e7eb;
+  background-color: #f9fafb;
+  font-style: italic;
+}
+
+/* Images */
+.blogContent img {
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* First paragraph special styling */
+.blogContent > p:first-of-type {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .blogContent {
+    font-size: 1rem;
+  }
+  
+  .blogContent p {
+    margin: 1.25rem 0;
+    font-size: 1rem;
+  }
+  
+  .blogContent h1 {
+    font-size: 2rem;
+  }
+  
+  .blogContent h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+  }
+  
+  .blogContent :global(.mermaid svg) {
+    min-width: 100%;
+  }
+  
+  .blogContent :global(.mermaid .nodeLabel) {
+    font-size: 12px !important;
+  }
+} 

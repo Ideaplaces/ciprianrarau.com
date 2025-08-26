@@ -1,0 +1,70 @@
+{
+  "source_image": "Screen Capture Result Jun 29 2025 (1).png",
+  "dimensions": {
+    "width": 2112,
+    "height": 10188
+  },
+  "sections_count": 5,
+  "sections": [
+    {
+      "type": "header",
+      "filename": "header_01.png",
+      "bounds": [
+        0,
+        0,
+        2112,
+        203
+      ],
+      "position": 1,
+      "of_total": 5
+    },
+    {
+      "type": "hero",
+      "filename": "hero_02.png",
+      "bounds": [
+        0,
+        203,
+        2112,
+        1018
+      ],
+      "position": 2,
+      "of_total": 5
+    },
+    {
+      "type": "features",
+      "filename": "features_03.png",
+      "bounds": [
+        0,
+        1221,
+        2112,
+        3565
+      ],
+      "position": 3,
+      "of_total": 5
+    },
+    {
+      "type": "content",
+      "filename": "content_04.png",
+      "bounds": [
+        0,
+        4786,
+        2112,
+        3565
+      ],
+      "position": 4,
+      "of_total": 5
+    },
+    {
+      "type": "footer",
+      "filename": "footer_05.png",
+      "bounds": [
+        0,
+        8351,
+        2112,
+        1837
+      ],
+      "position": 5,
+      "of_total": 5
+    }
+  ]
+}

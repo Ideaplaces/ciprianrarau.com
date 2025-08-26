@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: fit-content;
+            height: fit-content;
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+        .footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            width: fit-content;
+            height: fit-content;
+        }
+        .logo-section {
+            background: #f8f9fa;
+            color: #1e3a8a;
+            padding: 16px 24px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-weight: bold;
+            height: 96px;
+            min-width: 380px;
+        }
+        .logo-img {
+            width: 76px;
+            height: 76px;
+            background-image: url('./mentorly.com-small.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .author-section {
+            background: #f8f9fa;
+            color: #dc2626;
+            padding: 16px 24px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-weight: bold;
+            height: 96px;
+            min-width: 380px;
+        }
+        .author-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background-image: url('./chip-big.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #e2e8f0;
+        }
+        .text-content {
+            text-align: left;
+        }
+        .title {
+            font-size: 19px;
+            line-height: 1.3;
+            font-weight: bold;
+        }
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer-container">
+        <div class="logo-section">
+            <div class="logo-img"></div>
+            <div class="text-content">
+                <div class="title">mentorly.com</div>
+                <div class="subtitle">AI-Powered HR Mentorship Platform</div>
+            </div>
+        </div>
+        
+        <div class="author-section">
+            <div class="author-img"></div>
+            <div class="text-content">
+                <div class="title">Ciprian (Chip) Rarau</div>
+                <div class="subtitle">ciprianrarau.com</div>
+                <div class="subtitle">Entrepreneur, CTO</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

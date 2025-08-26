@@ -1,0 +1,154 @@
+#
+# Be aware that even a small syntax error here can lead to failures in output.
+#
+
+sidebar:
+    position: right # position of the sidebar : left or right
+    about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
+    education: True # set to False if you want education in main section instead of in sidebar
+
+    # Profile information
+    name: Ciprian (Chip) Rarau
+    tagline: Entrepreneur, System Architect, CTO, CPO
+    avatar: profile-chip.jpg  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+
+    # Sidebar links
+    email: chip@chipgpt.ai
+    phone: 514-560-5016
+    website: cv.chipgpt.ai
+    linkedin: ciprianrarau
+    github: crarau
+
+    languages:
+      title: Languages
+      info:
+        - idiom: English
+          level: Professional
+
+        - idiom: French
+          level: Professional
+
+        - idiom: Romanian
+          level: Native
+
+    interests:
+      title: Interests
+      info:
+        - item: AI and Large Language Models
+          link:
+
+        - item: System Design & Architecture
+          link:
+
+        - item: Business Process Optimization
+          link:
+
+career-profile:
+    title: Career Profile
+    summary: |
+      I am a passionate technologist, systems architect, and entrepreneur with over 25 years of experience delivering scalable, high-quality software solutions. My expertise spans across client and server development, infrastructure, databases, DevOps, AI integration, and marketing automation, making me a well-rounded and adaptable professional.
+
+      **Highlights:**
+        - **Built businesses from scratch**, scaling platforms to multimillion-dollar ARR.
+        - **Designed and implemented complex systems** with terabytes of data and hundreds of millions of rows.
+        - **Expert in technology and business optimization**, bridging development, product, sales, and marketing.
+        - **Hands-on experience in coding across the stack**, from Swift and Kotlin to Python, TypeScript, Ruby on Rails, and Terraform.
+        - **Specialized in scalability**, optimization, performance, and automation, ensuring speed and resilience.
+        - **Led marketing and sales tech implementations**, including email automations, reporting tools, and optimized workflows.
+        - **Capable of cleaning up codebases and processes** to help businesses scale efficiently.
+
+      **Technology Expertise:**
+        - **Client Development**: Swift (iOS & macOS), Kotlin (Android), React.js, Vue.js, Angular, HTML/CSS/JavaScript, React Native, Ionic, Flutter (cross-platform), Webflow, Wix, WordPress, Astro.
+        - **Server Development**: Node.js, PHP, Python (Django, Flask), Java, Kotlin (server-side), TypeScript (backend services), Ruby, Ruby on Rails, Laravel, GraphQL, REST APIs.
+        - **Infrastructure & DevOps**: Google Cloud Platform (GCP), AWS, Terraform, Ansible, Docker, Kubernetes, Jenkins, Cloudflare, CI/CD pipelines (GitLab, GitHub Actions).
+        - **Databases**: PostgreSQL, MySQL, MongoDB, BigQuery, Redis, Elasticsearch.
+        - **AI & Data Analytics**: OpenAI GPT API, LangChain, Google Cloud AI, Cloud Vision, Data pipelines, ETL processes, Superset, Tableau, Looker, SuperSort.
+        - **Code Quality**: Unit testing, integration testing, BDD, TDD, Cypress, Jest, Mocha.
+        - **Scalability & Optimization**: Microservices, log management, speed optimization, performance tuning.
+        - **Sales & Marketing Tools**: HubSpot, Mailchimp, Klaviyo, SendGrid, Zapier, CRM integration, Google Analytics, SEO tools, email automations.
+
+      With experience in every stage of the business lifecycle—from product ideation to scaling teams—I bring a chameleon-like ability to adapt and craft innovative solutions that drive business success.
+
+education:
+    title: Education
+    info:
+      - degree: Bachelor in Computer Science Engineering
+        university: Technical University of Cluj-Napoca, Romania
+        time: 1998 - 2003
+        details: |
+          Specialized in software development, system design, and network management. Completed projects and research papers that laid the foundation for a career in building scalable and efficient systems.
+
+      - degree: Computer Science
+        university: High School of Computer Science, Tiberiu Popoviciu, Cluj-Napoca, Romania
+        time: 1994 - 1998
+        details: |
+          Built a strong foundation in programming, algorithms, and data structures. Participated in national and international programming competitions.
+
+experiences:
+    title: Experiences
+    info:
+      - role: CTO/CPO, Co-Founder
+        time: 2016 - Present
+        company: <a href="https://wisk.ai" target="_blank">WISK.ai</a>, Montreal, Canada -> Remote
+        details: |
+          Built a modular, scalable platform for the hospitality sector, serving over 1,000 clients.
+            - Developed and maintained a microservices architecture with 100+ PostgreSQL tables.
+            - Implemented CI/CD pipelines and infrastructure as code with Terraform and Ansible.
+            - Delivered native mobile apps (Swift, Kotlin) and a web frontend (Vue.js).
+            - Built a system that processes terabytes of data for real-time analytics.
+
+      - role: Fractional CTO
+        time: January 2023 - Present
+        company: Alvéole, Montreal, Quebec, Canada
+        details: |
+          Designed and built the NextGen platform with GCP, TypeScript, and Kubernetes.
+            - Implemented scalable microservices and integrated AI-driven analytics.
+            - Hired and coached a development team to execute on a high-growth roadmap.
+
+      - role: Fractional CTO
+        time: December 2021 - January 2024
+        company: Expertsi, Quebec, Canada
+        details: |
+          Provided strategic guidance for infrastructure and product development.
+            - Oversaw a team of 10 developers, focusing on AI, machine learning, and scalable solutions.
+            - Built infrastructure using TypeScript, React Native, and ReactJS, deployed on AWS.
+            - Successfully hired a full-time CTO for the company, which raised over $60 million.
+
+      - role: Solo Founder
+        time: 2014 - 2016
+        company: IdeaPlaces, Montreal, Canada Area
+        details: |
+          Developed a location-based app integrating Evernote and Dropbox, achieving 25,000 downloads.
+            - Managed the full development lifecycle and drove significant business traction.
+
+      - role: VP Engineering
+        time: February 2012 - March 2014
+        company: OMsignal (acquired by Honeywell)
+        details: |
+          Built the software stack for wearable devices, including a mobile app and API.
+            - Raised $10+ million in funding and secured a partnership with Ralph Lauren.
+
+      - role: Lead R&D
+        time: September 2010 - February 2012
+        company: Aptilon
+        details: |
+          Led technical decisions, improved team efficiency, and introduced code reviews.
+
+      - role: Senior Java Developer
+        time: February 2006 - September 2010
+        company: Coradiant (Acquired by BMC)
+        details: |
+          Evangelized Test Driven Development (TDD) and Agile methodologies.
+            - Presented at Microstrategy World and contributed to advanced product development.
+
+      - role: Team Lead & Java Developer
+        time: September 2004 - January 2006
+        company: Gestion Resources
+        details: |
+          Led a team to build a comprehensive bookstore management system, enhancing team efficiency.
+
+      - role: Developer
+        time: October 2000 - August 2004
+        company: Nethrom
+        details: |
+          Delivered 10+ projects using diverse technologies and languages, building a strong technical foundation.

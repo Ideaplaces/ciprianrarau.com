@@ -1,0 +1,1254 @@
+{
+  "geonames": [
+    {
+      "geonameId": 3041565,
+      "countryCode": "AD",
+      "countryName": "Andorra"
+    },
+    {
+      "geonameId": 290557,
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates"
+    },
+    {
+      "geonameId": 1149361,
+      "countryCode": "AF",
+      "countryName": "Afghanistan"
+    },
+    {
+      "geonameId": 3576396,
+      "countryCode": "AG",
+      "countryName": "Antigua and Barbuda"
+    },
+    {
+      "geonameId": 3573511,
+      "countryCode": "AI",
+      "countryName": "Anguilla"
+    },
+    {
+      "geonameId": 783754,
+      "countryCode": "AL",
+      "countryName": "Albania"
+    },
+    {
+      "geonameId": 174982,
+      "countryCode": "AM",
+      "countryName": "Armenia"
+    },
+    {
+      "geonameId": 3351879,
+      "countryCode": "AO",
+      "countryName": "Angola"
+    },
+    {
+      "geonameId": 6697173,
+      "countryCode": "AQ",
+      "countryName": "Antarctica"
+    },
+    {
+      "geonameId": 3865483,
+      "countryCode": "AR",
+      "countryName": "Argentina"
+    },
+    {
+      "geonameId": 5880801,
+      "countryCode": "AS",
+      "countryName": "American Samoa"
+    },
+    {
+      "geonameId": 2782113,
+      "countryCode": "AT",
+      "countryName": "Austria"
+    },
+    {
+      "geonameId": 2077456,
+      "countryCode": "AU",
+      "countryName": "Australia"
+    },
+    {
+      "geonameId": 3577279,
+      "countryCode": "AW",
+      "countryName": "Aruba"
+    },
+    {
+      "geonameId": 661882,
+      "countryCode": "AX",
+      "countryName": "\u00c5land"
+    },
+    {
+      "geonameId": 587116,
+      "countryCode": "AZ",
+      "countryName": "Azerbaijan"
+    },
+    {
+      "geonameId": 3277605,
+      "countryCode": "BA",
+      "countryName": "Bosnia and Herzegovina"
+    },
+    {
+      "geonameId": 3374084,
+      "countryCode": "BB",
+      "countryName": "Barbados"
+    },
+    {
+      "geonameId": 1210997,
+      "countryCode": "BD",
+      "countryName": "Bangladesh"
+    },
+    {
+      "geonameId": 2802361,
+      "countryCode": "BE",
+      "countryName": "Belgium"
+    },
+    {
+      "geonameId": 2361809,
+      "countryCode": "BF",
+      "countryName": "Burkina Faso"
+    },
+    {
+      "geonameId": 732800,
+      "countryCode": "BG",
+      "countryName": "Bulgaria"
+    },
+    {
+      "geonameId": 290291,
+      "countryCode": "BH",
+      "countryName": "Bahrain"
+    },
+    {
+      "geonameId": 433561,
+      "countryCode": "BI",
+      "countryName": "Burundi"
+    },
+    {
+      "geonameId": 2395170,
+      "countryCode": "BJ",
+      "countryName": "Benin"
+    },
+    {
+      "geonameId": 3578476,
+      "countryCode": "BL",
+      "countryName": "Saint Barth\u00e9lemy"
+    },
+    {
+      "geonameId": 3573345,
+      "countryCode": "BM",
+      "countryName": "Bermuda"
+    },
+    {
+      "geonameId": 1820814,
+      "countryCode": "BN",
+      "countryName": "Brunei"
+    },
+    {
+      "geonameId": 3923057,
+      "countryCode": "BO",
+      "countryName": "Bolivia"
+    },
+    {
+      "geonameId": 7626844,
+      "countryCode": "BQ",
+      "countryName": "Bonaire, Sint Eustatius, and Saba"
+    },
+    {
+      "geonameId": 3469034,
+      "countryCode": "BR",
+      "countryName": "Brazil"
+    },
+    {
+      "geonameId": 3572887,
+      "countryCode": "BS",
+      "countryName": "Bahamas"
+    },
+    {
+      "geonameId": 1252634,
+      "countryCode": "BT",
+      "countryName": "Bhutan"
+    },
+    {
+      "geonameId": 3371123,
+      "countryCode": "BV",
+      "countryName": "Bouvet Island"
+    },
+    {
+      "geonameId": 933860,
+      "countryCode": "BW",
+      "countryName": "Botswana"
+    },
+    {
+      "geonameId": 630336,
+      "countryCode": "BY",
+      "countryName": "Belarus"
+    },
+    {
+      "geonameId": 3582678,
+      "countryCode": "BZ",
+      "countryName": "Belize"
+    },
+    {
+      "geonameId": 6251999,
+      "countryCode": "CA",
+      "countryName": "Canada"
+    },
+    {
+      "geonameId": 1547376,
+      "countryCode": "CC",
+      "countryName": "Cocos [Keeling] Islands"
+    },
+    {
+      "geonameId": 203312,
+      "countryCode": "CD",
+      "countryName": "DR Congo"
+    },
+    {
+      "geonameId": 239880,
+      "countryCode": "CF",
+      "countryName": "Central African Republic"
+    },
+    {
+      "geonameId": 2260494,
+      "countryCode": "CG",
+      "countryName": "Congo Republic"
+    },
+    {
+      "geonameId": 2658434,
+      "countryCode": "CH",
+      "countryName": "Switzerland"
+    },
+    {
+      "geonameId": 2287781,
+      "countryCode": "CI",
+      "countryName": "Ivory Coast"
+    },
+    {
+      "geonameId": 1899402,
+      "countryCode": "CK",
+      "countryName": "Cook Islands"
+    },
+    {
+      "geonameId": 3895114,
+      "countryCode": "CL",
+      "countryName": "Chile"
+    },
+    {
+      "geonameId": 2233387,
+      "countryCode": "CM",
+      "countryName": "Cameroon"
+    },
+    {
+      "geonameId": 1814991,
+      "countryCode": "CN",
+      "countryName": "China"
+    },
+    {
+      "geonameId": 3686110,
+      "countryCode": "CO",
+      "countryName": "Colombia"
+    },
+    {
+      "geonameId": 3624060,
+      "countryCode": "CR",
+      "countryName": "Costa Rica"
+    },
+    {
+      "geonameId": 3562981,
+      "countryCode": "CU",
+      "countryName": "Cuba"
+    },
+    {
+      "geonameId": 3374766,
+      "countryCode": "CV",
+      "countryName": "Cabo Verde"
+    },
+    {
+      "geonameId": 7626836,
+      "countryCode": "CW",
+      "countryName": "Cura\u00e7ao"
+    },
+    {
+      "geonameId": 2078138,
+      "countryCode": "CX",
+      "countryName": "Christmas Island"
+    },
+    {
+      "geonameId": 146669,
+      "countryCode": "CY",
+      "countryName": "Cyprus"
+    },
+    {
+      "geonameId": 3077311,
+      "countryCode": "CZ",
+      "countryName": "Czechia"
+    },
+    {
+      "geonameId": 2921044,
+      "countryCode": "DE",
+      "countryName": "Germany"
+    },
+    {
+      "geonameId": 223816,
+      "countryCode": "DJ",
+      "countryName": "Djibouti"
+    },
+    {
+      "geonameId": 2623032,
+      "countryCode": "DK",
+      "countryName": "Denmark"
+    },
+    {
+      "geonameId": 3575830,
+      "countryCode": "DM",
+      "countryName": "Dominica"
+    },
+    {
+      "geonameId": 3508796,
+      "countryCode": "DO",
+      "countryName": "Dominican Republic"
+    },
+    {
+      "geonameId": 2589581,
+      "countryCode": "DZ",
+      "countryName": "Algeria"
+    },
+    {
+      "geonameId": 3658394,
+      "countryCode": "EC",
+      "countryName": "Ecuador"
+    },
+    {
+      "geonameId": 453733,
+      "countryCode": "EE",
+      "countryName": "Estonia"
+    },
+    {
+      "geonameId": 357994,
+      "countryCode": "EG",
+      "countryName": "Egypt"
+    },
+    {
+      "geonameId": 2461445,
+      "countryCode": "EH",
+      "countryName": "Western Sahara"
+    },
+    {
+      "geonameId": 338010,
+      "countryCode": "ER",
+      "countryName": "Eritrea"
+    },
+    {
+      "geonameId": 2510769,
+      "countryCode": "ES",
+      "countryName": "Spain"
+    },
+    {
+      "geonameId": 337996,
+      "countryCode": "ET",
+      "countryName": "Ethiopia"
+    },
+    {
+      "geonameId": 660013,
+      "countryCode": "FI",
+      "countryName": "Finland"
+    },
+    {
+      "geonameId": 2205218,
+      "countryCode": "FJ",
+      "countryName": "Fiji"
+    },
+    {
+      "geonameId": 3474414,
+      "countryCode": "FK",
+      "countryName": "Falkland Islands"
+    },
+    {
+      "geonameId": 2081918,
+      "countryCode": "FM",
+      "countryName": "Micronesia"
+    },
+    {
+      "geonameId": 2622320,
+      "countryCode": "FO",
+      "countryName": "Faroe Islands"
+    },
+    {
+      "geonameId": 3017382,
+      "countryCode": "FR",
+      "countryName": "France"
+    },
+    {
+      "geonameId": 2400553,
+      "countryCode": "GA",
+      "countryName": "Gabon"
+    },
+    {
+      "geonameId": 2635167,
+      "countryCode": "GB",
+      "countryName": "United Kingdom"
+    },
+    {
+      "geonameId": 3580239,
+      "countryCode": "GD",
+      "countryName": "Grenada"
+    },
+    {
+      "geonameId": 614540,
+      "countryCode": "GE",
+      "countryName": "Georgia"
+    },
+    {
+      "geonameId": 3381670,
+      "countryCode": "GF",
+      "countryName": "French Guiana"
+    },
+    {
+      "geonameId": 3042362,
+      "countryCode": "GG",
+      "countryName": "Guernsey"
+    },
+    {
+      "geonameId": 2300660,
+      "countryCode": "GH",
+      "countryName": "Ghana"
+    },
+    {
+      "geonameId": 2411586,
+      "countryCode": "GI",
+      "countryName": "Gibraltar"
+    },
+    {
+      "geonameId": 3425505,
+      "countryCode": "GL",
+      "countryName": "Greenland"
+    },
+    {
+      "geonameId": 2413451,
+      "countryCode": "GM",
+      "countryName": "Gambia"
+    },
+    {
+      "geonameId": 2420477,
+      "countryCode": "GN",
+      "countryName": "Guinea"
+    },
+    {
+      "geonameId": 3579143,
+      "countryCode": "GP",
+      "countryName": "Guadeloupe"
+    },
+    {
+      "geonameId": 2309096,
+      "countryCode": "GQ",
+      "countryName": "Equatorial Guinea"
+    },
+    {
+      "geonameId": 390903,
+      "countryCode": "GR",
+      "countryName": "Greece"
+    },
+    {
+      "geonameId": 3474415,
+      "countryCode": "GS",
+      "countryName": "South Georgia and South Sandwich Islands"
+    },
+    {
+      "geonameId": 3595528,
+      "countryCode": "GT",
+      "countryName": "Guatemala"
+    },
+    {
+      "geonameId": 4043988,
+      "countryCode": "GU",
+      "countryName": "Guam"
+    },
+    {
+      "geonameId": 2372248,
+      "countryCode": "GW",
+      "countryName": "Guinea-Bissau"
+    },
+    {
+      "geonameId": 3378535,
+      "countryCode": "GY",
+      "countryName": "Guyana"
+    },
+    {
+      "geonameId": 1819730,
+      "countryCode": "HK",
+      "countryName": "Hong Kong"
+    },
+    {
+      "geonameId": 1547314,
+      "countryCode": "HM",
+      "countryName": "Heard Island and McDonald Islands"
+    },
+    {
+      "geonameId": 3608932,
+      "countryCode": "HN",
+      "countryName": "Honduras"
+    },
+    {
+      "geonameId": 3202326,
+      "countryCode": "HR",
+      "countryName": "Croatia"
+    },
+    {
+      "geonameId": 3723988,
+      "countryCode": "HT",
+      "countryName": "Haiti"
+    },
+    {
+      "geonameId": 719819,
+      "countryCode": "HU",
+      "countryName": "Hungary"
+    },
+    {
+      "geonameId": 1643084,
+      "countryCode": "ID",
+      "countryName": "Indonesia"
+    },
+    {
+      "geonameId": 2963597,
+      "countryCode": "IE",
+      "countryName": "Ireland"
+    },
+    {
+      "geonameId": 294640,
+      "countryCode": "IL",
+      "countryName": "Israel"
+    },
+    {
+      "geonameId": 3042225,
+      "countryCode": "IM",
+      "countryName": "Isle of Man"
+    },
+    {
+      "geonameId": 1269750,
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "geonameId": 1282588,
+      "countryCode": "IO",
+      "countryName": "British Indian Ocean Territory"
+    },
+    {
+      "geonameId": 99237,
+      "countryCode": "IQ",
+      "countryName": "Iraq"
+    },
+    {
+      "geonameId": 130758,
+      "countryCode": "IR",
+      "countryName": "Iran"
+    },
+    {
+      "geonameId": 2629691,
+      "countryCode": "IS",
+      "countryName": "Iceland"
+    },
+    {
+      "geonameId": 3175395,
+      "countryCode": "IT",
+      "countryName": "Italy"
+    },
+    {
+      "geonameId": 3042142,
+      "countryCode": "JE",
+      "countryName": "Jersey"
+    },
+    {
+      "geonameId": 3489940,
+      "countryCode": "JM",
+      "countryName": "Jamaica"
+    },
+    {
+      "geonameId": 248816,
+      "countryCode": "JO",
+      "countryName": "Jordan"
+    },
+    {
+      "geonameId": 1861060,
+      "countryCode": "JP",
+      "countryName": "Japan"
+    },
+    {
+      "geonameId": 192950,
+      "countryCode": "KE",
+      "countryName": "Kenya"
+    },
+    {
+      "geonameId": 1527747,
+      "countryCode": "KG",
+      "countryName": "Kyrgyzstan"
+    },
+    {
+      "geonameId": 1831722,
+      "countryCode": "KH",
+      "countryName": "Cambodia"
+    },
+    {
+      "geonameId": 4030945,
+      "countryCode": "KI",
+      "countryName": "Kiribati"
+    },
+    {
+      "geonameId": 921929,
+      "countryCode": "KM",
+      "countryName": "Comoros"
+    },
+    {
+      "geonameId": 3575174,
+      "countryCode": "KN",
+      "countryName": "St Kitts and Nevis"
+    },
+    {
+      "geonameId": 1873107,
+      "countryCode": "KP",
+      "countryName": "North Korea"
+    },
+    {
+      "geonameId": 1835841,
+      "countryCode": "KR",
+      "countryName": "South Korea"
+    },
+    {
+      "geonameId": 285570,
+      "countryCode": "KW",
+      "countryName": "Kuwait"
+    },
+    {
+      "geonameId": 3580718,
+      "countryCode": "KY",
+      "countryName": "Cayman Islands"
+    },
+    {
+      "geonameId": 1522867,
+      "countryCode": "KZ",
+      "countryName": "Kazakhstan"
+    },
+    {
+      "geonameId": 1655842,
+      "countryCode": "LA",
+      "countryName": "Laos"
+    },
+    {
+      "geonameId": 272103,
+      "countryCode": "LB",
+      "countryName": "Lebanon"
+    },
+    {
+      "geonameId": 3576468,
+      "countryCode": "LC",
+      "countryName": "Saint Lucia"
+    },
+    {
+      "geonameId": 3042058,
+      "countryCode": "LI",
+      "countryName": "Liechtenstein"
+    },
+    {
+      "geonameId": 1227603,
+      "countryCode": "LK",
+      "countryName": "Sri Lanka"
+    },
+    {
+      "geonameId": 2275384,
+      "countryCode": "LR",
+      "countryName": "Liberia"
+    },
+    {
+      "geonameId": 932692,
+      "countryCode": "LS",
+      "countryName": "Lesotho"
+    },
+    {
+      "geonameId": 597427,
+      "countryCode": "LT",
+      "countryName": "Lithuania"
+    },
+    {
+      "geonameId": 2960313,
+      "countryCode": "LU",
+      "countryName": "Luxembourg"
+    },
+    {
+      "geonameId": 458258,
+      "countryCode": "LV",
+      "countryName": "Latvia"
+    },
+    {
+      "geonameId": 2215636,
+      "countryCode": "LY",
+      "countryName": "Libya"
+    },
+    {
+      "geonameId": 2542007,
+      "countryCode": "MA",
+      "countryName": "Morocco"
+    },
+    {
+      "geonameId": 2993457,
+      "countryCode": "MC",
+      "countryName": "Monaco"
+    },
+    {
+      "geonameId": 617790,
+      "countryCode": "MD",
+      "countryName": "Moldova"
+    },
+    {
+      "geonameId": 3194884,
+      "countryCode": "ME",
+      "countryName": "Montenegro"
+    },
+    {
+      "geonameId": 3578421,
+      "countryCode": "MF",
+      "countryName": "Saint Martin"
+    },
+    {
+      "geonameId": 1062947,
+      "countryCode": "MG",
+      "countryName": "Madagascar"
+    },
+    {
+      "geonameId": 2080185,
+      "countryCode": "MH",
+      "countryName": "Marshall Islands"
+    },
+    {
+      "geonameId": 718075,
+      "countryCode": "MK",
+      "countryName": "North Macedonia"
+    },
+    {
+      "geonameId": 2453866,
+      "countryCode": "ML",
+      "countryName": "Mali"
+    },
+    {
+      "geonameId": 1327865,
+      "countryCode": "MM",
+      "countryName": "Myanmar"
+    },
+    {
+      "geonameId": 2029969,
+      "countryCode": "MN",
+      "countryName": "Mongolia"
+    },
+    {
+      "geonameId": 1821275,
+      "countryCode": "MO",
+      "countryName": "Macao"
+    },
+    {
+      "geonameId": 4041468,
+      "countryCode": "MP",
+      "countryName": "Northern Mariana Islands"
+    },
+    {
+      "geonameId": 3570311,
+      "countryCode": "MQ",
+      "countryName": "Martinique"
+    },
+    {
+      "geonameId": 2378080,
+      "countryCode": "MR",
+      "countryName": "Mauritania"
+    },
+    {
+      "geonameId": 3578097,
+      "countryCode": "MS",
+      "countryName": "Montserrat"
+    },
+    {
+      "geonameId": 2562770,
+      "countryCode": "MT",
+      "countryName": "Malta"
+    },
+    {
+      "geonameId": 934292,
+      "countryCode": "MU",
+      "countryName": "Mauritius"
+    },
+    {
+      "geonameId": 1282028,
+      "countryCode": "MV",
+      "countryName": "Maldives"
+    },
+    {
+      "geonameId": 927384,
+      "countryCode": "MW",
+      "countryName": "Malawi"
+    },
+    {
+      "geonameId": 3996063,
+      "countryCode": "MX",
+      "countryName": "Mexico"
+    },
+    {
+      "geonameId": 1733045,
+      "countryCode": "MY",
+      "countryName": "Malaysia"
+    },
+    {
+      "geonameId": 1036973,
+      "countryCode": "MZ",
+      "countryName": "Mozambique"
+    },
+    {
+      "geonameId": 3355338,
+      "countryCode": "NA",
+      "countryName": "Namibia"
+    },
+    {
+      "geonameId": 2139685,
+      "countryCode": "NC",
+      "countryName": "New Caledonia"
+    },
+    {
+      "geonameId": 2440476,
+      "countryCode": "NE",
+      "countryName": "Niger"
+    },
+    {
+      "geonameId": 2155115,
+      "countryCode": "NF",
+      "countryName": "Norfolk Island"
+    },
+    {
+      "geonameId": 2328926,
+      "countryCode": "NG",
+      "countryName": "Nigeria"
+    },
+    {
+      "geonameId": 3617476,
+      "countryCode": "NI",
+      "countryName": "Nicaragua"
+    },
+    {
+      "geonameId": 2750405,
+      "countryCode": "NL",
+      "countryName": "Netherlands"
+    },
+    {
+      "geonameId": 3144096,
+      "countryCode": "NO",
+      "countryName": "Norway"
+    },
+    {
+      "geonameId": 1282988,
+      "countryCode": "NP",
+      "countryName": "Nepal"
+    },
+    {
+      "geonameId": 2110425,
+      "countryCode": "NR",
+      "countryName": "Nauru"
+    },
+    {
+      "geonameId": 4036232,
+      "countryCode": "NU",
+      "countryName": "Niue"
+    },
+    {
+      "geonameId": 2186224,
+      "countryCode": "NZ",
+      "countryName": "New Zealand"
+    },
+    {
+      "geonameId": 286963,
+      "countryCode": "OM",
+      "countryName": "Oman"
+    },
+    {
+      "geonameId": 3703430,
+      "countryCode": "PA",
+      "countryName": "Panama"
+    },
+    {
+      "geonameId": 3932488,
+      "countryCode": "PE",
+      "countryName": "Peru"
+    },
+    {
+      "geonameId": 4030656,
+      "countryCode": "PF",
+      "countryName": "French Polynesia"
+    },
+    {
+      "geonameId": 2088628,
+      "countryCode": "PG",
+      "countryName": "Papua New Guinea"
+    },
+    {
+      "geonameId": 1694008,
+      "countryCode": "PH",
+      "countryName": "Philippines"
+    },
+    {
+      "geonameId": 1168579,
+      "countryCode": "PK",
+      "countryName": "Pakistan"
+    },
+    {
+      "geonameId": 798544,
+      "countryCode": "PL",
+      "countryName": "Poland"
+    },
+    {
+      "geonameId": 3424932,
+      "countryCode": "PM",
+      "countryName": "Saint Pierre and Miquelon"
+    },
+    {
+      "geonameId": 4030699,
+      "countryCode": "PN",
+      "countryName": "Pitcairn Islands"
+    },
+    {
+      "geonameId": 4566966,
+      "countryCode": "PR",
+      "countryName": "Puerto Rico"
+    },
+    {
+      "geonameId": 6254930,
+      "countryCode": "PS",
+      "countryName": "Palestine"
+    },
+    {
+      "geonameId": 2264397,
+      "countryCode": "PT",
+      "countryName": "Portugal"
+    },
+    {
+      "geonameId": 1559582,
+      "countryCode": "PW",
+      "countryName": "Palau"
+    },
+    {
+      "geonameId": 3437598,
+      "countryCode": "PY",
+      "countryName": "Paraguay"
+    },
+    {
+      "geonameId": 289688,
+      "countryCode": "QA",
+      "countryName": "Qatar"
+    },
+    {
+      "geonameId": 935317,
+      "countryCode": "RE",
+      "countryName": "R\u00e9union"
+    },
+    {
+      "geonameId": 798549,
+      "countryCode": "RO",
+      "countryName": "Romania"
+    },
+    {
+      "geonameId": 6290252,
+      "countryCode": "RS",
+      "countryName": "Serbia"
+    },
+    {
+      "geonameId": 2017370,
+      "countryCode": "RU",
+      "countryName": "Russia"
+    },
+    {
+      "geonameId": 49518,
+      "countryCode": "RW",
+      "countryName": "Rwanda"
+    },
+    {
+      "geonameId": 102358,
+      "countryCode": "SA",
+      "countryName": "Saudi Arabia"
+    },
+    {
+      "geonameId": 2103350,
+      "countryCode": "SB",
+      "countryName": "Solomon Islands"
+    },
+    {
+      "geonameId": 241170,
+      "countryCode": "SC",
+      "countryName": "Seychelles"
+    },
+    {
+      "geonameId": 366755,
+      "countryCode": "SD",
+      "countryName": "Sudan"
+    },
+    {
+      "geonameId": 2661886,
+      "countryCode": "SE",
+      "countryName": "Sweden"
+    },
+    {
+      "geonameId": 1880251,
+      "countryCode": "SG",
+      "countryName": "Singapore"
+    },
+    {
+      "geonameId": 3370751,
+      "countryCode": "SH",
+      "countryName": "Saint Helena"
+    },
+    {
+      "geonameId": 3190538,
+      "countryCode": "SI",
+      "countryName": "Slovenia"
+    },
+    {
+      "geonameId": 607072,
+      "countryCode": "SJ",
+      "countryName": "Svalbard and Jan Mayen"
+    },
+    {
+      "geonameId": 3057568,
+      "countryCode": "SK",
+      "countryName": "Slovakia"
+    },
+    {
+      "geonameId": 2403846,
+      "countryCode": "SL",
+      "countryName": "Sierra Leone"
+    },
+    {
+      "geonameId": 3168068,
+      "countryCode": "SM",
+      "countryName": "San Marino"
+    },
+    {
+      "geonameId": 2245662,
+      "countryCode": "SN",
+      "countryName": "Senegal"
+    },
+    {
+      "geonameId": 51537,
+      "countryCode": "SO",
+      "countryName": "Somalia"
+    },
+    {
+      "geonameId": 3382998,
+      "countryCode": "SR",
+      "countryName": "Suriname"
+    },
+    {
+      "geonameId": 7909807,
+      "countryCode": "SS",
+      "countryName": "South Sudan"
+    },
+    {
+      "geonameId": 2410758,
+      "countryCode": "ST",
+      "countryName": "S\u00e3o Tom\u00e9 and Pr\u00edncipe"
+    },
+    {
+      "geonameId": 3585968,
+      "countryCode": "SV",
+      "countryName": "El Salvador"
+    },
+    {
+      "geonameId": 7609695,
+      "countryCode": "SX",
+      "countryName": "Sint Maarten"
+    },
+    {
+      "geonameId": 163843,
+      "countryCode": "SY",
+      "countryName": "Syria"
+    },
+    {
+      "geonameId": 934841,
+      "countryCode": "SZ",
+      "countryName": "Eswatini"
+    },
+    {
+      "geonameId": 3576916,
+      "countryCode": "TC",
+      "countryName": "Turks and Caicos Islands"
+    },
+    {
+      "geonameId": 2434508,
+      "countryCode": "TD",
+      "countryName": "Chad"
+    },
+    {
+      "geonameId": 1546748,
+      "countryCode": "TF",
+      "countryName": "French Southern Territories"
+    },
+    {
+      "geonameId": 2363686,
+      "countryCode": "TG",
+      "countryName": "Togo"
+    },
+    {
+      "geonameId": 1605651,
+      "countryCode": "TH",
+      "countryName": "Thailand"
+    },
+    {
+      "geonameId": 1220409,
+      "countryCode": "TJ",
+      "countryName": "Tajikistan"
+    },
+    {
+      "geonameId": 4031074,
+      "countryCode": "TK",
+      "countryName": "Tokelau"
+    },
+    {
+      "geonameId": 1966436,
+      "countryCode": "TL",
+      "countryName": "Timor-Leste"
+    },
+    {
+      "geonameId": 1218197,
+      "countryCode": "TM",
+      "countryName": "Turkmenistan"
+    },
+    {
+      "geonameId": 2464461,
+      "countryCode": "TN",
+      "countryName": "Tunisia"
+    },
+    {
+      "geonameId": 4032283,
+      "countryCode": "TO",
+      "countryName": "Tonga"
+    },
+    {
+      "geonameId": 298795,
+      "countryCode": "TR",
+      "countryName": "Turkey"
+    },
+    {
+      "geonameId": 3573591,
+      "countryCode": "TT",
+      "countryName": "Trinidad and Tobago"
+    },
+    {
+      "geonameId": 2110297,
+      "countryCode": "TV",
+      "countryName": "Tuvalu"
+    },
+    {
+      "geonameId": 1668284,
+      "countryCode": "TW",
+      "countryName": "Taiwan"
+    },
+    {
+      "geonameId": 149590,
+      "countryCode": "TZ",
+      "countryName": "Tanzania"
+    },
+    {
+      "geonameId": 690791,
+      "countryCode": "UA",
+      "countryName": "Ukraine"
+    },
+    {
+      "geonameId": 226074,
+      "countryCode": "UG",
+      "countryName": "Uganda"
+    },
+    {
+      "geonameId": 5854968,
+      "countryCode": "UM",
+      "countryName": "U.S. Minor Outlying Islands"
+    },
+    {
+      "geonameId": 6252001,
+      "countryCode": "US",
+      "countryName": "United States"
+    },
+    {
+      "geonameId": 3439705,
+      "countryCode": "UY",
+      "countryName": "Uruguay"
+    },
+    {
+      "geonameId": 1512440,
+      "countryCode": "UZ",
+      "countryName": "Uzbekistan"
+    },
+    {
+      "geonameId": 3164670,
+      "countryCode": "VA",
+      "countryName": "Vatican City"
+    },
+    {
+      "geonameId": 3577815,
+      "countryCode": "VC",
+      "countryName": "St Vincent and Grenadines"
+    },
+    {
+      "geonameId": 3625428,
+      "countryCode": "VE",
+      "countryName": "Venezuela"
+    },
+    {
+      "geonameId": 3577718,
+      "countryCode": "VG",
+      "countryName": "British Virgin Islands"
+    },
+    {
+      "geonameId": 4796775,
+      "countryCode": "VI",
+      "countryName": "U.S. Virgin Islands"
+    },
+    {
+      "geonameId": 1562822,
+      "countryCode": "VN",
+      "countryName": "Vietnam"
+    },
+    {
+      "geonameId": 2134431,
+      "countryCode": "VU",
+      "countryName": "Vanuatu"
+    },
+    {
+      "geonameId": 4034749,
+      "countryCode": "WF",
+      "countryName": "Wallis and Futuna"
+    },
+    {
+      "geonameId": 4034894,
+      "countryCode": "WS",
+      "countryName": "Samoa"
+    },
+    {
+      "geonameId": 831053,
+      "countryCode": "XK",
+      "countryName": "Kosovo"
+    },
+    {
+      "geonameId": 69543,
+      "countryCode": "YE",
+      "countryName": "Yemen"
+    },
+    {
+      "geonameId": 1024031,
+      "countryCode": "YT",
+      "countryName": "Mayotte"
+    },
+    {
+      "geonameId": 953987,
+      "countryCode": "ZA",
+      "countryName": "South Africa"
+    },
+    {
+      "geonameId": 895949,
+      "countryCode": "ZM",
+      "countryName": "Zambia"
+    },
+    {
+      "geonameId": 878675,
+      "countryCode": "ZW",
+      "countryName": "Zimbabwe"
+    }
+  ]
+}

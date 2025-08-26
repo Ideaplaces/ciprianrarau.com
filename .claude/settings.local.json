@@ -14,7 +14,19 @@
       "Bash(find:*)",
       "Bash(npx vercel link:*)",
       "Bash(vercel:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ls:*)",
+      "Bash(chmod:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run process-mermaid:*)",
+      "Bash(mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(./vercel-deploy.sh pull:*)",
+      "Bash(git check-ignore:*)"
     ],
     "deny": []
   }

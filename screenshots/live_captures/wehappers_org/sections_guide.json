@@ -1,0 +1,138 @@
+{
+  "url": "https://wehappers.org/en",
+  "total_sections": 13,
+  "sections": [
+    {
+      "name": "header",
+      "description": "Header with logo, navigation, and language selector",
+      "selectors": [
+        "header",
+        ".header",
+        "#header",
+        "nav",
+        ".navbar"
+      ],
+      "expected_height": "80-150px"
+    },
+    {
+      "name": "hero",
+      "description": "Hero section: Re-imagining Wealth Distribution",
+      "selectors": [
+        ".hero",
+        ".hero-section",
+        "section:first-of-type",
+        "[class*='hero']"
+      ],
+      "expected_height": "500-800px"
+    },
+    {
+      "name": "happiness_index",
+      "description": "World Happiness Index with interactive map",
+      "selectors": [
+        "[class*='happiness-index']",
+        "[class*='map']",
+        ".world-happiness"
+      ],
+      "expected_height": "600-800px"
+    },
+    {
+      "name": "wealth_stats",
+      "description": "Wealth Discrepancies statistics",
+      "selectors": [
+        "[class*='wealth']",
+        "[class*='statistics']",
+        ".stats-section"
+      ],
+      "expected_height": "400-600px"
+    },
+    {
+      "name": "mission",
+      "description": "Mission: Positively Impact Happiness",
+      "selectors": [
+        "[class*='mission']",
+        ".mission-section",
+        "#mission"
+      ],
+      "expected_height": "400-600px"
+    },
+    {
+      "name": "actions",
+      "description": "Four key action areas/services",
+      "selectors": [
+        "[class*='action']",
+        "[class*='services']",
+        ".services-section"
+      ],
+      "expected_height": "500-700px"
+    },
+    {
+      "name": "dna_values",
+      "description": "DNA/Values: core principles",
+      "selectors": [
+        "[class*='dna']",
+        "[class*='values']",
+        ".values-section"
+      ],
+      "expected_height": "400-600px"
+    },
+    {
+      "name": "personas",
+      "description": "Happers Personas profiles",
+      "selectors": [
+        "[class*='personas']",
+        "[class*='profiles']",
+        ".personas-section"
+      ],
+      "expected_height": "500-700px"
+    },
+    {
+      "name": "process",
+      "description": "Give what you can process diagram",
+      "selectors": [
+        "[class*='process']",
+        ".process-section"
+      ],
+      "expected_height": "400-600px"
+    },
+    {
+      "name": "founders",
+      "description": "Founders profiles",
+      "selectors": [
+        "[class*='founders']",
+        "[class*='team']",
+        ".team-section"
+      ],
+      "expected_height": "600-800px"
+    },
+    {
+      "name": "blog",
+      "description": "Blog posts preview",
+      "selectors": [
+        "[class*='blog']",
+        ".blog-section",
+        "#blog"
+      ],
+      "expected_height": "500-700px"
+    },
+    {
+      "name": "community",
+      "description": "Community partners and SDGs",
+      "selectors": [
+        "[class*='community']",
+        "[class*='partners']",
+        ".partners-section"
+      ],
+      "expected_height": "300-500px"
+    },
+    {
+      "name": "footer",
+      "description": "Footer with navigation and social links",
+      "selectors": [
+        "footer",
+        ".footer",
+        "#footer"
+      ],
+      "expected_height": "200-400px"
+    }
+  ]
+}
