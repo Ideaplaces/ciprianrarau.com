@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        .footer {
+            width: 1760px;
+            height: 136px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            border-top: 2px solid #e5e5e5;
+            box-sizing: border-box;
+        }
+        .content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #333;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="40" text-anchor="middle" dy=".35em" fill="white">CR</text></svg>');
+            background-size: cover;
+        }
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .name {
+            font-size: 36px;
+            font-weight: 600;
+            color: #e91e63;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .website {
+            font-size: 24px;
+            color: #e91e63;
+            margin: 5px 0 0 0;
+        }
+        .title {
+            font-size: 24px;
+            color: #e91e63;
+            margin: 2px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">
+        <div class="content">
+            <div class="text-content">
+                <h1 class="name">Ciprian (Chip) Rarau</h1>
+                <div class="website">ciprianrarau.com</div>
+                <div class="title">Entrepreneur, CTO</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
