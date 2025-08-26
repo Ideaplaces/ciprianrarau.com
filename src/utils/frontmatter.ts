@@ -49,25 +49,21 @@ export const lazyImagesRehypePlugin: RehypePlugin = () => {
   };
 };
 
-export const hideMermaidCodeBlocksRehypePlugin: RehypePlugin = () => {
+export const hideMermaidCodeBlocksRemarkPlugin: RemarkPlugin = () => {
   return function (tree) {
-    if (!tree.children) return;
-
-    visit(tree, 'element', function (node, index, parent) {
-      // Look for pre elements with mermaid code
-      if (node.tagName === 'pre' && node.children && node.children.length > 0) {
-        const codeElement = node.children[0];
-        if (codeElement && codeElement.type === 'element' && codeElement.tagName === 'code') {
-          const dataLanguage = codeElement.properties?.['dataLanguage'] || codeElement.properties?.['data-language'];
-          
-          // Check if this is a mermaid code block
-          if (dataLanguage === 'mermaid') {
-            // Add a class to hide this pre element
-            node.properties = node.properties || {};
-            node.properties.className = (node.properties.className || []).concat(['mermaid-source-hidden']);
-          }
-        }
+    let indicesToRemove = [];
+    
+    // Find all mermaid code blocks
+    tree.children.forEach((node, index) => {
+      if (node.type === 'code' && node.lang === 'mermaid') {
+        // Mark this node for removal
+        indicesToRemove.push(index);
       }
     });
+    
+    // Remove mermaid code blocks (in reverse order to maintain indices)
+    for (let i = indicesToRemove.length - 1; i >= 0; i--) {
+      tree.children.splice(indicesToRemove[i], 1);
+    }
   };
 };

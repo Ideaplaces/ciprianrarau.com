@@ -1,8 +1,8 @@
+@import './mermaid.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './mermaid.css';
 
 @layer utilities {
   .bg-page {
