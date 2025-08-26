@@ -4,7 +4,7 @@ author: Ciprian Rarau
 publishDate: 2025-01-15
 category: Technology
 excerpt: "After deploying production infrastructure across AWS, Azure, and Google Cloud for 10+ startups this year, I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company."
-image: 
+image: ~/assets/images/blog-placeholder.jpg
 tags: 
   - DevOps
   - cloud
