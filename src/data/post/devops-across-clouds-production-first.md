@@ -53,30 +53,7 @@ My DevOps journey started 4-5 years ago, but this year alone has seen explosive 
 
 As a software engineer originally, I'm a product person at heart. But experience has taught me how critical infrastructure is. Now, when I join any company, I examine two things immediately: what customers want from the product, and whether the infrastructure can scale to handle them. Whether you have 10 customers or 10,000, you need certainty that your system will perform in any situation.
 
-<!-- mermaid-start -->
-```mermaid
-flowchart TD
-    A[Product Requirements] --> B[Infrastructure Design]
-    B --> C[Multi-Cloud Strategy]
-    C --> D[AWS Production]
-    C --> E[Azure Production]
-    C --> F[GCP Production]
-    D --> G[Terraform IaC]
-    E --> G
-    F --> G
-    G --> H[Peer Review]
-    H --> I[CI/CD Pipeline]
-    I --> J[Zero-Downtime Deployment]
-    J --> K[Production Monitoring]
-    K --> L[Customer Value]
-    
-    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style J fill:#90EE90,stroke:#333,stroke-width:3px
-    style L fill:#87CEEB,stroke:#333,stroke-width:3px
-```
-
-![Diagram 1](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=430261b9)
-<!-- mermaid-end -->
+![DevOps Multi-Cloud Infrastructure Flow](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=430261b9)
 
 ## Infrastructure as Code: The Foundation of Everything
 
