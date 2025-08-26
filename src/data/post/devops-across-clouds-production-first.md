@@ -45,8 +45,6 @@ transcript: |
   I'm launching a company, a product, a service called OneOps.cloud. This will be specifically tailored towards startups and early businesses to get their infrastructure in place. This really shows my commitment and my dedication when it comes to DevOps.
 ---
 
-# DevOps Across All Clouds: Why I'm Building Infrastructure for Every Startup
-
 Working in production is one of the most challenging yet rewarding aspects of DevOps. When something breaks, it's immediately visible. That's why I've spent this year deploying production infrastructure across AWS, Azure, and Google Cloud for over 10 startups, and why I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company.
 
 ## The Evolution from Code to Infrastructure
@@ -75,6 +73,8 @@ flowchart TD
     style J fill:#90EE90,stroke:#333,stroke-width:3px
     style L fill:#87CEEB,stroke:#333,stroke-width:3px
 ```
+
+![Diagram 1](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=430261b9)
 
 ## Infrastructure as Code: The Foundation of Everything
 
