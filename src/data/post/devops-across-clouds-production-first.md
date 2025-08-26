@@ -3,7 +3,7 @@ title: "DevOps Across All Clouds: Why I'm Building Infrastructure for Every Star
 author: Ciprian Rarau
 publishDate: 2025-08-25
 category: Technology
-excerpt: "After deploying production infrastructure across AWS, Azure, and Google Cloud for 10+ startups this year, I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company."
+excerpt: "After years of deploying production infrastructure across AWS, Azure, and Google Cloud for 10+ startups, I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company."
 tags: 
   - DevOps
   - cloud
@@ -45,7 +45,7 @@ transcript: |
   I'm launching a company, a product, a service called OneOps.cloud. This will be specifically tailored towards startups and early businesses to get their infrastructure in place. This really shows my commitment and my dedication when it comes to DevOps.
 ---
 
-Working in production is one of the most challenging yet rewarding aspects of DevOps. When something breaks, it's immediately visible. That's why I've spent this year deploying production infrastructure across AWS, Azure, and Google Cloud for over 10 startups, and why I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company.
+Working in production is one of the most challenging yet rewarding aspects of DevOps. When something breaks, it's immediately visible. Over the years, I've deployed production infrastructure across AWS, Azure, and Google Cloud for more than 10 startups, and now I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company.
 
 ## The Evolution from Code to Infrastructure
 
@@ -53,7 +53,28 @@ My DevOps journey started 4-5 years ago, but this year alone has seen explosive 
 
 As a software engineer originally, I'm a product person at heart. But experience has taught me how critical infrastructure is. Now, when I join any company, I examine two things immediately: what customers want from the product, and whether the infrastructure can scale to handle them. Whether you have 10 customers or 10,000, you need certainty that your system will perform in any situation.
 
-![DevOps Multi-Cloud Infrastructure Flow](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=430261b9)
+```mermaid
+flowchart TD
+    A[Product Requirements] --> B[Infrastructure Design]
+    B --> C[Multi-Cloud Strategy]
+    C --> D[AWS Production]
+    C --> E[Azure Production]
+    C --> F[GCP Production]
+    D --> G[Terraform IaC]
+    E --> G
+    F --> G
+    G --> H[Peer Review]
+    H --> I[CI/CD Pipeline]
+    I --> J[Zero-Downtime Deployment]
+    J --> K[Production Monitoring]
+    K --> L[Customer Value]
+    
+    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style J fill:#90EE90,stroke:#333,stroke-width:3px
+    style L fill:#87CEEB,stroke:#333,stroke-width:3px
+```
+
+![Diagram 1](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=430261b9)
 
 ## Infrastructure as Code: The Foundation of Everything
 
