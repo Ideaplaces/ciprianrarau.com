@@ -1,19 +1,5 @@
-/* Hide mermaid source code blocks when followed by rendered diagrams */
-/* The script adds an image immediately after the mermaid code block */
-pre:has(code.language-mermaid) + p > img[alt^="Diagram"],
-pre:has(code.language-mermaid) + img[alt^="Diagram"] {
-  /* The image is already visible, these selectors ensure proper targeting */
-}
-
-/* Hide the mermaid source code block when it's followed by a diagram image */
-pre:has(code.language-mermaid):has(+ p > img[alt^="Diagram"]),
-pre:has(code.language-mermaid):has(+ img[alt^="Diagram"]) {
-  display: none !important;
-}
-
-/* Alternative approach using adjacent sibling selector */
-/* This hides any pre with language-mermaid that is immediately followed by a paragraph containing a Diagram image */
-pre:has(code.language-mermaid) {
+/* Hide mermaid source code blocks using the class added by our rehype plugin */
+.mermaid-source-hidden {
   display: none !important;
 }
 

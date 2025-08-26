@@ -48,3 +48,26 @@ export const lazyImagesRehypePlugin: RehypePlugin = () => {
     });
   };
 };
+
+export const hideMermaidCodeBlocksRehypePlugin: RehypePlugin = () => {
+  return function (tree) {
+    if (!tree.children) return;
+
+    visit(tree, 'element', function (node, index, parent) {
+      // Look for pre elements with mermaid code
+      if (node.tagName === 'pre' && node.children && node.children.length > 0) {
+        const codeElement = node.children[0];
+        if (codeElement && codeElement.type === 'element' && codeElement.tagName === 'code') {
+          const dataLanguage = codeElement.properties?.['dataLanguage'] || codeElement.properties?.['data-language'];
+          
+          // Check if this is a mermaid code block
+          if (dataLanguage === 'mermaid') {
+            // Add a class to hide this pre element
+            node.properties = node.properties || {};
+            node.properties.className = (node.properties.className || []).concat(['mermaid-source-hidden']);
+          }
+        }
+      }
+    });
+  };
+};
