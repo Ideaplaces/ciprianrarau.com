@@ -19,14 +19,6 @@ export const headerData = {
       href: getPermalink('/pet-projects'),
     },
     {
-      text: 'Resume',
-      href: getPermalink('/#resume'),
-    },
-    {
-      text: 'CV',
-      href: getPermalink('/cv'),
-    },
-    {
       text: 'Blog',
       href: getBlogPermalink(),
     },
@@ -52,8 +44,6 @@ export const footerData = {
         { text: 'Home', href: getPermalink('/') },
         { text: 'About', href: getPermalink('/#about') },
         { text: 'Projects', href: getPermalink('/#projects') },
-        { text: 'Resume', href: getPermalink('/#resume') },
-        { text: 'CV', href: getPermalink('/cv') },
         { text: 'Blog', href: getBlogPermalink() },
         { text: 'Contact', href: getPermalink('/contact') },
       ],
