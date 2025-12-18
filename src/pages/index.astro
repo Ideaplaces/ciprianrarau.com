@@ -33,6 +33,19 @@ const metadata = {
     </Fragment>
   </Hero>
 
+  <!-- Latest Thoughts - Blog Section -->
+  <BlogLatestPosts
+    id="thoughts"
+    title="Latest Thoughts"
+    linkText="Read all posts"
+    information={`I write about the intersection of AI, technology, and business—exploring how we build, scale, and adapt in a world that's changing faster than ever.`}
+    count={2}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+
   <!-- About Content Widget **************** -->
 
   <Content
@@ -602,14 +615,4 @@ const metadata = {
     ]}
   />
 
-  <!-- Blog Posts -->
-  <BlogLatestPosts
-    id="blog"
-    title="Latest insights and thoughts"
-    information={`Sharing my experience in technology, entrepreneurship, and building scalable products.`}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </BlogLatestPosts>
 </Layout>
