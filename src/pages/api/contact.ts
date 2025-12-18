@@ -1,6 +1,33 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
+// Verify Cloudflare Turnstile token
+async function verifyTurnstile(token: string): Promise<boolean> {
+  const secretKey = import.meta.env.TURNSTILE_SECRET_KEY;
+
+  if (!secretKey) {
+    console.warn('TURNSTILE_SECRET_KEY not configured, skipping verification');
+    return true; // Allow if not configured (for development)
+  }
+
+  try {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: secretKey,
+        response: token,
+      }),
+    });
+
+    const data = await response.json();
+    return data.success === true;
+  } catch (error) {
+    console.error('Turnstile verification failed:', error);
+    return false;
+  }
+}
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     // Parse form data
@@ -9,6 +36,25 @@ export const POST: APIRoute = async ({ request }) => {
     const email = formData.get('email') as string;
     const company = formData.get('company') as string;
     const message = formData.get('message') as string;
+    const turnstileToken = formData.get('cf-turnstile-response') as string;
+
+    // Verify Turnstile CAPTCHA
+    if (import.meta.env.TURNSTILE_SECRET_KEY) {
+      if (!turnstileToken) {
+        return new Response(null, {
+          status: 302,
+          headers: { Location: '/contact?error=captcha' },
+        });
+      }
+
+      const isValid = await verifyTurnstile(turnstileToken);
+      if (!isValid) {
+        return new Response(null, {
+          status: 302,
+          headers: { Location: '/contact?error=captcha' },
+        });
+      }
+    }
 
     // Validate required fields
     if (!name || !email || !message) {
