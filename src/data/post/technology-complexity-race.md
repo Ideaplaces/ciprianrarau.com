@@ -3,7 +3,6 @@ publishDate: 2025-11-05T14:00:00
 author: Ciprian Rarau
 title: "AI as an Extension of Myself: When Technology Complexity Outpaces Human Understanding"
 excerpt: "Society is going into the technology, and what we see around us becomes more and more complex than what the human brain can understand"
-image: ~/assets/images/blog-placeholder.jpg
 category: Technology
 tags: ["AI","technology","complexity","future","society"]
 contentType: markdown
