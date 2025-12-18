@@ -13,8 +13,6 @@ metadata:
   canonical: https://ciprianrarau.com/blog/production-first-mindset-evolution
 ---
 
-# From Zero to a Thousand Clients: Why I Deploy to Production Every Day
-
 There's a moment every developer knows. You've written the code, tested it locally, maybe even shown it to your team. But it's not real yet. Not until it hits production. Not until actual users are touching it, breaking it, loving it, cursing at it. That's when code becomes software.
 
 I learned this lesson deeply over eight years at Wisc.ai, where I took a platform from zero to a thousand clients. And let me tell you—there's no margin for error when you're handling production systems at scale.

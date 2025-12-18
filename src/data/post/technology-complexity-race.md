@@ -25,8 +25,6 @@ metadata:
   canonical: https://ciprianrarau.com/blog/technology-complexity-race
 ---
 
-# AI as an Extension of Myself: When Technology Complexity Outpaces Human Understanding
-
 ## The Current Reality
 
 Right now I'm using AI and understand everything that the AI is doing, and I feel that it allows me to really embrace this capability because it extends my reach into every sphere of a business. AI has become an extension of myself - when I think about something, I can make it happen.
