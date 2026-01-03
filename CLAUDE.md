@@ -243,7 +243,9 @@ The site uses Google's Gemini Image API (Nano Banana Pro) for generating images.
 
 ## Style Guide - Components Reference
 
-The site uses AstroWind components. Here's how to maintain consistent styling:
+**IMPORTANT:** Before creating any new page, visit `/style-guide` to see all available components visually. This ensures consistent styling across the site.
+
+The site uses AstroWind components exclusively. All new pages must use these standard components - no custom HTML/CSS unless absolutely necessary.
 
 ### Layout Components
 
