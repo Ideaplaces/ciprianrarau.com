@@ -1,0 +1,367 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Note from '~/components/widgets/Note.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Style Guide',
+  robots: { index: false, follow: false }, // Hidden from search engines
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Page Header -->
+  <section class="bg-primary text-white py-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <h1 class="text-4xl font-bold">Style Guide</h1>
+      <p class="text-xl opacity-90 mt-2">Visual reference for all site components</p>
+      <p class="text-sm opacity-70 mt-1">This page is hidden from navigation and search engines</p>
+    </div>
+  </section>
+
+  <!-- Color Palette -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Color Palette</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div class="text-center">
+          <div class="w-full h-20 rounded-lg bg-primary"></div>
+          <p class="mt-2 font-medium">Primary</p>
+          <p class="text-sm text-gray-500">#1565C0</p>
+        </div>
+        <div class="text-center">
+          <div class="w-full h-20 rounded-lg" style="background: #0288D1"></div>
+          <p class="mt-2 font-medium">Accent/Teal</p>
+          <p class="text-sm text-gray-500">#0288D1</p>
+        </div>
+        <div class="text-center">
+          <div class="w-full h-20 rounded-lg" style="background: #388E3C"></div>
+          <p class="mt-2 font-medium">Success</p>
+          <p class="text-sm text-gray-500">#388E3C</p>
+        </div>
+        <div class="text-center">
+          <div class="w-full h-20 rounded-lg" style="background: #F57C00"></div>
+          <p class="mt-2 font-medium">Warning</p>
+          <p class="text-sm text-gray-500">#F57C00</p>
+        </div>
+        <div class="text-center">
+          <div class="w-full h-20 rounded-lg" style="background: #C62828"></div>
+          <p class="mt-2 font-medium">Error</p>
+          <p class="text-sm text-gray-500">#C62828</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Favicon/Logo -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Logo / Favicon</h2>
+      <div class="flex items-center gap-8">
+        <div class="text-center">
+          <img src="/favicon-generated.png" alt="CR Logo" class="w-32 h-32 rounded-lg shadow-lg" />
+          <p class="mt-2 text-sm text-gray-500">Full Size (PNG)</p>
+        </div>
+        <div class="text-center">
+          <img src="/favicon-generated.png" alt="CR Logo" class="w-16 h-16 rounded shadow" />
+          <p class="mt-2 text-sm text-gray-500">64x64</p>
+        </div>
+        <div class="text-center">
+          <img src="/favicon-generated.png" alt="CR Logo" class="w-8 h-8 rounded shadow" />
+          <p class="mt-2 text-sm text-gray-500">32x32</p>
+        </div>
+        <div class="text-center">
+          <img src="/favicon-generated.png" alt="CR Logo" class="w-4 h-4" />
+          <p class="mt-2 text-sm text-gray-500">16x16</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Typography</h2>
+      <div class="space-y-4">
+        <div>
+          <h1 class="text-5xl font-bold font-heading">Heading 1 - The quick brown fox</h1>
+          <p class="text-sm text-gray-500 mt-1">text-5xl font-bold font-heading</p>
+        </div>
+        <div>
+          <h2 class="text-4xl font-bold font-heading">Heading 2 - The quick brown fox</h2>
+          <p class="text-sm text-gray-500 mt-1">text-4xl font-bold font-heading</p>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold">Heading 3 - The quick brown fox</h3>
+          <p class="text-sm text-gray-500 mt-1">text-3xl font-bold</p>
+        </div>
+        <div>
+          <h4 class="text-2xl font-semibold">Heading 4 - The quick brown fox</h4>
+          <p class="text-sm text-gray-500 mt-1">text-2xl font-semibold</p>
+        </div>
+        <div>
+          <p class="text-lg">Body Large - The quick brown fox jumps over the lazy dog.</p>
+          <p class="text-sm text-gray-500 mt-1">text-lg</p>
+        </div>
+        <div>
+          <p class="text-base">Body - The quick brown fox jumps over the lazy dog.</p>
+          <p class="text-sm text-gray-500 mt-1">text-base</p>
+        </div>
+        <div>
+          <p class="text-sm text-muted">Muted Text - The quick brown fox jumps over the lazy dog.</p>
+          <p class="text-sm text-gray-500 mt-1">text-sm text-muted</p>
+        </div>
+        <div>
+          <code class="bg-gray-100 dark:bg-slate-700 px-2 py-1 rounded">inline code example</code>
+          <p class="text-sm text-gray-500 mt-1">code element</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Icons -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Icons (Tabler)</h2>
+      <div class="grid grid-cols-4 md:grid-cols-8 gap-6">
+        <div class="text-center">
+          <Icon name="tabler:code" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">code</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:building" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">building</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:user" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">user</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:rocket" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">rocket</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:chart-line" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">chart-line</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:briefcase" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">briefcase</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:school" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">school</p>
+        </div>
+        <div class="text-center">
+          <Icon name="tabler:mail" class="w-8 h-8 mx-auto text-primary" />
+          <p class="text-xs mt-2">mail</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Component -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Hero Component</h2>
+      <p class="text-gray-500 mb-6">Used on: index, about, project pages</p>
+    </div>
+  </section>
+
+  <Hero
+    tagline="Tagline Text"
+    title="Hero Title Goes Here"
+    subtitle="This is the subtitle text that provides more context about the page content."
+    actions={[
+      { variant: 'primary', text: 'Primary Action', href: '#' },
+      { variant: 'secondary', text: 'Secondary Action', href: '#' },
+    ]}
+  />
+
+  <!-- Content Component -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Content Component (Image Left)</h2>
+      <p class="text-gray-500 mb-6">Used on: project pages, about</p>
+    </div>
+  </section>
+
+  <Content
+    items={[
+      { title: 'Feature One', description: 'Description of the first feature with details.' },
+      { title: 'Feature Two', description: 'Description of the second feature with details.' },
+      { title: 'Feature Three', description: 'Description of the third feature with details.' },
+    ]}
+    image={{ src: '/favicon-generated.png', alt: 'Sample image' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Content Section Title</h3>
+      <p>This is the main content area where you describe the section in detail.</p>
+    </Fragment>
+  </Content>
+
+  <section class="py-4">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Content Component (Image Right - isReversed)</h2>
+    </div>
+  </section>
+
+  <Content
+    isReversed
+    items={[
+      { title: 'Feature One', description: 'Description of the first feature with details.' },
+      { title: 'Feature Two', description: 'Description of the second feature with details.' },
+    ]}
+    image={{ src: '/favicon-generated.png', alt: 'Sample image' }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Reversed Content</h3>
+      <p>Image appears on the right side with isReversed prop.</p>
+    </Fragment>
+  </Content>
+
+  <!-- Features Component -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Features Component</h2>
+      <p class="text-gray-500 mb-6">Used on: index, services</p>
+    </div>
+  </section>
+
+  <Features
+    title="Features Grid"
+    subtitle="A grid of features with icons"
+    items={[
+      { title: 'Feature 1', description: 'Description text here.', icon: 'tabler:rocket' },
+      { title: 'Feature 2', description: 'Description text here.', icon: 'tabler:code' },
+      { title: 'Feature 3', description: 'Description text here.', icon: 'tabler:chart-line' },
+      { title: 'Feature 4', description: 'Description text here.', icon: 'tabler:users' },
+    ]}
+  />
+
+  <!-- Features2 Component -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Features2 Component (Large Cards)</h2>
+      <p class="text-gray-500 mb-6">Used on: services</p>
+    </div>
+  </section>
+
+  <Features2
+    title="Features2 Grid"
+    subtitle="Larger feature cards with prominent icons"
+    items={[
+      { title: 'Card 1', description: 'Description for this feature card.', icon: 'tabler:building' },
+      { title: 'Card 2', description: 'Description for this feature card.', icon: 'tabler:shield-check' },
+      { title: 'Card 3', description: 'Description for this feature card.', icon: 'tabler:trending-up' },
+    ]}
+  />
+
+  <!-- Stats Component -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Stats Component</h2>
+      <p class="text-gray-500 mb-6">Used on: project pages</p>
+    </div>
+  </section>
+
+  <Stats
+    stats={[
+      { title: 'Downloads', amount: '132K' },
+      { title: 'Users', amount: '24.8K' },
+      { title: 'Rating', amount: '4.9' },
+      { title: 'Projects', amount: '48' },
+    ]}
+  />
+
+  <!-- Steps Component -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Steps Component</h2>
+      <p class="text-gray-500 mb-6">Used on: services, how-it-works</p>
+    </div>
+  </section>
+
+  <Steps
+    title="Process Steps"
+    items={[
+      { title: 'Step 1', description: 'First step in the process.' },
+      { title: 'Step 2', description: 'Second step in the process.' },
+      { title: 'Step 3', description: 'Third step in the process.' },
+    ]}
+  />
+
+  <!-- FAQs Component -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">FAQs Component</h2>
+      <p class="text-gray-500 mb-6">Used on: pricing, about</p>
+    </div>
+  </section>
+
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      { title: 'What is this?', description: 'This is the answer to the first question with detailed information.' },
+      { title: 'How does it work?', description: 'This is the answer explaining how things work.' },
+      { title: 'What are the benefits?', description: 'This explains all the benefits in detail.' },
+    ]}
+  />
+
+  <!-- Note Component -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">Note Component</h2>
+      <p class="text-gray-500 mb-6">Used for: callouts, tips</p>
+    </div>
+  </section>
+
+  <Note icon="tabler:info-circle">
+    This is a note component used to highlight important information.
+  </Note>
+
+  <!-- Call to Action Component -->
+  <section class="py-12 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-2">CallToAction Component</h2>
+      <p class="text-gray-500 mb-6">Used on: all pages (footer CTA)</p>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Ready to get started?"
+    subtitle="Contact me to discuss your project"
+    actions={[
+      { variant: 'primary', text: 'Get in Touch', href: '/contact' },
+    ]}
+  />
+
+  <!-- Code Block Example -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-6">Code Block Example</h2>
+      <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto"><code>{`// TypeScript example
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+async function getUser(id: string): Promise<User> {
+  const response = await fetch(\`/api/users/\${id}\`);
+  return response.json();
+}`}</code></pre>
+    </div>
+  </section>
+
+</Layout>
