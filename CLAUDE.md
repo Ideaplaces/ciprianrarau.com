@@ -206,10 +206,130 @@ npm run preview          # Preview production build
 npm run process-mermaid           # Process new diagrams
 npm run process-mermaid -- --force # Regenerate all
 
+# Image Generation (Google Gemini / Nano Banana Pro)
+./scripts/generate-image.sh "prompt" output.png
+./scripts/generate-image.sh "A minimalist icon" public/images/icon.png
+./scripts/generate-image.sh "Blog header" header.png --model gemini-2.0-flash-exp-image-generation
+
 # Linting
 npm run check            # Run all checks
 npm run fix              # Fix linting issues
 ```
+
+## Image Generation
+
+The site uses Google's Gemini Image API (Nano Banana Pro) for generating images.
+
+**Script location:** `scripts/generate-image.sh`
+
+**Available models:**
+- `gemini-3-pro-image-preview` - Best quality (default)
+- `gemini-2.5-flash-image` - Higher quality
+- `gemini-2.0-flash-exp-image-generation` - Fast iterations
+
+**Examples:**
+```bash
+# Generate favicon/icon
+./scripts/generate-image.sh "A minimalist CR monogram logo, blue to teal gradient" public/favicon.png
+
+# Generate blog header
+./scripts/generate-image.sh "DevOps pipeline visualization, modern flat design" public/images/blog/devops-header.png
+
+# Fast iteration mode
+./scripts/generate-image.sh "Quick test image" test.png --model gemini-2.0-flash-exp-image-generation
+```
+
+**Current favicon:** Generated with prompt "A minimalist, modern favicon icon for a tech blog. Simple geometric design featuring the letters 'CR' (Ciprian Rarau initials) in a clean, professional style. Use a gradient from deep blue to teal."
+
+## Style Guide - Components Reference
+
+The site uses AstroWind components. Here's how to maintain consistent styling:
+
+### Layout Components
+
+| Component | Usage | Example Pages |
+|-----------|-------|---------------|
+| `Hero` | Page headers with title, subtitle, CTA | index, about |
+| `Content` | Image + text blocks (reversible) | projects/*, about |
+| `Features` | Icon grid with descriptions | index, services |
+| `Features2` | Larger icon cards | services |
+| `Features3` | Compact feature list | projects/* |
+| `Steps` | Numbered process steps | services |
+| `Steps2` | Timeline with icons | about |
+| `Timeline` | Vertical timeline | index (experience) |
+| `FAQs` | Accordion Q&A | pricing |
+| `Stats` | Number highlights | projects/* |
+| `Pricing` | Pricing cards | pricing |
+| `CallToAction` | CTA sections | all pages |
+
+### Content Block Pattern (Image Left/Right)
+
+```astro
+<Content
+  isReversed  <!-- Image on right, text on left -->
+  items={[
+    { title: 'Feature 1', description: '...' },
+    { title: 'Feature 2', description: '...' },
+  ]}
+  image={{ src: '~/assets/images/...', alt: '...' }}
+>
+  <Fragment slot="content">
+    <h3>Section Title</h3>
+    <p>Description text...</p>
+  </Fragment>
+</Content>
+```
+
+### Color Palette
+
+- **Primary:** Blue (#1565C0 to teal gradient)
+- **Accent:** Teal (#0288D1)
+- **Success:** Green (#388E3C)
+- **Warning:** Amber (#F57C00)
+- **Error:** Red (#C62828)
+- **Dark mode:** Slate backgrounds
+
+### Typography
+
+- **Headings:** font-heading (Inter/system)
+- **Body:** Default sans-serif
+- **Code:** Monospace
+
+### Icon System
+
+Uses `tabler` icons via `astro-icon`:
+```astro
+import { Icon } from 'astro-icon/components';
+<Icon name="tabler:code" class="w-6 h-6" />
+```
+
+Common icons: `tabler:code`, `tabler:building`, `tabler:user`, `tabler:rocket`, `tabler:chart-line`
+
+### Project Page Template
+
+All project pages follow this structure:
+1. Hero with stats (role, company, impact)
+2. Challenge section
+3. Solution with features grid
+4. Technical implementation
+5. Results/Impact stats
+6. Call to action
+
+### Blog Post Template
+
+- Frontmatter with title, excerpt, image, tags
+- Mermaid diagrams for architecture
+- Code blocks with syntax highlighting
+- First person singular ("I built...", not "We built...")
+
+### Favicon/Logo
+
+Located at `src/assets/favicons/`:
+- `favicon.ico` - Browser tab icon
+- `apple-touch-icon.png` - iOS home screen
+- `favicon.svg` - Vector version
+
+Generated source: `public/favicon-generated.png`
 
 ## Deployment
 
