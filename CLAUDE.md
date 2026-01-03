@@ -4,6 +4,23 @@
 
 Personal website and blog for Ciprian Rarau (Chip). Built with Astro + Tailwind CSS.
 
+## About Chip - Key Background
+
+**Wisk.ai** - A foundational part of Chip's journey:
+- Spent 8-9 years building and scaling Wisk.ai
+- Grew the platform from zero to 1000+ clients
+- Evolved deployment practices from quarterly releases to multiple daily deployments
+- Learned production-first mindset through real constraints of serving paying customers
+- This experience shapes all of Chip's current DevOps and infrastructure philosophy
+
+**Current Focus:**
+- Helping 10+ startups with infrastructure and DevOps
+- Multi-cloud expertise (AWS, Azure, GCP)
+- Launching OneOps.cloud for startup infrastructure
+- AI-assisted development workflows
+
+**Important:** Always spell it "Wisk.ai" (not "Wisc.ai").
+
 ## Blog Writing Approach
 
 ### Direct Writing vs Natural-Blog-Writer Agent
