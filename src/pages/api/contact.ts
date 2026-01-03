@@ -34,7 +34,6 @@ export const POST: APIRoute = async ({ request }) => {
     const formData = await request.formData();
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
-    const company = formData.get('company') as string;
     const message = formData.get('message') as string;
     const turnstileToken = formData.get('cf-turnstile-response') as string;
 
@@ -134,14 +133,7 @@ export const POST: APIRoute = async ({ request }) => {
                   <div class="label">Email:</div>
                   <div class="value">${email}</div>
               </div>
-              
-              ${company ? `
-              <div class="field">
-                  <div class="label">Company:</div>
-                  <div class="value">${company}</div>
-              </div>
-              ` : ''}
-              
+
               <div class="field">
                   <div class="label">Message:</div>
                   <div class="value message-content">${message}</div>
@@ -155,7 +147,7 @@ export const POST: APIRoute = async ({ request }) => {
     const mailOptions = {
       from: `"Website Contact Form" <${import.meta.env.GMAIL_USER}>`,
       to: import.meta.env.RECIPIENT_EMAIL || import.meta.env.GMAIL_USER,
-      subject: `New Contact: ${name}${company ? ` from ${company}` : ''}`,
+      subject: `New Contact: ${name}`,
       html: htmlContent,
       replyTo: email, // Allows you to reply directly to the sender
     };
