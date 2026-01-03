@@ -61,6 +61,7 @@
     "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
+    "puppeteer": "^24.34.0",
     "reading-time": "^1.5.0",
     "sharp": "0.34.1",
     "tailwind-merge": "^2.6.0",
