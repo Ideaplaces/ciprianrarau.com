@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-01-03T12:00:00Z
+publishDate: 2026-01-03T12:00:00Z
 author: Ciprian Rarau
 title: "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits"
 excerpt: How I built a webhook-based integration that makes GitHub and Monday.com work as a single system. Developers commit code, and task statuses update automatically through the entire deployment pipeline.
