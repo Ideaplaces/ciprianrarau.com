@@ -24,6 +24,10 @@ Choose the approach based on content type:
 - **80% narrative, 20% technical examples** → `natural-blog-writer` agent
 
 **Style requirements (both approaches):**
+- **First person singular ("I", "my", "me")** - This is Chip's personal blog, not a team blog
+  - Use "I built this integration..." not "We built this integration..."
+  - Exception: "We" is acceptable when referring to humanity/society in general observations
+  - Actions taken should always be "I", never "we"
 - Highly technical and experience-based
 - Facts over opinions - everything should be what was done, what was possible
 - No fluff or filler content
