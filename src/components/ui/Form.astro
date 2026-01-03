@@ -6,9 +6,12 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '', a
 
 // Site key with fallback - the key is public (visible in HTML) so hardcoding is acceptable
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.meta.env.TURNSTILE_SITE_KEY || '0x4AAAAAACHdWCX71UHiumtC';
+
+// Fields that are required (company is optional)
+const requiredFields = ['name', 'email', 'message'];
 ---
 
-<form method="POST" action={action}>
+<form method="POST" action={action} id="contact-form" novalidate>
   {
     inputs &&
       inputs.map(
@@ -18,6 +21,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.met
               {label && (
                 <label for={name} class="block text-sm font-medium">
                   {label}
+                  {requiredFields.includes(name) && <span class="text-red-500 ml-1">*</span>}
                 </label>
               )}
               <input
@@ -26,8 +30,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.met
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                required={requiredFields.includes(name)}
+                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
               />
+              <p class="hidden mt-1 text-sm text-red-500" id={`${name}-error`}></p>
             </div>
           )
       )
@@ -35,17 +41,20 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.met
 
   {
     textarea && (
-      <div>
+      <div class="mb-6">
         <label for="textarea" class="block text-sm font-medium">
           {textarea.label}
+          {requiredFields.includes(textarea.name || 'message') && <span class="text-red-500 ml-1">*</span>}
         </label>
         <textarea
           id="textarea"
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          required={requiredFields.includes(textarea.name || 'message')}
+          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
         />
+        <p class="hidden mt-1 text-sm text-red-500" id="message-error"></p>
       </div>
     )
   }
@@ -100,3 +109,110 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.met
 {turnstileSiteKey && (
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 )}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    if (!form) return;
+
+    const errorMessages: Record<string, string> = {
+      name: 'Please enter your name',
+      email: 'Please enter a valid email address',
+      message: 'Please enter your message',
+    };
+
+    function showError(fieldName: string, message: string) {
+      const field = form.querySelector(`[name="${fieldName}"]`) as HTMLInputElement | HTMLTextAreaElement;
+      const errorEl = document.getElementById(`${fieldName}-error`);
+
+      if (field) {
+        field.classList.add('border-red-500', 'focus:ring-red-500');
+        field.classList.remove('border-gray-200', 'dark:border-gray-700');
+      }
+
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    function clearError(fieldName: string) {
+      const field = form.querySelector(`[name="${fieldName}"]`) as HTMLInputElement | HTMLTextAreaElement;
+      const errorEl = document.getElementById(`${fieldName}-error`);
+
+      if (field) {
+        field.classList.remove('border-red-500', 'focus:ring-red-500');
+        field.classList.add('border-gray-200', 'dark:border-gray-700');
+      }
+
+      if (errorEl) {
+        errorEl.classList.add('hidden');
+      }
+    }
+
+    function validateField(field: HTMLInputElement | HTMLTextAreaElement): boolean {
+      const name = field.name;
+      const value = field.value.trim();
+
+      clearError(name);
+
+      if (field.required && !value) {
+        showError(name, errorMessages[name] || 'This field is required');
+        return false;
+      }
+
+      if (name === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          showError(name, 'Please enter a valid email address');
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    // Validate on blur
+    form.querySelectorAll('input, textarea').forEach((field) => {
+      field.addEventListener('blur', (e) => {
+        validateField(e.target as HTMLInputElement | HTMLTextAreaElement);
+      });
+
+      // Clear error on input
+      field.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+        if (target.value.trim()) {
+          clearError(target.name);
+        }
+      });
+    });
+
+    // Validate on submit
+    form.addEventListener('submit', (e) => {
+      let isValid = true;
+      const fields = form.querySelectorAll('input[required], textarea[required]');
+
+      fields.forEach((field) => {
+        if (!validateField(field as HTMLInputElement | HTMLTextAreaElement)) {
+          isValid = false;
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+        // Focus the first invalid field
+        const firstError = form.querySelector('.border-red-500') as HTMLElement;
+        if (firstError) {
+          firstError.focus();
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  input:invalid:not(:placeholder-shown),
+  textarea:invalid:not(:placeholder-shown) {
+    border-color: rgb(239 68 68);
+  }
+</style>
