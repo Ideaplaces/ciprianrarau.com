@@ -27,7 +27,7 @@ transcript: |
   In the last few years, but specifically in this year alone, my focus on DevOps has been quite significant. It's not a few months, it's really years. Four years ago I started a journey with a friend of mine, and this has been growing and growing.
   
   === TRANSCRIPT SESSION 3: Final Version with All Details ===
-  My journey with DevOps started 4-5 years ago with a friend of mine, but specifically in this year alone, my focus has been quite significant. This has been growing and growing - me helping more and more startups, and AI significantly speeds up everything. I've been working with all cloud providers from Google Cloud to AWS to Azure. In all three of them, I'm working with production applications and really enjoying the process. I'm doing this on everything in all the free cloud environments. I'm doing infrastructure as code like I did in the past but professionally, and it's really a game changer in terms of being able to handle everything from every part of the application - from databases to provisioning Kubernetes, provisioning services, VMs, working with Terraform, working with logs, alerts. It's really quite mesmerizing the power that we have while implementing this, and if properly done, how much leverage in the business this can be.
+  My journey with DevOps started 4-5 years ago with a friend of mine, but specifically in this year alone, my focus has been quite significant. This has been growing and growing - me helping more and more startups, and AI significantly speeds up everything. I've been working with all cloud providers from Google Cloud to AWS to Azure. In all three of them, I'm working with production applications and really enjoying the process. I'm doing this on everything in all the free cloud environments. I'm doing infrastructure as code like I did in the past but professionally, and it's really a game changer in terms of being able to handle everything from every part of the application - from databases to provisioning Kubernetes, provisioning services, VMs, working with Terraform, working with logs, alerts. It's really quite mesmerizing the power that I have while implementing this, and if properly done, how much leverage in the business this can be.
 
   The key here is that in all the environments, I have all free environments, depth-stitch production proper CI/CD with everything: integration tests, unit tests, end-to-end tests, UI tests. When this is done properly, especially in a B2B and B2C company, it really gives wings and makes it fly.
 
@@ -37,7 +37,7 @@ transcript: |
 
   AI allows it with guidance, allowing a proper structuring of thinking as an architect, I can direct and have let's call a genetic engineer as an energetic engineer because that's what I am. I am shaping the AI into a very solid solution, the best of breed when it comes to DevOps practices. I'm not sure if there is something called green red red green or something green red. I don't know what's the term, but I mean it's zero downtime deployments and with many times I had to do deep migration while significantly improving the infrastructure while keeping the business running, so it's not only a green field but it can also be improvements as we go.
 
-  I want to emphasize also the tension that we have when we're working in DevOps, because we know that especially migrations and deployments when we make significant amounts of changes can lead to a lot of instability. Properly preparing for it. I did not talk about security, performance, availability, redundancy, disaster recovery - there are so many angles, but all of them start with amazing software engineering and everything being infrastructure as code and everything to be peer-reviewed and to be clear in text in code.
+  I want to emphasize also the tension that I have when I'm working in DevOps, because I know that especially migrations and deployments when I make significant amounts of changes can lead to a lot of instability. Properly preparing for it. I did not talk about security, performance, availability, redundancy, disaster recovery - there are so many angles, but all of them start with amazing software engineering and everything being infrastructure as code and everything to be peer-reviewed and to be clear in text in code.
 
   As a software engineer initially, I'm a product person, so I always enjoy that aspect. But as I go with more experience, I realize how important this infrastructure piece is, and I really work in every place where I'm going. The first thing that I'm looking for is looking at the product to see what the customers want, but I'm also looking at the infrastructure when it comes to scalability and being able to handle customers - doesn't matter the number. Of course, when you have a big number of customers it's actually important, but also when you have a small number of customers because of the certainty that this will work in any situation.
 
@@ -50,7 +50,7 @@ Working in production is one of the most challenging yet rewarding aspects of De
 
 ## The Evolution from Code to Infrastructure
 
-My DevOps journey started 4-5 years ago, but this year alone has seen explosive growth. I've been helping more startups build their infrastructure, with AI dramatically accelerating our capabilities. Working across all three major cloud providers—Google Cloud, AWS, and Azure—I'm running production applications on each platform.
+My DevOps journey started 4-5 years ago, but this year alone has seen explosive growth. I've been helping more startups build their infrastructure, with AI dramatically accelerating my capabilities. Working across all three major cloud providers—Google Cloud, AWS, and Azure—I'm running production applications on each platform.
 
 As a software engineer originally, I'm a product person at heart. But experience has taught me how critical infrastructure is. Now, when I join any company, I examine two things immediately: what customers want from the product, and whether the infrastructure can scale to handle them. Whether you have 10 customers or 10,000, you need certainty that your system will perform in any situation.
 
@@ -132,7 +132,7 @@ These aren't just best practices—they're survival requirements in production e
 
 This extensive production experience has led me to launch OneOps.cloud, a service specifically tailored for startups and early businesses to establish their infrastructure correctly from day one. This represents my commitment to making enterprise-grade infrastructure accessible to companies that need it most but often can't access it.
 
-The vision is simple: every startup deserves the same infrastructure excellence that large enterprises enjoy. With AI accelerating our capabilities and my experience across multiple cloud platforms and production deployments, we can make this happen.
+The vision is simple: every startup deserves the same infrastructure excellence that large enterprises enjoy. With AI accelerating my capabilities and my experience across multiple cloud platforms and production deployments, I can make this happen.
 
 ## The Future of Infrastructure
 

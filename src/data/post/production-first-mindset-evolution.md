@@ -49,7 +49,7 @@ For years, I worked exclusively on these post-authentication features. The dashb
 
 What used to take weeks now takes hours. Sometimes minutes.
 
-I just shipped a feature yesterday afternoon. By evening, I was watching customers use it in real-time through our analytics. One user found a edge case I hadn't considered. Fixed it. Deployed again. All before dinner.
+I just shipped a feature yesterday afternoon. By evening, I was watching customers use it in real-time through my analytics. One user found an edge case I hadn't considered. Fixed it. Deployed again. All before dinner.
 
 This isn't recklessness—it's confidence built on modern tooling. Claude Code, Cursor, Sonnet 3.7 and 4, now Opus. These aren't just tools; they're accelerators that compress the feedback loop from idea to impact.
 
@@ -57,7 +57,7 @@ This isn't recklessness—it's confidence built on modern tooling. Claude Code, 
 
 Here's what I've discovered: the more you deploy, the safer it becomes. 
 
-When I started at Wisc.ai, we did quarterly releases. Big, scary, all-hands-on-deck deployments. Everyone held their breath. By year eight? We were pushing multiple times daily. Smaller changes, faster feedback, happier customers.
+When I started at Wisc.ai, I did quarterly releases. Big, scary, all-hands-on-deck deployments. Everyone held their breath. By year eight? I was pushing multiple times daily. Smaller changes, faster feedback, happier customers.
 
 The constraints of production—everything must work, always—actually make you a better developer. There's no "it works on my machine" when a thousand clients depend on your code.
 
@@ -67,7 +67,7 @@ The game has fundamentally changed. I can imagine a feature in the morning and w
 
 Last week, a client mentioned they needed better data visualization. I sketched out the concept, explained it to my AI tools, and within two hours had a fully functional analytics dashboard deployed to production. The client's response? "How did you build this so fast?"
 
-That's the wrong question. The right question is: "Why would we build it any slower?"
+That's the wrong question. The right question is: "Why would I build it any slower?"
 
 ## The Maintainability Myth
 

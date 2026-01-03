@@ -2,7 +2,7 @@
 publishDate: 2025-11-05T14:00:00
 author: Ciprian Rarau
 title: "AI as an Extension of Myself: When Technology Complexity Outpaces Human Understanding"
-excerpt: "Society is going into the technology, and what we see around us becomes more and more complex than what the human brain can understand"
+excerpt: "Society is going into the technology, and what I see around me becomes more and more complex than what the human brain can understand"
 category: Technology
 tags: ["AI","technology","complexity","future","society"]
 image: /images/diagrams/technology-complexity-race-diagram-dede4eab.png
@@ -34,11 +34,11 @@ Right now I'm using AI and understand everything that the AI is doing, and I fee
 
 From what I observe, AI excels at individual tasks - if I focus on one specific task and provide the right directions, AI can execute it.
 
-When it comes to work as we know it, everything that we do is individually simple. An AI can handle each piece.
+When it comes to work as I know it, everything that I do is individually simple. An AI can handle each piece.
 
 ## The Complexity Challenge
 
-The real challenge is that we need to guide increasingly complex and bigger systems, faster and faster. Only a few minds can comprehend the different realities spanning from technical implementation all the way through sales, growth, and vision while keeping everything cohesive.
+The real challenge is that I need to guide increasingly complex and bigger systems, faster and faster. Only a few minds can comprehend the different realities spanning from technical implementation all the way through sales, growth, and vision while keeping everything cohesive.
 
 ```mermaid
 flowchart TD
@@ -61,13 +61,13 @@ flowchart TD
 
 ## The Horizon Expansion
 
-The perspective shift is profound: we now need to expand our horizons rather than dive deep into details. Before, many people spent their time deep in the minutiae, but now those details are being handled automatically. We can make any idea happen.
+The perspective shift is profound: I now need to expand my horizons rather than dive deep into details. Before, many people spent their time deep in the minutiae, but now those details are being handled automatically. I can make any idea happen.
 
 ## The Complexity Theory
 
 Society is merging with technology, and what surrounds us becomes increasingly complex - beyond what the human brain can fully grasp.
 
-Previously, our concerns were limited to traditional technology, distinct from biological systems. But now, everything becomes more sophisticated and interconnected, which means fewer and fewer minds can comprehend what's actually happening.
+Previously, my concerns were limited to traditional technology, distinct from biological systems. But now, everything becomes more sophisticated and interconnected, which means fewer and fewer minds can comprehend what's actually happening.
 
 ## What Technology Wants
 
@@ -75,6 +75,6 @@ This connects to Kevin Kelly's book "What Technology Wants" - the idea that tech
 
 ## The Transformation
 
-The shift is unmistakable: we're moving from a world where people needed to master details to one where AI handles those details while we must comprehend entire systems. The challenge has evolved beyond individual tasks - it's about orchestrating increasingly complex systems that fewer and fewer minds can fully grasp.
+The shift is unmistakable: I'm moving from a world where people needed to master details to one where AI handles those details while I must comprehend entire systems. The challenge has evolved beyond individual tasks - it's about orchestrating increasingly complex systems that fewer and fewer minds can fully grasp.
 
-We can make any idea happen. The details are handled. But the price is that the world around us grows more complex than any single human brain can comprehend.
+I can make any idea happen. The details are handled. But the price is that the world around me grows more complex than any single human brain can comprehend.

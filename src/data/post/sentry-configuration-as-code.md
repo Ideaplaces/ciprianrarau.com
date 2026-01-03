@@ -475,7 +475,7 @@ class SentryManager:
                     self._update_member_role(email, member["role"])
                     print(f"  Updated role: {email} -> {member['role']}")
 
-        # Note: We don't remove members not in config (safety measure)
+        # Note: I don't remove members not in config (safety measure)
         print("  Member sync complete (removal is manual)")
 
     def _get_existing_members(self) -> Dict[str, Dict]:
@@ -630,4 +630,4 @@ Error monitoring configuration is infrastructure. It should be:
 - Consistent across environments
 - Documented by its existence
 
-When a new developer asks "what errors do we ignore?", the answer is in `sentry_config.yaml`, not buried in UI settings across multiple projects.
+When a new developer asks "what errors do I ignore?", the answer is in `sentry_config.yaml`, not buried in UI settings across multiple projects.

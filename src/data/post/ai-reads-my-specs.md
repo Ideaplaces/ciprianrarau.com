@@ -18,7 +18,7 @@ metadata:
   showReadingTime: true
   showTags: true
 transcript: |
-  I'm writing specs for AI, and then based on specs I'm writing the code. AI can do individual tasks if I give it the right directions. The thing is that we have to guide more and more complex and bigger systems faster and faster. AI handles the details, I comprehend the system. It's iterative - every step has validation criteria. I'm always there, always looking at it. It really becomes an extension of myself.
+  I'm writing specs for AI, and then based on specs I'm writing the code. AI can do individual tasks if I give it the right directions. The thing is that I have to guide more and more complex and bigger systems faster and faster. AI handles the details, I comprehend the system. It's iterative - every step has validation criteria. I'm always there, always looking at it. It really becomes an extension of myself.
 ---
 
 ## Agentic Engineer vs Vibe Coder
@@ -40,7 +40,7 @@ The reality:
 2. Each step has clear acceptance criteria
 3. AI executes one step at a time
 4. I validate before moving to the next step
-5. If something's wrong, we fix it immediately
+5. If something's wrong, I fix it immediately
 6. The spec evolves with learnings
 
 It's iterative. It's controlled. It's an extension of myself.

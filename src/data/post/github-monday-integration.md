@@ -2,7 +2,7 @@
 publishDate: 2025-01-03T12:00:00Z
 author: Ciprian Rarau
 title: "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits"
-excerpt: How we built a webhook-based integration that makes GitHub and Monday.com work as a single system. Developers commit code, and task statuses update automatically through the entire deployment pipeline.
+excerpt: How I built a webhook-based integration that makes GitHub and Monday.com work as a single system. Developers commit code, and task statuses update automatically through the entire deployment pipeline.
 image: /images/diagrams/github-monday-integration-diagram-b2ddc22b.png
 category: Technology
 tags:
@@ -20,9 +20,9 @@ Every developer knows this pain: you're deep in flow, you've just shipped a feat
 
 It's not difficult work. It's just... friction. And friction compounds. Skip an update once, and suddenly nobody knows what's actually deployed.
 
-We fixed this. Now our developers commit code with a Monday link, and the entire task lifecycle updates automatically. Task reaches production? Status changes to "Done" without anyone touching Monday.com. It's been running for months, and the visibility improvement is dramatic.
+I fixed this. Now developers commit code with a Monday link, and the entire task lifecycle updates automatically. Task reaches production? Status changes to "Done" without anyone touching Monday.com. It's been running for months, and the visibility improvement is dramatic.
 
-## The Developer Experience We Wanted
+## The Developer Experience I Wanted
 
 The goal was simple: **make Monday.com and GitHub work as a single application**. A developer should be able to:
 
@@ -68,7 +68,7 @@ The Monday task becomes a single source of truth that reflects exactly where the
 
 ## How It Actually Works
 
-The integration runs on a simple but robust architecture. GitHub sends webhooks to our KPI dashboard, which processes events and updates Monday.com via their GraphQL API.
+The integration runs on a simple but robust architecture. GitHub sends webhooks to my KPI dashboard, which processes events and updates Monday.com via their GraphQL API.
 
 ```mermaid
 graph TB
@@ -113,13 +113,13 @@ graph TB
 
 **1. GitHub Webhooks**
 
-GitHub sends webhook events for every push and PR action. We configure these via Terraform to hit our KPI service endpoint:
+GitHub sends webhook events for every push and PR action. I configure these via Terraform to hit my KPI service endpoint:
 
 ```typescript
 events = ["push", "pull_request"]
 ```
 
-The webhook includes a cryptographic signature that we verify before processing - security first.
+The webhook includes a cryptographic signature that I verify before processing - security first.
 
 **2. Event Router**
 
@@ -147,11 +147,11 @@ Every commit and PR is scanned for Monday.com URLs using a regex pattern:
 /monday\.com\/boards\/\d+(?:\/views\/\d+)?\/pulses\/(\d+)/g
 ```
 
-This extracts the task ID (`pulses/XXXXX`) which we use to update the right item.
+This extracts the task ID (`pulses/XXXXX`) which I use to update the right item.
 
 ## Branch-Based Status Progression
 
-Our git workflow uses a release train model: `development` → `main` (staging) → `production`. The integration mirrors this exactly.
+My git workflow uses a release train model: `development` → `main` (staging) → `production`. The integration mirrors this exactly.
 
 ```mermaid
 flowchart LR
@@ -185,15 +185,15 @@ When code moves through branches, Monday.com tasks move through statuses. No man
 
 ### Why This Matters for Fast-Forward Merges
 
-We use fast-forward merges between environments (dev → staging → production). This means there's no PR when code moves from main to production - just a git push.
+I use fast-forward merges between environments (dev → staging → production). This means there's no PR when code moves from main to production - just a git push.
 
-The critical insight: **commits must have Monday links, not just PRs**. When we fast-forward to production, the webhook reads task IDs from the commit messages to know which tasks just went live.
+The critical insight: **commits must have Monday links, not just PRs**. When I fast-forward to production, the webhook reads task IDs from the commit messages to know which tasks just went live.
 
-Without this, we'd lose track of tasks as they progress through environments.
+Without this, I'd lose track of tasks as they progress through environments.
 
 ## PR Validation That Actually Works
 
-We enforce Monday links at the PR level with a GitHub Actions check. PRs that don't include a Monday link in both the description AND at least one commit cannot be merged.
+I enforce Monday links at the PR level with a GitHub Actions check. PRs that don't include a Monday link in both the description AND at least one commit cannot be merged.
 
 ```mermaid
 flowchart TB
@@ -220,7 +220,7 @@ For emergencies, there's a `[skip-monday]` escape hatch. But it's logged and sho
 
 ## Smart Commit Consolidation
 
-When multiple commits reference the same Monday task, we don't spam the task with individual notifications. Instead, we consolidate them into a single update that shows all commits.
+When multiple commits reference the same Monday task, I don't spam the task with individual notifications. Instead, I consolidate them into a single update that shows all commits.
 
 The logic:
 1. When new commits arrive, find existing GitHub updates for this repo/branch
@@ -268,11 +268,11 @@ const SUBTASK_STATUS_CONFIG = {
 };
 ```
 
-When updating a task, we first query Monday to check if it has a `parent_item`. If yes, it's a subtask and we use the subtask column configuration. Developers don't need to think about this - it just works.
+When updating a task, I first query Monday to check if it has a `parent_item`. If yes, it's a subtask and I use the subtask column configuration. Developers don't need to think about this - it just works.
 
 ## Preview URLs: Closing the Loop
 
-For our web app, Firebase Hosting generates preview URLs for every PR. These get automatically posted to the Monday task:
+For my web app, Firebase Hosting generates preview URLs for every PR. These get automatically posted to the Monday task:
 
 ```
 🌐 Preview Deployment
@@ -320,7 +320,7 @@ Building this required:
 
 Total: about 1000 lines of TypeScript plus configuration.
 
-The payoff: every developer saves 5-10 minutes per task on manual updates. With dozens of tasks per week, this compounds fast. More importantly, we eliminated an entire category of "I forgot to update Monday" problems.
+The payoff: every developer saves 5-10 minutes per task on manual updates. With dozens of tasks per week, this compounds fast. More importantly, I eliminated an entire category of "I forgot to update Monday" problems.
 
 ## Lessons Learned
 
@@ -338,18 +338,18 @@ Nobody wants 20 notifications for 20 commits. The accumulation logic took extra 
 
 **4. Status labels must match exactly**
 
-Monday.com status columns are label-based. A typo in "Deployed to Dev" vs "Deployed to dev" will silently fail. We hardcode the exact labels from the board.
+Monday.com status columns are label-based. A typo in "Deployed to Dev" vs "Deployed to dev" will silently fail. I hardcode the exact labels from the board.
 
 **5. Tasks and subtasks need different handling**
 
-This wasn't obvious at first. The integration got much more robust once we properly detected and handled subtasks.
+This wasn't obvious at first. The integration got much more robust once I properly detected and handled subtasks.
 
 ## It's a Train, Not a Taxi
 
-This integration embodies our "release train" philosophy. Once code is merged to development, it's on the train - it will automatically progress to staging and then production on schedule.
+This integration embodies my "release train" philosophy. Once code is merged to development, it's on the train - it will automatically progress to staging and then production on schedule.
 
 The automation reinforces this: you can't manually set a task to "Done" if the code hasn't actually reached production. The status reflects reality, not aspiration.
 
-Combined with our production-first DevOps approach, this creates a tight feedback loop. Commit → deploy → status update → visibility, all flowing automatically.
+Combined with my production-first DevOps approach, this creates a tight feedback loop. Commit → deploy → status update → visibility, all flowing automatically.
 
 The boring parts are finally automated. And the developer experience? It's night and day.

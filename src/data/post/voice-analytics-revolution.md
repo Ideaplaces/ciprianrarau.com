@@ -99,14 +99,14 @@ The toolkit leverages Python's multiprocessing capabilities to handle large data
 
 Integration with OpenAI and Anthropic APIs transforms raw metrics into engaging narratives optimized for sharing on LinkedIn or in presentations. The visualizations show everything from daily speaking patterns to cumulative time savings over months.
 
-But here's what makes this different from typical analytics tools: it doesn't just show you what happened—it helps you articulate why voice input is transformative. The data becomes proof points for a larger story about how we interact with technology.
+But here's what makes this different from typical analytics tools: it doesn't just show you what happened—it helps you articulate why voice input is transformative. The data becomes proof points for a larger story about how I interact with technology.
 
 ## Looking Forward: Voice as the New Default
 
-This project crystallized something I've been feeling for months: we're at an inflection point where voice input transitions from "interesting capability" to "default interaction method."
+This project crystallized something I've been feeling for months: I'm at an inflection point where voice input transitions from "interesting capability" to "default interaction method."
 
 The data proves it. When people consistently save 20+ hours monthly by speaking instead of typing, and when that time savings comes with improved expression and reduced physical strain, the choice becomes obvious.
 
-We're not just building better voice recognition—we're documenting the transition to a more natural way of working with computers. The analytics toolkit isn't just measuring productivity; it's capturing the moment when speaking to machines becomes as natural as speaking to humans.
+I'm not just building better voice recognition—I'm documenting the transition to a more natural way of working with computers. The analytics toolkit isn't just measuring productivity; it's capturing the moment when speaking to machines becomes as natural as speaking to humans.
 
-**The acceleration is remarkable. What once required us to adapt to our tools now has our tools adapting to us.** And for the first time, we have the data to prove just how transformative that shift really is. 
+**The acceleration is remarkable. What once required me to adapt to my tools now has my tools adapting to me.** And for the first time, I have the data to prove just how transformative that shift really is. 
