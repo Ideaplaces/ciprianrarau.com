@@ -56,6 +56,8 @@ flowchart TD
     style F fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
+![Diagram 1](/images/diagrams/ai-reads-my-specs-diagram-76c33e84.png?v=430261b9)
+
 ## Spec Structure for AI Consumption
 
 AI models parse structured text effectively. My specs follow a consistent format:

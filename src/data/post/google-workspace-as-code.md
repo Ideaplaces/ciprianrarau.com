@@ -41,15 +41,15 @@ flowchart TD
     B --> D[Groups]
     B --> E[Memberships]
 
-    C --> F[ciprian@domain.com]
-    C --> G[developer@domain.com]
-    C --> H[help@domain.com]
+    C --> F["ciprian@domain.com"]
+    C --> G["developer@domain.com"]
+    C --> H["help@domain.com"]
 
-    D --> I[dev-team@domain.com]
-    D --> J[support@domain.com]
-    D --> K[security@domain.com]
+    D --> I["dev-team@domain.com"]
+    D --> J["support@domain.com"]
+    D --> K["security@domain.com"]
 
-    E --> L[User → Group Mapping]
+    E --> L[User to Group Mapping]
 
     M[Service Account] --> B
     N[Impersonation] --> M
@@ -57,6 +57,8 @@ flowchart TD
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
     style L fill:#90EE90,stroke:#333,stroke-width:2px
 ```
+
+![Diagram 1](/images/diagrams/google-workspace-as-code-diagram-83f07ac9.png?v=430261b9)
 
 ## Provider Configuration
 

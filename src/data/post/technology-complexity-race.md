@@ -56,6 +56,8 @@ flowchart TD
     style J fill:#f9d5e5,stroke:#333,stroke-width:3px
 ```
 
+![Diagram 1](/images/diagrams/technology-complexity-race-diagram-dede4eab.png?v=430261b9)
+
 ## The Horizon Expansion
 
 The perspective shift is profound: we now need to expand our horizons rather than dive deep into details. Before, many people spent their time deep in the minutiae, but now those details are being handled automatically. We can make any idea happen.

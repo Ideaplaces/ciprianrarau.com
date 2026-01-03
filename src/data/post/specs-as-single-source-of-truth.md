@@ -58,6 +58,8 @@ flowchart TD
     style N fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
+![Diagram 2](/images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png?v=430261b9)
+
 ## Specification Structure
 
 Every feature spec follows a consistent format that both humans and AI can parse:
@@ -145,6 +147,8 @@ flowchart LR
     F --> G[Help Articles]
     F --> H[Marketing Copy]
 ```
+
+![Diagram 1](/images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png?v=430261b9)
 
 ## Help Articles from Specs
 

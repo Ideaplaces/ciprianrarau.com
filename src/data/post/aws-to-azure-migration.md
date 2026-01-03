@@ -66,6 +66,8 @@ flowchart TD
     style C2 fill:#f9d5e5,stroke:#333,stroke-width:3px
 ```
 
+![Diagram 3](/images/diagrams/aws-to-azure-migration-diagram-d04bf085.png?v=430261b9)
+
 ## The Three-Environment Strategy
 
 ### Environment 1: Development (Azure)
@@ -297,6 +299,8 @@ flowchart LR
     style F fill:#c8e6c9
 ```
 
+![Diagram 2](/images/diagrams/aws-to-azure-migration-diagram-f5cf32af.png?v=430261b9)
+
 ### The Cutover Window
 
 1. **T-24h**: Final staging validation
@@ -334,6 +338,8 @@ flowchart LR
     style F fill:#c8e6c9
     style C fill:#e0e0e0
 ```
+
+![Diagram 1](/images/diagrams/aws-to-azure-migration-diagram-ca6aecb0.png?v=430261b9)
 
 ### Rollback Plan
 
