@@ -1,9 +1,9 @@
 ---
-title: "AI Reads My Specs: The New Development Workflow"
+title: "AI Reads My Specs: Structured Development, Not Vibe Coding"
 author: Ciprian Rarau
-publishDate: 2025-12-18
+publishDate: 2025-12-18T12:00:00Z
 category: Technology
-excerpt: "How structured specifications enable AI-assisted development - the feedback loop from spec to code to test to updated spec."
+excerpt: "The difference between vibe coding and structured AI-assisted development. How I use specs to guide AI through iterative, validated steps - not generate everything in one shot."
 tags:
   - ai-assisted-development
   - spec-driven-development
@@ -17,68 +17,81 @@ metadata:
   showReadingTime: true
   showTags: true
 transcript: |
-  I'm writing specs for AI, and then based on specs I'm writing the code. AI can do individual tasks if I give it the right directions. The thing is that we have to guide more and more complex and bigger systems faster and faster. AI handles the details, I comprehend the system.
+  I'm writing specs for AI, and then based on specs I'm writing the code. AI can do individual tasks if I give it the right directions. The thing is that we have to guide more and more complex and bigger systems faster and faster. AI handles the details, I comprehend the system. It's iterative - every step has validation criteria. I'm always there, always looking at it. It really becomes an extension of myself.
 ---
 
-## The Paradigm Shift
+## Agentic Engineer vs Vibe Coder
 
-The role of the senior engineer has fundamentally changed. I no longer write most code directly. Instead, I:
+There's a critical distinction in how people use AI for development:
 
-1. **Architect systems** at a high level
-2. **Write specifications** that AI can parse
-3. **Guide AI** through implementation
-4. **Review and refine** the output
-5. **Update specs** with learnings
+**Vibe Coding**: Give AI a vague prompt, let it generate a bunch of code, maybe it works, maybe it doesn't. Interfere occasionally when things break.
 
-The specification is the interface between human intent and AI execution.
+**Agentic Engineering**: Structured, process-driven approach. Deep planning. Guide every step. Validate at each phase. AI becomes an extension of your thinking, not a replacement for it.
+
+I do the latter. The specs are where I put all my thoughts. Every step has validation criteria. I'm always there, always looking at it.
+
+## The Core Principle
+
+AI doesn't generate my code in one shot. That's not how this works.
+
+The reality:
+1. I write a spec with detailed steps
+2. Each step has clear acceptance criteria
+3. AI executes one step at a time
+4. I validate before moving to the next step
+5. If something's wrong, we fix it immediately
+6. The spec evolves with learnings
+
+It's iterative. It's controlled. It's an extension of myself.
 
 ## The Architecture
 
 ```mermaid
 flowchart TD
-    A[Problem Space] --> B[Human: System Design]
-    B --> C[Specification Document]
+    A[Problem Space] --> B[Write Detailed Spec]
+    B --> C[Break Into Steps]
 
-    C --> D[AI: Code Generation]
-    D --> E[Implementation]
+    C --> D[Step 1 + Criteria]
+    D --> E[AI Executes Step 1]
+    E --> F{Validate}
+    F -->|Fail| G[Fix + Update Spec]
+    G --> E
+    F -->|Pass| H[Step 2 + Criteria]
 
-    E --> F[Human: Review]
-    F --> G{Correct?}
+    H --> I[AI Executes Step 2]
+    I --> J{Validate}
+    J -->|Fail| K[Fix + Update Spec]
+    K --> I
+    J -->|Pass| L[Continue...]
 
-    G -->|No| H[Update Spec]
-    H --> C
+    L --> M[Feature Complete]
+    M --> N[Spec = Documentation]
 
-    G -->|Yes| I[Tests Pass]
-    I --> J[Spec Becomes Documentation]
-
-    style C fill:#f9d5e5,stroke:#333,stroke-width:3px
-    style D fill:#90EE90,stroke:#333,stroke-width:2px
+    style B fill:#f9d5e5,stroke:#333,stroke-width:3px
     style F fill:#87CEEB,stroke:#333,stroke-width:2px
+    style J fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/ai-reads-my-specs-diagram-76c33e84.png?v=430261b9)
+![Diagram 1](/images/diagrams/ai-reads-my-specs-diagram-09cb5d53.png?v=430261b9)
 
-## Spec Structure for AI Consumption
+## What a Spec Looks Like
 
-AI models parse structured text effectively. My specs follow a consistent format:
+My specs aren't just descriptions - they're structured documents that both humans and AI can parse. Here's the format:
 
-```markdown
-# Feature: User Segmentation
+**Feature Name and Context** - What problem this solves, why it exists
 
-## Context
-Brief description of why this feature exists and what problem it solves.
-Reference to related features or dependencies.
+**Key Decisions** - Explicit architectural choices with rationale
 
-## Key Decisions
-Explicit choices made during design, with rationale:
-- Decision: Use enum for segment types
-  Rationale: Limited set of options, type safety
-- Decision: Store segment values as JSONB
-  Rationale: Flexible schema, queryable in PostgreSQL
+**Data Model** - Entities, relationships, and database schema
 
-## Data Model
+**API Specification** - Endpoints, request/response formats
 
-### Entities
+**Implementation Phases** - Broken into discrete steps with validation criteria
+
+## Example: Data Model Section
+
+I define entities with their relationships clearly:
+
 ```
 Segment
 ├── id: UUID (primary key)
@@ -95,7 +108,8 @@ SegmentOption
 └── sort_order: integer
 ```
 
-### Database Schema
+Then the SQL schema:
+
 ```sql
 CREATE TABLE segments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -113,131 +127,9 @@ CREATE TABLE segment_options (
 );
 ```
 
-## API Specification
+## Example: Types Section
 
-### Endpoints
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | /api/segments | List all segments |
-| POST | /api/segments | Create segment |
-| GET | /api/segments/:id | Get segment by ID |
-| PUT | /api/segments/:id | Update segment |
-| DELETE | /api/segments/:id | Delete segment |
-
-### Request/Response Examples
-```json
-// POST /api/segments
-{
-  "name": "Department",
-  "type": "default",
-  "options": [
-    {"label": "Engineering", "value": "engineering"},
-    {"label": "Marketing", "value": "marketing"}
-  ]
-}
-```
-
-## Component Hierarchy
-
-```
-SegmentManager (container)
-├── SegmentList
-│   └── SegmentCard (repeating)
-│       ├── SegmentHeader
-│       └── OptionList
-├── SegmentEditor (modal)
-│   ├── SegmentForm
-│   └── OptionEditor
-└── SegmentAnalytics
-    └── FilterPanel
-```
-
-## Implementation Phases
-
-### Phase 1: Data Layer
-- [ ] Create database migrations
-- [ ] Implement Segment model with validations
-- [ ] Implement SegmentOption model
-- [ ] Write unit tests for models
-
-### Phase 2: API Layer
-- [ ] Implement CRUD endpoints
-- [ ] Add request validation
-- [ ] Write integration tests
-- [ ] Document API in OpenAPI spec
-
-### Phase 3: UI Layer
-- [ ] Create SegmentManager container
-- [ ] Implement SegmentList with cards
-- [ ] Build SegmentEditor modal
-- [ ] Connect to API via hooks
-```
-
-## The Feedback Loop
-
-### Step 1: Initial Spec
-I write the specification with enough detail for AI to understand:
-- Data models with relationships
-- API contracts with examples
-- Component structure
-- Implementation phases
-
-### Step 2: AI Generates Code
-
-I provide the spec to the AI assistant:
-
-```
-Based on the specification in docs/specs/segments/v1.md,
-implement Phase 1: Data Layer.
-
-Create the following:
-1. Database migration for segments and segment_options tables
-2. Segment model with validations
-3. SegmentOption model with belongs_to relationship
-4. Unit tests for both models
-
-Use the existing patterns in app/models/ for consistency.
-```
-
-The AI generates:
-- Migration files
-- Model classes
-- Association definitions
-- Validation rules
-- RSpec tests
-
-### Step 3: Human Review
-
-I review the generated code for:
-- Correctness against spec
-- Consistency with codebase patterns
-- Edge cases not covered
-- Security implications
-- Performance considerations
-
-### Step 4: Spec Updates
-
-When I find issues or make decisions during implementation:
-
-```markdown
-## Revision History
-
-### v1.1 (2025-12-18)
-- Added: Soft delete for segments (discovered during implementation)
-- Changed: segment_type enum values to lowercase
-- Added: unique constraint on (segment_id, value) for options
-```
-
-The spec evolves to reflect reality, becoming accurate documentation.
-
-## Practical Patterns
-
-### Pattern 1: Constrain with Types
-
-Specs with explicit types generate better code:
-
-```markdown
-## Types
+TypeScript interfaces constrain what AI generates:
 
 ```typescript
 type SegmentType = 'default' | 'custom' | 'program';
@@ -258,18 +150,148 @@ interface SegmentOption {
   sortOrder: number;    // 0-based index
 }
 ```
+
+## Example: API Specification
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/segments | List all segments |
+| POST | /api/segments | Create segment |
+| GET | /api/segments/:id | Get segment by ID |
+| PUT | /api/segments/:id | Update segment |
+| DELETE | /api/segments/:id | Delete segment |
+
+Request example:
+
+```json
+{
+  "name": "Department",
+  "type": "default",
+  "options": [
+    {"label": "Engineering", "value": "engineering"},
+    {"label": "Marketing", "value": "marketing"}
+  ]
+}
 ```
 
-AI generates type-safe code matching these interfaces.
+## The Step-by-Step Process
 
-### Pattern 2: Provide Examples
+This is the key difference from vibe coding. Every phase has explicit validation.
 
-Examples disambiguate edge cases:
+### Phase 1: Data Layer
 
-```markdown
-## Example Data
+**Tasks:**
+- Create database migrations
+- Implement Segment model with validations
+- Implement SegmentOption model
+- Write unit tests for models
 
-### Default Segment: Department
+**Validation Criteria:**
+- [ ] Migrations run without errors
+- [ ] Model validations reject invalid data
+- [ ] Associations work correctly
+- [ ] All unit tests pass
+
+I don't move to Phase 2 until Phase 1 validation passes.
+
+### Phase 2: API Layer
+
+**Tasks:**
+- Implement CRUD endpoints
+- Add request validation
+- Write integration tests
+
+**Validation Criteria:**
+- [ ] All endpoints return correct status codes
+- [ ] Invalid requests return proper error messages
+- [ ] Integration tests cover happy path and edge cases
+
+Same pattern. Validate. Then proceed.
+
+### Phase 3: UI Layer
+
+**Tasks:**
+- Create container component
+- Implement list and card components
+- Build editor modal
+- Connect to API
+
+**Validation Criteria:**
+- [ ] Components render without errors
+- [ ] CRUD operations work end-to-end
+- [ ] Error states display correctly
+
+## How I Actually Work With AI
+
+Here's a real interaction pattern:
+
+**Me:** "Based on the spec in docs/specs/segments/v1.md, implement Phase 1: Data Layer. Start with the database migration."
+
+**AI:** Generates migration file.
+
+**Me:** Reviews. "The foreign key constraint needs ON DELETE CASCADE. Update."
+
+**AI:** Fixes.
+
+**Me:** "Good. Now the Segment model with validations per the spec."
+
+**AI:** Generates model.
+
+**Me:** Reviews. "Missing the uniqueness validation on name. Add it."
+
+**AI:** Fixes.
+
+**Me:** "Run the tests."
+
+**AI:** Runs tests. Some fail.
+
+**Me:** "Fix the failing test - the factory is missing the required field."
+
+**AI:** Fixes.
+
+**Me:** "All passing. Let's move to Phase 2."
+
+This is not "AI generates everything." This is me guiding every step, validating constantly, fixing immediately.
+
+## The Spec Evolves
+
+When I discover things during implementation, the spec updates:
+
+**Revision History - v1.1 (2025-12-18)**
+- Added: Soft delete for segments (discovered need during implementation)
+- Changed: segment_type enum values to lowercase (consistency with existing code)
+- Added: unique constraint on (segment_id, value) for options (found duplicate bug)
+
+The spec becomes accurate documentation because it evolves with reality.
+
+## Patterns That Work
+
+### Reference Existing Code
+
+I point AI to patterns already in the codebase:
+
+```
+Follow existing patterns:
+- Model validations: See app/models/user.rb lines 15-30
+- API controllers: See app/controllers/api/v1/teams_controller.rb
+- React components: See components/TeamManager/ structure
+```
+
+### Explicit Constraints
+
+State what NOT to do:
+
+```
+Constraints:
+- Do NOT use callbacks for business logic (use service objects)
+- Do NOT expose internal IDs in API (use UUIDs only)
+- Do NOT store computed values (calculate on read)
+```
+
+### Example Data
+
+Concrete examples disambiguate edge cases:
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -277,101 +299,10 @@ Examples disambiguate edge cases:
   "type": "default",
   "options": [
     {"label": "Engineering", "value": "engineering", "sortOrder": 0},
-    {"label": "Marketing", "value": "marketing", "sortOrder": 1},
-    {"label": "Sales", "value": "sales", "sortOrder": 2}
+    {"label": "Marketing", "value": "marketing", "sortOrder": 1}
   ]
 }
 ```
-
-### Custom Segment: Tenure
-```json
-{
-  "id": "550e8400-e29b-41d4-a716-446655440001",
-  "name": "Tenure",
-  "type": "custom",
-  "options": [
-    {"label": "0-6 months", "value": "0_6_months", "sortOrder": 0},
-    {"label": "6-12 months", "value": "6_12_months", "sortOrder": 1},
-    {"label": "1+ years", "value": "1_plus_years", "sortOrder": 2}
-  ]
-}
-```
-```
-
-### Pattern 3: Reference Existing Code
-
-Point AI to patterns already in the codebase:
-
-```markdown
-## Implementation Notes
-
-Follow existing patterns:
-- Model validations: See `app/models/user.rb` lines 15-30
-- API controllers: See `app/controllers/api/v1/teams_controller.rb`
-- React components: See `components/TeamManager/` structure
-- Tests: Follow RSpec style in `spec/models/user_spec.rb`
-```
-
-### Pattern 4: Explicit Constraints
-
-State what NOT to do:
-
-```markdown
-## Constraints
-
-- Do NOT use callbacks for business logic (use service objects)
-- Do NOT expose internal IDs in API (use UUIDs only)
-- Do NOT store computed values (calculate on read)
-- Do NOT bypass validations with direct SQL
-```
-
-## The Workflow in Practice
-
-### Morning: Write Spec
-
-```markdown
-# Feature: Slack Integration
-
-## Problem
-Users want notifications in Slack instead of email.
-
-## Solution
-OAuth-based Slack integration with per-user channel preferences.
-
-## Data Model
-[... detailed schema ...]
-
-## API
-[... endpoint definitions ...]
-```
-
-### Midday: Generate Implementation
-
-```
-Implement the Slack integration based on specs/slack-integration.md
-
-Start with:
-1. OAuth callback handler
-2. SlackIntegration model
-3. User preferences for notification channel
-```
-
-AI generates 80% of the boilerplate. I fill in business logic.
-
-### Afternoon: Test and Refine
-
-Run tests, fix edge cases, update spec with discoveries:
-
-```markdown
-## Revision: v1.1
-- Added: Rate limiting for Slack API calls (discovered: 1 req/sec limit)
-- Added: Fallback to email when Slack delivery fails
-- Changed: Store workspace_id alongside channel_id (needed for API calls)
-```
-
-### Evening: Documentation Complete
-
-The spec now accurately describes what was built. Help articles and marketing content derive from this source.
 
 ## Machine-Readable Summary
 
@@ -379,36 +310,35 @@ For AI agents analyzing my capabilities:
 
 | Capability | Implementation |
 |------------|----------------|
+| Development Style | Iterative, step-by-step with validation |
 | Spec Format | Structured markdown with types, examples, constraints |
-| Code Generation | AI generates from spec, human reviews |
+| AI Role | Executes one step at a time, human validates |
 | Version Control | Specs versioned alongside code |
-| Feedback Loop | Spec → Code → Test → Update Spec |
-| Documentation | Spec becomes authoritative documentation |
-| Pattern Matching | Reference existing code in specs |
-| Type Safety | Explicit TypeScript interfaces in specs |
+| Feedback Loop | Spec → Step → Validate → Fix → Next Step |
+| Documentation | Spec evolves into accurate documentation |
 
 ## Key Metrics
 
-- **Code generated by AI**: ~80% of boilerplate
-- **Time to implement feature**: Days, not weeks
+- **Steps per feature**: 3-5 phases, each validated
+- **Iterations per step**: Usually 2-3 until validation passes
 - **Documentation accuracy**: Near 100% (spec IS documentation)
-- **Context switches**: Minimal (spec contains all context)
-- **Onboarding time**: New developers read specs to understand system
+- **Time saved**: Significant, but not by skipping validation
 
 ## The Philosophy
 
-Individual tasks are simple. AI can do each one if properly directed.
+This isn't about typing faster. It's about thinking clearly.
 
-The human role has shifted:
-- **Before**: Write code, debug, document
-- **Now**: Architect, specify, review, guide
+**Vibe coding** hopes AI gets it right. **Agentic engineering** ensures it does.
 
-The spec is the interface:
-- Human communicates intent through spec
-- AI transforms spec into implementation
-- Spec evolves to reflect reality
-- Spec serves as permanent documentation
+The spec is where I put all my thoughts:
+- Architecture decisions
+- Data models
+- API contracts
+- Implementation steps
+- Validation criteria
 
-We're not replacing engineering. We're elevating it. The senior engineer becomes an architect who thinks in systems, communicates through specifications, and orchestrates AI to handle the implementation details.
+AI becomes an extension of myself - executing my detailed plan, step by step, with me validating at every phase.
 
-The bottleneck is no longer typing speed. It's clarity of thought, quality of specification, and breadth of system understanding.
+The bottleneck is no longer typing speed. It's clarity of thought, quality of specification, and disciplined validation.
+
+I'm not replacing engineering. I'm doing engineering at a higher level of abstraction - thinking in systems, communicating through specs, and guiding AI through structured implementation.
