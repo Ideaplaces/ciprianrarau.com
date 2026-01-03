@@ -1,10 +1,10 @@
 ---
 title: "DevOps Across All Clouds: Why I'm Building Infrastructure for Every Startup"
 author: Ciprian Rarau
-publishDate: 2025-08-25
+publishDate: 2025-08-25T12:00:00Z
 category: Technology
 excerpt: "After years of deploying production infrastructure across AWS, Azure, and Google Cloud for 10+ startups, I'm launching OneOps.cloud to bring enterprise-grade DevOps to every early-stage company."
-tags: 
+tags:
   - DevOps
   - cloud
   - infrastructure
@@ -12,6 +12,7 @@ tags:
   - startups
   - AI
   - development
+image: /images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png
 metadata:
   featured: false
   showAuthor: true

@@ -1,7 +1,7 @@
 ---
 title: "Sentry Alerts, Filters, and Scrubbing: Programmatic Error Management"
 author: Ciprian Rarau
-publishDate: 2025-12-18
+publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "Why I wrote a Python CLI to manage Sentry configuration instead of clicking through the UI - alerts, filters, data scrubbing, all defined in YAML."
 tags:
@@ -11,6 +11,7 @@ tags:
   - python
   - observability
   - production-first
+image: /images/diagrams/sentry-configuration-as-code-diagram-16783202.png
 metadata:
   featured: false
   showAuthor: true

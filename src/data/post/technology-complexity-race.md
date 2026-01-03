@@ -5,6 +5,7 @@ title: "AI as an Extension of Myself: When Technology Complexity Outpaces Human 
 excerpt: "Society is going into the technology, and what we see around us becomes more and more complex than what the human brain can understand"
 category: Technology
 tags: ["AI","technology","complexity","future","society"]
+image: /images/diagrams/technology-complexity-race-diagram-dede4eab.png
 contentType: markdown
 draft: false
 transcript: |

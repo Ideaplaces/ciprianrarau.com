@@ -5,6 +5,7 @@ title: "Voice Analytics Revolution: Building Tools That Show Real Productivity I
 excerpt: "How I built a comprehensive analytics toolkit for voice recordings that reveals the hidden productivity gains from speaking instead of typing—with real numbers that'll surprise you."
 category: Technology
 tags: ["AI","voice-technology","productivity","analytics","python","data-visualization"]
+image: /images/diagrams/voice-analytics-revolution-diagram-cdc31cfc.png
 contentType: markdown
 draft: false
 transcript: |

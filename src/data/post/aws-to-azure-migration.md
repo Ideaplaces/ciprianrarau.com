@@ -1,7 +1,7 @@
 ---
 title: "Migrating from AWS to Azure: A Zero-Downtime Philosophy"
 author: Ciprian Rarau
-publishDate: 2025-12-18
+publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "How to migrate production workloads from AWS to Azure incrementally, using staging as a production rehearsal and maintaining zero downtime throughout."
 tags:
@@ -12,6 +12,7 @@ tags:
   - terraform
   - production-first
   - devops-automation
+image: /images/diagrams/aws-to-azure-migration-diagram-d04bf085.png
 metadata:
   featured: false
   showAuthor: true

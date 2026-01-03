@@ -1,7 +1,7 @@
 ---
 title: "Specs as the Single Source of Truth: How I Write Once and Generate Everywhere"
 author: Ciprian Rarau
-publishDate: 2025-12-18
+publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "A technical deep-dive into the workflow where specifications drive code generation, marketing content, and help documentation from a single source."
 tags:
@@ -11,6 +11,7 @@ tags:
   - content-operations
   - documentation
   - devops-automation
+image: /images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png
 metadata:
   featured: true
   showAuthor: true

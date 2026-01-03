@@ -10,6 +10,7 @@ tags:
   - claude-code
   - production-first
   - development-workflow
+image: /images/diagrams/ai-reads-my-specs-diagram-09cb5d53.png
 metadata:
   featured: true
   showAuthor: true
