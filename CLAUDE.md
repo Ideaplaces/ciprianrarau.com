@@ -4,6 +4,40 @@
 
 Personal website and blog for Ciprian Rarau (Chip). Built with Astro + Tailwind CSS.
 
+## Blog Writing Approach
+
+### Direct Writing vs Natural-Blog-Writer Agent
+
+Choose the approach based on content type:
+
+| Content Type | Approach | When to Use |
+|--------------|----------|-------------|
+| Code-heavy tutorials | Direct writing | Terraform configs, YAML, architecture with diagrams |
+| Infrastructure deep-dives | Direct writing | IaC patterns, deployment pipelines, technical specs |
+| How-I-Built-X posts | Direct writing | Step-by-step technical walkthroughs |
+| Philosophical pieces | `natural-blog-writer` | Technology trends, industry reflections |
+| Lessons learned | `natural-blog-writer` | Narrative-driven insights, experience sharing |
+| Thought leadership | `natural-blog-writer` | Predictions, observations, career reflections |
+
+**Rule of thumb:**
+- **80% code/config, 20% narrative** → Direct writing
+- **80% narrative, 20% technical examples** → `natural-blog-writer` agent
+
+**Style requirements (both approaches):**
+- Highly technical and experience-based
+- Facts over opinions - everything should be what was done, what was possible
+- No fluff or filler content
+- Code examples should be complete and functional
+- Mermaid diagrams where architecture visualization helps
+
+**Using the natural-blog-writer agent:**
+```
+Use Task tool with subagent_type='natural-blog-writer'
+Provide: topic, key points, transcript (if available), technical context
+```
+
+**Expected blog mix:** ~70% direct writing, ~30% natural-blog-writer
+
 ## Blog Post Creation Workflow
 
 ### 1. Create Blog Post
