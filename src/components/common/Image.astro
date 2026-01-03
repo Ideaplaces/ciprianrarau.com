@@ -47,6 +47,19 @@ if (
   isUnpicCompatible(_image)
 ) {
   image = await getImagesOptimized(_image, props, unpicOptimizer);
+} else if (typeof _image === 'string' && _image.startsWith('/')) {
+  // Public folder images - return as-is without optimization
+  image = {
+    src: _image,
+    attributes: {
+      width: props.width,
+      height: props.height,
+      alt: props.alt,
+      class: props.class,
+      loading: props.loading,
+      decoding: props.decoding,
+    },
+  };
 } else if (_image) {
   image = await getImagesOptimized(_image, props, astroAssetsOptimizer);
 }
