@@ -4,7 +4,7 @@ import Button from '~/components/ui/Button.astro';
 
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '', action = '' } = Astro.props;
 
-const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || import.meta.env.TURNSTILE_SITE_KEY;
 ---
 
 <form method="POST" action={action}>
