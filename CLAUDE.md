@@ -45,6 +45,11 @@ Choose the approach based on content type:
   - Use "I built this integration..." not "We built this integration..."
   - Exception: "We" is acceptable when referring to humanity/society in general observations
   - Actions taken should always be "I", never "we"
+- **NO company names** - Never mention client/company names in blog posts
+  - Use generic terms: "a healthcare startup", "a SaaS company", "one of the startups I work with"
+  - Exception: Wisk.ai can be mentioned (Chip's own company, public knowledge)
+  - Exception: Well-known tools/platforms are fine (AWS, Azure, Stripe, Shopify, etc.)
+  - This protects client confidentiality and keeps content universally applicable
 - Highly technical and experience-based
 - Facts over opinions - everything should be what was done, what was possible
 - No fluff or filler content
@@ -109,6 +114,9 @@ flowchart TD
 ```
 
 **Important notes for mermaid:**
+- **Optimize for vertical reading** - Diagrams should be tall, not wide. Use `flowchart TD` (top-down) instead of `flowchart LR` (left-right) when possible
+- **Break wide diagrams into pieces** - If a diagram has more than 4-5 horizontal elements, split it into multiple smaller diagrams or restructure vertically
+- **Mobile-friendly width** - Diagrams should render well on narrow screens; avoid long horizontal chains
 - Use quotes around labels with special characters: `["email@domain.com"]`
 - Avoid `@` symbols in unquoted labels
 - Use `-->` for arrows, not unicode arrows
