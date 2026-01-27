@@ -4,7 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-01-27T14:00:00Z
 category: Technology
 excerpt: "Before DevOps pipelines, before CI/CD, before monitoring - I set up a data warehouse. Here's why centralizing data is the foundation for every decision a startup will make."
-image: /images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-7bd6e3d9.png
+image: /images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-f73a4db1.png
 tags:
   - data-warehouse
   - bigquery
@@ -55,68 +55,79 @@ To answer that, you need all this data in one place where you can JOIN it.
 
 I use Google BigQuery as the central data warehouse for every startup I work with. Not because it's the only option - Snowflake and Databricks are excellent too - but because BigQuery integrates seamlessly with the Google Cloud ecosystem and has a generous free tier for startups.
 
-Here's what a typical data warehouse architecture looks like:
+Here's the high-level view: all roads lead to BigQuery.
 
 ```mermaid
 flowchart TD
-    subgraph Sources ["Data Sources"]
-        PG[("PostgreSQL<br/>Production DB")]
-        GA4["Google Analytics 4"]
-        SHOP["Shopify"]
-        FB["Facebook Ads"]
-        GADS["Google Ads"]
-        EMAIL["Email Platform"]
-        SUBS["Subscription Platform"]
+    PG[("PostgreSQL")]
+    GA4["Google Analytics 4"]
+    SAAS["Shopify / Ads / Email"]
+
+    PG -->|Cloud Datastream| BQ
+    GA4 -->|Cloud Functions| BQ
+    SAAS -->|Airbyte Cloud| BQ
+
+    BQ[("BigQuery<br/>Data Warehouse")]
+
+    BQ --> KPI["KPI Service"]
+    BQ --> DASH["Dashboards"]
+    BQ --> AI["AI Insights"]
+
+    style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
+```
+
+![Diagram 1](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-f73a4db1.png?v=88ad65c9)
+
+Each data source uses a different ingestion method, chosen based on the source type:
+
+```mermaid
+flowchart TD
+    subgraph CDC ["Real-Time CDC"]
+        PG[("PostgreSQL")] -->|Logical Replication| DS["Cloud Datastream"]
     end
 
-    subgraph Ingestion ["Ingestion Layer"]
-        DS["Cloud Datastream<br/>(CDC)"]
-        AB["Airbyte Cloud"]
-        CF["Cloud Functions"]
-        TF["Terraform<br/>Scheduled Jobs"]
+    subgraph Managed ["Managed Connectors"]
+        SHOP["Shopify"] --> AB["Airbyte Cloud"]
+        FB["Facebook Ads"] --> AB
+        GADS["Google Ads"] --> AB
+        EMAIL["Klaviyo"] --> AB
     end
 
-    subgraph Warehouse ["BigQuery Data Warehouse"]
-        BQ[("BigQuery")]
-        BQ --> PROD["Production Data"]
-        BQ --> ANALYTICS["Analytics Data"]
-        BQ --> ADS["Ads Data"]
-        BQ --> COMMERCE["E-commerce Data"]
-        BQ --> ENGAGEMENT["Engagement Data"]
+    subgraph Custom ["Custom Sync"]
+        GA4["GA4 Export"] --> CF["Cloud Functions"]
+        API["Custom APIs"] --> TF["Terraform Jobs"]
     end
 
-    subgraph Output ["Analytics & Insights"]
-        KPI["KPI Service"]
-        DASH["Dashboards"]
-        AI["AI Insights"]
-        SLACK["Slack Reports"]
-    end
-
-    PG --> DS
-    DS --> BQ
-
-    GA4 --> CF
-    CF --> BQ
-
-    SHOP --> AB
-    FB --> AB
-    GADS --> AB
-    EMAIL --> AB
-    SUBS --> AB
+    DS --> BQ[("BigQuery")]
     AB --> BQ
-
-    BQ --> KPI
-    KPI --> DASH
-    KPI --> AI
-    KPI --> SLACK
+    CF --> BQ
+    TF --> BQ
 
     style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
     style DS fill:#34A853,stroke:#333,stroke-width:2px
     style AB fill:#FF6B6B,stroke:#333,stroke-width:2px
     style CF fill:#FBBC04,stroke:#333,stroke-width:2px
+    style TF fill:#E8710A,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-ef2ba596.png?v=49803cc2)
+![Diagram 2](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-9873152e.png?v=88ad65c9)
+
+Once everything lands in BigQuery, the datasets sit side by side, ready to be JOINed:
+
+```mermaid
+flowchart TD
+    BQ[("BigQuery")]
+
+    BQ --> D1["Production Replica<br/>Users, Orders, Events"]
+    BQ --> D2["Analytics<br/>GA4 Sessions, Pageviews"]
+    BQ --> D3["Ads<br/>Facebook + Google Spend"]
+    BQ --> D4["E-commerce<br/>Shopify Orders, Refunds"]
+    BQ --> D5["Engagement<br/>Email Opens, Subscriptions"]
+
+    style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
+```
+
+![Diagram 3](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-39e022e7.png?v=88ad65c9)
 
 ## Four Ways to Get Data In
 
@@ -406,49 +417,32 @@ Raw SQL queries are powerful but not accessible to everyone. I build a KPI servi
 
 ```mermaid
 flowchart TD
-    BQ[("BigQuery<br/>Data Warehouse")]
-
-    subgraph KPI ["KPI Service (Cloud Run)"]
-        SQL["SQL Query Library<br/>(89 queries)"]
-        FETCH["Data Fetcher"]
-        ANALYZE["Metrics Analyzer"]
-        AI["AI Agent<br/>(Claude)"]
-        API["REST API"]
-    end
-
-    subgraph Dashboards ["Multiple Dashboards"]
-        ANALYTICS["Analytics Dashboard"]
-        ADS["Ads Dashboard"]
-        MARKETING["Marketing Dashboard"]
-        SUBS["Subscriptions Dashboard"]
-    end
-
-    subgraph Delivery ["Delivery Channels"]
-        SLACK["Slack Reports"]
-        WEB["Web Dashboard"]
-        EMAIL["Email Digests"]
-    end
-
-    BQ --> FETCH
-    SQL --> FETCH
-    FETCH --> ANALYZE
-    ANALYZE --> AI
-    ANALYZE --> API
-
-    API --> ANALYTICS
-    API --> ADS
-    API --> MARKETING
-    API --> SUBS
-
-    ANALYTICS --> WEB
-    AI --> SLACK
-    ANALYZE --> EMAIL
+    BQ[("BigQuery")] --> SQL["SQL Query Library"]
+    SQL --> FETCH["Data Fetcher"]
+    FETCH --> ANALYZE["Metrics Analyzer"]
+    ANALYZE --> API["REST API"]
+    ANALYZE --> AI["AI Agent"]
 
     style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
     style AI fill:#8B5CF6,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-7bd6e3d9.png?v=49803cc2)
+![Diagram 4](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-559a94f0.png?v=88ad65c9)
+
+The KPI service then feeds multiple delivery channels:
+
+```mermaid
+flowchart TD
+    API["KPI REST API"]
+
+    API --> WEB["Web Dashboards"]
+    API --> SLACK["Slack Reports"]
+    API --> EMAIL["Email Digests"]
+
+    style API fill:#34A853,stroke:#333,stroke-width:2px,color:#fff
+```
+
+![Diagram 5](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-0e9ec370.png?v=88ad65c9)
 
 ## What This Unlocks
 
