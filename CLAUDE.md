@@ -390,3 +390,22 @@ The mermaid script automatically adds a footer to all diagrams. The footer is se
 To add a new author footer:
 1. Create a PNG file in `scripts/mermaid-footer/`
 2. Name it `{firstname}-{lastname}.png` (lowercase, hyphenated)
+
+## Mermaid Config Gotchas
+
+**CRITICAL: Never put `width` or `height` inside the mermaid config JSON.**
+
+These properties cause sequence diagram actor boxes to expand to fill the specified dimensions, creating huge empty boxes with tiny text. They should only be passed as CLI arguments (`--width 1200 --height 800`), not in the config JSON.
+
+**Theme choice:** Use `theme: 'base'` for full customization. The `'default'` and `'neutral'` themes override custom themeVariables inconsistently.
+
+**Debugging mermaid issues:**
+```bash
+# Test a single diagram directly before running the full script
+npx mmdc -i /tmp/test.mmd -o /tmp/test.png -c /tmp/config.json --scale 2
+
+# Then run full processing
+npm run process-mermaid -- --force
+```
+
+This saves time vs regenerating all 28+ diagrams while debugging config issues.
