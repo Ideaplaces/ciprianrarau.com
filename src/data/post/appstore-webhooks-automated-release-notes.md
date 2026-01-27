@@ -13,7 +13,7 @@ tags:
   - google-cloud
   - github-actions
   - production-first
-image: /images/diagrams/appstore-webhooks-diagram.png
+image: /images/diagrams/appstore-webhooks-automated-release-notes-diagram-f70a1e74.png
 metadata:
   featured: true
   showAuthor: true

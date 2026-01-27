@@ -11,7 +11,7 @@ tags:
   - python
   - team-management
   - configuration-as-code
-image: /images/diagrams/slack-configuration-as-code-diagram.png
+image: /images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png
 metadata:
   featured: false
   showAuthor: true

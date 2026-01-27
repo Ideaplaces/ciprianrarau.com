@@ -13,7 +13,7 @@ tags:
   - observability
   - devops-automation
   - production-first
-image: /images/diagrams/ai-powered-alert-summarizer-diagram.png
+image: /images/diagrams/ai-powered-alert-summarizer-diagram-9ce2abb8.png
 metadata:
   featured: true
   showAuthor: true
