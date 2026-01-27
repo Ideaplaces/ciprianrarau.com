@@ -50,6 +50,17 @@ Choose the approach based on content type:
   - Exception: Wisk.ai can be mentioned (Chip's own company, public knowledge)
   - Exception: Well-known tools/platforms are fine (AWS, Azure, Stripe, Shopify, etc.)
   - This protects client confidentiality and keeps content universally applicable
+  - **In code examples, replace:**
+    - Company email domains → `company.com` (e.g., `dev@company.com`)
+    - GCP project IDs → `my-project-dev`, `my-project-prod`
+    - App names → `My App`, `My App Stage`, `My App Dev`
+    - Service-specific names (like "HAE") → generic terms (`ML`, `Analytics`, etc.)
+    - Bucket names → `my-project-bucket-name`
+    - Any identifiable infrastructure names → generic equivalents
+  - **In prose, replace:**
+    - Specific team names → "the team", "developers", "engineers"
+    - Product names → "the app", "the service", "the platform"
+    - Internal service names → generic descriptions ("ML service", "analytics pipeline")
 - Highly technical and experience-based
 - Facts over opinions - everything should be what was done, what was possible
 - No fluff or filler content
