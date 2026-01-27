@@ -452,46 +452,63 @@ function convertMermaidToImage(mermaidCode, outputPath, authorFooterPath = null)
     const processedMermaidCode = processImagesInMermaidCode(mermaidCode)
     
     // Create mermaid config with puppeteer settings and width constraints
-    // Using 'default' theme for clean white background with good contrast
+    // Using 'base' theme for full customization with white backgrounds
     const config = {
-      theme: 'default',
+      theme: 'base',
       background: 'white',
-      width: 1200,
-      height: 800,
       themeVariables: {
-        // Primary colors for nodes
-        primaryColor: '#e3f2fd',
-        primaryTextColor: '#1a1a1a',
+        // Base colors
+        background: '#ffffff',
+        primaryColor: '#ffffff',
+        primaryTextColor: '#000000',
         primaryBorderColor: '#1565C0',
-        // Secondary colors
-        secondaryColor: '#fff3e0',
-        secondaryTextColor: '#1a1a1a',
-        secondaryBorderColor: '#f57c00',
-        // Tertiary colors
-        tertiaryColor: '#f3e5f5',
-        tertiaryTextColor: '#1a1a1a',
-        tertiaryBorderColor: '#7b1fa2',
-        // General
-        lineColor: '#333',
-        textColor: '#1a1a1a',
+        secondaryColor: '#ffffff',
+        secondaryTextColor: '#000000',
+        secondaryBorderColor: '#1565C0',
+        tertiaryColor: '#ffffff',
+        tertiaryTextColor: '#000000',
+        tertiaryBorderColor: '#1565C0',
+        // General text and lines
+        lineColor: '#333333',
+        textColor: '#000000',
         mainBkg: '#ffffff',
-        // Sequence diagram specific
-        actorBkg: '#e3f2fd',
+        // Sequence diagram specific - white boxes with blue borders
+        actorBkg: '#ffffff',
         actorBorder: '#1565C0',
-        actorTextColor: '#1a1a1a',
-        actorLineColor: '#333',
-        signalColor: '#333',
-        signalTextColor: '#1a1a1a',
-        labelBoxBkgColor: '#e3f2fd',
+        actorTextColor: '#000000',
+        actorLineColor: '#333333',
+        signalColor: '#333333',
+        signalTextColor: '#000000',
+        labelBoxBkgColor: '#ffffff',
         labelBoxBorderColor: '#1565C0',
-        labelTextColor: '#1a1a1a',
-        loopTextColor: '#1a1a1a',
-        noteBkgColor: '#fff9c4',
-        noteBorderColor: '#f9a825',
-        noteTextColor: '#1a1a1a',
-        activationBkgColor: '#bbdefb',
+        labelTextColor: '#000000',
+        loopTextColor: '#000000',
+        noteBkgColor: '#ffffcc',
+        noteBorderColor: '#aaaa33',
+        noteTextColor: '#000000',
+        activationBkgColor: '#e3f2fd',
         activationBorderColor: '#1565C0',
-        sequenceNumberColor: '#ffffff'
+        sequenceNumberColor: '#ffffff',
+        // Flowchart specific
+        nodeBorder: '#1565C0',
+        clusterBkg: '#f5f5f5',
+        clusterBorder: '#1565C0',
+        defaultLinkColor: '#333333',
+        titleColor: '#000000',
+        edgeLabelBackground: '#ffffff',
+        // Font - larger for better readability
+        fontFamily: 'arial, sans-serif',
+        fontSize: '16px',
+        // Actor/participant specific font
+        actorFontSize: '18px',
+        actorFontFamily: 'arial, sans-serif',
+        actorFontWeight: 'bold',
+        // Message/signal font
+        messageFontSize: '14px',
+        messageFontFamily: 'arial, sans-serif',
+        // Note font
+        noteFontSize: '14px',
+        noteFontFamily: 'arial, sans-serif'
       },
       flowchart: {
         useMaxWidth: true,
