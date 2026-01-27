@@ -57,7 +57,7 @@ flowchart TD
     style J fill:#f9d5e5,stroke:#333,stroke-width:3px
 ```
 
-![Diagram 1](/images/diagrams/technology-complexity-race-diagram-dede4eab.png?v=0c79a587)
+![Diagram 1](/images/diagrams/technology-complexity-race-diagram-dede4eab.png?v=88ad65c9)
 
 ## The Horizon Expansion
 

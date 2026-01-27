@@ -76,7 +76,7 @@ flowchart TD
     style J fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/voice-analytics-revolution-diagram-ed3adc54.png?v=0c79a587)
+![Diagram 1](/images/diagrams/voice-analytics-revolution-diagram-ed3adc54.png?v=88ad65c9)
 
 The magic happens in the middle: AI doesn't just transcribe what I say—it predicts what I'm about to say based on context. And on the receiving end, the LLM doesn't just parse my words—it understands my intent.
 

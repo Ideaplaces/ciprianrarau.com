@@ -62,7 +62,7 @@ flowchart TB
     style STATUS_PROD fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px,color:#000
 ```
 
-![Diagram 1](/images/diagrams/github-monday-integration-diagram-45398a0b.png?v=0c79a587)
+![Diagram 1](/images/diagrams/github-monday-integration-diagram-45398a0b.png?v=88ad65c9)
 
 The Monday task becomes a single source of truth that reflects exactly where the code is in the pipeline.
 
@@ -107,7 +107,7 @@ graph TB
     style TASK fill:#C8E6C9,stroke:#388E3C,stroke-width:2px,color:#000
 ```
 
-![Diagram 2](/images/diagrams/github-monday-integration-diagram-b2ddc22b.png?v=0c79a587)
+![Diagram 2](/images/diagrams/github-monday-integration-diagram-b2ddc22b.png?v=88ad65c9)
 
 ### The Key Components
 
@@ -179,7 +179,7 @@ flowchart LR
     style DONE fill:#C8E6C9,stroke:#388E3C,stroke-width:2px,color:#000
 ```
 
-![Diagram 3](/images/diagrams/github-monday-integration-diagram-68bd9c3f.png?v=0c79a587)
+![Diagram 3](/images/diagrams/github-monday-integration-diagram-68bd9c3f.png?v=88ad65c9)
 
 When code moves through branches, Monday.com tasks move through statuses. No manual intervention required.
 
@@ -212,7 +212,7 @@ flowchart TB
     style FAIL3 fill:#FFCDD2,stroke:#C62828,stroke-width:2px,color:#000
 ```
 
-![Diagram 4](/images/diagrams/github-monday-integration-diagram-e20f9b23.png?v=0c79a587)
+![Diagram 4](/images/diagrams/github-monday-integration-diagram-e20f9b23.png?v=88ad65c9)
 
 The validation actually calls the Monday.com API to verify the task exists. No more broken links.
 
