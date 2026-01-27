@@ -59,7 +59,7 @@ flowchart TD
     style L fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/google-workspace-as-code-diagram-83f07ac9.png?v=430261b9)
+![Diagram 1](/images/diagrams/google-workspace-as-code-diagram-83f07ac9.png?v=49803cc2)
 
 ## Provider Configuration
 

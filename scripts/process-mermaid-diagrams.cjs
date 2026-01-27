@@ -512,15 +512,57 @@ function convertMermaidToImage(mermaidCode, outputPath, authorFooterPath = null)
   }
 }
 
+// Function to update frontmatter image field with the first diagram
+function updateFrontmatterImage(content, firstDiagramPath) {
+  // Match YAML frontmatter at the beginning of the file
+  const frontmatterMatch = content.match(/^(---\n)([\s\S]*?)(\n---)/)
+  if (!frontmatterMatch) {
+    return content
+  }
+
+  const frontmatterStart = frontmatterMatch[1]
+  const frontmatterContent = frontmatterMatch[2]
+  const frontmatterEnd = frontmatterMatch[3]
+
+  // Check if image field exists
+  const imageMatch = frontmatterContent.match(/^image:\s*.+$/m)
+
+  let updatedFrontmatter
+  if (imageMatch) {
+    // Update existing image field
+    updatedFrontmatter = frontmatterContent.replace(
+      /^image:\s*.+$/m,
+      `image: ${firstDiagramPath}`
+    )
+    console.log(`  🖼️  Updated frontmatter image to first diagram`)
+  } else {
+    // Add image field after excerpt or at end of frontmatter
+    const excerptMatch = frontmatterContent.match(/^excerpt:.*(?:\n(?![\w]).*)*$/m)
+    if (excerptMatch) {
+      const insertIndex = excerptMatch.index + excerptMatch[0].length
+      updatedFrontmatter =
+        frontmatterContent.substring(0, insertIndex) +
+        `\nimage: ${firstDiagramPath}` +
+        frontmatterContent.substring(insertIndex)
+    } else {
+      updatedFrontmatter = frontmatterContent + `\nimage: ${firstDiagramPath}`
+    }
+    console.log(`  🖼️  Added frontmatter image field`)
+  }
+
+  return frontmatterStart + updatedFrontmatter + frontmatterEnd + content.substring(frontmatterMatch[0].length)
+}
+
 // Function to process a single markdown file
 function processMarkdownFile(filePath) {
   console.log(`\n📄 Processing: ${path.basename(filePath)}`)
-  
+
   const content = fs.readFileSync(filePath, 'utf8')
   const baseName = path.basename(filePath, path.extname(filePath))
   let updatedContent = content
   let diagramCount = 0
-  
+  let firstDiagramPath = null
+
   // Extract author from frontmatter
   const author = extractAuthorFromFrontmatter(content)
   const authorFooterPath = getAuthorFooterPath(author)
@@ -567,6 +609,11 @@ function processMarkdownFile(filePath) {
     }
     
     if (imageGenerated) {
+      // Track the first diagram for frontmatter image
+      if (!firstDiagramPath) {
+        firstDiagramPath = relativeImagePath
+      }
+
       // Add cache-busting script hash to image URL (only changes when script logic changes)
       const scriptHash = generateScriptHash()
       const cacheBustedImagePath = `${relativeImagePath}?v=${scriptHash}`
@@ -595,6 +642,11 @@ function processMarkdownFile(filePath) {
     }
   })
   
+  // Update frontmatter image with first diagram if we found diagrams
+  if (firstDiagramPath) {
+    updatedContent = updateFrontmatterImage(updatedContent, firstDiagramPath)
+  }
+
   // Write updated content if changes were made
   if (updatedContent !== content) {
     fs.writeFileSync(filePath, updatedContent)
@@ -602,7 +654,7 @@ function processMarkdownFile(filePath) {
   } else if (diagramCount === 0) {
     console.log(`  ℹ️  No mermaid diagrams found`)
   }
-  
+
   return diagramCount
 }
 

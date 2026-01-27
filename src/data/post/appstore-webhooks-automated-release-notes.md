@@ -73,7 +73,7 @@ flowchart TD
     style J fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-34c04c66.png?v=430261b9)
+![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-34c04c66.png?v=49803cc2)
 
 ## What Apple Sends
 
@@ -593,7 +593,7 @@ sequenceDiagram
     Note over Slack: ✅ My App Build Ready<br/>Version: 1.2.3 Build: 236<br/>• abc1234 Add dark mode<br/>• def5678 Fix login bug
 ```
 
-![Diagram 1](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-f70a1e74.png?v=430261b9)
+![Diagram 1](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-f70a1e74.png?v=49803cc2)
 
 ## Machine-Readable Summary
 

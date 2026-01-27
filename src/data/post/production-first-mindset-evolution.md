@@ -37,7 +37,7 @@ flowchart TD
     style H fill:#e3f2fd,stroke:#333,stroke-width:3px
 ```
 
-![Diagram 1](/images/diagrams/production-first-mindset-evolution-diagram-a78f2c23.png?v=430261b9)
+![Diagram 1](/images/diagrams/production-first-mindset-evolution-diagram-a78f2c23.png?v=49803cc2)
 
 ## The Post-Login Reality
 

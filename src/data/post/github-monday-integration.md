@@ -3,7 +3,7 @@ publishDate: 2026-01-03T12:00:00Z
 author: Ciprian Rarau
 title: "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits"
 excerpt: How I built a webhook-based integration that makes GitHub and Monday.com work as a single system. Developers commit code, and task statuses update automatically through the entire deployment pipeline.
-image: /images/diagrams/github-monday-integration-diagram-b2ddc22b.png
+image: /images/diagrams/github-monday-integration-diagram-e20f9b23.png
 category: Technology
 tags:
   - devops
@@ -62,7 +62,7 @@ flowchart TB
     style STATUS_PROD fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px,color:#000
 ```
 
-![Diagram 4](/images/diagrams/github-monday-integration-diagram-45398a0b.png?v=430261b9)
+![Diagram 4](/images/diagrams/github-monday-integration-diagram-45398a0b.png?v=49803cc2)
 
 The Monday task becomes a single source of truth that reflects exactly where the code is in the pipeline.
 
@@ -107,7 +107,7 @@ graph TB
     style TASK fill:#C8E6C9,stroke:#388E3C,stroke-width:2px,color:#000
 ```
 
-![Diagram 3](/images/diagrams/github-monday-integration-diagram-b2ddc22b.png?v=430261b9)
+![Diagram 3](/images/diagrams/github-monday-integration-diagram-b2ddc22b.png?v=49803cc2)
 
 ### The Key Components
 
@@ -179,7 +179,7 @@ flowchart LR
     style DONE fill:#C8E6C9,stroke:#388E3C,stroke-width:2px,color:#000
 ```
 
-![Diagram 2](/images/diagrams/github-monday-integration-diagram-68bd9c3f.png?v=430261b9)
+![Diagram 2](/images/diagrams/github-monday-integration-diagram-68bd9c3f.png?v=49803cc2)
 
 When code moves through branches, Monday.com tasks move through statuses. No manual intervention required.
 
@@ -212,7 +212,7 @@ flowchart TB
     style FAIL3 fill:#FFCDD2,stroke:#C62828,stroke-width:2px,color:#000
 ```
 
-![Diagram 1](/images/diagrams/github-monday-integration-diagram-e20f9b23.png?v=430261b9)
+![Diagram 1](/images/diagrams/github-monday-integration-diagram-e20f9b23.png?v=49803cc2)
 
 The validation actually calls the Monday.com API to verify the task exists. No more broken links.
 

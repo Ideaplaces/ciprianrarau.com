@@ -60,7 +60,7 @@ flowchart TD
     style D fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 4](/images/diagrams/company-docs-dna-of-the-business-diagram-8ce6cc15.png?v=430261b9)
+![Diagram 4](/images/diagrams/company-docs-dna-of-the-business-diagram-8ce6cc15.png?v=49803cc2)
 
 ```mermaid
 flowchart TD
@@ -86,7 +86,7 @@ flowchart TD
     style E fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 3](/images/diagrams/company-docs-dna-of-the-business-diagram-77c83ced.png?v=430261b9)
+![Diagram 3](/images/diagrams/company-docs-dna-of-the-business-diagram-77c83ced.png?v=49803cc2)
 
 The documentation covers:
 
@@ -130,7 +130,7 @@ flowchart LR
     style F fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/company-docs-dna-of-the-business-diagram-0ecbac7e.png?v=430261b9)
+![Diagram 2](/images/diagrams/company-docs-dna-of-the-business-diagram-0ecbac7e.png?v=49803cc2)
 
 The documentation site deploys through CI/CD just like any other service:
 
@@ -185,7 +185,7 @@ flowchart TD
     style G fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/company-docs-dna-of-the-business-diagram-ec6924f0.png?v=430261b9)
+![Diagram 1](/images/diagrams/company-docs-dna-of-the-business-diagram-ec6924f0.png?v=49803cc2)
 
 ## Why This Works Now
 

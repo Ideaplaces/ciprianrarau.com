@@ -73,7 +73,7 @@ flowchart TD
     style J fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/ai-reads-my-specs-diagram-09cb5d53.png?v=430261b9)
+![Diagram 1](/images/diagrams/ai-reads-my-specs-diagram-09cb5d53.png?v=49803cc2)
 
 ## What a Spec Looks Like
 
