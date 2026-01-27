@@ -21,6 +21,44 @@ Personal website and blog for Ciprian Rarau (Chip). Built with Astro + Tailwind 
 
 **Important:** Always spell it "Wisk.ai" (not "Wisc.ai").
 
+## Key Reference Folders
+
+These folders contain important implementations that should be referenced when writing about data warehouses, KPIs, analytics, or DevOps patterns:
+
+### Data Warehouse & KPI Implementations
+
+| Project | Path | Key Content |
+|---------|------|-------------|
+| **Eli Health** | `/home/chipdev/eli.health/` | Full data warehouse: BigQuery, Datastream CDC, Airbyte, GA4 sync |
+| **Eli KPI Service** | `/home/chipdev/eli.health/eli-kpi/` | 89 SQL queries, KPI dashboards, AI insights |
+| **Eli DevOps** | `/home/chipdev/eli.health/eli-devops/tf/` | Terraform for Datastream, GA4 sync, IAM |
+| **Mentorly Meta** | `/home/chipdev/mentorly-meta/` | BigQuery GA4 streaming, PostgreSQL, HubSpot sync |
+| **Mentorly Dashboard** | `/home/chipdev/mentorly-meta/mentorly-dash-meta/` | KPI queries, UTM tracking, marketing analytics |
+
+### Data Sources & Patterns
+
+**Eli Health Data Sources:**
+- PostgreSQL → BigQuery (Google Cloud Datastream CDC)
+- Shopify → BigQuery (Airbyte Cloud)
+- GA4 → BigQuery (cross-region sync via Cloud Functions)
+- Facebook Ads → BigQuery (Airbyte)
+- Google Ads → BigQuery (Airbyte)
+- Loopwork subscriptions → BigQuery (Airbyte)
+- Klaviyo email → BigQuery (Airbyte)
+
+**Mentorly Data Sources:**
+- GA4 streaming export → BigQuery
+- PostgreSQL operational data
+- HubSpot CRM sync
+
+### Key SQL Patterns
+
+- **Cross-source JOINs**: Combine marketing, e-commerce, and product data
+- **Attribution modeling**: First-touch, last-touch, multi-touch
+- **Cohort analysis**: Monthly retention tracking
+- **Funnel analysis**: Sankey diagrams from traffic to conversion
+- **CAC/ROAS**: Customer acquisition cost and return on ad spend
+
 ## Blog Writing Approach
 
 ### Direct Writing vs Natural-Blog-Writer Agent
