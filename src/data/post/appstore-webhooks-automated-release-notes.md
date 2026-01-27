@@ -219,7 +219,7 @@ The tag pattern: `build/{environment}/{build_number}`
 
     # Upload to GCS
     gcloud storage cp commits.json \
-      gs://eli-health-prod-appstore-webhook-source/commits/${APP_ID}/${BUILD_NUMBER}.json
+      gs://my-project-prod-appstore-webhook-source/commits/${APP_ID}/${BUILD_NUMBER}.json
 
     # Create and push the tag
     git tag "build/${{ inputs.lane }}/${BUILD_NUMBER}"
@@ -251,7 +251,7 @@ The tag pattern: `build/{environment}/{build_number}`
 def fetch_commits_from_gcs(app_id: str, build_number: str) -> list:
     """Fetch commit messages from GCS for a specific build."""
     client = storage.Client()
-    bucket = client.bucket("eli-health-prod-appstore-webhook-source")
+    bucket = client.bucket("my-project-prod-appstore-webhook-source")
     blob = bucket.blob(f"commits/{app_id}/{build_number}.json")
 
     if blob.exists():
@@ -320,11 +320,11 @@ Different events get different formatting:
 
 | Event | Emoji | Message |
 |-------|-------|---------|
-| Submitted for Review | 📤 | "Eli Health 1.2.3 submitted for review" |
-| In Review | 👀 | "Eli Health 1.2.3 is being reviewed" |
-| Approved | ✅ | "Eli Health 1.2.3 approved!" |
-| Rejected | ❌ | "Eli Health 1.2.3 rejected" |
-| Released | 🚀 | "Eli Health 1.2.3 is now live!" |
+| Submitted for Review | 📤 | "My App 1.2.3 submitted for review" |
+| In Review | 👀 | "My App 1.2.3 is being reviewed" |
+| Approved | ✅ | "My App 1.2.3 approved!" |
+| Rejected | ❌ | "My App 1.2.3 rejected" |
+| Released | 🚀 | "My App 1.2.3 is now live!" |
 
 ### Crash Reports
 
@@ -427,10 +427,10 @@ Single webhook handler, multiple apps:
 
 ```python
 APP_NAMES = {
-    "6471992170": "Eli Health",     # Production
-    "6747853426": "Eli Stage",      # Staging
-    "6747853441": "Eli Dev",        # Development
-    "6758223635": "Eli Dev 2",      # Dev variant
+    "6471992170": "My App",     # Production
+    "6747853426": "My App Stage",      # Staging
+    "6747853441": "My App Dev",        # Development
+    "6758223635": "My App Dev 2",      # Dev variant
 }
 
 def get_app_name(app_id: str) -> str:
@@ -588,7 +588,7 @@ sequenceDiagram
     CF->>GCS: Fetch commits
     CF->>Slack: Post notification
 
-    Note over Slack: ✅ Eli Health Build Ready<br/>Version: 1.2.3 Build: 236<br/>• abc1234 Add dark mode<br/>• def5678 Fix login bug
+    Note over Slack: ✅ My App Build Ready<br/>Version: 1.2.3 Build: 236<br/>• abc1234 Add dark mode<br/>• def5678 Fix login bug
 ```
 
 ## Machine-Readable Summary

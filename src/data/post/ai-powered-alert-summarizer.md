@@ -44,21 +44,30 @@ Route alerts through an AI that reads the logs and tells me what's happening.
 
 ```mermaid
 flowchart TD
-    subgraph GCP [Google Cloud Platform]
-        A[Cloud Monitoring] -->|Alert fires| B[Pub/Sub Topic]
+    subgraph Detection [Alert Detection]
+        A[Cloud Monitoring] -->|Threshold exceeded| B[Pub/Sub Topic]
         B -->|Triggers| C[Cloud Function]
-        C -->|Queries| D[Cloud Logging]
-        D -->|Returns logs| C
     end
 
-    C -->|Sends logs| E[Claude API]
-    E -->|Returns summary| C
-    C -->|Posts| F[Slack Channel]
-
-    F --> G[Engineer responds with context]
+    subgraph Analysis [Log Analysis]
+        C -->|Queries| D[Cloud Logging]
+        D -->|Returns logs| C
+        C -->|Sends logs| E[Claude API]
+        E -->|Returns summary| C
+    end
 
     style C fill:#90EE90,stroke:#333,stroke-width:3px
     style E fill:#f9d5e5,stroke:#333,stroke-width:2px
+```
+
+```mermaid
+flowchart TD
+    A[Cloud Function] -->|Posts summary| B[Slack Channel]
+    B --> C[Engineer responds with context]
+    C --> D[One-click to filtered logs]
+
+    style A fill:#90EE90,stroke:#333,stroke-width:3px
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
 ## The Architecture
@@ -129,7 +138,7 @@ def process_alert(cloud_event):
 
 The system handles application errors and infrastructure events differently:
 
-**Application Errors** (Backend API, HAE service):
+**Application Errors** (Backend API, ML services):
 ```python
 prompt = """Analyze these error logs and provide a summary:
 - What's failing (which endpoint, which operation)
@@ -165,8 +174,8 @@ def get_slack_channel(policy_name: str) -> str:
 
     if "backend" in policy_lower:
         return f"alerts-backend-{environment}"
-    elif "hae" in policy_lower:
-        return f"alerts-hae-{environment}"
+    elif "ml" in policy_lower:
+        return f"alerts-ml-{environment}"
     else:
         return f"alerts-infrastructure-{environment}"
 ```
@@ -275,14 +284,14 @@ Same module, three environments, identical behavior.
 
 ```bash
 gcloud pubsub topics publish alert-summarizer-development \
-  --project=eli-health-dev \
+  --project=my-project-dev \
   --message='{
     "incident": {
       "policy_name": "Backend API Errors - development",
       "condition_name": "Backend errors exceed threshold",
       "started_at": 1704902043,
       "state": "open",
-      "scoping_project_id": "eli-health-dev"
+      "scoping_project_id": "my-project-dev"
     }
   }'
 ```
@@ -292,7 +301,7 @@ gcloud pubsub topics publish alert-summarizer-development \
 ```bash
 gcloud logging write api-service-test-errors \
   '{"message": "Test database connection error", "endpoint": "/api/users"}' \
-  --project=eli-health-dev \
+  --project=my-project-dev \
   --payload-type=json \
   --severity=ERROR
 ```
@@ -301,7 +310,7 @@ gcloud logging write api-service-test-errors \
 
 ```bash
 gcloud functions logs read alert-summarizer-development \
-  --project=eli-health-dev \
+  --project=my-project-dev \
   --region=us-east1 \
   --limit=20
 ```

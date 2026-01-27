@@ -73,11 +73,11 @@ roles:
       - alerts-backend-staging
       - alerts-backend-production
 
-  hae_developer:
+  ml_developer:
     channels:
-      - alerts-hae-dev
-      - alerts-hae-staging
-      - alerts-hae-production
+      - alerts-ml-dev
+      - alerts-ml-staging
+      - alerts-ml-production
 
   devops:
     channels:
@@ -108,22 +108,22 @@ roles:
 
 ```yaml
 users:
-  - email: chip@eli.health
+  - email: chip@company.com
     name: Chip
     roles:
       - backend_developer
       - devops
       - ios_developer
-      - hae_developer
+      - ml_developer
       - frontend_developer
 
-  - email: newdev@eli.health
+  - email: newdev@company.com
     name: New Developer
     roles:
       - backend_developer
       - ios_developer
 
-  - email: support@eli.health
+  - email: support@company.com
     name: Support Person
     roles:
       - customer_support
@@ -361,7 +361,7 @@ python manage_channels.py "$@"
 ```bash
 # 1. Add to config.yaml
 echo "
-  - email: newdev@eli.health
+  - email: newdev@company.com
     name: New Developer
     roles:
       - backend_developer
@@ -378,7 +378,7 @@ Output:
 ```
 Processing channel memberships...
 
-User: New Developer (newdev@eli.health)
+User: New Developer (newdev@company.com)
   Added New Developer to #alerts-backend-dev
   Added New Developer to #alerts-backend-staging
   Added New Developer to #alerts-backend-production
@@ -392,7 +392,7 @@ Summary:
 ### Process Single User
 
 ```bash
-./run.sh --user newdev@eli.health
+./run.sh --user newdev@company.com
 ```
 
 ## The Channel Matrix
@@ -405,7 +405,7 @@ The system manages access to 13+ alert channels:
 |---------|-----|---------|-----------|
 | Frontend (Sentry) | `#alerts-dev` | `#alerts-staging` | `#alerts-production` |
 | Backend API | `#alerts-backend-dev` | `#alerts-backend-staging` | `#alerts-backend-production` |
-| HAE Service | `#alerts-hae-dev` | `#alerts-hae-staging` | `#alerts-hae-production` |
+| ML Service | `#alerts-ml-dev` | `#alerts-ml-staging` | `#alerts-ml-production` |
 | Infrastructure | `#alerts-infrastructure-dev` | `#alerts-infrastructure-staging` | `#alerts-infrastructure-production` |
 
 ### Special Channels
@@ -427,7 +427,7 @@ flowchart TD
     A --> E[Billing Alerter]
 
     B --> F[#alerts-backend-*]
-    B --> G[#alerts-hae-*]
+    B --> G[#alerts-ml-*]
     B --> H[#alerts-infrastructure-*]
 
     C --> F
@@ -489,7 +489,7 @@ Already a member? Not an error. Just skip. Run it daily if you want.
 Users can have multiple roles:
 
 ```yaml
-- email: chip@eli.health
+- email: chip@company.com
   roles:
     - backend_developer
     - devops
@@ -505,7 +505,7 @@ The script adds users to channels but never removes them. Removal is a manual, d
 ## Directory Structure
 
 ```
-eli-devops/
+devops/
 └── slack/
     ├── manage_channels.py   # Python implementation
     ├── config.yaml          # Roles and users
@@ -541,7 +541,7 @@ When someone asks "who has access to production alerts?", the answer is in `conf
 ```yaml
 # Everyone with these roles:
 - backend_developer  # alerts-backend-production
-- hae_developer      # alerts-hae-production
+- ml_developer      # alerts-ml-production
 - devops             # alerts-infrastructure-production
 ```
 
