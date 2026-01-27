@@ -1,7 +1,7 @@
 ---
 title: "App Store Connect Webhooks: Automated Release Notes with Git Tags"
 author: Ciprian Rarau
-publishDate: 2025-01-27T12:00:00Z
+publishDate: 2026-01-27T12:00:00Z
 category: Technology
 excerpt: "How I connected Apple's App Store Connect webhooks to Slack, with automatic commit tracking between releases. Build uploaded? Here's what changed since the last one."
 tags:
