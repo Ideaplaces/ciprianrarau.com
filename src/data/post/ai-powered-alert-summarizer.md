@@ -60,6 +60,8 @@ flowchart TD
     style E fill:#f9d5e5,stroke:#333,stroke-width:2px
 ```
 
+![Diagram 2](/images/diagrams/ai-powered-alert-summarizer-diagram-d0dc0c99.png?v=430261b9)
+
 ```mermaid
 flowchart TD
     A[Cloud Function] -->|Posts summary| B[Slack Channel]
@@ -69,6 +71,8 @@ flowchart TD
     style A fill:#90EE90,stroke:#333,stroke-width:3px
     style B fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
+
+![Diagram 1](/images/diagrams/ai-powered-alert-summarizer-diagram-9ce2abb8.png?v=430261b9)
 
 ## The Architecture
 
