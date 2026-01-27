@@ -11,7 +11,7 @@ tags:
   - python
   - team-management
   - configuration-as-code
-image: /images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png
+image: /images/diagrams/slack-configuration-as-code-diagram-43793164.png
 metadata:
   featured: false
   showAuthor: true
@@ -60,7 +60,7 @@ flowchart TD
     style K fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/slack-configuration-as-code-diagram-43793164.png?v=49803cc2)
+![Diagram 1](/images/diagrams/slack-configuration-as-code-diagram-43793164.png?v=0c79a587)
 
 ## Configuration Structure
 
@@ -443,7 +443,7 @@ flowchart TD
     style B fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png?v=49803cc2)
+![Diagram 2](/images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png?v=0c79a587)
 
 One bot, one token, multiple purposes:
 - **Channel Manager**: Adds users to channels

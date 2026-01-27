@@ -11,7 +11,7 @@ tags:
   - content-operations
   - documentation
   - devops-automation
-image: /images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png
+image: /images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png
 metadata:
   featured: true
   showAuthor: true
@@ -59,7 +59,7 @@ flowchart TD
     style N fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png?v=49803cc2)
+![Diagram 1](/images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png?v=0c79a587)
 
 ## Specification Structure
 
@@ -149,7 +149,7 @@ flowchart LR
     F --> H[Marketing Copy]
 ```
 
-![Diagram 1](/images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png?v=49803cc2)
+![Diagram 2](/images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png?v=0c79a587)
 
 ## Help Articles from Specs
 

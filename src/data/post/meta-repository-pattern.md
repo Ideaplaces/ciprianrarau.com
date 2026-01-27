@@ -10,7 +10,7 @@ tags:
   - infrastructure-as-code
   - production-first
   - development-workflow
-image: /images/diagrams/meta-repository-pattern-diagram-9ea8338e.png
+image: /images/diagrams/meta-repository-pattern-diagram-30d78660.png
 metadata:
   featured: true
   showAuthor: true
@@ -121,7 +121,7 @@ flowchart TD
     style D2 fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/meta-repository-pattern-diagram-30d78660.png?v=49803cc2)
+![Diagram 1](/images/diagrams/meta-repository-pattern-diagram-30d78660.png?v=0c79a587)
 
 The Source Control panel shows changes grouped by repository. I can see at a glance what's modified across the entire company.
 
@@ -152,7 +152,7 @@ flowchart TD
     style D fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/meta-repository-pattern-diagram-9ea8338e.png?v=49803cc2)
+![Diagram 2](/images/diagrams/meta-repository-pattern-diagram-9ea8338e.png?v=0c79a587)
 
 The meta-level `CLAUDE.md` contains company-wide rules:
 - No AI attribution in commits

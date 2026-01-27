@@ -13,7 +13,7 @@ tags:
   - observability
   - devops-automation
   - production-first
-image: /images/diagrams/ai-powered-alert-summarizer-diagram-9ce2abb8.png
+image: /images/diagrams/ai-powered-alert-summarizer-diagram-d0dc0c99.png
 metadata:
   featured: true
   showAuthor: true
@@ -60,7 +60,7 @@ flowchart TD
     style E fill:#f9d5e5,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/ai-powered-alert-summarizer-diagram-d0dc0c99.png?v=49803cc2)
+![Diagram 1](/images/diagrams/ai-powered-alert-summarizer-diagram-d0dc0c99.png?v=0c79a587)
 
 ```mermaid
 flowchart TD
@@ -72,7 +72,7 @@ flowchart TD
     style B fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/ai-powered-alert-summarizer-diagram-9ce2abb8.png?v=49803cc2)
+![Diagram 2](/images/diagrams/ai-powered-alert-summarizer-diagram-9ce2abb8.png?v=0c79a587)
 
 ## The Architecture
 
