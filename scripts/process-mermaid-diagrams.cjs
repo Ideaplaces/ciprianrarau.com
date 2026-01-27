@@ -452,11 +452,47 @@ function convertMermaidToImage(mermaidCode, outputPath, authorFooterPath = null)
     const processedMermaidCode = processImagesInMermaidCode(mermaidCode)
     
     // Create mermaid config with puppeteer settings and width constraints
+    // Using 'default' theme for clean white background with good contrast
     const config = {
-      theme: 'neutral',
+      theme: 'default',
       background: 'white',
       width: 1200,
       height: 800,
+      themeVariables: {
+        // Primary colors for nodes
+        primaryColor: '#e3f2fd',
+        primaryTextColor: '#1a1a1a',
+        primaryBorderColor: '#1565C0',
+        // Secondary colors
+        secondaryColor: '#fff3e0',
+        secondaryTextColor: '#1a1a1a',
+        secondaryBorderColor: '#f57c00',
+        // Tertiary colors
+        tertiaryColor: '#f3e5f5',
+        tertiaryTextColor: '#1a1a1a',
+        tertiaryBorderColor: '#7b1fa2',
+        // General
+        lineColor: '#333',
+        textColor: '#1a1a1a',
+        mainBkg: '#ffffff',
+        // Sequence diagram specific
+        actorBkg: '#e3f2fd',
+        actorBorder: '#1565C0',
+        actorTextColor: '#1a1a1a',
+        actorLineColor: '#333',
+        signalColor: '#333',
+        signalTextColor: '#1a1a1a',
+        labelBoxBkgColor: '#e3f2fd',
+        labelBoxBorderColor: '#1565C0',
+        labelTextColor: '#1a1a1a',
+        loopTextColor: '#1a1a1a',
+        noteBkgColor: '#fff9c4',
+        noteBorderColor: '#f9a825',
+        noteTextColor: '#1a1a1a',
+        activationBkgColor: '#bbdefb',
+        activationBorderColor: '#1565C0',
+        sequenceNumberColor: '#ffffff'
+      },
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
@@ -465,9 +501,22 @@ function convertMermaidToImage(mermaidCode, outputPath, authorFooterPath = null)
         rankSpacing: 40,
         padding: 15
       },
+      sequence: {
+        diagramMarginX: 50,
+        diagramMarginY: 10,
+        actorMargin: 50,
+        width: 150,
+        height: 65,
+        boxMargin: 10,
+        boxTextMargin: 5,
+        noteMargin: 10,
+        messageMargin: 35,
+        mirrorActors: false,
+        useMaxWidth: true
+      },
       puppeteerConfig: {
         args: [
-          '--no-sandbox', 
+          '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-web-security',
           '--disable-features=VizDisplayCompositor'
@@ -574,7 +623,7 @@ function processMarkdownFile(filePath) {
   // Find all mermaid diagrams and collect them
   const matches = []
   let match
-  
+
   while ((match = MERMAID_REGEX.exec(content)) !== null) {
     matches.push({
       fullMatch: match[0],
@@ -582,9 +631,20 @@ function processMarkdownFile(filePath) {
       index: match.index
     })
   }
-  
+
+  // Calculate the first diagram path BEFORE reversing (for frontmatter image)
+  if (matches.length > 0) {
+    const firstMatch = matches[0]
+    const firstContentHash = generateContentHash(firstMatch.mermaidCode)
+    const firstFilename = `${baseName}-diagram-${firstContentHash}.png`
+    firstDiagramPath = `/images/diagrams/${firstFilename}`
+  }
+
   // Process matches in reverse order to avoid index shifting
-  matches.reverse().forEach((matchData) => {
+  const totalDiagrams = matches.length
+  matches.reverse().forEach((matchData, reverseIndex) => {
+    // Calculate correct diagram number (original order, not reversed)
+    const diagramNumber = totalDiagrams - reverseIndex
     diagramCount++
     
     // Generate hash-based filename
@@ -609,11 +669,6 @@ function processMarkdownFile(filePath) {
     }
     
     if (imageGenerated) {
-      // Track the first diagram for frontmatter image
-      if (!firstDiagramPath) {
-        firstDiagramPath = relativeImagePath
-      }
-
       // Add cache-busting script hash to image URL (only changes when script logic changes)
       const scriptHash = generateScriptHash()
       const cacheBustedImagePath = `${relativeImagePath}?v=${scriptHash}`
@@ -626,14 +681,14 @@ function processMarkdownFile(filePath) {
       
       if (existingImageMatch) {
         // Update existing image reference with script-based cache busting
-        const newImageRef = `![Diagram ${diagramCount}](${cacheBustedImagePath})`
+        const newImageRef = `![Diagram ${diagramNumber}](${cacheBustedImagePath})`
         updatedContent = updatedContent.substring(0, afterMermaidIndex) + 
                         afterMermaidContent.replace(existingImageMatch[0], `\n\n${newImageRef}`) +
                         updatedContent.substring(afterMermaidIndex + afterMermaidContent.length)
         console.log(`  🔄 Updated diagram ${diagramCount} image reference (script hash: ${scriptHash})`)
       } else {
         // Add new image reference with script-based cache busting - KEEP the mermaid source
-        const replacement = `${matchData.fullMatch}\n\n![Diagram ${diagramCount}](${cacheBustedImagePath})`
+        const replacement = `${matchData.fullMatch}\n\n![Diagram ${diagramNumber}](${cacheBustedImagePath})`
         updatedContent = updatedContent.substring(0, matchData.index) + 
                         replacement + 
                         updatedContent.substring(matchData.index + matchData.fullMatch.length)
