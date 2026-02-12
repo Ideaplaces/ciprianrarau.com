@@ -82,7 +82,7 @@ const requiredFields = ['name', 'email', 'message'];
   {
     turnstileSiteKey && (
       <div class="mt-6">
-        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+        <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div>
       </div>
     )
   }
@@ -107,7 +107,7 @@ const requiredFields = ['name', 'email', 'message'];
 </form>
 
 {turnstileSiteKey && (
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script data-cfasync="false" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 )}
 
 <script>
