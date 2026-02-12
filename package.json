@@ -23,9 +23,9 @@
     "process-mermaid": "node scripts/process-mermaid-diagrams.cjs"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.3",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/vercel": "^9.0.2",
     "@astrolib/analytics": "^0.6.1",
     "@astrolib/seo": "^1.0.0-beta.8",
     "@fontsource-variable/inter": "^5.2.5",
