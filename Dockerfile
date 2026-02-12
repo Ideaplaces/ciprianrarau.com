@@ -1,17 +1,29 @@
-FROM node:lts AS base
+# Build stage
+FROM node:20-alpine AS build
+
 WORKDIR /app
 
-FROM base AS deps
-COPY package*.json ./
-RUN npm install
+# Install dependencies (legacy-peer-deps for mermaid-cli/puppeteer conflict)
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
 
-FROM base AS build
-COPY --from=deps /app/node_modules ./node_modules
+# Copy source and build
 COPY . .
 RUN npm run build
 
-FROM nginx:stable-alpine AS deploy
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+# Production stage
+FROM node:20-alpine AS production
 
-EXPOSE 8080
+WORKDIR /app
+
+# Copy built output and all node_modules (Astro SSR needs some devDeps at runtime)
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+
+# Azure App Service uses PORT env var (defaults to 4321)
+ENV HOST=0.0.0.0
+ENV PORT=4321
+
+EXPOSE 4321
+
+CMD ["node", "./dist/server/entry.mjs"]
