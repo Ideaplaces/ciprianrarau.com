@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import nodemailer from 'nodemailer';
 
 // Verify Cloudflare Turnstile token
 async function verifyTurnstile(token: string): Promise<boolean> {
@@ -63,14 +62,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Email configuration
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: import.meta.env.GMAIL_USER,
-        pass: import.meta.env.GMAIL_APP_PASSWORD, // Gmail App Password
-      },
-    });
+    const apiKey = import.meta.env.RESEND_API_KEY;
+    const recipientEmail = import.meta.env.RECIPIENT_EMAIL || 'me@ciprianrarau.com';
+
+    if (!apiKey) {
+      console.error('Missing RESEND_API_KEY');
+      return new Response(null, {
+        status: 302,
+        headers: { Location: '/contact?error=true' },
+      });
+    }
 
     // HTML email template
     const htmlContent = `
@@ -122,13 +123,13 @@ export const POST: APIRoute = async ({ request }) => {
               <h2>New Contact Form Submission</h2>
               <p>From: ciprianrarau.com</p>
           </div>
-          
+
           <div class="content">
               <div class="field">
                   <div class="label">Name:</div>
                   <div class="value">${name}</div>
               </div>
-              
+
               <div class="field">
                   <div class="label">Email:</div>
                   <div class="value">${email}</div>
@@ -143,17 +144,30 @@ export const POST: APIRoute = async ({ request }) => {
       </html>
     `;
 
-    // Email options
-    const mailOptions = {
-      from: `"Website Contact Form" <${import.meta.env.GMAIL_USER}>`,
-      to: import.meta.env.RECIPIENT_EMAIL || import.meta.env.GMAIL_USER,
-      subject: `New Contact: ${name}`,
-      html: htmlContent,
-      replyTo: email, // Allows you to reply directly to the sender
-    };
+    // Send email via Resend API
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Website Contact Form <contact@ciprianrarau.com>',
+        to: [recipientEmail],
+        reply_to: email,
+        subject: `New Contact: ${name}`,
+        html: htmlContent,
+      }),
+    });
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Resend API error:', response.status, errorData);
+      return new Response(null, {
+        status: 302,
+        headers: { Location: '/contact?error=true' },
+      });
+    }
 
     // Return success response with redirect
     return new Response(null, {
@@ -165,7 +179,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   } catch (error) {
     console.error('Email sending failed:', error);
-    
+
     return new Response(null, {
       status: 302,
       headers: {
@@ -173,4 +187,4 @@ export const POST: APIRoute = async ({ request }) => {
       },
     });
   }
-}; 
+};
