@@ -20,6 +20,7 @@ async function verifyTurnstile(token: string): Promise<boolean> {
     });
 
     const data = await response.json();
+    console.log('Turnstile verification response:', JSON.stringify(data));
     return data.success === true;
   } catch (error) {
     console.error('Turnstile verification failed:', error);
@@ -36,9 +37,12 @@ export const POST: APIRoute = async ({ request }) => {
     const message = formData.get('message') as string;
     const turnstileToken = formData.get('cf-turnstile-response') as string;
 
+    console.log('Contact form submission:', { name, email, hasTurnstileToken: !!turnstileToken, hasTurnstileSecret: !!process.env.TURNSTILE_SECRET_KEY });
+
     // Verify Turnstile CAPTCHA
     if (process.env.TURNSTILE_SECRET_KEY) {
       if (!turnstileToken) {
+        console.error('Contact form: No turnstile token provided');
         return new Response(null, {
           status: 302,
           headers: { Location: '/contact?error=captcha' },
@@ -47,11 +51,13 @@ export const POST: APIRoute = async ({ request }) => {
 
       const isValid = await verifyTurnstile(turnstileToken);
       if (!isValid) {
+        console.error('Contact form: Turnstile verification failed');
         return new Response(null, {
           status: 302,
           headers: { Location: '/contact?error=captcha' },
         });
       }
+      console.log('Contact form: Turnstile verified successfully');
     }
 
     // Validate required fields
