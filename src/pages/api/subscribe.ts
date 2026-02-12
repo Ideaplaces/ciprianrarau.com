@@ -12,8 +12,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const apiKey = import.meta.env.RESEND_API_KEY;
-    const audienceId = import.meta.env.RESEND_AUDIENCE_ID;
+    const apiKey = process.env.RESEND_API_KEY;
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
     if (!apiKey || !audienceId) {
       console.error('Missing RESEND_API_KEY or RESEND_AUDIENCE_ID');

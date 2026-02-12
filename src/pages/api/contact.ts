@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 // Verify Cloudflare Turnstile token
 async function verifyTurnstile(token: string): Promise<boolean> {
-  const secretKey = import.meta.env.TURNSTILE_SECRET_KEY;
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
 
   if (!secretKey) {
     console.warn('TURNSTILE_SECRET_KEY not configured, skipping verification');
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
     const turnstileToken = formData.get('cf-turnstile-response') as string;
 
     // Verify Turnstile CAPTCHA
-    if (import.meta.env.TURNSTILE_SECRET_KEY) {
+    if (process.env.TURNSTILE_SECRET_KEY) {
       if (!turnstileToken) {
         return new Response(null, {
           status: 302,
@@ -62,8 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const apiKey = import.meta.env.RESEND_API_KEY;
-    const recipientEmail = import.meta.env.RECIPIENT_EMAIL || 'me@ciprianrarau.com';
+    const apiKey = process.env.RESEND_API_KEY;
+    const recipientEmail = process.env.RECIPIENT_EMAIL || 'me@ciprianrarau.com';
 
     if (!apiKey) {
       console.error('Missing RESEND_API_KEY');
@@ -152,7 +152,7 @@ export const POST: APIRoute = async ({ request }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Website Contact Form <contact@ciprianrarau.com>',
+        from: 'ciprianrarau.com Contact Form <contact@ideaplaces.com>',
         to: [recipientEmail],
         reply_to: email,
         subject: `New Contact: ${name}`,
