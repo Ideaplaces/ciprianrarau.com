@@ -45,6 +45,8 @@ vercel env pull .env.local
 | `GMAIL_USER` | SMTP sender email | Your Gmail address |
 | `GMAIL_APP_PASSWORD` | SMTP authentication | [Google App Passwords](https://myaccount.google.com/apppasswords) |
 | `RECIPIENT_EMAIL` | Contact form recipient | Email to receive submissions |
+| `RESEND_API_KEY` | Resend API (newsletter) | [Resend API Keys](https://resend.com/api-keys) |
+| `RESEND_AUDIENCE_ID` | Resend audience for blog | [Resend Audiences](https://resend.com/audiences) |
 
 ## Deployment
 

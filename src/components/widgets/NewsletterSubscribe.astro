@@ -1,0 +1,97 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+import Headline from '~/components/ui/Headline.astro';
+
+interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="max-w-3xl mx-auto text-center p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+    <Headline
+      title={title}
+      subtitle={subtitle}
+      classes={{
+        container: 'mb-0 md:mb-0',
+        title: 'text-4xl md:text-4xl font-bold tracking-tighter mb-4 font-heading',
+        subtitle: 'text-xl text-muted dark:text-slate-400',
+      }}
+    />
+    <form id="newsletter-form" class="max-w-md mx-auto mt-6">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="your@email.com"
+          class="flex-1 px-4 py-3 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        />
+        <button
+          type="submit"
+          class="btn-primary px-6 py-3 whitespace-nowrap"
+        >
+          Subscribe
+        </button>
+      </div>
+      <p id="newsletter-status" class="mt-3 text-sm hidden"></p>
+    </form>
+  </div>
+</WidgetWrapper>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  const status = document.getElementById('newsletter-status') as HTMLElement;
+  const button = form?.querySelector('button') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = new FormData(form).get('email') as string;
+    if (!email) return;
+
+    button.disabled = true;
+    button.textContent = 'Subscribing...';
+    status.classList.add('hidden');
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      status.classList.remove('hidden');
+
+      if (res.ok) {
+        status.textContent = data.message;
+        status.className = 'mt-3 text-sm text-green-600 dark:text-green-400';
+        form.reset();
+      } else {
+        status.textContent = data.error || 'Something went wrong.';
+        status.className = 'mt-3 text-sm text-red-600 dark:text-red-400';
+      }
+    } catch {
+      status.classList.remove('hidden');
+      status.textContent = 'Network error. Please try again.';
+      status.className = 'mt-3 text-sm text-red-600 dark:text-red-400';
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Subscribe';
+    }
+  });
+</script>

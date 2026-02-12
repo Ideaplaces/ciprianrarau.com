@@ -8,6 +8,7 @@ import Features3 from '~/components/widgets/Features3.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ProjectGallery from '~/components/widgets/ProjectGallery.astro';
+import NewsletterSubscribe from '~/components/widgets/NewsletterSubscribe.astro';
 import { Icon } from 'astro-icon/components';
 import { getPermalink } from '~/utils/permalinks';
 
@@ -45,6 +46,12 @@ const metadata = {
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </BlogLatestPosts>
+
+  <!-- Newsletter Subscribe -->
+  <NewsletterSubscribe
+    title="Stay in the loop"
+    subtitle="Get notified when I publish new articles on tech, startups, and building products."
+  />
 
   <!-- About Content Widget **************** -->
 
