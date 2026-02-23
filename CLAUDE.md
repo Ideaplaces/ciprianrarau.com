@@ -223,7 +223,7 @@ ciprianrarau.com/
 │   └── mermaid-footer/
 │       └── ciprian-rarau.png   # Author footer
 ├── devops/
-│   ├── README.md           # Vercel env vars documentation
+│   ├── README.md           # Deployment and env vars documentation
 │   └── .env.example        # Template for all env vars
 ├── blog-article-analysis.md    # Living document with article ideas
 └── CLAUDE.md                   # This file
@@ -395,29 +395,15 @@ Generated source: `public/favicon-generated.png`
 
 ## Deployment
 
-The site deploys automatically to Vercel on push to main via GitHub Actions.
+The site deploys automatically to Azure on push to main via GitHub Actions.
 
-### Vercel Environment Variables
+**Pipeline:** `.github/workflows/deploy.yml`
+- Builds Docker image
+- Pushes to Azure Container Registry (`acrideaplaces.azurecr.io`)
+- Deploys to Azure Web App (`app-ideaplaces-ciprianrarau`)
+- Uses OIDC for authentication (no stored secrets)
 
 See `devops/README.md` for full documentation.
-
-**Quick reference:**
-```bash
-# List current variables
-vercel env ls
-
-# Add new variable to all environments
-for env in production preview development; do
-  echo "value" | vercel env add VARIABLE_NAME $env
-done
-
-# Pull to local .env
-vercel env pull .env.local
-```
-
-**Current variables:**
-- `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` - Cloudflare CAPTCHA
-- `GMAIL_USER` / `GMAIL_APP_PASSWORD` / `RECIPIENT_EMAIL` - Contact form email
 
 ## Author Footer
 
