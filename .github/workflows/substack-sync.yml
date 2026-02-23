@@ -1,0 +1,70 @@
+name: Sync Blog Posts to Substack
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/post/**'
+  workflow_dispatch:
+
+concurrency:
+  group: substack-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: write
+
+env:
+  AZURE_CLIENT_ID: REDACTED_AZURE_CLIENT_ID
+  AZURE_TENANT_ID: REDACTED_AZURE_TENANT_ID
+  AZURE_SUBSCRIPTION_ID: REDACTED_AZURE_SUBSCRIPTION_ID
+  SUBSTACK_URL: https://chiprarau.substack.com
+
+jobs:
+  sync:
+    name: Sync to Substack
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure via OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch Substack cookie from Key Vault
+        run: |
+          SUBSTACK_COOKIE=$(az keyvault secret show \
+            --vault-name kv-ideaplaces \
+            --name substack-cookie \
+            --query value -o tsv)
+          echo "::add-mask::$SUBSTACK_COOKIE"
+          echo "SUBSTACK_COOKIE=$SUBSTACK_COOKIE" >> "$GITHUB_ENV"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scripts/substack/requirements.txt
+
+      - name: Run Substack sync
+        run: python scripts/substack/sync.py
+
+      - name: Commit updated sync state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/substack/.substack-sync.json
+          if git diff --cached --quiet; then
+            echo "No changes to sync state file"
+          else
+            git commit -m "Update Substack sync state"
+            git push
+          fi
