@@ -279,7 +279,11 @@ class SubstackClient:
         self.base_url = "https://substack.com/api/v1"
 
         # Resolve publication
-        profile = self.session.get(f"{self.base_url}/user/profile/self").json()
+        resp = self.session.get(f"{self.base_url}/user/profile/self")
+        if resp.status_code != 200 or not resp.text.strip().startswith("{"):
+            print(f"Auth failed: HTTP {resp.status_code}, body: {resp.text[:500]}")
+            raise RuntimeError(f"Substack auth failed (HTTP {resp.status_code}). Possible Cloudflare block or expired cookie.")
+        profile = resp.json()
         self.user_id = profile["id"]
 
         # Extract subdomain from publication_url
