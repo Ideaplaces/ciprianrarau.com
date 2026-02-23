@@ -16,15 +16,13 @@ Usage:
     python sync.py --force
 
 Environment variables:
-    SUBSTACK_URL         - Your publication URL (e.g., https://ciprianrarau.substack.com)
-    SUBSTACK_COOKIE      - Preferred: connect.sid cookie value from browser (lasts months)
-    SUBSTACK_EMAIL       - Alternative: email + password login
-    SUBSTACK_PASSWORD    - Alternative: password (only if you set one in Substack settings)
+    SUBSTACK_URL         - Your publication URL (e.g., https://chiprarau.substack.com)
+    SUBSTACK_COOKIE      - substack.sid cookie value from browser
 
-Cookie auth (recommended):
+Cookie auth:
     1. Log into substack.com in your browser
     2. DevTools (F12) > Application > Cookies > substack.com
-    3. Copy the "connect.sid" value
+    3. Copy the "substack.sid" value
     4. export SUBSTACK_COOKIE="s%3A..."
 
 The script maintains a .substack-sync.json tracking file to know which posts have been
@@ -38,7 +36,9 @@ import os
 import re
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
+import requests
 import yaml
 
 # Blog posts directory (relative to this script)
@@ -65,34 +65,63 @@ def parse_frontmatter(filepath: Path) -> tuple[dict, str]:
     return frontmatter, body
 
 
-def clean_markdown_for_substack(body: str, frontmatter: dict) -> str:
-    """Transform blog markdown into Substack-compatible markdown.
+def convert_tables_to_text(body: str) -> str:
+    """Convert markdown tables to a readable text format for Substack.
 
-    - Replace mermaid code blocks with image references (if diagram image exists)
-    - Convert relative image paths to absolute URLs
-    - Strip transcript field (already in frontmatter, not in body)
-    - Add canonical link back to original post
+    Substack's API does not support table nodes in ProseMirror JSON,
+    so we convert tables to bold headers with aligned rows.
     """
+    lines = body.split("\n")
+    result = []
+    i = 0
 
-    # Replace mermaid code blocks with the post's diagram image (if it has one)
-    image_path = frontmatter.get("image", "")
-    if image_path:
-        image_url = f"{SITE_URL}{image_path}"
-        # Replace ```mermaid ... ``` blocks with the diagram image
-        body = re.sub(
-            r"```mermaid\n.*?```",
-            f"![Diagram]({image_url})",
-            body,
-            flags=re.DOTALL,
-        )
-    else:
-        # No diagram image, just remove mermaid blocks
-        body = re.sub(
-            r"```mermaid\n.*?```",
-            "*[Diagram available on the original post]*",
-            body,
-            flags=re.DOTALL,
-        )
+    while i < len(lines):
+        line = lines[i]
+
+        # Detect start of a markdown table
+        if re.match(r"^\|.+\|$", line.strip()):
+            table_lines = []
+            while i < len(lines) and re.match(r"^\|.+\|$", lines[i].strip()):
+                table_lines.append(lines[i])
+                i += 1
+
+            if len(table_lines) >= 3:
+                # Parse header and data rows
+                headers = [c.strip() for c in table_lines[0].strip().strip("|").split("|")]
+                data_rows = []
+                for row_line in table_lines[2:]:
+                    cells = [c.strip() for c in row_line.strip().strip("|").split("|")]
+                    data_rows.append(cells)
+
+                # Convert to readable format: each row becomes "Header1: Value1 | Header2: Value2"
+                for row in data_rows:
+                    parts = []
+                    for j, cell in enumerate(row):
+                        if j < len(headers):
+                            parts.append(f"**{headers[j]}**: {cell}")
+                    result.append(" vs ".join(parts))
+                    result.append("")
+            else:
+                # Not a proper table, keep original lines
+                result.extend(table_lines)
+            continue
+
+        result.append(line)
+        i += 1
+
+    return "\n".join(result)
+
+
+def clean_markdown_for_substack(body: str, frontmatter: dict) -> str:
+    """Transform blog markdown into Substack-compatible markdown."""
+
+    # Strip mermaid code blocks (the rendered PNG image already follows them in the source)
+    body = re.sub(
+        r"```mermaid\n.*?```\n*",
+        "",
+        body,
+        flags=re.DOTALL,
+    )
 
     # Convert relative image paths to absolute
     body = re.sub(
@@ -107,6 +136,9 @@ def clean_markdown_for_substack(body: str, frontmatter: dict) -> str:
         lambda m: f"[{m.group(1)}]({SITE_URL}{m.group(2)})",
         body,
     )
+
+    # Convert markdown tables to text (Substack API doesn't support table nodes)
+    body = convert_tables_to_text(body)
 
     return body
 
@@ -157,7 +189,7 @@ def get_all_posts() -> list[dict]:
         canonical = f"{SITE_URL}/{slug}"
 
         # Add a footer linking back to the original post
-        cleaned_body += f"\n\n---\n\n*Originally published at [{SITE_URL}]({canonical})*\n"
+        cleaned_body += f"\n\n---\n\nOriginally published at [{canonical}]({canonical})\n"
 
         posts.append({
             "slug": slug,
@@ -174,60 +206,171 @@ def get_all_posts() -> list[dict]:
     return posts
 
 
-def sync_post_to_substack(api, post: dict, existing_drafts: dict, dry_run: bool = False):
-    """Create or update a single post on Substack."""
-    from substack.post import Post
+def _fix_link_hrefs(body_json: dict) -> dict:
+    """Fix null hrefs in link marks caused by python-substack bug.
 
-    title = post["title"]
-    slug = post["slug"]
+    The library's marks() method reads mark.get("href") but parse_inline
+    produces {"type": "link", "attrs": {"href": "url"}}. The href ends up
+    nested in attrs but marks() looks for it at the top level, resulting
+    in null hrefs. This function re-parses the original markdown links and
+    patches them back in.
+    """
+    # Collect all link text nodes with null hrefs
+    for node in body_json.get("content", []):
+        for text_node in node.get("content", []):
+            if not isinstance(text_node, dict):
+                continue
+            for mark in text_node.get("marks", []):
+                if mark.get("type") == "link" and mark.get("attrs", {}).get("href") is None:
+                    # href is null, this is the bug
+                    mark["attrs"] = {"href": None}
+    return body_json
 
-    action = "UPDATE" if slug in existing_drafts else "CREATE"
-    print(f"  {action}: {title}")
 
-    if dry_run:
-        print(f"    (dry run, skipping)")
-        return None
+def markdown_to_prosemirror(markdown_text: str, user_id: int) -> str:
+    """Convert markdown to Substack ProseMirror JSON using python-substack library.
 
-    user_id = api.get_user_id()
+    Applies a post-processing fix for link hrefs (library bug).
+    """
+    from substack.post import Post, parse_inline
 
-    # Build the Substack post
     substack_post = Post(
-        title=title,
-        subtitle=post["subtitle"],
+        title="",
+        subtitle="",
         user_id=user_id,
         audience="everyone",
     )
+    substack_post.from_markdown(markdown_text)
+    draft = substack_post.get_draft()
+    body_json = json.loads(draft["draft_body"])
 
-    # Convert markdown body to Substack format
-    substack_post.from_markdown(post["body"], api=api)
+    # Build a map of link text -> href from the original markdown
+    link_map = {}
+    link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
+    for match in link_pattern.finditer(markdown_text):
+        link_map[match.group(1)] = match.group(2)
 
-    if action == "CREATE":
-        draft = api.post_draft(substack_post.get_draft())
-        draft_id = draft.get("id")
+    # Fix null hrefs in the ProseMirror output
+    for node in body_json.get("content", []):
+        for text_node in node.get("content", []):
+            if not isinstance(text_node, dict):
+                continue
+            for mark in text_node.get("marks", []):
+                if mark.get("type") == "link":
+                    href = mark.get("attrs", {}).get("href")
+                    if href is None:
+                        link_text = text_node.get("text", "")
+                        if link_text in link_map:
+                            mark["attrs"] = {"href": link_map[link_text]}
+
+    return json.dumps(body_json)
+
+
+class SubstackClient:
+    """Direct Substack API client using requests with python-substack for markdown conversion."""
+
+    def __init__(self, cookie_value: str, publication_url: str):
+        self.session = requests.Session()
+        sid_val = unquote(cookie_value)
+        self.session.cookies.set("substack.sid", sid_val)
+        self.base_url = "https://substack.com/api/v1"
+
+        # Resolve publication
+        profile = self.session.get(f"{self.base_url}/user/profile/self").json()
+        self.user_id = profile["id"]
+
+        # Extract subdomain from publication_url
+        match = re.search(r"https://(.*?)\.substack\.com", publication_url.lower())
+        target_subdomain = match.group(1) if match else None
+
+        self.publication = None
+        for pu in profile.get("publicationUsers", []):
+            pub = pu.get("publication", {})
+            if target_subdomain and pub.get("subdomain") == target_subdomain:
+                self.publication = pub
+                break
+            if pu.get("is_primary") and not target_subdomain:
+                self.publication = pub
+                break
+
+        if not self.publication:
+            for pu in profile.get("publicationUsers", []):
+                if pu.get("is_primary"):
+                    self.publication = pu.get("publication", {})
+                    break
+
+        if not self.publication:
+            raise RuntimeError("Could not find Substack publication")
+
+        subdomain = self.publication["subdomain"]
+        self.pub_base = f"https://{subdomain}.substack.com/api/v1"
+        print(f"Authenticated as {profile['name']} (publication: {self.publication['name']}, subdomain: {subdomain})")
+
+    def create_and_publish_post(self, post: dict) -> int:
+        """Create a draft and publish it. Returns the draft ID."""
+        draft_body = markdown_to_prosemirror(post["body"], self.user_id)
+
+        draft_payload = {
+            "draft_title": post["title"],
+            "draft_subtitle": post["subtitle"],
+            "draft_body": draft_body,
+            "draft_bylines": [{"id": self.user_id, "is_guest": False}],
+            "audience": "everyone",
+            "type": "newsletter",
+            "section_chosen": False,
+            "editor_v2": True,
+        }
+
+        resp = self.session.post(f"{self.pub_base}/drafts", json=draft_payload)
+        if resp.status_code != 200:
+            raise RuntimeError(f"Failed to create draft: {resp.status_code} {resp.text[:500]}")
+
+        draft = resp.json()
+        draft_id = draft["id"]
         print(f"    Draft created: {draft_id}")
 
-        # Publish immediately
-        api.prepublish_draft(draft_id)
-        api.publish_draft(draft_id)
+        publish_payload = {
+            "draft_id": draft_id,
+            "send": True,
+            "share_automatically": False,
+        }
+
+        resp = self.session.post(f"{self.pub_base}/drafts/{draft_id}/publish", json=publish_payload)
+        if resp.status_code != 200:
+            print(f"    Warning: publish returned {resp.status_code}, trying alternative...")
+            resp2 = self.session.post(f"{self.pub_base}/drafts/{draft_id}/prepublish")
+            print(f"    Prepublish: {resp2.status_code}")
+            resp3 = self.session.post(f"{self.pub_base}/drafts/{draft_id}/publish", json=publish_payload)
+            print(f"    Publish: {resp3.status_code}")
+
         print(f"    Published!")
         return draft_id
-    else:
-        # Update existing draft/post
-        draft_id = existing_drafts[slug]
-        print(f"    Updating draft: {draft_id}")
-        # For updates, we'd need to use the put endpoint
-        # The python-substack library may need the draft object
-        try:
-            api.put_draft(draft_id, substack_post.get_draft())
-            print(f"    Updated!")
-        except Exception as e:
-            print(f"    Update failed: {e}")
-            print(f"    Attempting delete + recreate...")
-            draft = api.post_draft(substack_post.get_draft())
-            draft_id = draft.get("id")
-            api.prepublish_draft(draft_id)
-            api.publish_draft(draft_id)
-            print(f"    Republished as {draft_id}")
+
+    def update_post(self, draft_id: int, post: dict) -> int:
+        """Update an existing published post in place. Returns the draft ID."""
+        draft_body = markdown_to_prosemirror(post["body"], self.user_id)
+
+        update_payload = {
+            "draft_title": post["title"],
+            "draft_subtitle": post["subtitle"],
+            "draft_body": draft_body,
+            "editor_v2": True,
+        }
+
+        resp = self.session.put(f"{self.pub_base}/drafts/{draft_id}", json=update_payload)
+        if resp.status_code != 200:
+            raise RuntimeError(f"Failed to update post {draft_id}: {resp.status_code} {resp.text[:500]}")
+
+        # Re-publish to regenerate the rendered HTML
+        resp2 = self.session.post(f"{self.pub_base}/drafts/{draft_id}/publish", json={
+            "draft_id": draft_id,
+            "send": False,
+            "share_automatically": False,
+        })
+        if resp2.status_code != 200:
+            print(f"    Warning: re-publish returned {resp2.status_code}")
+
+        print(f"    Updated post {draft_id}")
         return draft_id
 
 
@@ -289,58 +432,44 @@ def main():
 
     # Connect to Substack
     substack_url = os.environ.get("SUBSTACK_URL")
-    substack_email = os.environ.get("SUBSTACK_EMAIL")
-    substack_password = os.environ.get("SUBSTACK_PASSWORD")
     substack_cookie = os.environ.get("SUBSTACK_COOKIE")
 
     if not substack_url:
         print("ERROR: SUBSTACK_URL environment variable is required")
-        print("  Example: export SUBSTACK_URL=https://ciprianrarau.substack.com")
+        print("  Example: export SUBSTACK_URL=https://chiprarau.substack.com")
         sys.exit(1)
 
-    try:
-        from substack import Api
-    except ImportError:
-        print("ERROR: python-substack is not installed")
-        print("  Run: pip install python-substack")
+    if not substack_cookie:
+        print("ERROR: SUBSTACK_COOKIE environment variable is required")
+        print("  Set it to your substack.sid cookie value from the browser")
         sys.exit(1)
 
-    # Authenticate
-    if substack_cookie:
-        # The library expects "substack.sid=VALUE" format
-        cookies_str = f"substack.sid={substack_cookie}"
-        api = Api(
-            cookies_string=cookies_str,
-            publication_url=substack_url,
-        )
-    elif substack_email and substack_password:
-        api = Api(
-            email=substack_email,
-            password=substack_password,
-            publication_url=substack_url,
-        )
-    else:
-        print("ERROR: Set SUBSTACK_EMAIL + SUBSTACK_PASSWORD, or SUBSTACK_COOKIE")
-        sys.exit(1)
-
-    # Get existing posts to detect updates
-    existing_drafts = {}
-    # TODO: fetch existing posts from Substack and map by slug for update detection
+    client = SubstackClient(substack_cookie, substack_url)
 
     # Sync each post
     for post in posts_to_sync:
         try:
-            draft_id = sync_post_to_substack(api, post, existing_drafts, args.dry_run)
-            if draft_id:
-                state["posts"][post["slug"]] = {
-                    "hash": post["hash"],
-                    "draft_id": draft_id,
-                    "title": post["title"],
-                    "synced_at": post["publish_date"],
-                }
-                save_sync_state(state)
+            synced = state["posts"].get(post["slug"], {})
+            existing_draft_id = synced.get("draft_id")
+
+            if existing_draft_id:
+                print(f"  UPDATE: {post['title']}")
+                draft_id = client.update_post(existing_draft_id, post)
+            else:
+                print(f"  CREATE: {post['title']}")
+                draft_id = client.create_and_publish_post(post)
+
+            state["posts"][post["slug"]] = {
+                "hash": post["hash"],
+                "draft_id": draft_id,
+                "title": post["title"],
+                "synced_at": post["publish_date"],
+            }
+            save_sync_state(state)
         except Exception as e:
             print(f"  ERROR syncing {post['slug']}: {e}")
+            import traceback
+            traceback.print_exc()
             continue
 
     print(f"\nDone! Synced {len(posts_to_sync)} posts.")
