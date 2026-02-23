@@ -5,6 +5,7 @@ publishDate: 2026-02-05T14:00:00Z
 category: Technology
 excerpt: "Billing exports to BigQuery, budget alerts with smart deduplication, and Slack notifications - here's the four-step process I use to get full billing visibility across GCP projects and eliminate cost surprises."
 image: /images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-a50de0bf.png
+substack: true
 tags:
   - devops-automation
   - google-cloud
