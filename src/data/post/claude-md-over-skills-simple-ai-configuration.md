@@ -141,13 +141,13 @@ I am trading flexibility for formalism. At my scale, flexibility wins.
 
 Brad's skills system provides structured context for each operational domain. My layered CLAUDE.md files do the same thing, just organized differently:
 
-| Brad's Approach | My Approach |
-|----------------|-------------|
-| 12 skill files in one repo | Layered CLAUDE.md across multiple meta repos |
-| Skills activate by intent matching | Sections activate by natural language |
-| Data ownership per skill | Context isolation per company/repo |
-| 8-section template per skill | Company-level + repo-level context |
-| Trigger configs in JSON | No explicit triggers needed |
+**Brad's Approach** vs **My Approach**
+
+- 12 skill files in one repo vs Layered CLAUDE.md across multiple meta repos
+- Skills activate by intent matching vs Sections activate by natural language
+- Data ownership per skill vs Context isolation per company/repo
+- 8-section template per skill vs Company-level + repo-level context
+- Trigger configs in JSON vs No explicit triggers needed
 
 The meta repository pattern already gives me context isolation. When I open Claude Code in the healthcare company's meta folder, it loads that company's CLAUDE.md with its architecture, team structure, and conventions. When I switch to the B2B SaaS company, different CLAUDE.md, different context, different team. The isolation is physical (different folders) rather than logical (different skill files).
 
