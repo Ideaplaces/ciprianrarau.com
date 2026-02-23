@@ -79,6 +79,7 @@ Choose the approach based on content type:
 - **80% narrative, 20% technical examples** → `natural-blog-writer` agent
 
 **Style requirements (both approaches):**
+- **NO markdown tables in blog posts** - Substack does not support markdown tables via their API. Use bullet point comparisons, bold headers with lists, or code blocks for tabular data instead.
 - **First person singular ("I", "my", "me")** - This is Chip's personal blog, not a team blog
   - Use "I built this integration..." not "We built this integration..."
   - Exception: "We" is acceptable when referring to humanity/society in general observations
