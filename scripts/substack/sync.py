@@ -181,6 +181,9 @@ def get_all_posts() -> list[dict]:
         if frontmatter.get("draft", False):
             print(f"  SKIP {filepath.name} (draft)")
             continue
+        if not frontmatter.get("substack", False):
+            print(f"  SKIP {filepath.name} (substack not enabled)")
+            continue
 
         slug = build_post_slug(filepath.name)
         cleaned_body = clean_markdown_for_substack(body, frontmatter)
