@@ -20,7 +20,7 @@ env:
 jobs:
   sync:
     name: Sync to Substack
-    runs-on: [self-hosted, chipdev]
+    runs-on: [self-hosted, chipmac]
 
     steps:
       - name: Checkout code
@@ -34,6 +34,9 @@ jobs:
             --query value -o tsv)
           echo "::add-mask::$SUBSTACK_COOKIE"
           echo "SUBSTACK_COOKIE=$SUBSTACK_COOKIE" >> "$GITHUB_ENV"
+
+      - name: Install dependencies
+        run: pip3 install -r scripts/substack/requirements.txt
 
       - name: Run Substack sync
         run: python3 scripts/substack/sync.py
