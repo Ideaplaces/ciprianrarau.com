@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-01-27T12:00:00Z
 category: Technology
 excerpt: "How I connected Apple's App Store Connect webhooks to Slack, with automatic commit tracking between releases and forced auto-upgrades for internal TestFlight users. Build uploaded? Here's what changed, and your app will update itself."
+substack: true
 tags:
   - ios-development
   - devops-automation
