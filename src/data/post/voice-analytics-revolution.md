@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-01-20T12:00:00Z
+publishDate: 2025-10-27T12:00:00Z
 author: Ciprian Rarau
 title: "Voice Analytics Revolution: When Machines Finally Understand Human Speech"
 excerpt: "For the first time, machines can truly understand human language—not through brute force transcription, but because AI predicts what I'm going to say. This changes everything about how I interact with technology."

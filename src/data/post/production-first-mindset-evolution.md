@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-06-19T10:30:00
+publishDate: 2025-11-03T12:00:00Z
 author: Ciprian Rarau
 title: "From Zero to a Thousand Clients: Why I Deploy to Production Every Day"
 excerpt: "How modern AI tools transformed my production deployment philosophy from careful quarterly releases to daily shipping with confidence"

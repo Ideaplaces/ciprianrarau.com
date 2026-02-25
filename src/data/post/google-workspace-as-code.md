@@ -1,7 +1,7 @@
 ---
 title: "Google Workspace as Code: Managing Users, Groups, and Aliases with Terraform"
 author: Ciprian Rarau
-publishDate: 2025-12-18T12:00:00Z
+publishDate: 2025-12-08T12:00:00Z
 category: Technology
 excerpt: "How I manage Google Workspace users, distribution lists, and email aliases entirely through Terraform - no admin console clicking required."
 substack: true

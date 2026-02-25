@@ -1,7 +1,7 @@
 ---
 title: "Company Docs: The DNA of Every Business I Touch"
 author: Ciprian Rarau
-publishDate: 2026-01-09T12:00:00Z
+publishDate: 2026-01-05T12:00:00Z
 category: Technology
 excerpt: "For every company I work with, the first thing I build is a central knowledge base that becomes the DNA of the business. LLMs finally make this possible."
 substack: true
