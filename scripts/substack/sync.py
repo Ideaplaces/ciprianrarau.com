@@ -201,7 +201,7 @@ def get_all_posts() -> list[dict]:
             "subtitle": frontmatter.get("excerpt", ""),
             "body": cleaned_body,
             "tags": frontmatter.get("tags", []),
-            "publish_date": str(frontmatter.get("publishDate", "")),
+            "publish_date": frontmatter["publishDate"].isoformat() if frontmatter.get("publishDate") else "",
             "hash": content_hash(frontmatter, body),
             "frontmatter": frontmatter,
         })
