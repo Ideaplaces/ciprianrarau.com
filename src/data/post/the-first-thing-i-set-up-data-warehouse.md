@@ -5,6 +5,7 @@ publishDate: 2026-01-27T14:00:00Z
 category: Technology
 excerpt: "Before DevOps pipelines, before CI/CD, before monitoring - I set up a data warehouse. Here's why centralizing data is the foundation for every decision a startup will make."
 image: /images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-f73a4db1.png
+substack: true
 tags:
   - data-warehouse
   - bigquery
