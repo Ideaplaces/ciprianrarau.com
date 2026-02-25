@@ -50,5 +50,6 @@ jobs:
             echo "No changes to sync state file"
           else
             git commit -m "Update Substack sync state"
+            git pull --rebase origin main
             git push
           fi
