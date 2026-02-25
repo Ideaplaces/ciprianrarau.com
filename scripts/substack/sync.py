@@ -331,6 +331,9 @@ class SubstackClient:
             "editor_v2": True,
         }
 
+        if post.get("publish_date"):
+            draft_payload["post_date"] = post["publish_date"]
+
         resp = self.session.post(f"{self.pub_base}/drafts", json=draft_payload)
         if resp.status_code != 200:
             raise RuntimeError(f"Failed to create draft: {resp.status_code} {resp.text[:500]}")
@@ -366,6 +369,9 @@ class SubstackClient:
             "draft_body": draft_body,
             "editor_v2": True,
         }
+
+        if post.get("publish_date"):
+            update_payload["post_date"] = post["publish_date"]
 
         resp = self.session.put(f"{self.pub_base}/drafts/{draft_id}", json=update_payload)
         if resp.status_code != 200:
