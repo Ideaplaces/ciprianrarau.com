@@ -625,6 +625,8 @@ sequenceDiagram
     Note over App: User MUST update.<br/>No dismiss button.
 ```
 
+![Diagram 3](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-d2290a16.png?v=88ad65c9)
+
 ### How It Works
 
 The Cloud Function gained a few lines of code:
