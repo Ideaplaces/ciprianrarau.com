@@ -84,11 +84,15 @@ Choose the approach based on content type:
   - Use "I built this integration..." not "We built this integration..."
   - Exception: "We" is acceptable when referring to humanity/society in general observations
   - Actions taken should always be "I", never "we"
-- **NO company names** - Never mention client/company names in blog posts
+- **NO company or product names** - Never mention client, company, or product names in blog posts
   - Use generic terms: "a healthcare startup", "a SaaS company", "one of the startups I work with"
   - Exception: Wisk.ai can be mentioned (Chip's own company, public knowledge)
+  - Exception: IdeaPlaces can be mentioned (Chip's overarching business)
   - Exception: Well-known tools/platforms are fine (AWS, Azure, Stripe, Shopify, etc.)
+  - **Never mention:** Eli, Eli Health, Mentorly, Pivot, or any other client/product name
+  - **Never mention** team members by name (use "a QA engineer", "a developer", "someone on the team")
   - This protects client confidentiality and keeps content universally applicable
+  - **Timelessness principle:** Blog posts should stand on their own as lessons and patterns that outlast the current moment. Write about the *approach* and the *insight*, not the specific project. A reader should learn something valuable without needing to know which company or product is involved
   - **In code examples, replace:**
     - Company email domains → `company.com` (e.g., `dev@company.com`)
     - GCP project IDs → `my-project-dev`, `my-project-prod`
