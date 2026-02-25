@@ -4,31 +4,109 @@
       "hash": "91ed5cc465becc5c",
       "draft_id": 188896743,
       "title": "Why I Use One File Instead of Twelve: CLAUDE.md Over Skills",
-      "synced_at": "2026-02-23 12:00:00+00:00"
+      "synced_at": "2026-02-23T12:00:00+00:00"
     },
     "appstore-webhooks-automated-release-notes": {
       "hash": "f16f8df39c2f59fa",
       "draft_id": 189125251,
       "title": "App Store Connect Webhooks: Automated Release Notes with Git Tags",
-      "synced_at": "2026-01-27 12:00:00+00:00"
+      "synced_at": "2026-01-27T12:00:00+00:00"
     },
     "cloud-billing-observability-every-dollar-tracked": {
       "hash": "4e4962099097b174",
       "draft_id": 189125253,
       "title": "Cloud Billing Observability: How I Track Every Dollar Across Three Environments",
-      "synced_at": "2026-02-05 14:00:00+00:00"
+      "synced_at": "2026-02-05T14:00:00+00:00"
     },
     "the-first-thing-i-set-up-data-warehouse": {
       "hash": "09d7d9d8787d0d90",
       "draft_id": 189126206,
       "title": "The First Thing I Set Up at Every Company: A Data Warehouse",
-      "synced_at": "2026-01-27 14:00:00+00:00"
+      "synced_at": "2026-01-27T14:00:00+00:00"
     },
     "meta-repository-pattern": {
       "hash": "e802244bc0144836",
       "draft_id": 189129254,
       "title": "The Meta Repository Pattern: One Folder to Rule Them All",
       "synced_at": "2026-01-09T14:00:00+00:00"
+    },
+    "ai-powered-alert-summarizer": {
+      "hash": "bb68d3ab9a7fc60b",
+      "draft_id": 189129645,
+      "title": "AI-Powered Alert Summarizer: Claude Reads My Logs So I Don't Have To",
+      "synced_at": "2026-01-27T12:00:00+00:00"
+    },
+    "ai-reads-my-specs": {
+      "hash": "5d45d80e3fbe4243",
+      "draft_id": 189129649,
+      "title": "AI Reads My Specs: Structured Development, Not Vibe Coding",
+      "synced_at": "2025-12-18T12:00:00+00:00"
+    },
+    "aws-to-azure-migration": {
+      "hash": "71ec4b4b46eb9240",
+      "draft_id": 189129651,
+      "title": "Migrating from AWS to Azure: A Zero-Downtime Philosophy",
+      "synced_at": "2025-12-18T12:00:00+00:00"
+    },
+    "company-docs-dna-of-the-business": {
+      "hash": "51aeed2d41d4d06f",
+      "draft_id": 189129652,
+      "title": "Company Docs: The DNA of Every Business I Touch",
+      "synced_at": "2026-01-09T12:00:00+00:00"
+    },
+    "devops-across-clouds-production-first": {
+      "hash": "5c2b6f33e07d8de0",
+      "draft_id": 189129656,
+      "title": "DevOps Across All Clouds: Why I'm Building Infrastructure for Every Startup",
+      "synced_at": "2025-08-25T12:00:00+00:00"
+    },
+    "github-monday-integration": {
+      "hash": "01d5706d65d841a4",
+      "draft_id": 189129658,
+      "title": "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits",
+      "synced_at": "2026-01-03T12:00:00+00:00"
+    },
+    "google-workspace-as-code": {
+      "hash": "b49658ca3cba7b83",
+      "draft_id": 189129661,
+      "title": "Google Workspace as Code: Managing Users, Groups, and Aliases with Terraform",
+      "synced_at": "2025-12-18T12:00:00+00:00"
+    },
+    "production-first-mindset-evolution": {
+      "hash": "8da09d8e0411ca3c",
+      "draft_id": 189129662,
+      "title": "From Zero to a Thousand Clients: Why I Deploy to Production Every Day",
+      "synced_at": "2025-06-19T10:30:00"
+    },
+    "sentry-configuration-as-code": {
+      "hash": "8fac193c665574e0",
+      "draft_id": 189129664,
+      "title": "Sentry Alerts, Filters, and Scrubbing: Programmatic Error Management",
+      "synced_at": "2025-12-18T12:00:00+00:00"
+    },
+    "slack-configuration-as-code": {
+      "hash": "08b669cc0db3c2e1",
+      "draft_id": 189129666,
+      "title": "Slack Configuration as Code: Role-Based Channel Access Without the Clicking",
+      "synced_at": "2026-01-27T12:00:00+00:00"
+    },
+    "specs-as-single-source-of-truth": {
+      "hash": "439fd9175e202a5e",
+      "draft_id": 189129668,
+      "title": "Specs as the Single Source of Truth: How I Write Once and Generate Everywhere",
+      "synced_at": "2025-12-18T12:00:00+00:00"
+    },
+    "technology-complexity-race": {
+      "hash": "fea886cd87ca5664",
+      "draft_id": 189129670,
+      "title": "AI as an Extension of Myself: When Technology Complexity Outpaces Human Understanding",
+      "synced_at": "2025-11-05T14:00:00"
+    },
+    "voice-analytics-revolution": {
+      "hash": "08339667840bb217",
+      "draft_id": 189129672,
+      "title": "Voice Analytics Revolution: When Machines Finally Understand Human Speech",
+      "synced_at": "2025-01-20T12:00:00+00:00"
     }
   }
 }

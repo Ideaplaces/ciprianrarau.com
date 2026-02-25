@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "The difference between vibe coding and structured AI-assisted development. How I use specs to guide AI through iterative, validated steps - not generate everything in one shot."
+substack: true
 tags:
   - ai-assisted-development
   - spec-driven-development

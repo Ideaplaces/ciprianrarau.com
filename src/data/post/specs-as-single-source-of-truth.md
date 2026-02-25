@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "A technical deep-dive into the workflow where specifications drive code generation, marketing content, and help documentation from a single source."
+substack: true
 tags:
   - spec-driven-development
   - ai-assisted-development

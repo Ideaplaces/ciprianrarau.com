@@ -5,6 +5,7 @@ title: "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits"
 excerpt: How I built a webhook-based integration that makes GitHub and Monday.com work as a single system. Developers commit code, and task statuses update automatically through the entire deployment pipeline.
 image: /images/diagrams/github-monday-integration-diagram-45398a0b.png
 category: Technology
+substack: true
 tags:
   - devops
   - automation

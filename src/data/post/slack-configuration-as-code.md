@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-01-27T12:00:00Z
 category: Technology
 excerpt: "How I manage Slack channel memberships through YAML configuration. New employee joins? Add them to config, run a script, they're in all the right channels."
+substack: true
 tags:
   - infrastructure-as-code
   - devops-automation

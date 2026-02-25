@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-01-27T12:00:00Z
 category: Technology
 excerpt: "How I built a serverless alert system that uses Claude to analyze error logs and post human-readable summaries to Slack. No Docker, no servers, under $1/month."
+substack: true
 tags:
   - ai-assisted-development
   - serverless

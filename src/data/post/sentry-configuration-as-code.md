@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2025-12-18T12:00:00Z
 category: Technology
 excerpt: "Why I wrote a Python CLI to manage Sentry configuration instead of clicking through the UI - alerts, filters, data scrubbing, all defined in YAML."
+substack: true
 tags:
   - infrastructure-as-code
   - devops-automation
