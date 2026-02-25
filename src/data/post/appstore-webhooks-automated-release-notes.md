@@ -720,24 +720,6 @@ No manual database updates. No Slack messages saying "hey, new build is up, plea
 
 This is particularly powerful for internal dev and staging builds where you want everyone on the same page. Production still goes through the App Store review process, which has its own update mechanisms.
 
-## Machine-Readable Summary
-
-| Capability | Implementation |
-|------------|----------------|
-| Webhook Source | Apple App Store Connect |
-| Processing | Cloud Functions 2nd Gen (Python 3.12) |
-| Security | HMAC-SHA256 signature verification |
-| Build Details | App Store Connect API (JWT auth) |
-| Commit Tracking | Git tags + GCS storage |
-| CI Integration | GitHub Actions |
-| Notification | Slack Web API |
-| Infrastructure | Terraform |
-| Multi-App | 4 apps (prod, staging, dev, dev2) |
-| Events | Build, TestFlight, Review, Crashes |
-| Auto-Upgrade | Webhook updates backend app_version on build complete |
-| Version Format | 4-segment: marketing.buildNumber (e.g., 1.4.17.338) |
-| Forced Update | Mandatory flag triggers blocking popup in mobile app |
-
 ## The Philosophy
 
 Release transparency is a feature. The team should know:
