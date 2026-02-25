@@ -4,6 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-01-09T14:00:00Z
 category: Technology
 excerpt: "How I organize 10-20 repositories per company into a single meta folder, giving both humans and AI a bird's eye view of the entire business."
+substack: true
 tags:
   - devops-automation
   - ai-assisted-development
