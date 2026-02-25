@@ -3,7 +3,7 @@ title: "App Store Connect Webhooks: Automated Release Notes with Git Tags"
 author: Ciprian Rarau
 publishDate: 2026-01-27T12:00:00Z
 category: Technology
-excerpt: "How I connected Apple's App Store Connect webhooks to Slack, with automatic commit tracking between releases. Build uploaded? Here's what changed since the last one."
+excerpt: "How I connected Apple's App Store Connect webhooks to Slack, with automatic commit tracking between releases and forced auto-upgrades for internal TestFlight users. Build uploaded? Here's what changed, and your app will update itself."
 tags:
   - ios-development
   - devops-automation
@@ -21,7 +21,7 @@ metadata:
   showReadingTime: true
   showTags: true
 transcript: |
-  I'm getting webhook notifications from Apple straight to Slack. When a build finishes processing on TestFlight, when an app goes into review, when it gets approved or rejected - it all shows up in Slack. But the cool part is the commits. Every notification includes what changed since the last build. Git tags track releases, GitHub Actions uploads the commit list, and the webhook handler puts it all together.
+  I'm getting webhook notifications from Apple straight to Slack. When a build finishes processing on TestFlight, when an app goes into review, when it gets approved or rejected - it all shows up in Slack. But the cool part is the commits. Every notification includes what changed since the last build. Git tags track releases, GitHub Actions uploads the commit list, and the webhook handler puts it all together. And now it goes further: when a build completes, the webhook automatically updates the backend so the mobile app forces internal testers to upgrade. No more QA testing on stale builds.
 ---
 
 ## The Problem
@@ -595,6 +595,128 @@ sequenceDiagram
 
 ![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-f70a1e74.png?v=88ad65c9)
 
+## The Auto-Upgrade: Closing the Loop
+
+Notifications are nice. But there was still a gap. Someone from QA was testing on build 225 while the latest was 337. They had no idea they needed to update. Nobody told them. TestFlight doesn't force updates.
+
+So I connected the webhook to the backend.
+
+### The Idea
+
+When a build finishes processing on TestFlight, the Cloud Function already knows the version and build number. What if it also told the backend? And what if the mobile app checked that on every launch?
+
+```mermaid
+sequenceDiagram
+    participant Apple as App Store Connect
+    participant CF as Cloud Function
+    participant API as Backend API
+    participant App as Mobile App
+
+    Apple->>CF: Build 338 is COMPLETE
+    CF->>CF: Post to Slack ✅
+    CF->>API: POST /app-version/webhook
+    Note over CF,API: version: 1.4.17, build: 338
+
+    Note over API: Stores "1.4.17.338"<br/>mandatory: true
+
+    App->>API: Hey, I'm on 1.4.17.225
+    API-->>App: You need 1.4.17.338 (mandatory)
+    App->>App: ⛔ Full-screen update popup
+    Note over App: User MUST update.<br/>No dismiss button.
+```
+
+### How It Works
+
+The Cloud Function gained a few lines of code:
+
+```python
+APP_BACKEND_CONFIG = {
+    "6747853441": {"env": "dev", "url": "https://dev.eli-app.com"},
+    "6747853426": {"env": "stage", "url": "https://staging.eli-app.com"},
+    # Production is excluded - App Store handles that
+}
+
+def update_backend_app_version(app_id, version, build_number):
+    config = APP_BACKEND_CONFIG.get(app_id)
+    if not config:
+        return  # Not a dev/staging app, skip
+
+    secret = get_secret("app-version-webhook-secret")
+    requests.post(
+        f"{config['url']}/app-version/webhook",
+        headers={"x-api-key": secret},
+        json={
+            "version": version,
+            "buildNumber": build_number,
+            "platform": "ios",
+            "env": config["env"]
+        }
+    )
+```
+
+The backend stores the version as `1.4.17.338` (marketing version + build number) and marks it `mandatory: true`. The mobile app reads its actual build number at runtime using `react-native-device-info` (not from `package.json`, which turns out to be stale by the time the build is installed). On every app launch, it sends its full 4-segment version to the backend and gets back whether an update is required.
+
+### The Version Comparison Problem
+
+Semantic versioning is usually 3 segments: `1.4.17`. But in dev, the marketing version stays the same across dozens of builds. Build 225 and build 338 are both `1.4.17`. The difference is only in the build number.
+
+The fix: store 4-segment versions (`1.4.17.338`) and compare dynamically:
+
+```typescript
+private compareVersions(latest: string, current: string): boolean {
+  const latestParts = latest.split('.').map(s => parseInt(s, 10));
+  const currentParts = current.split('.').map(s => parseInt(s, 10));
+  const maxLength = Math.max(latestParts.length, currentParts.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    const l = latestParts[i] || 0;
+    const c = currentParts[i] || 0;
+    if (l > c) return true;
+    if (l < c) return false;
+  }
+  return false;
+}
+```
+
+Missing segments default to `0`, so `1.4.17` < `1.4.17.1`. This handles mixed formats gracefully.
+
+### The Stale Build Number Gotcha
+
+Here's a fun one I didn't expect. The mobile app was reading the build number from `package.json`:
+
+```typescript
+// OLD - wrong
+const buildNumber = packageJson.build[Platform.OS]; // "225" forever
+```
+
+Fastlane increments `CURRENT_PROJECT_VERSION` in the Xcode project during CI, but never touches `package.json`. So the app always thought it was build 225, no matter how many times it was updated.
+
+The fix: read the native bundle version at runtime:
+
+```typescript
+// NEW - correct
+import DeviceInfo from 'react-native-device-info';
+const buildNumber = DeviceInfo.getBuildNumber(); // "338" from CFBundleVersion
+```
+
+This reads `CFBundleVersion` directly from the installed binary. No stale values.
+
+### The Result
+
+A full round trip, completely automated:
+
+1. Developer pushes code
+2. GitHub Actions builds and uploads to TestFlight
+3. Apple processes the build
+4. Apple fires webhook to Cloud Function
+5. Cloud Function notifies Slack AND updates the backend
+6. QA opens the app, sees "New version available", taps update
+7. TestFlight installs the latest build
+
+No manual database updates. No Slack messages saying "hey, new build is up, please update." No one testing on a build from three weeks ago. The system enforces currency.
+
+This is particularly powerful for internal dev and staging builds where you want everyone on the same page. Production still goes through the App Store review process, which has its own update mechanisms.
+
 ## Machine-Readable Summary
 
 | Capability | Implementation |
@@ -609,6 +731,9 @@ sequenceDiagram
 | Infrastructure | Terraform |
 | Multi-App | 4 apps (prod, staging, dev, dev2) |
 | Events | Build, TestFlight, Review, Crashes |
+| Auto-Upgrade | Webhook updates backend app_version on build complete |
+| Version Format | 4-segment: marketing.buildNumber (e.g., 1.4.17.338) |
+| Forced Update | Mandatory flag triggers blocking popup in mobile app |
 
 ## The Philosophy
 
@@ -618,8 +743,9 @@ Release transparency is a feature. The team should know:
 2. **What's in each build** - Not "dig through git log"
 3. **Where releases are in the pipeline** - Not "check App Store Connect"
 4. **When things go wrong** - Crashes, rejections, failures
+5. **That they're on the latest build** - Not "are you sure you updated?"
 
-All of this arrives in Slack. The iOS build channel becomes the source of truth for release status.
+All of this arrives in Slack. The iOS build channel becomes the source of truth for release status. And the auto-upgrade mechanism ensures nobody is testing on stale builds.
 
 The git tag strategy means I can always answer "what changed between build 235 and 236?" without leaving the terminal:
 
@@ -628,3 +754,5 @@ git log build/prod/235..build/prod/236 --oneline
 ```
 
 And when the Slack notification arrives with those commits already listed, the team doesn't even need to ask.
+
+The full pipeline, from push to forced update on the tester's device, runs without any human intervention. That's the dream: developers write code, and the system handles everything else.
