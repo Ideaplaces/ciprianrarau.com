@@ -23,6 +23,12 @@
       "draft_id": 189126206,
       "title": "The First Thing I Set Up at Every Company: A Data Warehouse",
       "synced_at": "2026-01-27 14:00:00+00:00"
+    },
+    "meta-repository-pattern": {
+      "hash": "e802244bc0144836",
+      "draft_id": 189129034,
+      "title": "The Meta Repository Pattern: One Folder to Rule Them All",
+      "synced_at": "2026-01-09 14:00:00+00:00"
     }
   }
 }
