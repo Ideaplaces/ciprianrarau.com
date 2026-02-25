@@ -11,6 +11,7 @@ tags:
   - production-first
   - development-workflow
 image: /images/diagrams/meta-repository-pattern-diagram-30d78660.png
+substack: true
 metadata:
   featured: true
   showAuthor: true
