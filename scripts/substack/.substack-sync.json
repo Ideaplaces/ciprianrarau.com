@@ -113,6 +113,12 @@
       "draft_id": 189563770,
       "title": "My Entire Development Runs in the Cloud. No Laptop Required.",
       "synced_at": "2026-03-01T16:00:00+00:00"
+    },
+    "substack-auto-sync-from-markdown-to-newsletter": {
+      "hash": "7b056a084c878682",
+      "draft_id": 189585990,
+      "title": "Every Blog Post I Write Automatically Publishes to Substack",
+      "synced_at": "2026-03-01T20:00:00+00:00"
     }
   }
 }
