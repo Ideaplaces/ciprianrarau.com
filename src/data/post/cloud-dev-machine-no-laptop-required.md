@@ -5,6 +5,7 @@ publishDate: 2026-03-01T16:00:00Z
 category: Technology
 excerpt: "How I replaced local development with a high-frequency cloud VM, a 2TB data disk, automated daily backups, and Terraform. My laptop is just a window into a machine that never sleeps."
 image: /images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8661d62d.png
+substack: true
 tags:
   - devops-automation
   - infrastructure-as-code
