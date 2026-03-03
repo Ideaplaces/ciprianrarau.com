@@ -35,11 +35,13 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from urllib.parse import unquote
 
 import requests
 import yaml
+from urllib.parse import urlparse, urljoin
 
 # Blog posts directory (relative to this script)
 SCRIPT_DIR = Path(__file__).parent
@@ -230,6 +232,17 @@ def _fix_link_hrefs(body_json: dict) -> dict:
     return body_json
 
 
+def fix_image_dimensions(body_json: dict) -> dict:
+    """Remove hardcoded image dimensions so Substack auto-detects from CDN."""
+    for node in body_json.get("content", []):
+        if node.get("type") == "image2":
+            attrs = node.get("attrs", {})
+            attrs["width"] = None
+            attrs["height"] = None
+            attrs["resizeWidth"] = None
+    return body_json
+
+
 def markdown_to_prosemirror(markdown_text: str, user_id: int) -> str:
     """Convert markdown to Substack ProseMirror JSON using python-substack library.
 
@@ -314,11 +327,72 @@ class SubstackClient:
 
         subdomain = self.publication["subdomain"]
         self.pub_base = f"https://{subdomain}.substack.com/api/v1"
+        self._image_cache = {}
         print(f"Authenticated as {profile['name']} (publication: {self.publication['name']}, subdomain: {subdomain})")
+
+    def upload_image(self, image_url: str) -> str:
+        """Upload an image to Substack's CDN by passing its URL. Returns the CDN URL.
+
+        Substack's /image endpoint accepts a URL string via form data (not multipart).
+        Substack fetches the image and re-hosts it on substackcdn.com.
+        """
+        clean_url = image_url.split("?")[0]
+
+        if clean_url in self._image_cache:
+            return self._image_cache[clean_url]
+
+        filename = os.path.basename(urlparse(clean_url).path)
+        print(f"    Uploading image: {filename}")
+
+        for attempt in range(3):
+            try:
+                upload_resp = self.session.post(
+                    f"{self.pub_base}/image",
+                    data={"image": image_url},
+                )
+
+                if upload_resp.status_code == 200:
+                    cdn_url = upload_resp.json().get("url", "")
+                    if cdn_url:
+                        print(f"      -> {cdn_url[:80]}...")
+                        self._image_cache[clean_url] = cdn_url
+                        return cdn_url
+
+                if upload_resp.status_code == 429:
+                    wait = 10 * (attempt + 1)
+                    print(f"      Rate limited, waiting {wait}s (attempt {attempt + 1}/3)...")
+                    time.sleep(wait)
+                    continue
+
+                print(f"      Warning: upload returned {upload_resp.status_code}: {upload_resp.text[:200]}, keeping original URL")
+                break
+            except Exception as e:
+                print(f"      Warning: failed to upload {filename}: {e}, keeping original URL")
+                break
+
+        return image_url
+
+    def upload_images_in_markdown(self, body: str) -> str:
+        """Find all images pointing to ciprianrarau.com, upload to Substack CDN, replace URLs."""
+        def replace_image(match):
+            alt_text = match.group(1)
+            url = match.group(2)
+            cdn_url = self.upload_image(url)
+            return f"![{alt_text}]({cdn_url})"
+
+        return re.sub(
+            r"!\[([^\]]*)\]\((https://ciprianrarau\.com/[^)]+)\)",
+            replace_image,
+            body,
+        )
 
     def create_and_publish_post(self, post: dict) -> int:
         """Create a draft and publish it. Returns the draft ID."""
-        draft_body = markdown_to_prosemirror(post["body"], self.user_id)
+        body_with_cdn_images = self.upload_images_in_markdown(post["body"])
+        draft_body_raw = markdown_to_prosemirror(body_with_cdn_images, self.user_id)
+        body_json = json.loads(draft_body_raw)
+        fix_image_dimensions(body_json)
+        draft_body = json.dumps(body_json)
 
         draft_payload = {
             "draft_title": post["title"],
@@ -361,7 +435,11 @@ class SubstackClient:
 
     def update_post(self, draft_id: int, post: dict) -> int:
         """Update an existing published post in place. Returns the draft ID."""
-        draft_body = markdown_to_prosemirror(post["body"], self.user_id)
+        body_with_cdn_images = self.upload_images_in_markdown(post["body"])
+        draft_body_raw = markdown_to_prosemirror(body_with_cdn_images, self.user_id)
+        body_json = json.loads(draft_body_raw)
+        fix_image_dimensions(body_json)
+        draft_body = json.dumps(body_json)
 
         update_payload = {
             "draft_title": post["title"],
@@ -374,6 +452,10 @@ class SubstackClient:
             update_payload["post_date"] = post["publish_date"]
 
         resp = self.session.put(f"{self.pub_base}/drafts/{draft_id}", json=update_payload)
+        if resp.status_code == 429:
+            print(f"    Rate limited on update, waiting 15s...")
+            time.sleep(15)
+            resp = self.session.put(f"{self.pub_base}/drafts/{draft_id}", json=update_payload)
         if resp.status_code != 200:
             raise RuntimeError(f"Failed to update post {draft_id}: {resp.status_code} {resp.text[:500]}")
 
@@ -462,8 +544,12 @@ def main():
 
     client = SubstackClient(substack_cookie, substack_url)
 
-    # Sync each post
-    for post in posts_to_sync:
+    # Sync each post (with delay to avoid rate limiting)
+    for i, post in enumerate(posts_to_sync):
+        if i > 0:
+            print("  Waiting 5s before next post...")
+            time.sleep(5)
+
         try:
             synced = state["posts"].get(post["slug"], {})
             existing_draft_id = synced.get("draft_id")
