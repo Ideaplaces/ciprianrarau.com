@@ -4,7 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-03-01T16:00:00Z
 category: Technology
 excerpt: "How I replaced local development with a high-frequency cloud VM, a 2TB data disk, automated daily backups, and Terraform. My laptop is just a window into a machine that never sleeps."
-image: /images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8661d62d.png
+image: /images/diagrams/cloud-dev-machine-no-laptop-required-diagram-c619b60c.png
 substack: true
 tags:
   - devops-automation
@@ -36,13 +36,13 @@ The machine is an Azure Ubuntu 22.04 VM running an FX-series processor at 4.0 GH
 ```mermaid
 flowchart TD
     A["My Laptop (Thin Client)"]
-    A -->|"SSH / VS Code Remote"| B["Azure VM\n4 vCPUs @ 4.0 GHz, 84GB RAM"]
-    B --> C["OS Disk (256GB NVMe SSD)\nUbuntu 22.04 + Docker engine"]
-    B --> D["Data Disk (2TB Premium SSD)\n/home/chipdev"]
-    D --> D1["All code repositories\nacross multiple companies"]
+    A -->|"SSH / VS Code Remote"| B["Azure VM<br/>4 vCPUs @ 4.0 GHz, 84GB RAM"]
+    B --> C["OS Disk (256GB NVMe SSD)<br/>Ubuntu 22.04 + Docker engine"]
+    B --> D["Data Disk (2TB Premium SSD)<br/>/home/chipdev"]
+    D --> D1["All code repositories<br/>across multiple companies"]
     D --> D2["Docker containers and images"]
     D --> D3["Build artifacts and caches"]
-    D -->|"Daily snapshots at 2 AM"| E["Azure Managed Snapshots\n7-day retention, incremental"]
+    D -->|"Daily snapshots at 2 AM"| E["Azure Managed Snapshots<br/>7-day retention, incremental"]
 
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
     style B fill:#87CEEB,stroke:#333,stroke-width:2px
@@ -50,7 +50,7 @@ flowchart TD
     style E fill:#FFD700,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8661d62d.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-c619b60c.png?v=88ad65c9)
 
 The key decision: two separate disks.
 
@@ -140,17 +140,17 @@ So I went the other direction. I moved to the FX-series: 4 vCPUs at 4.0 GHz turb
 
 ```mermaid
 flowchart TD
-    A["v1: 32 vCPUs @ 2.4 GHz\n~$1,378/month"]
-    A -->|"Most cores idle"| B["v2: 16 vCPUs @ 2.4 GHz\n~$1,000/month"]
-    B -->|"Still too many idle cores"| C["v3: 4 vCPUs @ 4.0 GHz\n~$864/month"]
-    C --> D["Result: 40% faster per-core\n37% cheaper\n20 GB more RAM"]
+    A["v1: 32 vCPUs @ 2.4 GHz<br/>~$1,378/month"]
+    A -->|"Most cores idle"| B["v2: 16 vCPUs @ 2.4 GHz<br/>~$1,000/month"]
+    B -->|"Still too many idle cores"| C["v3: 4 vCPUs @ 4.0 GHz<br/>~$864/month"]
+    C --> D["Result: 40% faster per-core<br/>37% cheaper<br/>20 GB more RAM"]
 
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
     style C fill:#87CEEB,stroke:#333,stroke-width:2px
     style D fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-e6bdefaf.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8bb0d92e.png?v=88ad65c9)
 
 The result: compilation is faster, hot reload is snappier, and the monthly bill dropped by 37%. Four fast cores beat sixteen slow ones for everything I do.
 
@@ -163,11 +163,11 @@ The entire machine is defined in Terraform. The networking, the disks, the backu
 ```mermaid
 flowchart TD
     A["terraform apply"]
-    A --> B["Networking\nVNet + Subnet + Static IP + NSG"]
-    B --> C["Compute\nUbuntu 22.04, FX4mds_v2\n4 vCPUs @ 4.0 GHz, 84GB RAM"]
-    C --> D["Storage\nOS Disk: 256GB NVMe SSD\nData Disk: 2TB Premium SSD"]
-    D --> E["Backup Automation\nDaily snapshots at 2 AM\n7-day retention"]
-    E --> F["Bootstrap Script\nDocker, Node, Python, Azure CLI\nMount data disk, configure system"]
+    A --> B["Networking<br/>VNet + Subnet + Static IP + NSG"]
+    B --> C["Compute<br/>Ubuntu 22.04, FX4mds_v2<br/>4 vCPUs @ 4.0 GHz, 84GB RAM"]
+    C --> D["Storage<br/>OS Disk: 256GB NVMe SSD<br/>Data Disk: 2TB Premium SSD"]
+    D --> E["Backup Automation<br/>Daily snapshots at 2 AM<br/>7-day retention"]
+    E --> F["Bootstrap Script<br/>Docker, Node, Python, Azure CLI<br/>Mount data disk, configure system"]
     F --> G["Ready to SSH"]
 
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
@@ -176,7 +176,7 @@ flowchart TD
     style G fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 3](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8f8eeecc.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-3d3758da.png?v=88ad65c9)
 
 A first-boot script runs automatically when the VM is created. It installs everything: Docker, Node.js via nvm, GitHub CLI, Azure CLI, Python, build tools. It formats the data disk, creates the mount, tunes the kernel for Node.js development (increasing inotify watchers to 524288). By the time I SSH in for the first time, the machine is ready.
 
