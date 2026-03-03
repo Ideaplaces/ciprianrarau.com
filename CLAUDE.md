@@ -168,6 +168,7 @@ flowchart TD
 ```
 
 **Important notes for mermaid:**
+- **Use `<br/>` for line breaks in labels, NEVER `\n`** - Inside quoted labels like `["Line 1<br/>Line 2"]`, use `<br/>` for newlines. Using `\n` renders as literal text instead of a line break.
 - **Optimize for vertical reading** - Diagrams should be tall, not wide. Use `flowchart TD` (top-down) instead of `flowchart LR` (left-right) when possible
 - **Break wide diagrams into pieces** - If a diagram has more than 4-5 horizontal elements, split it into multiple smaller diagrams or restructure vertically
 - **Mobile-friendly width** - Diagrams should render well on narrow screens; avoid long horizontal chains
