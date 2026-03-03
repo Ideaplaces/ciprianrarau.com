@@ -4,7 +4,7 @@ author: Ciprian Rarau
 publishDate: 2026-03-01T20:00:00Z
 category: Technology
 excerpt: "How I built a pipeline that takes a markdown blog post, processes mermaid diagrams into PNGs, deploys to my website, and automatically publishes to Substack. One git push, two platforms, zero manual steps."
-image: /images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-edbd70ad.png
+image: /images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-095cbb32.png
 substack: true
 tags:
   - devops-automation
@@ -42,25 +42,26 @@ So I automated it.
 
 ```mermaid
 flowchart TD
-    A["Write blog post\n(Markdown + Mermaid)"]
-    A --> B["Process mermaid diagrams\nnpm run process-mermaid"]
+    A["Write blog post<br/>(Markdown + Mermaid)"]
+    A --> B["Process mermaid diagrams<br/>npm run process-mermaid"]
     B --> C["git push origin main"]
     C --> D["GitHub Actions"]
-    D --> E["Deploy to website\n(Docker → Azure Web App)"]
-    D --> F["Sync to Substack\n(Python script)"]
-    F --> G["Parse frontmatter\nFilter: substack: true"]
-    G --> H["Convert markdown\nto ProseMirror JSON"]
-    H --> I["POST to Substack API\nCreate or update post"]
-    I --> J["Commit sync state\nback to repo"]
+    D --> E["Deploy to website<br/>(Docker + Azure Web App)"]
+    D --> F["Sync to Substack<br/>(Python on self-hosted runner)"]
+    F --> G["Parse frontmatter<br/>Filter: substack: true"]
+    G --> H["Upload images to<br/>Substack CDN"]
+    H --> I["Convert markdown<br/>to ProseMirror JSON"]
+    I --> J["POST to Substack API<br/>Create or update post"]
+    J --> K["Commit sync state<br/>back to repo"]
 
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
     style D fill:#87CEEB,stroke:#333,stroke-width:2px
     style E fill:#90EE90,stroke:#333,stroke-width:2px
     style F fill:#FFD700,stroke:#333,stroke-width:2px
-    style I fill:#90EE90,stroke:#333,stroke-width:2px
+    style J fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-edbd70ad.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-095cbb32.png?v=88ad65c9)
 
 One push triggers two parallel workflows: the website deploys via Docker to Azure, and the Substack sync runs via a Python script on a self-hosted GitHub Actions runner.
 
@@ -118,15 +119,19 @@ body = re.sub(
 )
 ```
 
-**Convert relative URLs to absolute.** My blog uses relative image paths like `/images/diagrams/my-diagram.png`. Substack needs full URLs:
+**Convert relative URLs to absolute.** My blog uses relative image paths like `/images/diagrams/my-diagram.png`. Substack needs full URLs, so the script prepends the site domain.
+
+**Upload images to Substack's CDN.** External image URLs (hotlinked from my blog) don't display reliably on Substack's mobile apps. The script passes each image URL to Substack's `/image` API endpoint, which fetches the image and re-hosts it on their S3 CDN:
 
 ```python
-body = re.sub(
-    r"!\[([^\]]*)\]\((/[^)]+)\)",
-    lambda m: f"![{m.group(1)}]({SITE_URL}{m.group(2)})",
-    body,
+upload_resp = self.session.post(
+    f"{self.pub_base}/image",
+    data={"image": image_url},
 )
+cdn_url = upload_resp.json().get("url")
 ```
+
+The key detail: this endpoint expects form-encoded data (`data=`), not a multipart file upload (`files=`). Substack fetches the image from the URL you provide and returns a CDN URL on `substack-post-media.s3.amazonaws.com`. The script caches uploaded URLs to avoid re-uploading the same image across runs.
 
 **Convert markdown tables to text.** Substack's API doesn't support table nodes in its ProseMirror format. The script converts markdown tables into readable key-value pairs so the content still makes sense.
 
@@ -191,7 +196,9 @@ on:
 
 It also supports manual triggers via `workflow_dispatch` for cases where I need to force a re-sync.
 
-The workflow runs on a self-hosted runner (my Mac) because it needs access to Azure Key Vault for authentication. Substack doesn't have API keys. It uses session cookies, which means the auth token is a browser cookie stored securely in Azure Key Vault:
+The workflow runs on a self-hosted runner (my Mac) instead of GitHub's hosted runners. Substack's API sits behind Cloudflare, which blocks requests from GitHub Actions' shared datacenter IPs with a 403 "Just a moment..." challenge page. A self-hosted runner on a residential IP bypasses this entirely.
+
+The runner also handles authentication. Substack doesn't have API keys. It uses session cookies, which means the auth token is a browser cookie stored securely in Azure Key Vault:
 
 ```yaml
 - name: Get Substack cookie from Key Vault
@@ -251,14 +258,14 @@ The hash covers the title, excerpt, and body. It uses the first 16 characters of
 
 ```mermaid
 flowchart TD
-    A["Read all .md files\nfrom src/data/post/"]
-    A --> B["Filter: substack: true\nSkip drafts"]
-    B --> C["Compute SHA256 hash\nof title + excerpt + body"]
-    C --> D{"Hash matches\nstored state?"}
-    D -->|"Yes"| E["SKIP\nAlready synced"]
-    D -->|"No match found"| F["CREATE\nNew post on Substack"]
-    D -->|"Hash changed"| G["UPDATE\nModify existing post"]
-    F --> H["Save hash + draft_id\nto .substack-sync.json"]
+    A["Read all .md files<br/>from src/data/post/"]
+    A --> B["Filter: substack: true<br/>Skip drafts"]
+    B --> C["Compute SHA256 hash<br/>of title + excerpt + body"]
+    C --> D{"Hash matches<br/>stored state?"}
+    D -->|"Yes"| E["SKIP<br/>Already synced"]
+    D -->|"No match found"| F["CREATE<br/>New post on Substack"]
+    D -->|"Hash changed"| G["UPDATE<br/>Modify existing post"]
+    F --> H["Save hash + draft_id<br/>to .substack-sync.json"]
     G --> H
 
     style A fill:#f9d5e5,stroke:#333,stroke-width:3px
@@ -268,7 +275,7 @@ flowchart TD
     style G fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-fa847eeb.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8688f80a.png?v=88ad65c9)
 
 When a post is new, the script creates a draft and publishes it. When a post has changed (the hash differs), it updates the existing post in place using the stored `draft_id`. When nothing changed, it skips entirely.
 
@@ -313,39 +320,36 @@ The workflow looks like this:
 
 From idea to published newsletter in a single conversation.
 
-## The Pattern
+## The Full Pipeline
 
-```
-Blog Post Pipeline
-==================
+```mermaid
+flowchart TD
+    A["Write<br/>(Markdown + Mermaid)"]
+    A --> B["Process Diagrams<br/>(mermaid-cli + PNG + footer)"]
+    B --> C["git push origin main"]
+    C --> D1["Deploy Workflow"]
+    C --> D2["Substack Sync Workflow"]
 
-Write (Markdown + Mermaid)
-    │
-    ▼
-Process Diagrams (mermaid-cli → PNG + author footer)
-    │
-    ▼
-git push origin main
-    │
-    ├──────────────────────────┐
-    ▼                          ▼
-Deploy Workflow            Substack Sync Workflow
-    │                          │
-    ▼                          ▼
-Docker build              Read posts (*.md)
-    │                          │
-    ▼                          ▼
-Push to ACR               Filter: substack: true
-    │                          │
-    ▼                          ▼
-Azure Web App             Hash → Compare → Create/Update
-    │                          │
-    ▼                          ▼
-ciprianrarau.com          chiprarau.substack.com
+    D1 --> E1["Docker build"]
+    E1 --> F1["Push to ACR"]
+    F1 --> G1["Azure Web App"]
+    G1 --> H1["ciprianrarau.com"]
+
+    D2 --> E2["Read posts<br/>Filter: substack: true"]
+    E2 --> F2["Upload images<br/>to Substack CDN"]
+    F2 --> G2["Hash + Compare<br/>Create or Update"]
+    G2 --> H2["chiprarau.substack.com"]
+
+    style A fill:#f9d5e5,stroke:#333,stroke-width:3px
+    style C fill:#87CEEB,stroke:#333,stroke-width:2px
+    style H1 fill:#90EE90,stroke:#333,stroke-width:2px
+    style H2 fill:#90EE90,stroke:#333,stroke-width:2px
 ```
+
+![Diagram 3](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8bc0c92e.png?v=88ad65c9)
 
 I write in one place. Markdown files in a git repository. Every post gets version history, pull request reviews if needed, and the full power of my development workflow. The website and the newsletter are just two outputs of the same source.
 
-The sync script is 500 lines of Python. The GitHub Actions workflow is 50 lines of YAML. The mermaid processing is a Node.js script that runs locally. Together, they turn a `git push` into a multi-platform publication.
+The sync script is a Python script. The GitHub Actions workflow is 50 lines of YAML. The mermaid processing is a Node.js script that runs locally. Together, they turn a `git push` into a multi-platform publication.
 
 No manual formatting. No copy-pasting. No "I forgot to update it on Substack." One source of truth, two platforms, zero friction.
