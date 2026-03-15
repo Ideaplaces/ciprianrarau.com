@@ -29,3 +29,4 @@ pnpm-lock.yaml
 *-token.sh
 .vercel-token
 vercel-deploy.sh
+__pycache__/
