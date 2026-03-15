@@ -48,8 +48,34 @@ jobs:
           docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to staging slot
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          slot-name: staging
           images: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Wait for staging slot to be healthy
+        run: |
+          echo "Waiting for staging slot to become healthy..."
+          SLOT_URL="https://${{ env.AZURE_WEBAPP_NAME }}-staging.azurewebsites.net/"
+          for i in $(seq 1 60); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SLOT_URL" --max-time 5 2>/dev/null || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "Staging slot healthy after ${i} attempts"
+              exit 0
+            fi
+            echo "Attempt $i: HTTP $STATUS, retrying in 5s..."
+            sleep 5
+          done
+          echo "Staging slot failed to become healthy after 5 minutes"
+          exit 1
+
+      - name: Swap staging to production
+        run: |
+          az webapp deployment slot swap \
+            --name ${{ env.AZURE_WEBAPP_NAME }} \
+            --resource-group rg-ideaplaces \
+            --slot staging \
+            --target-slot production
+          echo "Swap complete. Production is now running the new version."
