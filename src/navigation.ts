@@ -20,7 +20,14 @@ export const headerData = {
     },
     {
       text: 'Blog',
-      href: getBlogPermalink(),
+      links: [
+        { text: 'All Posts', href: getBlogPermalink() },
+        { text: 'Building', href: getPermalink('building', 'category') },
+        { text: 'Shipping', href: getPermalink('shipping', 'category') },
+        { text: 'Thinking', href: getPermalink('thinking', 'category') },
+        { text: 'Operating', href: getPermalink('operating', 'category') },
+        { text: 'Workflow', href: getPermalink('workflow', 'category') },
+      ],
     },
     {
       text: 'Contact',

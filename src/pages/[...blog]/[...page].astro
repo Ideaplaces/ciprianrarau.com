@@ -4,9 +4,9 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import Layout from '~/layouts/PageLayout.astro';
 import Grid from '~/components/blog/Grid.astro';
 import Headline from '~/components/blog/Headline.astro';
-// import PostTags from "~/components/blog/Tags.astro";
+import PostTags from '~/components/blog/Tags.astro';
 
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { blogListRobots, getStaticPathsBlogList, findCategories } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -19,8 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-// const allCategories = await findCategories();
-// const allTags = await findTags();
+const allCategories = await findCategories();
 
 const metadata = {
   title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
@@ -37,14 +36,13 @@ const metadata = {
 <Layout metadata={metadata}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-6xl">
     <Headline
-      subtitle="Insights on technology, AI, productivity, and building transformative products from an entrepreneur's perspective"
+      subtitle="Insights on building infrastructure, shipping products, and the thinking behind technical decisions"
     >
       The Blog
     </Headline>
+    <div class="mb-8">
+      <PostTags tags={allCategories} class="text-sm" title="Browse by category:" isCategory />
+    </div>
     <Grid posts={page.data} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
   </section>
 </Layout>

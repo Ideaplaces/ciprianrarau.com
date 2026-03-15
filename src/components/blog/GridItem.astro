@@ -8,6 +8,14 @@ import { findImage } from '~/utils/images';
 import { getPermalink } from '~/utils/permalinks';
 import { getTimeAgo } from '~/utils/utils';
 
+const categoryColors: Record<string, string> = {
+  building: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+  shipping: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+  thinking: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+  operating: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300',
+  workflow: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300',
+};
+
 export interface Props {
   post: Post;
 }
@@ -75,6 +83,15 @@ const timeAgo = getTimeAgo(post.publishDate);
     )
   }
 
+  {post.category && (
+    <a
+      href={getPermalink(post.category.slug, 'category')}
+      class={`inline-block text-xs font-semibold uppercase tracking-wide rounded-full px-2.5 py-0.5 mb-2 ${categoryColors[post.category.slug] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'}`}
+    >
+      {post.category.title}
+    </a>
+  )}
+
   <h3 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
     {
       link ? (
@@ -87,16 +104,21 @@ const timeAgo = getTimeAgo(post.publishDate);
     }
   </h3>
 
-  {timeAgo && (
-    <p class="text-sm text-muted dark:text-slate-500 mb-2">
-      <span class="inline-flex items-center gap-1">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        {timeAgo}
-      </span>
-    </p>
-  )}
+  <p class="text-sm text-muted dark:text-slate-500 mb-2">
+    <span class="inline-flex items-center gap-1">
+      {timeAgo && (
+        <>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {timeAgo}
+        </>
+      )}
+      {post.readingTime && (
+        <span class="ml-2">&middot; {post.readingTime} min read</span>
+      )}
+    </span>
+  </p>
 
   <p class="text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>
 </article>

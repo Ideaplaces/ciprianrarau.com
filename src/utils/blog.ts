@@ -1,7 +1,7 @@
 import type { PaginateFunction } from 'astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import type { Post } from '~/types';
+import type { Post, Taxonomy } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
 
@@ -171,6 +171,34 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
   const posts = await fetchPosts();
 
   return posts ? posts.slice(0, _count) : [];
+};
+
+/** */
+export const findCategories = async (): Promise<Array<Taxonomy>> => {
+  const posts = await fetchPosts();
+  const categories: Record<string, Taxonomy> = {};
+  posts.forEach((post) => {
+    if (post.category?.slug) {
+      categories[post.category.slug] = post.category;
+    }
+  });
+  return Object.values(categories);
+};
+
+/** */
+export const findTags = async (): Promise<Array<Taxonomy>> => {
+  const posts = await fetchPosts();
+  const tags: Record<string, Taxonomy> = {};
+  posts.forEach((post) => {
+    if (Array.isArray(post.tags)) {
+      post.tags.forEach((tag) => {
+        if (tag?.slug) {
+          tags[tag.slug] = tag;
+        }
+      });
+    }
+  });
+  return Object.values(tags);
 };
 
 /** */
