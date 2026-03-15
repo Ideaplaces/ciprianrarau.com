@@ -61,22 +61,52 @@ These folders contain important implementations that should be referenced when w
 
 ## Blog Writing Approach
 
+### Voice Guidelines
+
+The blog should feel like having coffee with a senior technical leader who has battle scars and is generous enough to show them. Five qualities define the voice:
+
+1. **Grounded conviction.** No hedging. Speak from experience, not theory.
+2. **Stakes and numbers first.** Lead with dollar figures, client counts, consequences. Don't bury them in tables.
+3. **The why before the how.** Give readers 3-4 paragraphs of narrative before the first code block.
+4. **Warm directness.** Preserve the energy from voice transcripts. "I love pushing to production" is better than "deploying frequently is beneficial."
+5. **Philosophical anchoring.** Every post should anchor to a principle readers carry away even if they never implement the solution.
+
+### Blog Categories
+
+Posts use one of five categories (not "Technology"):
+
+- **Building** : Infrastructure, IaC, Terraform, cloud architecture, deployment pipelines
+- **Shipping** : Production-first philosophy, CI/CD, release strategy, velocity
+- **Thinking** : AI, complexity, spec-driven development, humans and machines
+- **Operating** : Business lessons, startup patterns, data-driven decisions
+- **Workflow** : Tools, productivity, voice-to-text, cloud dev machines, automation
+
+### Post Templates
+
+**Template A: Deep Technical Build** ("How I Built X") for Building category
+Open with a moment/story (200-400 words), one architecture diagram, implementation with WHY not just WHAT, a gotcha section, philosophical close. 1,500-3,000 words, 40/60 code-to-prose.
+
+**Template B: Principle Piece** ("Why I Do X") for Shipping/Thinking
+Story from production (300-500 words), state the principle in one sentence, 3-5 evidence sections, the tension/tradeoff, a takeaway. 1,200-2,000 words, 10/90 code-to-prose.
+
+**Template C: Short Insight** ("One Thing I Learned") for any category
+Bold opening hook, context (100-200 words), one insight (200-400 words), why it matters. 500-800 words, almost no code.
+
+**Template D: Lesson** ("What X Taught Me") for Operating
+Set the scene, narrative arc with turning points, the lesson, connection to present. 1,000-2,000 words, minimal code.
+
 ### Direct Writing vs Natural-Blog-Writer Agent
 
 Choose the approach based on content type:
 
-| Content Type | Approach | When to Use |
-|--------------|----------|-------------|
-| Code-heavy tutorials | Direct writing | Terraform configs, YAML, architecture with diagrams |
-| Infrastructure deep-dives | Direct writing | IaC patterns, deployment pipelines, technical specs |
-| How-I-Built-X posts | Direct writing | Step-by-step technical walkthroughs |
-| Philosophical pieces | `natural-blog-writer` | Technology trends, industry reflections |
-| Lessons learned | `natural-blog-writer` | Narrative-driven insights, experience sharing |
-| Thought leadership | `natural-blog-writer` | Predictions, observations, career reflections |
+- **Template A (code-heavy):** Direct writing
+- **Template B/C/D (narrative-heavy):** `natural-blog-writer` agent
 
-**Rule of thumb:**
-- **80% code/config, 20% narrative** → Direct writing
-- **80% narrative, 20% technical examples** → `natural-blog-writer` agent
+**Expected blog mix:** ~50% direct writing, ~50% natural-blog-writer
+
+### Publishing Rhythm
+
+No more than two consecutive Building posts. Every Building post should be followed by a Thinking, Operating, or Short Insight. Aim for one post every 2-3 weeks.
 
 **Style requirements (both approaches):**
 - **NO markdown tables in blog posts** - Substack does not support markdown tables via their API. Use bullet point comparisons, bold headers with lists, or code blocks for tabular data instead.
@@ -129,7 +159,7 @@ Create a new markdown file in `src/data/post/`:
 title: "Your Title Here"
 author: Ciprian Rarau
 publishDate: 2025-12-18
-category: Technology
+category: Building  # or Shipping, Thinking, Operating, Workflow
 excerpt: "Brief description for previews and SEO"
 tags:
   - tag1
