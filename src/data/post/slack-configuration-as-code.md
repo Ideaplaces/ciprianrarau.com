@@ -23,6 +23,8 @@ transcript: |
   I'm managing Slack channel access from code. When a new developer joins, I add their email and role to a YAML file, run a script, and they're automatically added to all the alert channels they need. No clicking through Slack, no forgetting to add someone to the staging channel, no "hey can you add me to that channel" messages.
 ---
 
+I have lost count of how many times I have had to manually add a new team member to 15+ Slack channels. It is one of those tasks that seems small in isolation but adds up fast when you are onboarding people across multiple roles and environments. After the third time I forgot to add someone to a staging alerts channel, I decided to automate the whole thing.
+
 ## The Problem
 
 Onboarding a new developer to Slack:
@@ -518,19 +520,6 @@ devops/
     ├── requirements.txt     # pyyaml, requests
     └── README.md           # Documentation
 ```
-
-## Machine-Readable Summary
-
-| Capability | Implementation |
-|------------|----------------|
-| Channel Management | Python + Slack API |
-| Configuration | YAML with role-based access |
-| User Lookup | Email-based via `users.lookupByEmail` |
-| Idempotency | Safe to run repeatedly |
-| Removal Policy | Manual only (safety) |
-| Token Source | Terraform tfvars |
-| Preview Mode | `--dry-run` flag |
-| Single User Mode | `--user email` flag |
 
 ## The Philosophy
 

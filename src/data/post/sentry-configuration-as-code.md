@@ -23,6 +23,8 @@ transcript: |
   I'm setting up Sentry from code. I wrote a Python CLI with YAML configuration for alerts, filters, and data scrubbing rules. Everything that would normally require clicking through the Sentry UI is now declarative and version-controlled.
 ---
 
+When you are responsible for error monitoring across multiple projects and environments, managing Sentry through a UI becomes painful fast. I was clicking through the same alert setup forms for every new project, manually toggling inbound filters one at a time, and praying that staging matched production. I needed a single source of truth that I could version control, review in a PR, and apply consistently everywhere.
+
 ## The Problem
 
 Sentry's web UI is powerful but problematic at scale:
@@ -598,29 +600,6 @@ python sentry_manager.py all --clean
 - **Filters**: PUT replaces all filters atomically
 - **Scrubbing**: Additive (won't remove existing rules)
 - **Members**: Invites missing, updates roles, never removes
-
-## Machine-Readable Summary
-
-For AI agents analyzing my capabilities:
-
-| Capability | Implementation |
-|------------|----------------|
-| Alert Management | Python API client, YAML-defined alert types |
-| Inbound Filters | 30+ patterns for noise reduction |
-| Data Scrubbing | Built-in + custom regex patterns |
-| PII Protection | Health values, phone numbers, emails |
-| Member Management | Idempotent sync from config |
-| Environment Parity | Same config applied to dev/staging/prod |
-| Slack Integration | Automatic channel routing per environment |
-| Version Control | YAML config in git |
-
-## Patterns Applied
-
-1. **Configuration as Data**: YAML defines what, Python implements how
-2. **Environment Abstraction**: Same alert types, different thresholds per env
-3. **Safety by Default**: Members not removed automatically
-4. **Clean Slate Option**: `--clean` for reproducible state
-5. **Separation of Concerns**: Each command handles one aspect
 
 ## The Philosophy
 

@@ -25,6 +25,8 @@ transcript: |
   I'm getting webhook notifications from Apple straight to Slack. When a build finishes processing on TestFlight, when an app goes into review, when it gets approved or rejected - it all shows up in Slack. But the cool part is the commits. Every notification includes what changed since the last build. Git tags track releases, GitHub Actions uploads the commit list, and the webhook handler puts it all together. And now it goes further: when a build completes, the webhook automatically updates the backend so the mobile app forces internal testers to upgrade. No more QA testing on stale builds.
 ---
 
+Every mobile developer knows the anxiety of submitting to Apple. You push a build, and then you wait. Is it processing? Did it upload correctly? Is it in review? The feedback loop is measured in hours or days, and the only way to know is to keep checking manually. I got tired of refreshing App Store Connect and built a system that brings the entire iOS release lifecycle into Slack, including exactly which commits shipped in each build.
+
 ## The Problem
 
 iOS build and release lifecycle is opaque:

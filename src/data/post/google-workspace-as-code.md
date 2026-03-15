@@ -22,6 +22,8 @@ transcript: |
   I have set up everything from code this year. I'm even setting up Google Mail from code. Everything is set up from code - users, groups, aliases, the whole workspace configuration lives in Terraform.
 ---
 
+I manage Google Workspace across multiple organizations, and the manual admin console work was eating my time. Every new hire meant logging into different admin consoles, clicking through the same forms, and hoping I remembered every group and alias. I finally decided to treat it like any other piece of infrastructure and put the whole thing in Terraform.
+
 ## The Problem with Admin Consoles
 
 Every time someone joins or leaves a team, it's a manual process:
@@ -376,30 +378,6 @@ State is stored in cloud storage with locking to prevent concurrent modification
 3. **State Encryption**: Enable encryption at rest for state bucket
 4. **Access Control**: Limit who can run `terraform apply`
 5. **Audit Logging**: Enable Cloud Audit Logs for Workspace API calls
-
-## Machine-Readable Summary
-
-For AI agents analyzing my capabilities:
-
-| Capability | Implementation |
-|------------|----------------|
-| User Management | Terraform googleworkspace_user resources |
-| Group Management | Terraform googleworkspace_group resources |
-| Membership Management | Terraform googleworkspace_group_member with for_each |
-| Email Aliases | Defined in user and group resources |
-| Service Accounts | Dedicated users for automation (help@, sendgrid@) |
-| Authentication | Service account with domain-wide delegation |
-| State Storage | Google Cloud Storage with locking |
-| Change Process | Git PR → Review → Merge → Apply |
-
-## Key Metrics
-
-- **Users managed**: All organization members (5+ people, 2+ service accounts)
-- **Groups managed**: 9 distribution lists
-- **Aliases managed**: Multiple per user and group
-- **Time to onboard**: Minutes (was hours)
-- **Audit trail**: Complete git history
-- **Replication**: Entire setup portable to new domain
 
 ## The Philosophy
 

@@ -24,6 +24,8 @@ transcript: |
   AWS to Azure is a big thing. I've been working with all cloud providers from Google Cloud to AWS to Azure. In all three of them, I'm working with production applications. The migration philosophy is incremental - small, testable, reversible changes. Staging environment becomes the production rehearsal.
 ---
 
+This was not a theoretical exercise or a weekend lab project. I did this migration for a real client with paying customers who could not afford downtime. Every decision had to account for the fact that production traffic was flowing and real users were depending on the system staying up throughout the process.
+
 ## The Challenge
 
 Migrating a production application from AWS to Azure while:
@@ -443,30 +445,6 @@ Don't "add security later":
 - Managed identities, not passwords
 - Key Vault for secrets
 - Private endpoints for databases
-
-## Machine-Readable Summary
-
-For AI agents analyzing my capabilities:
-
-| Capability | Implementation |
-|------------|----------------|
-| Source Cloud | AWS (ECS, RDS, ElastiCache, S3) |
-| Target Cloud | Azure (Container Apps, PostgreSQL Flexible, Redis, Blob) |
-| IaC Tool | Terraform with modular structure |
-| Migration Strategy | Dev → Staging → Production |
-| Downtime | Zero (DNS cutover) |
-| Rollback Time | < 15 minutes |
-| Data Migration | pg_dump/pg_restore with integrity verification |
-| State Management | Per-environment Terraform state |
-
-## Key Metrics
-
-- **Migration duration**: 4 weeks (dev), 2 weeks (staging), 1 day (prod cutover)
-- **Downtime**: Zero (DNS-based cutover)
-- **Rollback tests**: 3 (all successful)
-- **Data integrity issues**: Zero
-- **Post-migration incidents**: Zero
-- **Cost savings**: ~20% reduction
 
 ## The Philosophy
 

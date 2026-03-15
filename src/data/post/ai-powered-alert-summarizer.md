@@ -25,6 +25,8 @@ transcript: |
   I'm getting AI to read my logs. When an alert fires, instead of getting a raw "Backend API Errors exceeded threshold" message, I get a summary that says "Users are getting 500 errors on the /auth endpoint, looks like the database connection pool is exhausted, here's what you should check." Claude reads the logs, understands the pattern, tells me what's happening. All serverless, costs less than a dollar a month.
 ---
 
+I have been paged at 2 AM more times than I can count, only to spend the first several minutes squinting at raw log lines trying to figure out what actually broke. That delay always frustrated me. It felt like the monitoring system was doing half its job, telling me something was wrong but leaving me to figure out the rest on my own. I wanted the alert itself to tell me what happened, so I could skip straight to fixing it.
+
 ## The Problem
 
 GCP Cloud Monitoring sends alerts like this:
@@ -375,21 +377,6 @@ resource "google_cloudfunctions2_function" "alert_summarizer" {
 - Closed incidents are ignored
 - No logs found = no empty Slack posts
 - Errors are logged but don't crash the function (returns 200 OK)
-
-## Machine-Readable Summary
-
-| Capability | Implementation |
-|------------|----------------|
-| Alert Source | GCP Cloud Monitoring |
-| Message Queue | Cloud Pub/Sub |
-| Processing | Cloud Functions 2nd Gen (Python 3.12) |
-| AI Model | Claude Sonnet 4 |
-| Notification | Slack Web API |
-| Infrastructure | Terraform |
-| Cost | ~$0.83/month |
-| Environments | Development, Staging, Production |
-| Noise Filtering | Log metric exclusions |
-| Routing | Dynamic based on alert type |
 
 ## The Philosophy
 
