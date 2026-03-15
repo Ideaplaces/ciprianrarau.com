@@ -31,7 +31,9 @@ When I start working with a new startup, people expect me to focus on CI/CD pipe
 
 This surprises people. "Shouldn't we focus on building the product first?"
 
-The answer is no. Every business decision you'll make - from feature prioritization to marketing spend - depends on data. Without a central place to query that data, you're flying blind. You can build the most elegant infrastructure in the world, but if you can't answer "which marketing channel brings our best customers?" or "where do users drop off in our funnel?", you're guessing.
+The answer is no. I learned this the hard way at one of the startups I work with. The marketing team was spending thousands per month on Facebook Ads, convinced it was their best channel. When I finally got the data warehouse running and JOINed ad spend with actual purchase data, the numbers told a completely different story. Their best customers, the ones who stayed and paid for months, were coming from organic search. Facebook was driving volume, but those users churned within weeks. That single query changed how they allocated their entire marketing budget.
+
+Every business decision you'll make, from feature prioritization to marketing spend, depends on data. Without a central place to query that data, you're flying blind. You can build the most elegant infrastructure in the world, but if you can't answer "which marketing channel brings our best customers?" or "where do users drop off in our funnel?", you're guessing.
 
 ## The Problem: Data Trapped in Silos
 

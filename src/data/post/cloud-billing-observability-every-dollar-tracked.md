@@ -28,9 +28,9 @@ transcript: |
 
 ## The Moment I Realized I Was Flying Blind
 
-I was managing infrastructure across three GCP projects for a startup - production, staging, and development. Every month I'd check the billing console, see a number, and move on. I had rough estimates in my head based on GCP pricing pages and the resources I'd provisioned.
+I was managing infrastructure across three GCP projects for a startup: production, staging, and development. Every month I'd check the billing console, see a number, and move on. I had rough estimates in my head based on GCP pricing pages and the resources I'd provisioned. I thought I understood my costs. I was wrong by nearly 2x.
 
-Then one month the bill came in significantly higher than expected. I had no idea which project caused it, which service spiked, or when it started. I spent half a day clicking through the GCP billing console, switching between projects, trying to piece together what happened.
+Then one month the bill came in significantly higher than expected. I had no idea which project caused it, which service spiked, or when it started. I spent half a day clicking through the GCP billing console, switching between projects, trying to piece together what happened. The worst part? The cost spike turned out to be load balancer forwarding rules, a category I hadn't even been tracking.
 
 That was the last time billing surprised me. I developed a four-step process that I now apply at every startup I work with:
 

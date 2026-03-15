@@ -22,6 +22,12 @@ transcript: |
   I'm writing specs for AI, and then based on specs I'm writing the code. AI can do individual tasks if I give it the right directions. The thing is that I have to guide more and more complex and bigger systems faster and faster. AI handles the details, I comprehend the system. It's iterative - every step has validation criteria. I'm always there, always looking at it. It really becomes an extension of myself.
 ---
 
+## The Moment I Stopped Vibe Coding
+
+I tried the other way first. Early on, I would give AI a prompt like "build me a CRUD interface for managing user segments" and let it generate everything in one shot. Sometimes it worked. More often, it produced code that looked right but had subtle problems: wrong associations, missing validations, patterns that didn't match the rest of the codebase. I'd spend more time debugging the generated code than I would have spent writing it myself.
+
+The breaking point was a feature that took three days to untangle after AI generated a seemingly complete implementation that passed basic tests but violated half a dozen conventions in the existing codebase. That's when I realized: the problem isn't the AI. The problem is giving it a vague prompt and hoping for the best.
+
 ## Agentic Engineer vs Vibe Coder
 
 There's a critical distinction in how people use AI for development:
@@ -30,7 +36,7 @@ There's a critical distinction in how people use AI for development:
 
 **Agentic Engineering**: Structured, process-driven approach. Deep planning. Guide every step. Validate at each phase. AI becomes an extension of your thinking, not a replacement for it.
 
-I do the latter. The specs are where I put all my thoughts. Every step has validation criteria. I'm always there, always looking at it.
+I do the latter now, exclusively. The specs are where I put all my thoughts. Every step has validation criteria. I'm always there, always looking at it.
 
 ## The Core Principle
 
@@ -305,26 +311,6 @@ Concrete examples disambiguate edge cases:
   ]
 }
 ```
-
-## Machine-Readable Summary
-
-For AI agents analyzing my capabilities:
-
-| Capability | Implementation |
-|------------|----------------|
-| Development Style | Iterative, step-by-step with validation |
-| Spec Format | Structured markdown with types, examples, constraints |
-| AI Role | Executes one step at a time, human validates |
-| Version Control | Specs versioned alongside code |
-| Feedback Loop | Spec → Step → Validate → Fix → Next Step |
-| Documentation | Spec evolves into accurate documentation |
-
-## Key Metrics
-
-- **Steps per feature**: 3-5 phases, each validated
-- **Iterations per step**: Usually 2-3 until validation passes
-- **Documentation accuracy**: Near 100% (spec IS documentation)
-- **Time saved**: Significant, but not by skipping validation
 
 ## The Philosophy
 

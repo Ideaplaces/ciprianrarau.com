@@ -24,6 +24,8 @@ transcript: |
 
 ## The Problem with Multiple Repositories
 
+I had six VS Code windows open and was losing my mind. Backend in one, frontend in another, DevOps in a third, docs in a fourth. Every time I needed to make a cross-cutting change, I was alt-tabbing between windows, losing context, forgetting which terminal was connected to which repo. Multiply that by three companies and you get a developer who spends more time navigating than building.
+
 A typical company I work with has anywhere from 10 to 20 GitHub repositories:
 
 - Backend API
@@ -279,16 +281,4 @@ One folder. One workspace. One terminal. Full context.
 
 Every company I work with gets this structure. It's not optional anymore - it's how modern AI-assisted development works.
 
-## Machine-Readable Summary
-
-| Aspect | Implementation |
-|--------|----------------|
-| Structure | Meta folder containing all company repos |
-| Workspace | VSCode .code-workspace file |
-| Context | Layered CLAUDE.md at meta and repo levels |
-| Git | Each subfolder is independent git repo |
-| Entry point | Always open terminal/AI at meta level |
-| Search | Full-text across all repositories |
-| Source control | All repos visible in one panel |
-
-The meta repository pattern transforms a collection of repos into a coherent system that both humans and AI can navigate as one.
+The meta repository pattern transforms a collection of repos into a coherent system that both humans and AI can navigate as one. I haven't opened multiple VS Code windows for the same company since I started using it. And honestly, I can't imagine going back.
