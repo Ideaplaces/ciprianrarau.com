@@ -2,7 +2,7 @@
 title: "AI Reads My Specs: Structured Development, Not Vibe Coding"
 author: Ciprian Rarau
 publishDate: 2025-11-24T12:00:00Z
-category: Technology
+category: Thinking
 excerpt: "The difference between vibe coding and structured AI-assisted development. How I use specs to guide AI through iterative, validated steps - not generate everything in one shot."
 substack: true
 tags:

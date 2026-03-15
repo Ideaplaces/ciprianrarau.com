@@ -2,7 +2,7 @@
 title: "Why I Use One File Instead of Twelve: CLAUDE.md Over Skills"
 author: Ciprian Rarau
 publishDate: 2026-02-23T12:00:00Z
-category: Technology
+category: Thinking
 excerpt: "Brad Feld built a 12-skill system to run his company through Claude Code. I manage multiple companies with layered CLAUDE.md files instead. Here is why simplicity wins when your system is already sophisticated."
 image: /images/diagrams/claude-md-over-skills-simple-ai-configuration-diagram-dbd30b45.png
 substack: true

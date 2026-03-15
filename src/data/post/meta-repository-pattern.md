@@ -2,7 +2,7 @@
 title: "The Meta Repository Pattern: One Folder to Rule Them All"
 author: Ciprian Rarau
 publishDate: 2026-01-12T12:00:00Z
-category: Technology
+category: Operating
 excerpt: "How I organize 10-20 repositories per company into a single meta folder, giving both humans and AI a bird's eye view of the entire business."
 substack: true
 tags:

@@ -2,7 +2,7 @@
 title: "Every Blog Post I Write Automatically Publishes to Substack"
 author: Ciprian Rarau
 publishDate: 2026-03-01T20:00:00Z
-category: Technology
+category: Workflow
 excerpt: "How I built a pipeline that takes a markdown blog post, processes mermaid diagrams into PNGs, deploys to my website, and automatically publishes to Substack. One git push, two platforms, zero manual steps."
 image: /images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-095cbb32.png
 substack: true
@@ -74,7 +74,7 @@ Not every blog post goes to Substack. The decision is controlled by a single fro
 title: "My Blog Post Title"
 author: Ciprian Rarau
 publishDate: 2026-03-01T20:00:00Z
-category: Technology
+category: Workflow
 excerpt: "Short description for previews and SEO"
 substack: true
 tags:
