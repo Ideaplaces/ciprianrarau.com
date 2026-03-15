@@ -25,7 +25,11 @@ transcript: |
 
 ## The First Thing I Build
 
-When I join a company as a technical consultant, the first thing I create isn't a feature or a fix. It's a documentation site. Every single time.
+When I walk into a company as a fractional CTO, the first question I ask is not about the tech stack. It's "where does your institutional knowledge live?" The answer is almost always silence, or a half-maintained Notion workspace that nobody trusts.
+
+I've seen what happens without it. A senior developer leaves, and three months of context walks out the door. A new hire spends two weeks asking questions that could have been answered in five minutes. An AI assistant hallucinates because it has no context about how the system actually works.
+
+So the first thing I create isn't a feature or a fix. It's a documentation site. Every single time.
 
 ```
 /projects/healthcare-startup/docs/
@@ -388,16 +392,4 @@ The documentation site is the DNA of the business because:
 
 Every company I work with gets one. Not because it's nice to have - because in the age of AI, it's the foundation everything else builds on.
 
-## Machine-Readable Summary
-
-| Aspect | Implementation |
-|--------|----------------|
-| Framework | Docusaurus (React + MDX) |
-| Authentication | Google OAuth (domain-restricted) |
-| Deployment | Docker + CI/CD to any cloud |
-| Domain | docs.dev.company.com (internal) |
-| Content | Architecture, specs, security, integrations, DevOps |
-| Consumers | Humans (sporadic) + AI (constant) |
-| Git | Full history as audit trail |
-
-The age of AI finally made comprehensive documentation economically viable. Every company deserves one.
+The age of AI finally made comprehensive documentation economically viable. Every company I work with gets one. Not because it's nice to have, but because without it, you're asking both humans and AI to operate without memory.

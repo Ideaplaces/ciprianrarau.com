@@ -17,7 +17,7 @@ metadata:
 
 There's a moment every developer knows. You've written the code, tested it locally, maybe even shown it to your team. But it's not real yet. Not until it hits production. Not until actual users are touching it, breaking it, loving it, cursing at it. That's when code becomes software.
 
-I learned this lesson deeply over eight years at Wisk.ai, where I took a platform from zero to a thousand clients. And let me tell you—there's no margin for error when you're handling production systems at scale.
+I learned this lesson over nearly a decade at Wisk.ai, where I took a platform from zero to over a thousand clients. In the early days, we did quarterly releases. Big, scary, all hands on deck deployments. Everyone held their breath. By year eight, I was pushing multiple times daily. The constraints of serving paying customers 24/7, with zero margin for error, rewired how I think about shipping software entirely.
 
 ## The Architecture of Always-On
 
@@ -56,11 +56,11 @@ This isn't recklessness—it's confidence built on modern tooling. Claude Code, 
 
 ## The Production Paradox
 
-Here's what I've discovered: the more you deploy, the safer it becomes. 
+Here's what I've discovered: the more you deploy, the safer it becomes.
 
-When I started at Wisk.ai, I did quarterly releases. Big, scary, all-hands-on-deck deployments. Everyone held their breath. By year eight? I was pushing multiple times daily. Smaller changes, faster feedback, happier customers.
+Smaller changes, faster feedback, happier customers. The inverse is also true. The bigger the release, the more terrifying the deployment, the more things break. I watched this pattern play out over years. The quarterly releases were the most dangerous thing we did. The daily deploys were the safest.
 
-The constraints of production—everything must work, always—actually make you a better developer. There's no "it works on my machine" when a thousand clients depend on your code.
+The constraints of production, everything must work always, actually make you a better developer. There's no "it works on my machine" when a thousand clients depend on your code.
 
 ## From Imagination to Implementation
 
