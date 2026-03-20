@@ -119,6 +119,12 @@
       "draft_id": 189585990,
       "title": "Every Blog Post I Write Automatically Publishes to Substack",
       "synced_at": "2026-03-01T20:00:00+00:00"
+    },
+    "spec-driven-design-system-evolution": {
+      "hash": "9389c9d21b643efb",
+      "draft_id": 191630010,
+      "title": "How I Turned a Color Palette Generator Into a Professional Design System in One Session",
+      "synced_at": "2026-03-20T22:00:00+00:00"
     }
   }
 }
