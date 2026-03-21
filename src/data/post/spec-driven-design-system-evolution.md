@@ -21,7 +21,7 @@ metadata:
 
 # How I Turned a Color Palette Generator Into a Professional Design System in One Session
 
-I had a working product. Users could chat with AI to generate color palettes, refine them through conversation, explore a version tree, and export to 7 formats (CSS, Tailwind, Swift, Android XML, and more). It had 463 tests, Stripe billing, and a split-pane chat interface.
+I had a working product: the [IdeaPlaces Style Guide Generator](https://styleguide.ideaplaces.com). Users could chat with AI to generate color palettes, refine them through conversation, explore a version tree, and export to 7 formats (CSS, Tailwind, Swift, Android XML, and more). It had 463 tests, Stripe billing, and a split-pane chat interface.
 
 The problem was simple: **the output looked like a developer tool, not a professional deliverable.** A flat list of 45+ UI components against a colored background. No typography scale. No spacing system. No device frames. No one was going to hand this to a stakeholder and say "here's our design system."
 
