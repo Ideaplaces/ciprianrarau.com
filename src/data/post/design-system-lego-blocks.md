@@ -12,7 +12,7 @@ tags:
   - component-library
   - frontend-architecture
   - developer-experience
-image: /images/diagrams/design-system-lego-blocks.png
+image: /images/diagrams/design-system-lego-blocks-diagram-c1edf3b5.png
 metadata:
   featured: true
   showAuthor: true
@@ -26,6 +26,31 @@ transcript: |
 I was reviewing a PR where my developer had "integrated a style guide." The colors changed. The background was different. But the font was exactly the same system font as before, and every page still had its own inline button styles, its own card markup, its own badge colors. It looked different but it wasn't a design system. It was a palette swap.
 
 So I decided to do it properly. In one session, I studied how my own [style guide generator](https://styleguide.ideaplaces.com) works under the hood, generated a complete design system following the exact same schema, built a reusable component library, and refactored 20 pages to use it.
+
+```mermaid
+graph TD
+    K["Design Brief<br/><i>Product context + audience</i>"] --> A
+    L["Specs & Docs<br/><i>catalyzeup-docs</i>"] --> K
+    M["Flow Wireframes<br/><i>catalyzeup-flows</i>"] --> K
+    A["Style Guide Generator<br/><i>styleguide.ideaplaces.com</i>"] --> B["Design Schema<br/><i>18 colors, typography, spacing</i>"]
+    B --> C["Tailwind Config"]
+    B --> D["UI Component Library<br/><i>7 reusable components</i>"]
+    C --> E["Button<br/><i>6 variants, 3 sizes</i>"]
+    C --> F["Card / Badge<br/><i>elevated, status-mapped</i>"]
+    C --> G["Input / Alert<br/><i>labels, errors, semantic</i>"]
+    C --> H["PageLayout<br/><i>NavBar, PageHeader</i>"]
+    D --> E
+    D --> F
+    D --> G
+    D --> H
+    E --> I["20 Pages Refactored"]
+    F --> I
+    G --> I
+    H --> I
+    I --> J["Consistent UI<br/><i>ImpactPulse</i>"]
+```
+
+![Diagram 1](/images/diagrams/design-system-lego-blocks-diagram-c1edf3b5.png?v=88ad65c9)
 
 ## The Problem: Color Soup
 
