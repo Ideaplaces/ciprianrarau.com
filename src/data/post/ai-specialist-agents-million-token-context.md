@@ -23,6 +23,8 @@ metadata:
   showTags: true
 ---
 
+![A Part of Me Lives in This Agent](/images/diagrams/ai-specialist-agents-million-token.png)
+
 ## It Started with an Evolution, Not a Bug
 
 I didn't sit down to fix a bug. I sat down to evolve a platform.
