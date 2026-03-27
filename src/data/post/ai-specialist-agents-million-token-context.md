@@ -3,7 +3,7 @@ title: "A Part of Me Lives in This Agent: How Million-Token Conversations Create
 author: Ciprian Rarau
 publishDate: 2026-03-27T12:00:00Z
 category: AI
-excerpt: "I didn't set out to build a specialist AI agent. I set out to evolve a matching algorithm. Twelve hours later, the conversation had absorbed my thinking process, my instincts for production systems, and my approach to navigating unknowns. A part of me now lives inside that context window."
+excerpt: "A single conversation went deep enough to absorb my thinking process. Now a part of me lives inside that context window, and the code it ships runs in production."
 substack: true
 tags:
   - AI
