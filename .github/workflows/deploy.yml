@@ -14,10 +14,11 @@ permissions:
   contents: read
 
 env:
-  AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
   ACR_NAME: ${{ vars.ACR_NAME }}
   ACR_LOGIN_SERVER: ${{ vars.ACR_LOGIN_SERVER }}
   IMAGE_NAME: ciprianrarau
+  AZURE_CONTAINER_APP: ${{ vars.AZURE_CONTAINER_APP }}
+  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -31,6 +32,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Login to Azure via OIDC
         uses: azure/login@v2
         with:
@@ -42,43 +46,44 @@ jobs:
         run: az acr login --name ${{ env.ACR_NAME }}
 
       - name: Build and push Docker image
-        run: |
-          docker build -t ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
-          docker tag ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
-          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: Deploy to staging slot
-        uses: azure/webapps-deploy@v2
+        uses: docker/build-push-action@v5
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          slot-name: staging
-          images: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+          platforms: linux/amd64
+          cache-from: type=registry,ref=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
 
-      - name: Wait for staging slot to be healthy
+      - name: Deploy new revision
         run: |
-          echo "Waiting for staging slot to become healthy..."
-          SLOT_URL="https://${{ env.AZURE_WEBAPP_NAME }}-staging.azurewebsites.net/"
-          for i in $(seq 1 60); do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SLOT_URL" --max-time 5 2>/dev/null || echo "000")
+          az containerapp update \
+            --name ${{ env.AZURE_CONTAINER_APP }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Wait for deployment to be healthy
+        run: |
+          FQDN=$(az containerapp show \
+            --name ${{ env.AZURE_CONTAINER_APP }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --query "properties.configuration.ingress.fqdn" -o tsv)
+          HEALTH_URL="https://${FQDN}/"
+          echo "Health check: $HEALTH_URL"
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$HEALTH_URL" --max-time 5 2>/dev/null || echo "000")
             if [ "$STATUS" = "200" ]; then
-              echo "Staging slot healthy after ${i} attempts"
+              echo "Healthy after ${i} attempts"
               exit 0
             fi
-            echo "Attempt $i: HTTP $STATUS, retrying in 5s..."
+            echo "Attempt $i: HTTP $STATUS, waiting..."
             sleep 5
           done
-          echo "Staging slot failed to become healthy after 5 minutes"
+          echo "Failed to become healthy after 150 seconds"
           exit 1
-
-      - name: Swap staging to production
-        run: |
-          az webapp deployment slot swap \
-            --name ${{ env.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} \
-            --slot staging \
-            --target-slot production
-          echo "Swap complete. Production is now running the new version."
 
       - name: Discord notification on failure
         if: failure()
