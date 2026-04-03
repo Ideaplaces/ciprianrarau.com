@@ -14,13 +14,13 @@ permissions:
   contents: read
 
 env:
-  AZURE_WEBAPP_NAME: app-ideaplaces-ciprianrarau
-  ACR_NAME: acrideaplaces
-  ACR_LOGIN_SERVER: acrideaplaces.azurecr.io
+  AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
+  ACR_NAME: ${{ vars.ACR_NAME }}
+  ACR_LOGIN_SERVER: ${{ vars.ACR_LOGIN_SERVER }}
   IMAGE_NAME: ciprianrarau
-  AZURE_CLIENT_ID: REDACTED_AZURE_CLIENT_ID
-  AZURE_TENANT_ID: REDACTED_AZURE_TENANT_ID
-  AZURE_SUBSCRIPTION_ID: REDACTED_AZURE_SUBSCRIPTION_ID
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
 jobs:
   build-and-deploy:
@@ -75,7 +75,7 @@ jobs:
         run: |
           az webapp deployment slot swap \
             --name ${{ env.AZURE_WEBAPP_NAME }} \
-            --resource-group rg-ideaplaces \
+            --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} \
             --slot staging \
             --target-slot production
           echo "Swap complete. Production is now running the new version."

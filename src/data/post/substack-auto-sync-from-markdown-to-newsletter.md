@@ -204,7 +204,7 @@ The runner also handles authentication. Substack doesn't have API keys. It uses 
 - name: Get Substack cookie from Key Vault
   run: |
     COOKIE=$(az keyvault secret show \
-      --vault-name kv-ideaplaces \
+      --vault-name my-keyvault \
       --name substack-cookie \
       --query value -o tsv)
     echo "::add-mask::$COOKIE"

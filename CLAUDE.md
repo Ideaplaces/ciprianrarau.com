@@ -435,8 +435,8 @@ The site deploys automatically to Azure on push to main via GitHub Actions.
 
 **Pipeline:** `.github/workflows/deploy.yml`
 - Builds Docker image
-- Pushes to Azure Container Registry (`acrideaplaces.azurecr.io`)
-- Deploys to Azure Web App (`app-ideaplaces-ciprianrarau`)
+- Pushes to Azure Container Registry (configured via `vars.ACR_LOGIN_SERVER`)
+- Deploys to Azure Web App (configured via `vars.AZURE_WEBAPP_NAME`)
 - Uses OIDC for authentication (no stored secrets)
 
 See `devops/README.md` for full documentation.

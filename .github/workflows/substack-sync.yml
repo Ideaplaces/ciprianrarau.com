@@ -29,7 +29,7 @@ jobs:
       - name: Fetch Substack cookie from Key Vault
         run: |
           SUBSTACK_COOKIE=$(az keyvault secret show \
-            --vault-name kv-ideaplaces \
+            --vault-name ${{ vars.AZURE_KEYVAULT_NAME }} \
             --name substack-cookie \
             --query value -o tsv)
           echo "::add-mask::$SUBSTACK_COOKIE"
