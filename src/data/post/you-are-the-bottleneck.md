@@ -6,7 +6,7 @@ excerpt: "55 builds. 12 hours. 2 lines of code. The AI didn't need a better prom
 category: AI
 substack: false
 tags: ["AI","iOS","debugging","react-native","expo","fastlane","CI-CD","productivity"]
-image: ~
+image: ""
 contentType: markdown
 draft: true
 ---
