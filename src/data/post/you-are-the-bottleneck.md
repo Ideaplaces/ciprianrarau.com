@@ -4,11 +4,11 @@ author: Ciprian Rarau
 title: "You Are the Bottleneck"
 excerpt: "55 builds. 12 hours. 2 lines of code. The AI didn't need a better prompt. It needed me to get out of the way."
 category: AI
-substack: false
+substack: true
 tags: ["AI","iOS","debugging","react-native","expo","fastlane","CI-CD","productivity"]
 image: ""
 contentType: markdown
-draft: true
+draft: false
 ---
 
 # You Are the Bottleneck
