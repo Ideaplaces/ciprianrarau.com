@@ -7,10 +7,10 @@
       "synced_at": "2026-02-23T12:00:00+00:00"
     },
     "appstore-webhooks-automated-release-notes": {
-      "hash": "5a14858f27738a63",
+      "hash": "e2b4c345aaad6f34",
       "draft_id": 189125251,
-      "title": "App Store Connect Webhooks: Automated Release Notes with Git Tags",
-      "synced_at": "2026-01-19T12:00:00+00:00"
+      "title": "Release on Autopilot: From Code Push to Forced App Update, Zero Human Steps",
+      "synced_at": "2026-04-07T12:00:00+00:00"
     },
     "cloud-billing-observability-every-dollar-tracked": {
       "hash": "0e3fadf794b78a62",
