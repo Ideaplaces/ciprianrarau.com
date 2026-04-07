@@ -1,9 +1,9 @@
 ---
-title: "App Store Connect Webhooks: Automated Release Notes with Git Tags"
+title: "Release on Autopilot: From Code Push to Forced App Update, Zero Human Steps"
 author: Ciprian Rarau
-publishDate: 2026-01-19T12:00:00Z
+publishDate: 2026-04-07T12:00:00Z
 category: Building
-excerpt: "How I connected Apple's App Store Connect webhooks to Slack, with automatic commit tracking between releases and forced auto-upgrades for internal TestFlight users. Build uploaded? Here's what changed, and your app will update itself."
+excerpt: "Six services talk to each other so I don't have to. Apple tells my Cloud Function a build shipped. The function tells Slack, schedules a delayed update via Cloud Tasks, and 30 minutes later the backend forces every user to the new version. The entire iOS release pipeline, from code push to forced update on the user's phone, runs without a single human step."
 substack: true
 tags:
   - ios-development
@@ -14,6 +14,7 @@ tags:
   - google-cloud
   - github-actions
   - production-first
+  - shipping
 image: /images/diagrams/appstore-webhooks-automated-release-notes-diagram-34c04c66.png
 metadata:
   featured: true
@@ -22,10 +23,12 @@ metadata:
   showReadingTime: true
   showTags: true
 transcript: |
-  I'm getting webhook notifications from Apple straight to Slack. When a build finishes processing on TestFlight, when an app goes into review, when it gets approved or rejected - it all shows up in Slack. But the cool part is the commits. Every notification includes what changed since the last build. Git tags track releases, GitHub Actions uploads the commit list, and the webhook handler puts it all together. And now it goes further: when a build completes, the webhook automatically updates the backend so the mobile app forces internal testers to upgrade. No more QA testing on stale builds.
+  I built a system where six services, Apple, a Cloud Function, Cloud Tasks, the backend API, a database, and Slack, all work as one. Developer pushes code, GitHub Actions builds and uploads to Apple, Apple processes the build and fires a webhook, my Cloud Function catches it, notifies Slack with the commits, and tells the backend to force the update. For production, it schedules a 30-minute delay via Cloud Tasks so Apple has time to propagate the binary globally, then fires the update. Every action posts to Slack. Every failure posts to Slack. There is no manual step anywhere. The entire release lifecycle, from git push to a blocking popup on the user's phone, is fully automated.
 ---
 
-Every mobile developer knows the anxiety of submitting to Apple. You push a build, and then you wait. Is it processing? Did it upload correctly? Is it in review? The feedback loop is measured in hours or days, and the only way to know is to keep checking manually. I got tired of refreshing App Store Connect and built a system that brings the entire iOS release lifecycle into Slack, including exactly which commits shipped in each build.
+Six services. Zero human steps. A developer pushes code, and the system handles everything: building, uploading to Apple, tracking commits, notifying the team, and forcing every user to update. No one checks App Store Connect. No one posts in Slack. No one runs a database query. The entire iOS release pipeline, from git push to a blocking popup on the user's phone, operates as a single automated system.
+
+This is the story of how I built it, layer by layer, until the last manual step was gone.
 
 ## The Problem
 
@@ -598,68 +601,50 @@ sequenceDiagram
 
 ![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-f70a1e74.png?v=88ad65c9)
 
-## The Auto-Upgrade: Closing the Loop
+## The Force Update: Dev and Staging
 
 Notifications are nice. But there was still a gap. Someone from QA was testing on build 225 while the latest was 337. They had no idea they needed to update. Nobody told them. TestFlight doesn't force updates.
 
 So I connected the webhook to the backend.
 
-### The Idea
-
-When a build finishes processing on TestFlight, the Cloud Function already knows the version and build number. What if it also told the backend? And what if the mobile app checked that on every launch?
+When a build finishes processing on TestFlight, the Cloud Function already knows the version and build number. It tells the backend, and the mobile app checks on every launch:
 
 ```mermaid
 sequenceDiagram
     participant Apple as App Store Connect
     participant CF as Cloud Function
+    participant Slack as Slack
     participant API as Backend API
     participant App as Mobile App
 
     Apple->>CF: Build 338 is COMPLETE
-    CF->>CF: Post to Slack ✅
+    CF->>Slack: Build notification with commits
     CF->>API: POST /app-version/webhook
     Note over CF,API: version: 1.4.17, build: 338
+    CF->>Slack: "Force Update Applied"
 
     Note over API: Stores "1.4.17.338"<br/>mandatory: true
 
     App->>API: Hey, I'm on 1.4.17.225
     API-->>App: You need 1.4.17.338 (mandatory)
-    App->>App: ⛔ Full-screen update popup
+    App->>App: Full-screen update popup
     Note over App: User MUST update.<br/>No dismiss button.
 ```
 
 ![Diagram 3](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-d2290a16.png?v=88ad65c9)
 
-### How It Works
-
-The Cloud Function gained a few lines of code:
+The Cloud Function calls the backend for dev and staging only:
 
 ```python
 APP_BACKEND_CONFIG = {
-    "6747853441": {"env": "dev", "url": "https://dev.eli-app.com"},
-    "6747853426": {"env": "stage", "url": "https://staging.eli-app.com"},
-    # Production is excluded - App Store handles that
+    "6747853441": {"env": "dev",  "url": "https://dev.eli-app.com"},
+    "6747853426": {"env": "stage","url": "https://staging.eli-app.com"},
+    "6471992170": {"env": "prod", "url": "https://app.eli.health",
+                   "delay_minutes": 30},
 }
-
-def update_backend_app_version(app_id, version, build_number):
-    config = APP_BACKEND_CONFIG.get(app_id)
-    if not config:
-        return  # Not a dev/staging app, skip
-
-    secret = get_secret("app-version-webhook-secret")
-    requests.post(
-        f"{config['url']}/app-version/webhook",
-        headers={"x-api-key": secret},
-        json={
-            "version": version,
-            "buildNumber": build_number,
-            "platform": "ios",
-            "env": config["env"]
-        }
-    )
 ```
 
-The backend stores the version as `1.4.17.338` (marketing version + build number) and marks it `mandatory: true`. The mobile app reads its actual build number at runtime using `react-native-device-info` (not from `package.json`, which turns out to be stale by the time the build is installed). On every app launch, it sends its full 4-segment version to the backend and gets back whether an update is required.
+The backend's `setVersion()` method is deliberately simple: delete all existing records for the environment/platform, create one new record with the version and `mandatory: true`. One row per environment, always current.
 
 ### The Version Comparison Problem
 
@@ -706,40 +691,234 @@ const buildNumber = DeviceInfo.getBuildNumber(); // "338" from CFBundleVersion
 
 This reads `CFBundleVersion` directly from the installed binary. No stale values.
 
-### The Result
+## The Last Manual Step: Production
 
-A full round trip, completely automated:
+Dev and staging were fully automated. But production was different. Every App Store release ended with me SSH'ing into a server and running SQL:
 
-1. Developer pushes code
-2. GitHub Actions builds and uploads to TestFlight
-3. Apple processes the build
-4. Apple fires webhook to Cloud Function
-5. Cloud Function notifies Slack AND updates the backend
-6. QA opens the app, sees "New version available", taps update
-7. TestFlight installs the latest build
-
-No manual database updates. No Slack messages saying "hey, new build is up, please update." No one testing on a build from three weeks ago. The system enforces currency.
-
-This is particularly powerful for internal dev and staging builds where you want everyone on the same page. Production still goes through the App Store review process, which has its own update mechanisms.
-
-## The Philosophy
-
-Release transparency is a feature. The team should know:
-
-1. **When builds are ready** - Not "check TestFlight periodically"
-2. **What's in each build** - Not "dig through git log"
-3. **Where releases are in the pipeline** - Not "check App Store Connect"
-4. **When things go wrong** - Crashes, rejections, failures
-5. **That they're on the latest build** - Not "are you sure you updated?"
-
-All of this arrives in Slack. The iOS build channel becomes the source of truth for release status. And the auto-upgrade mechanism ensures nobody is testing on stale builds.
-
-The git tag strategy means I can always answer "what changed between build 235 and 236?" without leaving the terminal:
-
-```bash
-git log build/prod/235..build/prod/236 --oneline
+```sql
+BEGIN;
+UPDATE app_version SET version = '1.4.21.235', mandatory = true
+WHERE env = 'prod' AND platform = 'ios';
+DELETE FROM app_version WHERE env = 'prod' AND id != '...';
+COMMIT;
 ```
 
-And when the Slack notification arrives with those commits already listed, the team doesn't even need to ask.
+It worked. It always worked. But it was the one manual step in an otherwise fully automated pipeline. And it existed because the original webhook endpoint explicitly rejected `env=prod`. A cautious choice, but the wrong one. If the secret is valid, the caller is trusted. The environment restriction added no security, only friction.
 
-The full pipeline, from push to forced update on the tester's device, runs without any human intervention. That's the dream: developers write code, and the system handles everything else.
+I removed the restriction, and then automated the trigger.
+
+### The 30-Minute Problem
+
+You can't force users to update the moment you click "Release" in App Store Connect. Apple needs time to propagate the binary to CDN nodes across all regions. If I forced the update immediately, users in some countries would see "Update Required" but find nothing in their App Store.
+
+30 minutes gives Apple enough time. Cloud Tasks handles this elegantly: schedule once, fire later, retry on failure.
+
+### What Apple's Webhook Actually Sends
+
+This is where I got surprised. I assumed Apple's release webhook would include the version and build number. It does not.
+
+The actual payload for `READY_FOR_DISTRIBUTION`, pulled from production Cloud Logging after a real release:
+
+```json
+{
+  "data": {
+    "type": "appStoreVersionAppVersionStateUpdated",
+    "attributes": {
+      "newValue": "READY_FOR_DISTRIBUTION",
+      "oldValue": "PENDING_DEVELOPER_RELEASE"
+    },
+    "relationships": {
+      "instance": {
+        "data": {
+          "type": "appStoreVersions",
+          "id": "3f5c0725-a3ad-..."
+        }
+      }
+    }
+  }
+}
+```
+
+No app ID. No version string. No build number. Just a state change and a resource ID.
+
+If I had built this from Apple's documentation alone, the code would have silently failed in production. I found this by pulling the real logs first, then building against the actual data. The Cloud Function uses that resource ID to call the App Store Connect API, which returns the marketing version, build number, and app ID.
+
+### The Production Flow
+
+```mermaid
+sequenceDiagram
+    participant Apple as App Store Connect
+    participant CF as Cloud Function
+    participant ASC as ASC API
+    participant CT as Cloud Tasks
+    participant Slack as Slack
+    participant API as Backend API
+    participant DB as PostgreSQL
+    participant App as Mobile App
+
+    Apple->>CF: READY_FOR_DISTRIBUTION
+    CF->>Slack: "Released to App Store"
+    CF->>ASC: GET /appStoreVersions/{id}
+    Note over CF,ASC: Fetch version, build, app ID
+    ASC-->>CF: v1.4.21, build 235
+    CF->>CT: Schedule task (30 min)
+    CF->>Slack: "Force Update Scheduled (30 min)"
+
+    Note over CT: 30 minutes later...
+    CT->>API: POST /app-version/webhook
+    API->>DB: Delete old, create new
+    Note over DB: version: 1.4.21.235<br/>mandatory: true
+
+    App->>API: I'm on 1.4.20.230
+    API-->>App: mandatory: true, storeUrl: App Store
+    App->>App: Blocking update popup
+```
+
+### One Function, Two Behaviors
+
+The same function handles all environments. The configuration drives the behavior:
+
+```python
+def update_backend_app_version(app_id, version, build_number):
+    config = APP_BACKEND_CONFIG.get(app_id)
+    if not config:
+        return
+
+    delay_minutes = config.get("delay_minutes")
+    if delay_minutes:
+        _schedule_delayed_request(url, api_key, payload, delay_minutes)
+    else:
+        _send_version_update(url, api_key, payload, ...)
+```
+
+If `delay_minutes` is present, Cloud Tasks. If not, immediate HTTP call. Same webhook endpoint, same secret, same trust boundary.
+
+## Full Visibility: Slack as the Control Plane
+
+Every action the system takes posts to Slack. Not just Apple's events (which were always there), but every version update action:
+
+| What Happened | Slack Message |
+|---------------|---------------|
+| Dev build ready, force update applied | "Eli Dev - Force Update Applied" (version, environment) |
+| Production released, timer started | "Eli Health - Force Update Scheduled" (version, 30 min) |
+| Backend returned an error | "Force Update FAILED" (version, error details) |
+| Apple API unreachable during release | "Production Release Detected - Version Fetch FAILED" (action required) |
+
+I chose Slack over just Cloud Logging because Slack is where I live during releases. If something goes wrong, I need to see it without opening the GCP console. And when everything goes right, the confirmation is right there next to the build notification.
+
+## The Unified System
+
+Here's the full picture. Six services, zero human steps:
+
+```mermaid
+flowchart TB
+    subgraph Developer["Developer"]
+        Push["git push"]
+    end
+
+    subgraph GitHub["GitHub Actions"]
+        Build["Build iOS App"]
+        Tag["Create Git Tag"]
+        Upload["Upload Commits to GCS"]
+    end
+
+    subgraph Apple["App Store Connect"]
+        Process["Process Build"]
+        Review["App Review"]
+        Release["Release to App Store"]
+    end
+
+    subgraph GCP["Google Cloud Platform"]
+        CF["Cloud Function"]
+        ASC["ASC API"]
+        CT["Cloud Tasks"]
+        GCS["Cloud Storage"]
+    end
+
+    subgraph Backend["Backend API + PostgreSQL"]
+        WH["POST /app-version/webhook"]
+        DB[("app_version table")]
+    end
+
+    subgraph Slack["Slack #alerts-ios-builds"]
+        N1["Build notifications"]
+        N2["Version update actions"]
+        N3["Errors and failures"]
+    end
+
+    subgraph Mobile["Mobile App"]
+        Check["Version check"]
+        Popup["Blocking update popup"]
+    end
+
+    Push --> Build --> Tag --> Upload
+    Build -->|"Upload .ipa"| Process
+    Process -->|"Webhook"| CF
+    Review -->|"Webhook"| CF
+    Release -->|"Webhook"| CF
+
+    CF -->|"Fetch commits"| GCS
+    CF -->|"Fetch version"| ASC
+    CF -->|"Dev/Stage: immediate"| WH
+    CF -->|"Prod: 30 min delay"| CT
+    CT -->|"Timer fires"| WH
+    WH --> DB
+
+    CF --> N1
+    CF --> N2
+    CF --> N3
+
+    Check --> WH
+    WH -->|"mandatory: true"| Popup
+
+    style Developer fill:#f3e5f5,stroke:#621164,stroke-width:2px
+    style GitHub fill:#f6f8fa,stroke:#24292e,stroke-width:2px
+    style Apple fill:#f5f5f7,stroke:#86868b,stroke-width:2px
+    style GCP fill:#e8f0fe,stroke:#4285f4,stroke-width:2px
+    style Backend fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style Slack fill:#f4ede4,stroke:#4a154b,stroke-width:2px
+    style Mobile fill:#fff3e0,stroke:#e65100,stroke-width:2px
+```
+
+Everything talks to everything else, and nobody needs to tell it to. The developer pushes code. GitHub builds and tags. Apple processes and reviews. The Cloud Function listens, notifies, and triggers. Cloud Tasks handles the delay. The backend writes one row. The mobile app reads it and acts.
+
+There is no communication necessary between humans for any of this to work. The system acts as a single entity.
+
+## The Infrastructure Glue
+
+All of it is Terraform. The Cloud Function, the Cloud Tasks queue, the IAM permissions, the secrets, the environment variables. One `terraform apply` and everything is wired up.
+
+The shared secret is the thread that ties the system together. It lives in GCP Secret Manager, read by the Cloud Function (to authenticate outbound calls) and the backend (to validate inbound calls). Same secret, same trust boundary, managed in one Terraform module. Structured JSON logging with severity levels goes to Cloud Logging, so anything that doesn't surface in Slack can still be found in the GCP console.
+
+## The Release Experience
+
+Here's what releasing looks like now:
+
+1. I click "Release" in App Store Connect
+2. Slack: "Released to App Store"
+3. Slack: "Eli Health - Force Update Scheduled" (30 minutes)
+4. I close App Store Connect
+5. 30 minutes later: the backend confirms the update
+6. Every user on an older version sees the update popup
+
+If it fails, Slack tells me. If I need to intervene manually:
+
+```bash
+API_KEY=$(gcloud secrets versions access latest \
+  --secret=app-version-webhook-secret --project=eli-health-dev)
+
+curl -s -X POST "https://app.eli.health/app-version/webhook" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: $API_KEY" \
+  -d '{"env":"prod","platform":"ios","version":"1.4.21","buildNumber":"235"}'
+```
+
+But the point is that I shouldn't need to. And after the next release, I'll know for sure.
+
+## What This Really Means
+
+This isn't about the code. It's about what happens when you connect systems intentionally. Each service does one thing. GitHub builds. Apple reviews. The Cloud Function routes events. Cloud Tasks adds a delay. The backend writes one row. Slack provides visibility. The mobile app enforces.
+
+None of them are complex. But connected, they create something that feels magical: a developer pushes code, and hours or days later, every user's phone updates itself. No human touched anything in between.
+
+The best infrastructure is the kind you build once and then forget exists. Until Slack reminds you it's working.
