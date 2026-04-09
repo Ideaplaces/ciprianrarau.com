@@ -15,7 +15,7 @@ tags:
   - github-actions
   - production-first
   - shipping
-image: /images/diagrams/appstore-webhooks-automated-release-notes-diagram-34c04c66.png
+image: /images/diagrams/appstore-webhooks-automated-release-notes-diagram-7acf67fe.png
 metadata:
   featured: true
   showAuthor: true
@@ -26,79 +26,79 @@ transcript: |
   I built a system where six services, Apple, a Cloud Function, Cloud Tasks, the backend API, a database, and Slack, all work as one. Developer pushes code, GitHub Actions builds and uploads to Apple, Apple processes the build and fires a webhook, my Cloud Function catches it, notifies Slack with the commits, and tells the backend to force the update. For production, it schedules a 30-minute delay via Cloud Tasks so Apple has time to propagate the binary globally, then fires the update. Every action posts to Slack. Every failure posts to Slack. There is no manual step anywhere. The entire release lifecycle, from git push to a blocking popup on the user's phone, is fully automated.
 ---
 
-Six services. Zero human steps. A developer pushes code, and the system handles everything: building, uploading to Apple, tracking what changed, notifying the team, and forcing every user to update. No one checks App Store Connect. No one posts in Slack. No one runs a database query. The entire iOS release pipeline operates as a single automated system.
+I think a lot about how companies actually work. Not the org chart version, but the real version: how information flows, where decisions get stuck, where a human is doing something a machine should be doing.
 
-This is the story of how I built it, layer by layer, until the last manual step was gone.
+Most companies are a collection of systems that don't talk to each other. Someone pushes code. Someone else checks if the build finished. A third person posts in Slack. A fourth person does something in the database. Everyone is a messenger between machines. It's like running a relay race where the runners keep stopping to call each other on the phone.
 
-## The Problem
+What if the machines just talked to each other directly?
 
-iOS releases are opaque. You push a build, and then you wait. Is it processing? Did it upload correctly? Is it in review? The feedback loop is measured in hours or days, and the only way to know is to keep checking manually.
+## The Vision
 
-And when a build goes out: "What's in this release?" requires digging through git history.
+Here's what I wanted: a developer pushes code, and some time later, every user's phone updates itself. No human touches anything in between. No checking. No posting. No database commands. The company's release pipeline operates as a single organism.
 
-I wanted a system where none of this requires human attention.
+Six services. One flow. Zero human steps.
 
-## Layer 1: Apple Talks to Slack
+## Building the Nervous System
 
-Apple sends webhooks for everything that happens in the build and release lifecycle: builds processing, TestFlight status changes, app review decisions, crash reports from testers. I set up a Cloud Function to receive these events, verify Apple's cryptographic signature, and post formatted notifications to a Slack channel.
+The first question is always: how do the systems even know what happened? In the iOS world, Apple is the gatekeeper. You upload a build, and it disappears into a black box. Is it processing? Is it in review? Did it get approved? Released? The default experience is refreshing a web page and hoping.
 
-Every webhook also triggers a lookup to the App Store Connect API to get the actual version and build number (Apple's webhook payloads contain IDs, not details). For build events, the system also fetches the list of git commits that shipped in that build, which GitHub Actions uploads to cloud storage during the CI pipeline.
+But Apple sends webhooks. For everything. Build processing, TestFlight status, review decisions, crash reports, releases. They sign each one cryptographically, so you know it's really Apple talking.
 
-The result: a Slack channel that shows the complete lifecycle of every build, with the exact commits included.
+I put a small Cloud Function in front of these webhooks. Its only job: listen, verify, and translate. Apple speaks in resource IDs and state changes. My function translates that into something humans care about, and posts it to Slack with the exact list of commits that shipped in each build.
 
-## Layer 2: The Team Stays Current
+Suddenly, the Slack channel becomes the release dashboard. Nobody needs to check App Store Connect. The information arrives.
 
-Notifications are nice. But there was still a gap. QA was testing on an old build while a newer one had been ready for hours. Nobody told them. TestFlight doesn't force updates.
+## From Knowing to Acting
 
-So I connected the webhook to the backend. When a dev or staging build finishes processing, the Cloud Function tells the backend "the latest version is now 1.4.17 build 338." The backend stores this and marks it as mandatory. The mobile app checks on every launch, and if it's behind, it shows a blocking full-screen popup. No dismiss button. You must update.
+But knowing is only half the story. The more interesting question is: what should the system *do* with that knowledge?
+
+Here's a problem that sounds small but is actually expensive: QA is testing on a build from three days ago. A developer fixed the bug yesterday. QA doesn't know a new build exists. They file the same bug again. Multiply this across a team, across weeks.
+
+TestFlight doesn't force updates. It notifies, and people ignore notifications. So I connected the webhook to the backend. When a build finishes processing, the system doesn't just announce it. It tells the backend: "this is the new minimum version." The mobile app checks on every launch. If you're behind, you see a full-screen popup. No dismiss button. You update, or you don't use the app.
+
+This sounds aggressive, and it is. But for internal dev and staging builds, currency matters more than convenience. Everyone tests the same code. Always.
 
 ```mermaid
 sequenceDiagram
-    participant Apple as App Store Connect
-    participant CF as Cloud Function
+    participant Apple as Apple
+    participant System as Cloud Function
     participant Slack as Slack
-    participant API as Backend
+    participant Backend as Backend
     participant App as Mobile App
 
-    Apple->>CF: Build 338 is ready
-    CF->>Slack: Build notification + commits
-    CF->>API: New version: 1.4.17.338
-    CF->>Slack: "Force Update Applied"
+    Apple->>System: Build ready
+    System->>Slack: Notification + commits
+    System->>Backend: Set minimum version
+    System->>Slack: "Update applied"
 
-    App->>API: I'm on build 225
-    API-->>App: You need build 338 (mandatory)
-    App->>App: Blocking update popup
+    App->>Backend: What version should I be on?
+    Backend-->>App: Newer than yours (mandatory)
+    App->>App: Update now
 ```
 
-Dev and staging were now fully automated. Build completes, everyone updates. No human in the loop.
+![Diagram 1](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-7acf67fe.png?v=88ad65c9)
 
-## Layer 3: The Last Manual Step
+## The Production Puzzle
 
-But production was different. Every App Store release ended with me connecting to the production database and running SQL to force the update. It worked. It always worked. But it was the one manual step in an otherwise fully automated pipeline.
+Dev and staging were fully automated. But production has a constraint that internal builds don't: when Apple releases your app to the App Store, it takes time for the binary to propagate to every CDN node worldwide. If you tell users "you must update" and the update isn't available in their region yet, you've just locked them out of your app for no reason.
 
-It existed because the original code explicitly rejected production from the automation. A cautious choice, but the wrong one. The authentication was already there. If the secret is valid, the caller is trusted. The environment restriction added no security, only friction.
+The answer is a delay. When Apple fires the "released to App Store" event, the system doesn't act immediately. It schedules a task that fires 30 minutes later. Enough time for Apple to distribute globally. The task queue handles the scheduling, the delay, and retries if something is temporarily down.
 
-I removed the restriction. Then I had to solve a harder problem.
+Same system, same function, different timing per environment. Dev and staging: instant. Production: 30 minutes.
 
-## The 30-Minute Problem
+## The Detail That Would Have Broken Everything
 
-You can't force users to update the moment you click "Release" in App Store Connect. Apple needs time to propagate the binary to CDN nodes across all regions. If I forced the update immediately, users in some countries would see "Update Required" but find nothing available in their App Store.
+Here's something that's worth sharing because it's the kind of thing that separates systems that work from systems that almost work.
 
-The solution: a 30-minute delay. When Apple fires the release event, my Cloud Function doesn't call the backend immediately. Instead, it schedules a task that fires 30 minutes later. Google Cloud Tasks handles the scheduling, the delay, and automatic retries if the backend is temporarily unavailable.
+Apple's webhook for "your app is now live on the App Store" contains almost no information. It tells you that a state change happened and gives you a resource ID. That's it. No version number. No build number. Not even which app it is.
 
-Same function, different behavior per environment: dev and staging get immediate updates when builds complete. Production gets a delayed update when the App Store release goes live.
+If I had built this from Apple's documentation and assumed the payload would contain what I needed, the system would have deployed, looked correct, passed every test, and silently done nothing in production. I only discovered this by pulling the actual webhook payload from production logs after a real release.
 
-## The Surprise in Apple's Payload
+The system now takes that resource ID and asks Apple's API: "What version is this? What build? Which app?" Then it acts. This is a pattern I keep seeing: the real world is always messier than the documentation. You build for the real payload, not the expected one.
 
-This is where building against real data saved me. I assumed Apple's release webhook would include the version and build number. It does not.
+## The Full Organism
 
-The actual payload when a build is released to the App Store contains only a state change ("now live") and a resource ID. No app identifier. No version string. No build number. If I had built the automation from documentation alone, it would have silently done nothing in production.
-
-I found this by pulling the real webhook payload from production logs after an actual release. The fix: use that resource ID to call Apple's API and fetch the version, build number, and app ID before scheduling the update.
-
-## The Unified System
-
-Here's the full picture:
+Here's what the system looks like when all the pieces are connected:
 
 ```mermaid
 flowchart TB
@@ -107,34 +107,34 @@ flowchart TB
     end
 
     subgraph GitHub["GitHub Actions"]
-        Build["Build + tag + upload commits"]
+        Build["Build, tag, track commits"]
     end
 
     subgraph Apple["Apple"]
-        Process["Process + Review + Release"]
+        Process["Process, review, release"]
     end
 
     subgraph Cloud["Google Cloud"]
-        CF["Cloud Function"]
-        CT["Cloud Tasks (30 min delay)"]
+        CF["Event router"]
+        CT["Delayed scheduler"]
     end
 
     subgraph Backend["Backend"]
-        DB["Version record (1 row)"]
+        DB["Version record"]
     end
 
     subgraph Slack["Slack"]
-        Notify["Every event, every action, every error"]
+        Notify["Every event, action, and error"]
     end
 
     subgraph Mobile["Mobile App"]
-        Popup["Blocking update popup"]
+        Popup["Mandatory update"]
     end
 
     Push --> Build --> Apple
-    Process -->|"Webhook"| CF
-    CF -->|"Dev/Stage: immediate"| DB
-    CF -->|"Production: delayed"| CT --> DB
+    Process -->|"Event"| CF
+    CF -->|"Immediate"| DB
+    CF -->|"Delayed"| CT --> DB
     CF --> Notify
     DB --> Popup
 
@@ -147,46 +147,43 @@ flowchart TB
     style Mobile fill:#fff3e0,stroke:#e65100,stroke-width:2px
 ```
 
-Everything talks to everything else, and nobody needs to tell it to. The developer pushes code. GitHub builds and tags. Apple processes and reviews. The Cloud Function listens, notifies, and triggers. Cloud Tasks handles the delay. The backend writes one row. The mobile app reads it and acts.
+![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-4dca7352.png?v=88ad65c9)
 
-There is no communication necessary between humans for any of this to work.
+Every node does one thing. GitHub builds. Apple reviews. The function routes. The scheduler delays. The backend records. Slack observes. The app enforces.
 
-## Full Visibility as a Feature
+No node is complex. But together, they create behavior that looks intelligent: code gets pushed, and days later, phones update themselves. Nobody coordinated anything. The system is the coordination.
 
-Every action the system takes posts to Slack. Not just Apple's events, but every version update action:
+## Visibility is Not Optional
 
-- Build ready, force update applied for dev/staging
-- Production released, 30-minute timer started
-- Backend update confirmed
-- Any failure at any step, with error details
+There's a temptation, when you automate something, to make it invisible. "It just works." But invisible automation is automation you can't trust. The moment something breaks, you're blind.
 
-I chose Slack over just logging because Slack is where I live during releases. If something goes wrong, I need to see it without opening a cloud console. And when everything goes right, the confirmation is right there next to the build notification.
+Every action the system takes shows up in Slack. Not just Apple's events (build ready, in review, released), but the system's own actions: force update applied, 30-minute timer scheduled, backend confirmed, or if something fails, what failed and why.
 
-If the automated system ever fails, there's a one-command manual fallback. But the point is that I shouldn't need it.
+Slack is the control plane. Not because it's the best monitoring tool, but because it's where I already live during a release. The information comes to me. I don't go looking for it.
 
-## The Infrastructure Principle
+## The Release
 
-All of this is infrastructure as code. The Cloud Function, the task queue, the permissions, the shared secrets, the environment variables. One command and everything is wired up. One shared secret ties the system together: the Cloud Function reads it to authenticate outbound calls, the backend reads it to validate inbound calls. Same trust boundary, managed in one place.
-
-This is what I mean when I say infrastructure should be invisible. You build it once, deploy it, and forget it exists. Until Slack reminds you it's working.
-
-## The Release Experience Now
-
-Here's what releasing looks like:
+Here's what releasing looks like now:
 
 1. I click "Release" in App Store Connect
-2. Slack: "Released to App Store"
-3. Slack: "Force Update Scheduled (30 minutes)"
-4. I close App Store Connect
-5. 30 minutes later: update confirmed
+2. Slack: your app is live
+3. Slack: force update scheduled, 30 minutes
+4. I close the browser
+5. 30 minutes later, Slack: confirmed
 6. Every user on an older version sees the update popup
 
-No SSH. No SQL. No manual anything.
+That's it. The system handles the rest.
 
-## What This Really Means
+## The Bigger Idea
 
-This isn't about any single piece of technology. It's about what happens when you connect systems intentionally. Each service does one thing. GitHub builds. Apple reviews. A function routes events. A task queue adds a delay. The backend writes one row. Slack provides visibility. The mobile app enforces.
+I keep coming back to this question: what is a company, really? It's a collection of systems. Some of them are people. Some of them are software. Some of them are third-party services you don't control (like Apple). The quality of a company isn't determined by how good each individual system is. It's determined by how well they talk to each other.
 
-None of them are complex individually. But connected, they create something that feels magical: a developer pushes code, and hours or days later, every user's phone updates itself. No human touched anything in between.
+Most companies have excellent individual systems that don't communicate. The CRM doesn't know what the build system is doing. The build system doesn't know what the notification system is doing. Humans bridge the gaps, manually, every time.
 
-The best infrastructure is the kind you build once and then forget exists. Until Slack reminds you it's working.
+What I'm building, release by release, automation by automation, is a company where the systems are the communication. Apple tells the Cloud Function. The Cloud Function tells Slack and the backend. The backend tells the mobile app. Each one reacts to the previous one, like a nervous system.
+
+The AI tools I use (and they're deeply embedded in how I build all of this) are the orchestrators. They help me see the connections, design the flows, and build the glue between systems at a speed that would have been impossible even two years ago. But the AI isn't the point. The point is that every system in the company knows what every other system is doing, and acts accordingly.
+
+No human messengers. No manual steps. No relay race with phone calls.
+
+Just systems, talking to each other, getting things done.

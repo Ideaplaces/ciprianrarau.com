@@ -11,3 +11,29 @@ import { ANALYTICS } from 'astrowind:config';
     />
   ) : null
 }
+
+<script>
+  import posthog from 'posthog-js';
+
+  function getEnvironment(): string {
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') return 'local';
+    return 'production';
+  }
+
+  posthog.init('phc_REr8yvSNak9ePrzkQmEJlC1JSMxZLME1QhXntAplPh7', {
+    api_host: 'https://us.i.posthog.com',
+    capture_pageview: true,
+    capture_pageleave: true,
+    loaded: (ph) => {
+      ph.register({
+        environment: getEnvironment(),
+        app: 'ciprianrarau',
+      });
+    },
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    posthog.capture('$pageview', { $current_url: window.location.href });
+  });
+</script>
