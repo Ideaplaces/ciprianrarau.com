@@ -305,7 +305,7 @@ export const GET: APIRoute = async ({ request }) => {
         <div class="contact-item">🌐 ciprianrarau.com</div>
         <div class="contact-item">💼 linkedin.com/in/ciprianrarau</div>
         <div class="contact-item">💻 github.com/crarau</div>
-        <div class="contact-item">📅 cal.com/chip-tech/45min</div>
+        <div class="contact-item">📅 cal.com/ciprianrarau/45-min</div>
       </section>
 
       <section class="section">
