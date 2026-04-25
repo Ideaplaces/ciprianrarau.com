@@ -46,7 +46,7 @@ from urllib.parse import urlparse, urljoin
 # Blog posts directory (relative to this script)
 SCRIPT_DIR = Path(__file__).parent
 BLOG_ROOT = SCRIPT_DIR.parent.parent
-POSTS_DIR = BLOG_ROOT / "src" / "data" / "post"
+POSTS_DIR = BLOG_ROOT / "content" / "blog"
 SYNC_STATE_FILE = SCRIPT_DIR / ".substack-sync.json"
 SITE_URL = "https://ciprianrarau.com"
 
