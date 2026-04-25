@@ -4,7 +4,10 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+# npm install (not npm ci) tolerates the picomatch peer-dep dedup conflict
+# between tailwind's micromatch (picomatch ^2) and tinyglobby's fdir
+# (picomatch ^3 || ^4). --legacy-peer-deps mirrors the previous Astro setup.
+RUN npm install --legacy-peer-deps --no-audit --no-fund
 
 FROM node:20-alpine AS builder
 WORKDIR /app
