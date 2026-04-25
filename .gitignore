@@ -1,6 +1,9 @@
 # build output
 dist/
 .output/
+.next/
+out/
+build/
 
 # dependencies
 node_modules/
@@ -14,7 +17,9 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.local
 .env.production
+.env*.local
 
 # macOS-specific files
 .DS_Store
@@ -30,3 +35,15 @@ pnpm-lock.yaml
 .vercel-token
 vercel-deploy.sh
 __pycache__/
+
+# typescript / next
+*.tsbuildinfo
+next-env.d.ts
+
+# legacy astro reference (kept for migration; remove at cutover)
+/_legacy-astro/node_modules
+/_legacy-astro/dist
+/_legacy-astro/.astro
+
+# tailwind source from styleguide export (committed only as tailwind.config.ts)
+tailwind.source.js

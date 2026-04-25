@@ -1,0 +1,28 @@
+{
+  "name": "ciprianrarau.com",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Ciprian (Chip) Rarau — personal portfolio, blog, and projects.",
+  "scripts": {
+    "dev": "next dev -p 5310",
+    "build": "next build",
+    "start": "next start -p 5310",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

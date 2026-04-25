@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #21517C;
+    --color-primary-light: #3671A1;
+    --color-primary-dark: #143553;
+    --color-secondary: #A45C36;
+    --color-secondary-light: #C87955;
+    --color-secondary-dark: #76361A;
+    --color-accent: #F29E4C;
+    --color-background: #F5F4F1;
+    --color-background-alt: #ECEBE9;
+    --color-surface: #F3EEE9;
+    --color-foreground: #252422;
+    --color-foreground-muted: #7C746B;
+    --color-border: #D6D4CF;
+    --color-border-light: #E8E6E2;
+    --color-success: #16A34A;
+    --color-warning: #F59E0B;
+    --color-error: #DC2626;
+    --color-info: #2563EB;
+  }
+
+  .dark {
+    --color-background: #1A1916;
+    --color-background-alt: #221F1B;
+    --color-surface: #2A2622;
+    --color-foreground: #F5F4F1;
+    --color-foreground-muted: #A39B92;
+    --color-border: #3A352F;
+    --color-border-light: #2F2A24;
+    --color-primary: #3671A1;
+    --color-primary-light: #5C97C7;
+    --color-primary-dark: #21517C;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  h1 { letter-spacing: -0.03em; }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-foreground);
+  }
+}
