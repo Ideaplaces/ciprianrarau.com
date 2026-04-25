@@ -1,471 +1,154 @@
-# ciprianrarau.com - Blog & Personal Website
+# ciprianrarau.com — Claude Instructions
 
 ## Overview
 
-Personal website and blog for Ciprian Rarau (Chip). Built with Astro + Tailwind CSS.
+Personal portfolio, blog, and projects site for Ciprian (Chip) Rarau. **Next.js 15 + React 19 + Tailwind v3.** Deployed to Azure Container Apps.
 
-## About Chip - Key Background
+The previous Astro version is preserved under `_legacy-astro/` on this branch as a reference during the migration. **Do not edit anything under `_legacy-astro/`.** It is dead code, kept only so the migration can grab old layouts and content if something is missing. It will be deleted once the new site has been live for a stable stretch.
 
-**Wisk.ai** - A foundational part of Chip's journey:
-- Spent 8-9 years building and scaling Wisk.ai
-- Grew the platform from zero to 1000+ clients
-- Evolved deployment practices from quarterly releases to multiple daily deployments
-- Learned production-first mindset through real constraints of serving paying customers
-- This experience shapes all of Chip's current DevOps and infrastructure philosophy
+## Stack
 
-**Current Focus:**
-- Helping 10+ startups with infrastructure and DevOps
-- Multi-cloud expertise (AWS, Azure, GCP)
-- Launching OneOps.cloud for startup infrastructure
-- AI-assisted development workflows
+- **Framework:** Next.js 15 (App Router), React 19, TypeScript 5
+- **Styling:** Tailwind v3 with custom Clay & Code design tokens
+- **Markdown:** `unified` + `remark` + `rehype` (NOT MDX — plain markdown so `<5%` style content does not parse as JSX)
+- **Forms:** Resend API (contact, newsletter)
+- **Icons:** lucide-react
+- **Fonts:** Inter (sans + heading) + JetBrains Mono via `next/font/google`
+- **Output:** Standalone (`output: 'standalone'`) for Docker
+- **Dev port:** 5310
 
-**Important:** Always spell it "Wisk.ai" (not "Wisc.ai").
+## Brand
 
-## Key Reference Folders
+- **Palette:** Clay & Code, generated via Styleguide Generator (conversation `6e0eecd1-1830-43af-ba27-0b84b0469dd6`, version `0ae9aec4-1e4f-4ff7-a064-27b29f4e5a66`).
+- **Colors:** Cream `#F5F4F1` background, deep navy `#21517C` primary, terracotta `#A45C36` secondary, amber `#F29E4C` accent.
+- **Type:** Inter 700/800 for headings (Söhne is paid; we substitute Inter at heavier weights with `tracking-tight`).
+- **Brand mark:** A cream "C" arc on a rounded deep-navy square. Lives in `app/icon.svg`, `app/apple-icon.tsx`, `app/opengraph-image.tsx`. Replaces the Vercel triangle scaffold default.
 
-These folders contain important implementations that should be referenced when writing about data warehouses, KPIs, analytics, or DevOps patterns:
-
-### Data Warehouse & KPI Implementations
-
-| Project | Path | Key Content |
-|---------|------|-------------|
-| **Eli Health** | `/home/chipdev/eli.health/` | Full data warehouse: BigQuery, Datastream CDC, Airbyte, GA4 sync |
-| **Eli KPI Service** | `/home/chipdev/eli.health/eli-kpi/` | 89 SQL queries, KPI dashboards, AI insights |
-| **Eli DevOps** | `/home/chipdev/eli.health/eli-devops/tf/` | Terraform for Datastream, GA4 sync, IAM |
-| **Mentorly Meta** | `/home/chipdev/mentorly-meta/` | BigQuery GA4 streaming, PostgreSQL, HubSpot sync |
-| **Mentorly Dashboard** | `/home/chipdev/mentorly-meta/mentorly-dash-meta/` | KPI queries, UTM tracking, marketing analytics |
-
-### Data Sources & Patterns
-
-**Eli Health Data Sources:**
-- PostgreSQL → BigQuery (Google Cloud Datastream CDC)
-- Shopify → BigQuery (Airbyte Cloud)
-- GA4 → BigQuery (cross-region sync via Cloud Functions)
-- Facebook Ads → BigQuery (Airbyte)
-- Google Ads → BigQuery (Airbyte)
-- Loopwork subscriptions → BigQuery (Airbyte)
-- Klaviyo email → BigQuery (Airbyte)
-
-**Mentorly Data Sources:**
-- GA4 streaming export → BigQuery
-- PostgreSQL operational data
-- HubSpot CRM sync
-
-### Key SQL Patterns
-
-- **Cross-source JOINs**: Combine marketing, e-commerce, and product data
-- **Attribution modeling**: First-touch, last-touch, multi-touch
-- **Cohort analysis**: Monthly retention tracking
-- **Funnel analysis**: Sankey diagrams from traffic to conversion
-- **CAC/ROAS**: Customer acquisition cost and return on ad spend
-
-## Blog Writing Approach
-
-### Voice Guidelines
-
-The blog should feel like having coffee with a senior technical leader who has battle scars and is generous enough to show them. Five qualities define the voice:
-
-1. **Grounded conviction.** No hedging. Speak from experience, not theory.
-2. **Stakes and numbers first.** Lead with dollar figures, client counts, consequences. Don't bury them in tables.
-3. **The why before the how.** Give readers 3-4 paragraphs of narrative before the first code block.
-4. **Warm directness.** Preserve the energy from voice transcripts. "I love pushing to production" is better than "deploying frequently is beneficial."
-5. **Philosophical anchoring.** Every post should anchor to a principle readers carry away even if they never implement the solution.
-
-### Blog Categories
-
-Posts use one of five categories (not "Technology"):
-
-- **Building** : Infrastructure, IaC, Terraform, cloud architecture, deployment pipelines
-- **Shipping** : Production-first philosophy, CI/CD, release strategy, velocity
-- **Thinking** : AI, complexity, spec-driven development, humans and machines
-- **Operating** : Business lessons, startup patterns, data-driven decisions
-- **Workflow** : Tools, productivity, voice-to-text, cloud dev machines, automation
-
-### Post Templates
-
-**Template A: Deep Technical Build** ("How I Built X") for Building category
-Open with a moment/story (200-400 words), one architecture diagram, implementation with WHY not just WHAT, a gotcha section, philosophical close. 1,500-3,000 words, 40/60 code-to-prose.
-
-**Template B: Principle Piece** ("Why I Do X") for Shipping/Thinking
-Story from production (300-500 words), state the principle in one sentence, 3-5 evidence sections, the tension/tradeoff, a takeaway. 1,200-2,000 words, 10/90 code-to-prose.
-
-**Template C: Short Insight** ("One Thing I Learned") for any category
-Bold opening hook, context (100-200 words), one insight (200-400 words), why it matters. 500-800 words, almost no code.
-
-**Template D: Lesson** ("What X Taught Me") for Operating
-Set the scene, narrative arc with turning points, the lesson, connection to present. 1,000-2,000 words, minimal code.
-
-### Direct Writing vs Natural-Blog-Writer Agent
-
-Choose the approach based on content type:
-
-- **Template A (code-heavy):** Direct writing
-- **Template B/C/D (narrative-heavy):** `natural-blog-writer` agent
-
-**Expected blog mix:** ~50% direct writing, ~50% natural-blog-writer
-
-### Publishing Rhythm
-
-No more than two consecutive Building posts. Every Building post should be followed by a Thinking, Operating, or Short Insight. Aim for one post every 2-3 weeks.
-
-**Style requirements (both approaches):**
-- **NO markdown tables in blog posts** - Substack does not support markdown tables via their API. Use bullet point comparisons, bold headers with lists, or code blocks for tabular data instead.
-- **First person singular ("I", "my", "me")** - This is Chip's personal blog, not a team blog
-  - Use "I built this integration..." not "We built this integration..."
-  - Exception: "We" is acceptable when referring to humanity/society in general observations
-  - Actions taken should always be "I", never "we"
-- **NO company or product names** - Never mention client, company, or product names in blog posts
-  - Use generic terms: "a healthcare startup", "a SaaS company", "one of the startups I work with"
-  - Exception: Wisk.ai can be mentioned (Chip's own company, public knowledge)
-  - Exception: IdeaPlaces can be mentioned (Chip's overarching business)
-  - Exception: Well-known tools/platforms are fine (AWS, Azure, Stripe, Shopify, etc.)
-  - **Never mention:** Eli, Eli Health, Mentorly, Pivot, or any other client/product name
-  - **Never mention** team members by name (use "a QA engineer", "a developer", "someone on the team")
-  - This protects client confidentiality and keeps content universally applicable
-  - **Timelessness principle:** Blog posts should stand on their own as lessons and patterns that outlast the current moment. Write about the *approach* and the *insight*, not the specific project. A reader should learn something valuable without needing to know which company or product is involved
-  - **In code examples, replace:**
-    - Company email domains → `company.com` (e.g., `dev@company.com`)
-    - GCP project IDs → `my-project-dev`, `my-project-prod`
-    - App names → `My App`, `My App Stage`, `My App Dev`
-    - Service-specific names (like "HAE") → generic terms (`ML`, `Analytics`, etc.)
-    - Bucket names → `my-project-bucket-name`
-    - Any identifiable infrastructure names → generic equivalents
-  - **In prose, replace:**
-    - Specific team names → "the team", "developers", "engineers"
-    - Product names → "the app", "the service", "the platform"
-    - Internal service names → generic descriptions ("ML service", "analytics pipeline")
-- Highly technical and experience-based
-- Facts over opinions - everything should be what was done, what was possible
-- No fluff or filler content
-- Code examples should be complete and functional
-- Mermaid diagrams where architecture visualization helps
-
-**Using the natural-blog-writer agent:**
-```
-Use Task tool with subagent_type='natural-blog-writer'
-Provide: topic, key points, transcript (if available), technical context
-```
-
-**Expected blog mix:** ~70% direct writing, ~30% natural-blog-writer
-
-## Blog Post Creation Workflow
-
-### 1. Create Blog Post
-
-Create a new markdown file in `src/data/post/`:
-
-```markdown
----
-title: "Your Title Here"
-author: Ciprian Rarau
-publishDate: 2025-12-18
-category: Building  # or Shipping, Thinking, Operating, Workflow
-excerpt: "Brief description for previews and SEO"
-tags:
-  - tag1
-  - tag2
-  - tag3
-metadata:
-  featured: false
-  showAuthor: true
-  showDate: true
-  showReadingTime: true
-  showTags: true
-transcript: |
-  Optional: Original voice transcript or notes that inspired this post.
-  This is stored in frontmatter but not displayed.
----
-
-## Your Content Here
-
-Write your blog content using standard markdown.
-```
-
-### 2. Add Mermaid Diagrams
-
-Include mermaid diagrams inline in your markdown:
-
-```markdown
-## Architecture
-
-```mermaid
-flowchart TD
-    A[Start] --> B[Process]
-    B --> C[End]
-
-    style A fill:#f9d5e5,stroke:#333,stroke-width:3px
-```
-```
-
-**Important notes for mermaid:**
-- **Use `<br/>` for line breaks in labels, NEVER `\n`** - Inside quoted labels like `["Line 1<br/>Line 2"]`, use `<br/>` for newlines. Using `\n` renders as literal text instead of a line break.
-- **Optimize for vertical reading** - Diagrams should be tall, not wide. Use `flowchart TD` (top-down) instead of `flowchart LR` (left-right) when possible
-- **Break wide diagrams into pieces** - If a diagram has more than 4-5 horizontal elements, split it into multiple smaller diagrams or restructure vertically
-- **Mobile-friendly width** - Diagrams should render well on narrow screens; avoid long horizontal chains
-- Use quotes around labels with special characters: `["email@domain.com"]`
-- Avoid `@` symbols in unquoted labels
-- Use `-->` for arrows, not unicode arrows
-
-### 3. Process Mermaid Diagrams
-
-Run the mermaid processing script:
-
-```bash
-# Standard processing (only new/changed diagrams)
-npm run process-mermaid
-
-# Force regenerate all diagrams
-npm run process-mermaid -- --force
-```
-
-**What this does:**
-- Extracts mermaid code blocks from all blog posts
-- Generates PNG images using mermaid-cli
-- Adds author footer to each diagram (from `scripts/mermaid-footer/`)
-- Updates markdown to include image references
-- Uses content-based hashing for caching
-
-**Requirements:**
-- `@mermaid-js/mermaid-cli` (npm install -g)
-- `imagemagick` (for footer stitching)
-- `libasound2` and other puppeteer dependencies
-
-### 4. Commit and Push
-
-```bash
-# Add blog post and generated images
-git add src/data/post/your-post.md
-git add public/images/diagrams/
-
-# Commit
-git commit -m "Add blog post: Your Title Here"
-
-# Push
-git push origin main
-```
+To regenerate or update the palette, follow `/styleguide-generate` (in ideaplaces-meta `.claude/prompts/`).
 
 ## Directory Structure
 
 ```
 ciprianrarau.com/
-├── src/
-│   └── data/
-│       └── post/           # Blog posts (*.md)
+├── app/
+│   ├── (marketing pages: page.tsx, about, cv, contact, blog, blog/[slug])
+│   ├── api/
+│   │   ├── contact/        # Resend send-email
+│   │   ├── subscribe/      # Resend audience add
+│   │   └── health/         # liveness probe
+│   ├── icon.svg            # browser tab icon
+│   ├── apple-icon.tsx      # 180x180 home-screen icon
+│   ├── opengraph-image.tsx # 1200x630 social share
+│   ├── rss.xml/            # RSS feed
+│   ├── sitemap.ts          # /sitemap.xml
+│   ├── robots.ts           # /robots.txt
+│   ├── globals.css         # Tailwind layers + Prism theme
+│   └── layout.tsx          # root layout, metadata, fonts
+├── components/             # React primitives (Header, Footer, Section, Button, ProductCard, ProjectCarousel, etc.)
+├── lib/
+│   ├── data/               # hardcoded products, companies, track record, projects
+│   └── blog.ts             # markdown loader + renderer
+├── content/blog/           # 25 blog posts (.md with frontmatter)
 ├── public/
-│   └── images/
-│       └── diagrams/       # Generated mermaid PNGs
-├── scripts/
-│   ├── process-mermaid-diagrams.cjs
-│   └── mermaid-footer/
-│       └── ciprian-rarau.png   # Author footer
-├── devops/
-│   ├── README.md           # Deployment and env vars documentation
-│   └── .env.example        # Template for all env vars
-├── blog-article-analysis.md    # Living document with article ideas
-└── CLAUDE.md                   # This file
+│   ├── projects/           # carousel images (10 PNGs)
+│   ├── images/blog/        # post inline images
+│   ├── images/diagrams/    # pre-rendered mermaid PNGs
+│   └── resume.pdf          # CV download
+├── _legacy-astro/          # frozen Astro version, deleted at cleanup
+├── Dockerfile              # multi-stage Next.js standalone build
+├── tailwind.config.ts
+└── next.config.ts
 ```
 
-## Blog Tags (Recommended)
-
-Use these tags consistently for machine readability:
-
-- `spec-driven-development` - Specs as source of truth
-- `infrastructure-as-code` - Terraform, IaC patterns
-- `multi-cloud` - AWS, Azure, GCP expertise
-- `ai-assisted-development` - AI workflow patterns
-- `production-first` - Always production-ready mindset
-- `devops-automation` - GitHub, Sentry, Workspace automation
-- `ml-in-production` - Real AI/ML deployment
-- `content-operations` - Help articles, marketing, docs
-- `serverless` - Cloud Run, Container Apps
-- `enterprise-compliance` - SOC 2, HIPAA
-
-## Blog Article Analysis
-
-The file `blog-article-analysis.md` is a living document containing:
-- 28 article ideas organized by theme
-- Source documentation references
-- Prioritized writing order
-- Tags and narrative threads
-
-Update this document as you write articles and discover new topics.
-
-## Commands Reference
+## Development
 
 ```bash
-# Development
-npm run dev              # Start dev server
-npm run build            # Build for production
-npm run preview          # Preview production build
-
-# Mermaid Processing
-npm run process-mermaid           # Process new diagrams
-npm run process-mermaid -- --force # Regenerate all
-
-# Image Generation (Google Gemini / Nano Banana Pro)
-./scripts/generate-image.sh "prompt" output.png
-./scripts/generate-image.sh "A minimalist icon" public/images/icon.png
-./scripts/generate-image.sh "Blog header" header.png --model gemini-2.0-flash-exp-image-generation
-
-# Linting
-npm run check            # Run all checks
-npm run fix              # Fix linting issues
+npm install
+npm run dev       # http://localhost:5310
+npm run build     # production build
+npm run start     # serve the build on 5310
+npm run typecheck # tsc --noEmit
+npm run lint
 ```
 
-## Image Generation
+## Adding a Blog Post
 
-The site uses Google's Gemini Image API (Nano Banana Pro) for generating images.
+Create a markdown file under `content/blog/<slug>.md`:
 
-**Script location:** `scripts/generate-image.sh`
+```markdown
+---
+title: "Your title"
+publishDate: 2026-04-25T12:00:00Z
+author: Ciprian Rarau
+excerpt: "One- to three-sentence summary used in lists, OG, and SEO."
+category: Building
+tags: [tag-one, tag-two]
+substack: true
+draft: false
+---
 
-**Available models:**
-- `gemini-3-pro-image-preview` - Best quality (default)
-- `gemini-2.5-flash-image` - Higher quality
-- `gemini-2.0-flash-exp-image-generation` - Fast iterations
-
-**Examples:**
-```bash
-# Generate favicon/icon
-./scripts/generate-image.sh "A minimalist CR monogram logo, blue to teal gradient" public/favicon.png
-
-# Generate blog header
-./scripts/generate-image.sh "DevOps pipeline visualization, modern flat design" public/images/blog/devops-header.png
-
-# Fast iteration mode
-./scripts/generate-image.sh "Quick test image" test.png --model gemini-2.0-flash-exp-image-generation
+Body in plain markdown. Code fences, GFM tables, mermaid PNG references all
+work. Do NOT use raw `<jsx>` — the renderer is markdown, not MDX.
 ```
 
-**Current favicon:** Generated with prompt "A minimalist, modern favicon icon for a tech blog. Simple geometric design featuring the letters 'CR' (Ciprian Rarau initials) in a clean, professional style. Use a gradient from deep blue to teal."
+The Substack sync workflow at `.github/workflows/substack-sync.yml` watches `src/data/post/**` from the legacy path. **It needs updating to watch `content/blog/**` after this migration lands.** Until then, sync to Substack runs manually (see workflow_dispatch).
 
-## Style Guide - Components Reference
+Mermaid diagrams in posts use pre-rendered PNGs from `public/images/diagrams/`. To re-process diagrams, port `_legacy-astro/scripts/process-mermaid-diagrams.cjs` to the new structure.
 
-**IMPORTANT:** Before creating any new page, visit `/style-guide` to see all available components visually. This ensures consistent styling across the site.
+### Voice Guidelines
 
-The site uses AstroWind components exclusively. All new pages must use these standard components - no custom HTML/CSS unless absolutely necessary.
+The blog should feel like coffee with a senior technical leader who has battle scars and shares them. Five qualities:
 
-### Layout Components
+1. **Grounded conviction.** No hedging. Speak from experience.
+2. **Stakes and numbers first.** Lead with dollar figures, client counts, consequences.
+3. **The why before the how.** Three or four paragraphs of narrative before the first code block.
+4. **Warm directness.** Preserve the energy from voice transcripts.
+5. **Philosophical anchoring.** Every post anchors to a principle the reader carries away.
 
-| Component | Usage | Example Pages |
-|-----------|-------|---------------|
-| `Hero` | Page headers with title, subtitle, CTA | index, about |
-| `Content` | Image + text blocks (reversible) | projects/*, about |
-| `Features` | Icon grid with descriptions | index, services |
-| `Features2` | Larger icon cards | services |
-| `Features3` | Compact feature list | projects/* |
-| `Steps` | Numbered process steps | services |
-| `Steps2` | Timeline with icons | about |
-| `Timeline` | Vertical timeline | index (experience) |
-| `FAQs` | Accordion Q&A | pricing |
-| `Stats` | Number highlights | projects/* |
-| `Pricing` | Pricing cards | pricing |
-| `CallToAction` | CTA sections | all pages |
+### Categories (existing posts use varied values; legacy taxonomy was)
 
-### Content Block Pattern (Image Left/Right)
+`Building`, `Shipping`, `Thinking`, `Operating`, `Workflow`. Real posts also use `AI`, etc. The schema accepts any string.
 
-```astro
-<Content
-  isReversed  <!-- Image on right, text on left -->
-  items={[
-    { title: 'Feature 1', description: '...' },
-    { title: 'Feature 2', description: '...' },
-  ]}
-  image={{ src: '~/assets/images/...', alt: '...' }}
->
-  <Fragment slot="content">
-    <h3>Section Title</h3>
-    <p>Description text...</p>
-  </Fragment>
-</Content>
-```
+### Content rules
 
-### Color Palette
+- **First person singular** (`I`, `my`, `me`). Not `we`.
+- **No client names**: use generic terms (`a healthcare startup`, `a SaaS company`). Exceptions: WISK.ai, IdeaPlaces, well-known tools (AWS, Stripe, etc.).
+- **No team member names** in prose.
+- **No markdown tables** in posts that sync to Substack (Substack API does not support them).
 
-- **Primary:** Blue (#1565C0 to teal gradient)
-- **Accent:** Teal (#0288D1)
-- **Success:** Green (#388E3C)
-- **Warning:** Amber (#F57C00)
-- **Error:** Red (#C62828)
-- **Dark mode:** Slate backgrounds
+## Environment Variables
 
-### Typography
+Pulled at runtime by the Container App. Set in Azure Key Vault and bound as Container App secrets:
 
-- **Headings:** font-heading (Inter/system)
-- **Body:** Default sans-serif
-- **Code:** Monospace
+- `RESEND_API_KEY` — used by `/api/contact` and `/api/subscribe`
+- `RESEND_AUDIENCE_ID` — newsletter audience
+- `RESEND_FROM` — sender address (defaults to `Ciprian Rarau <noreply@ciprianrarau.com>`)
+- `RECIPIENT_EMAIL` — contact form destination (defaults to `chip@ideaplaces.com`)
 
-### Icon System
-
-Uses `tabler` icons via `astro-icon`:
-```astro
-import { Icon } from 'astro-icon/components';
-<Icon name="tabler:code" class="w-6 h-6" />
-```
-
-Common icons: `tabler:code`, `tabler:building`, `tabler:user`, `tabler:rocket`, `tabler:chart-line`
-
-### Project Page Template
-
-All project pages follow this structure:
-1. Hero with stats (role, company, impact)
-2. Challenge section
-3. Solution with features grid
-4. Technical implementation
-5. Results/Impact stats
-6. Call to action
-
-### Blog Post Template
-
-- Frontmatter with title, excerpt, image, tags
-- Mermaid diagrams for architecture
-- Code blocks with syntax highlighting
-- First person singular ("I built...", not "We built...")
-
-### Favicon/Logo
-
-Located at `src/assets/favicons/`:
-- `favicon.ico` - Browser tab icon
-- `apple-touch-icon.png` - iOS home screen
-- `favicon.svg` - Vector version
-
-Generated source: `public/favicon-generated.png`
+Turnstile is wired into the legacy site but not the new contact form. To re-add, set `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` and validate the token in `app/api/contact/route.ts`.
 
 ## Deployment
 
-The site deploys automatically to Azure on push to main via GitHub Actions.
+Push to `main` triggers `.github/workflows/deploy.yml`:
 
-**Pipeline:** `.github/workflows/deploy.yml`
-- Builds Docker image
-- Pushes to Azure Container Registry (configured via `vars.ACR_LOGIN_SERVER`)
-- Deploys to Azure Web App (configured via `vars.AZURE_WEBAPP_NAME`)
-- Uses OIDC for authentication (no stored secrets)
+1. Build Docker image from `./Dockerfile`
+2. Push to Azure Container Registry (`vars.ACR_LOGIN_SERVER`)
+3. Update Azure Container App revision (`vars.AZURE_CONTAINER_APP`)
+4. Health check: poll `https://${FQDN}/` until 200 (max 150 seconds)
+5. Discord failure notification via `secrets.DISCORD_WEBHOOK_CHIP_LUCA`
 
-See `devops/README.md` for full documentation.
+The Dockerfile listens on port **4321** to match the existing Container App ingress targetPort. If the ingress targetPort is changed, update `ENV PORT` in the Dockerfile to match.
 
-## Author Footer
+OIDC authentication, no stored Azure credentials.
 
-The mermaid script automatically adds a footer to all diagrams. The footer is selected based on the `author` field in the blog post frontmatter:
+## Cross-linking with ideaplaces.com
 
-- Author: `Ciprian Rarau` → Footer: `scripts/mermaid-footer/ciprian-rarau.png`
+Header and Footer link out to `ideaplaces.com`. The reverse link (ideaplaces.com → ciprianrarau.com) lives in the `ideaplaces-website` repo and should be added there separately.
 
-To add a new author footer:
-1. Create a PNG file in `scripts/mermaid-footer/`
-2. Name it `{firstname}-{lastname}.png` (lowercase, hyphenated)
+## Style Guide
 
-## Mermaid Config Gotchas
+Live preview of the Clay & Code tokens at `/style-guide` would be a future addition. For now, the `_legacy-astro/src/pages/style-guide.astro` is a reference for what to rebuild.
 
-**CRITICAL: Never put `width` or `height` inside the mermaid config JSON.**
+## Image Generation
 
-These properties cause sequence diagram actor boxes to expand to fill the specified dimensions, creating huge empty boxes with tiny text. They should only be passed as CLI arguments (`--width 1200 --height 800`), not in the config JSON.
-
-**Theme choice:** Use `theme: 'base'` for full customization. The `'default'` and `'neutral'` themes override custom themeVariables inconsistently.
-
-**Debugging mermaid issues:**
-```bash
-# Test a single diagram directly before running the full script
-npx mmdc -i /tmp/test.mmd -o /tmp/test.png -c /tmp/config.json --scale 2
-
-# Then run full processing
-npm run process-mermaid -- --force
-```
-
-This saves time vs regenerating all 28+ diagrams while debugging config issues.
+Images for posts can be generated via the Gemini Image API. The script `_legacy-astro/scripts/generate-image.sh` uses `gemini-3-pro-image-preview` (default) and accepts a prompt + output path. Port to `scripts/` when needed.
