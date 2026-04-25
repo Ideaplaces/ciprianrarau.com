@@ -7,9 +7,13 @@ import { ProductCard } from '@/components/ProductCard';
 import { CompanyCard } from '@/components/CompanyCard';
 import { TrackRecordItem } from '@/components/TrackRecordItem';
 import { ProjectCarousel } from '@/components/ProjectCarousel';
+import { PostCard } from '@/components/PostCard';
 import { FEATURED_PRODUCTS, MORE_PRODUCTS } from '@/lib/data/products';
 import { ACTIVE_COMPANIES } from '@/lib/data/companies';
 import { TRACK_RECORD } from '@/lib/data/track-record';
+import { getRecentPosts } from '@/lib/blog';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -135,18 +139,26 @@ function Portfolio() {
 }
 
 function BlogTeaser() {
+  const posts = getRecentPosts(4);
   return (
     <Section
       eyebrow="Latest from the blog"
       title="Notes from the work"
       intro="Production stories, not theory. The blog is where the patterns get written down before they become products."
     >
-      <div className="rounded-xl border border-border-light bg-surface p-10 text-center">
-        <p className="text-foreground-muted">
-          Blog posts migrate in Phase 5. The full archive is preserved in
-          <code className="font-mono mx-1 text-secondary">_legacy-astro/src/data/post/</code>
-          on this branch.
-        </p>
+      <div>
+        {posts.map((post) => (
+          <PostCard key={post.slug} post={post} compact />
+        ))}
+      </div>
+      <div className="mt-8">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+        >
+          All posts
+          <ArrowRight size={14} strokeWidth={2.5} />
+        </Link>
       </div>
     </Section>
   );
