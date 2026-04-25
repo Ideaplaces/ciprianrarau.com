@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { ProductCard } from '@/components/ProductCard';
 import { CompanyCard } from '@/components/CompanyCard';
 import { TrackRecordItem } from '@/components/TrackRecordItem';
+import { ProjectCarousel } from '@/components/ProjectCarousel';
 import { FEATURED_PRODUCTS, MORE_PRODUCTS } from '@/lib/data/products';
 import { ACTIVE_COMPANIES } from '@/lib/data/companies';
 import { TRACK_RECORD } from '@/lib/data/track-record';
@@ -19,6 +20,7 @@ export default function Home() {
         <FeaturedProducts />
         <MoreProducts />
         <Companies />
+        <Portfolio />
         <BlogTeaser />
         <TrackRecord />
         <Newsletter />
@@ -115,6 +117,19 @@ function Companies() {
           <CompanyCard key={c.slug} company={c} />
         ))}
       </div>
+    </Section>
+  );
+}
+
+function Portfolio() {
+  return (
+    <Section
+      eyebrow="Full portfolio"
+      title="Hover across the work"
+      intro="Past and present in one ribbon. Hover any tile to expand it. The top of the list is what I'm shipping now; the bottom is the track record that funds the present."
+      size="wide"
+    >
+      <ProjectCarousel />
     </Section>
   );
 }
