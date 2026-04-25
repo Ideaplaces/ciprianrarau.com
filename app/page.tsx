@@ -8,6 +8,7 @@ import { CompanyCard } from '@/components/CompanyCard';
 import { TrackRecordItem } from '@/components/TrackRecordItem';
 import { ProjectCarousel } from '@/components/ProjectCarousel';
 import { PostCard } from '@/components/PostCard';
+import { NewsletterForm } from '@/components/NewsletterForm';
 import { FEATURED_PRODUCTS, MORE_PRODUCTS } from '@/lib/data/products';
 import { ACTIVE_COMPANIES } from '@/lib/data/companies';
 import { TRACK_RECORD } from '@/lib/data/track-record';
@@ -197,9 +198,7 @@ function Newsletter() {
           No marketing. No drip sequences. A short note when a product ships, a blog
           post lands, or I notice a pattern worth sharing.
         </p>
-        <p className="text-sm text-foreground-muted">
-          Sign-up form wires up in Phase 6 (Resend audience already provisioned).
-        </p>
+        <NewsletterForm />
       </div>
     </Section>
   );
