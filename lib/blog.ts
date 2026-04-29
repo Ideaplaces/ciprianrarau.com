@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-import { unified } from 'unified';
+import { unified, type Plugin } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
@@ -10,6 +10,13 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeStringify from 'rehype-stringify';
+import type { Root } from 'mdast';
+
+const stripMermaidCodeBlocks: Plugin<[], Root> = () => (tree) => {
+  tree.children = tree.children.filter(
+    (node) => !(node.type === 'code' && node.lang === 'mermaid'),
+  );
+};
 
 export type PostFrontmatter = {
   title: string;
@@ -95,6 +102,7 @@ export async function renderPostHtml(markdown: string): Promise<string> {
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(stripMermaidCodeBlocks)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeSlug)
