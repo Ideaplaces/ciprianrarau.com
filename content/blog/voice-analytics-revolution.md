@@ -1,5 +1,5 @@
 ---
-publishDate: 2025-10-27T12:00:00Z
+publishDate: 2026-05-01T12:00:00Z
 author: Ciprian Rarau
 title: "Voice Analytics Revolution: When Machines Finally Understand Human Speech"
 excerpt: "For the first time, machines can truly understand human language—not through brute force transcription, but because AI predicts what I'm going to say. This changes everything about how I interact with technology."
@@ -27,10 +27,11 @@ transcript: |
   Real user insights show 4,200 words daily in 40 minutes of talking time,
   saving nearly 20 hours of typing per month. Speaking at 113 WPM vs typing.
 
-  Update (2025): Switched from SuperWhisper to Wispr Flow (wisprflow.ai) mainly for
-  mobile app support. 31 weeks streak, 778,501 words dictated (7 complete books),
-  119 WPM (top 3% of users), 101 apps used. The quality of AI-powered transcription
-  is astonishing - not brute force, but predictive understanding. Wispr Flow raised $80M.
+  Update (May 2026): Switched from SuperWhisper to Wispr Flow (wisprflow.ai) mainly for
+  mobile app support. After a full year of voice as primary input: 1,663,682 words
+  dictated (16 complete books), 136 WPM (top 19% of users), 115 apps used, 152 day
+  longest streak, 29,960 AI prompts. The quality of AI-powered transcription is
+  astonishing, not brute force, but predictive understanding. Wispr Flow raised $80M.
 
   Comparing to Loom.com era: had 8,000-9,000 looms created pre-LLM. Now most interactions
   are full text because easier to read than watch videos. Voice-to-text-to-LLM pipeline.
@@ -101,12 +102,14 @@ But I switched to Wispr Flow for one reason: their mobile app. Voice input on de
 
 My Wispr Flow stats tell the story:
 
-![My Wispr Flow productivity stats - 31 weeks streak, 778,501 words dictated, 119 WPM (top 3%), 101 apps used](/images/blog/wisprflow-stats.png)
+![My Wispr Flow productivity stats: 1,663,682 words dictated, 16 complete books, 136 WPM (top 19%), 115 apps used, 152 day streak](/images/blog/wisprflow-stats.png)
 
-- **31 weeks** consecutive usage streak
-- **778,501 words** dictated (equivalent to 7 complete books)
-- **119 words per minute** speaking speed (top 3% of all Flow users)
-- **101 different apps** used with voice input
+- **A full year** of voice as primary input
+- **1,663,682 words** dictated (16 complete books, per Wispr Flow's own count)
+- **136 words per minute** speaking speed (top 19% of all Flow users)
+- **115 different apps** used with voice input
+- **152 day** longest consecutive usage streak
+- **29,960 AI prompts** sent through voice
 
 No wonder Wispr Flow raised $80 million. They've built something that fundamentally changes the human-computer interface.
 
