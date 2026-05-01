@@ -56,7 +56,7 @@ flowchart TD
     style B fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/sentry-configuration-as-code-diagram-16783202.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/sentry-configuration-as-code-diagram-16783202.png?v=e01b41f3)
 
 ## YAML Configuration Structure
 

@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start -p 5310",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "process-mermaid": "node scripts/process-mermaid-diagrams.cjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

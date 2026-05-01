@@ -61,7 +61,7 @@ flowchart TD
     style J fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-095cbb32.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-095cbb32.png?v=e01b41f3)
 
 One push triggers two parallel workflows: the website deploys via Docker to Azure, and the Substack sync runs via a Python script on a self-hosted GitHub Actions runner.
 
@@ -275,7 +275,7 @@ flowchart TD
     style G fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8688f80a.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8688f80a.png?v=e01b41f3)
 
 When a post is new, the script creates a draft and publishes it. When a post has changed (the hash differs), it updates the existing post in place using the stored `draft_id`. When nothing changed, it skips entirely.
 
@@ -346,7 +346,7 @@ flowchart TD
     style H2 fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 3](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8bc0c92e.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/substack-auto-sync-from-markdown-to-newsletter-diagram-8bc0c92e.png?v=e01b41f3)
 
 I write in one place. Markdown files in a git repository. Every post gets version history, pull request reviews if needed, and the full power of my development workflow. The website and the newsletter are just two outputs of the same source.
 

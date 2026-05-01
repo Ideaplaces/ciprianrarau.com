@@ -76,7 +76,7 @@ flowchart TD
     style L fill:#87CEEB,stroke:#333,stroke-width:3px
 ```
 
-![Diagram 1](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/devops-across-clouds-production-first-diagram-ab3bc984.png?v=e01b41f3)
 
 ## Infrastructure as Code: The Foundation of Everything
 

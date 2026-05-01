@@ -50,7 +50,7 @@ graph TD
     I --> J["Consistent UI<br/><i>ImpactPulse</i>"]
 ```
 
-![Diagram 1](/images/diagrams/design-system-lego-blocks-diagram-c1edf3b5.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/design-system-lego-blocks-diagram-c1edf3b5.png?v=e01b41f3)
 
 ## The Problem: Color Soup
 

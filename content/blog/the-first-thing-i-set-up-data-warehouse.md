@@ -79,7 +79,7 @@ flowchart TD
     style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
 ```
 
-![Diagram 1](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-f73a4db1.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-f73a4db1.png?v=e01b41f3)
 
 Each data source uses a different ingestion method, chosen based on the source type:
 
@@ -113,7 +113,7 @@ flowchart TD
     style TF fill:#E8710A,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-9873152e.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-9873152e.png?v=e01b41f3)
 
 Once everything lands in BigQuery, the datasets sit side by side, ready to be JOINed:
 
@@ -130,7 +130,7 @@ flowchart TD
     style BQ fill:#4285F4,stroke:#333,stroke-width:3px,color:#fff
 ```
 
-![Diagram 3](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-39e022e7.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-39e022e7.png?v=e01b41f3)
 
 ## Four Ways to Get Data In
 
@@ -430,7 +430,7 @@ flowchart TD
     style AI fill:#8B5CF6,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 4](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-559a94f0.png?v=88ad65c9)
+![Diagram 4](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-559a94f0.png?v=e01b41f3)
 
 The KPI service then feeds multiple delivery channels:
 
@@ -445,7 +445,7 @@ flowchart TD
     style API fill:#34A853,stroke:#333,stroke-width:2px,color:#fff
 ```
 
-![Diagram 5](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-0e9ec370.png?v=88ad65c9)
+![Diagram 5](/images/diagrams/the-first-thing-i-set-up-data-warehouse-diagram-0e9ec370.png?v=e01b41f3)
 
 ## What This Unlocks
 

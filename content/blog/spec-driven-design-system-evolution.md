@@ -51,7 +51,7 @@ flowchart TD
     style H fill:#f5d5f9,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/spec-driven-design-system-evolution-diagram-3e3061e9.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/spec-driven-design-system-evolution-diagram-3e3061e9.png?v=e01b41f3)
 
 Most developers would jump straight to step 7. That's why most feature work drifts, bloats, and ships late. The first 6 steps took less time than the implementation, but they made the implementation almost mechanical.
 

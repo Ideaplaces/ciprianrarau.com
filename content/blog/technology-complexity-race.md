@@ -72,7 +72,7 @@ flowchart TD
     style J fill:#f9d5e5,stroke:#333,stroke-width:3px
 ```
 
-![Diagram 1](/images/diagrams/technology-complexity-race-diagram-dede4eab.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/technology-complexity-race-diagram-dede4eab.png?v=e01b41f3)
 
 No AI can hold that full picture yet. It can execute brilliantly within any single box on that diagram. But the lines between the boxes, the tensions, the tradeoffs, the judgment calls about what to prioritize when everything is on fire. That is still a human job. And it is getting harder, because the systems are getting bigger and faster every month.
 

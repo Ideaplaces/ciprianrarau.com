@@ -50,7 +50,7 @@ flowchart TD
     style E fill:#FFD700,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-c619b60c.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-c619b60c.png?v=e01b41f3)
 
 The key decision: two separate disks.
 
@@ -150,7 +150,7 @@ flowchart TD
     style D fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8bb0d92e.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-8bb0d92e.png?v=e01b41f3)
 
 The result: compilation is faster, hot reload is snappier, and the monthly bill dropped by 37%. Four fast cores beat sixteen slow ones for everything I do.
 
@@ -176,7 +176,7 @@ flowchart TD
     style G fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 3](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-3d3758da.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/cloud-dev-machine-no-laptop-required-diagram-3d3758da.png?v=e01b41f3)
 
 A first-boot script runs automatically when the VM is created. It installs everything: Docker, Node.js via nvm, GitHub CLI, Azure CLI, Python, build tools. It formats the data disk, creates the mount, tunes the kernel for Node.js development (increasing inotify watchers to 524288). By the time I SSH in for the first time, the machine is ready.
 

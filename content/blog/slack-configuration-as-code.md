@@ -63,7 +63,7 @@ flowchart TD
     style K fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/slack-configuration-as-code-diagram-43793164.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/slack-configuration-as-code-diagram-43793164.png?v=e01b41f3)
 
 ## Configuration Structure
 
@@ -446,7 +446,7 @@ flowchart TD
     style B fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/slack-configuration-as-code-diagram-a7e29fa5.png?v=e01b41f3)
 
 One bot, one token, multiple purposes:
 - **Channel Manager**: Adds users to channels

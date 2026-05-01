@@ -60,7 +60,7 @@ flowchart TD
     style N fill:#87CEEB,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/specs-as-single-source-of-truth-diagram-a603cb55.png?v=e01b41f3)
 
 ## Specification Structure
 
@@ -150,7 +150,7 @@ flowchart LR
     F --> H[Marketing Copy]
 ```
 
-![Diagram 2](/images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/specs-as-single-source-of-truth-diagram-fd2e4a3a.png?v=e01b41f3)
 
 ## Help Articles from Specs
 

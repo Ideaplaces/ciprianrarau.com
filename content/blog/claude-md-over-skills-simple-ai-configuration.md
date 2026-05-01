@@ -72,7 +72,7 @@ flowchart TD
     style H fill:#e8f5e9,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/claude-md-over-skills-simple-ai-configuration-diagram-dbd30b45.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/claude-md-over-skills-simple-ai-configuration-diagram-dbd30b45.png?v=e01b41f3)
 
 Skills never call each other directly. When `co-launch` needs to send a message, it delegates to `co-comms` through natural language. The human stays in the loop at every transition. Brad calls this "mention, don't invoke."
 

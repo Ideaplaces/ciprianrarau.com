@@ -76,7 +76,7 @@ sequenceDiagram
     App->>App: Update now
 ```
 
-![Diagram 1](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-7acf67fe.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-7acf67fe.png?v=e01b41f3)
 
 ## The Production Puzzle
 
@@ -147,7 +147,7 @@ flowchart TB
     style Mobile fill:#fff3e0,stroke:#e65100,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-4dca7352.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/appstore-webhooks-automated-release-notes-diagram-4dca7352.png?v=e01b41f3)
 
 Every node does one thing. GitHub builds. Apple reviews. The function routes. The scheduler delays. The backend records. Slack observes. The app enforces.
 

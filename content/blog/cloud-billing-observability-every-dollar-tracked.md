@@ -61,7 +61,7 @@ flowchart TD
     style BA fill:#FFD700,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 1](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-a50de0bf.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-a50de0bf.png?v=e01b41f3)
 
 Two types of export land in BigQuery:
 
@@ -259,7 +259,7 @@ flowchart TD
     style SKIP fill:#FFB6C1,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 2](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-60c1a7cd.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-60c1a7cd.png?v=e01b41f3)
 
 The logic is simple:
 
@@ -325,7 +325,7 @@ flowchart TD
     style BF fill:#90EE90,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 3](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-311156de.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-311156de.png?v=e01b41f3)
 
 Billing alerts don't need environment isolation. They all go to the same `#alerts-billing` Slack channel, processed by the same deduplication logic. Running three identical Cloud Functions would triple the infrastructure for zero benefit. The function extracts the environment name from the budget's `display_name` field, so the Slack message still says "Production" or "Staging."
 
@@ -406,7 +406,7 @@ flowchart TD
     style Step4 fill:#FCE4EC,stroke:#333,stroke-width:2px
 ```
 
-![Diagram 4](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-f90f2480.png?v=88ad65c9)
+![Diagram 4](/images/diagrams/cloud-billing-observability-every-dollar-tracked-diagram-f90f2480.png?v=e01b41f3)
 
 Each step builds on the previous one:
 

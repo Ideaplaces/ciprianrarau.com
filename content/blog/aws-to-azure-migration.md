@@ -70,7 +70,7 @@ flowchart TD
     style C2 fill:#f9d5e5,stroke:#333,stroke-width:3px
 ```
 
-![Diagram 1](/images/diagrams/aws-to-azure-migration-diagram-d04bf085.png?v=88ad65c9)
+![Diagram 1](/images/diagrams/aws-to-azure-migration-diagram-d04bf085.png?v=e01b41f3)
 
 ## The Three-Environment Strategy
 
@@ -303,7 +303,7 @@ flowchart LR
     style F fill:#c8e6c9
 ```
 
-![Diagram 2](/images/diagrams/aws-to-azure-migration-diagram-f5cf32af.png?v=88ad65c9)
+![Diagram 2](/images/diagrams/aws-to-azure-migration-diagram-f5cf32af.png?v=e01b41f3)
 
 ### The Cutover Window
 
@@ -343,7 +343,7 @@ flowchart LR
     style C fill:#e0e0e0
 ```
 
-![Diagram 3](/images/diagrams/aws-to-azure-migration-diagram-ca6aecb0.png?v=88ad65c9)
+![Diagram 3](/images/diagrams/aws-to-azure-migration-diagram-ca6aecb0.png?v=e01b41f3)
 
 ### Rollback Plan
 
