@@ -1,133 +1,133 @@
 {
   "posts": {
     "claude-md-over-skills-simple-ai-configuration": {
-      "hash": "91ed5cc465becc5c",
+      "hash": "b3b778bd40eca708",
       "draft_id": 188896743,
       "title": "Why I Use One File Instead of Twelve: CLAUDE.md Over Skills",
       "synced_at": "2026-02-23T12:00:00+00:00"
     },
     "appstore-webhooks-automated-release-notes": {
-      "hash": "cb5620bae37528af",
+      "hash": "2178df2d06894b59",
       "draft_id": 189125251,
       "title": "Release on Autopilot: From Code Push to Forced App Update, Zero Human Steps",
       "synced_at": "2026-04-07T12:00:00+00:00"
     },
     "cloud-billing-observability-every-dollar-tracked": {
-      "hash": "0e3fadf794b78a62",
+      "hash": "3ecf52250ebc59fa",
       "draft_id": 189125253,
       "title": "Cloud Billing Observability: How I Track Every Dollar Across Three Environments",
       "synced_at": "2026-02-16T12:00:00+00:00"
     },
     "the-first-thing-i-set-up-data-warehouse": {
-      "hash": "aeea4b0fc0da9c80",
+      "hash": "5a9e13877724a9cd",
       "draft_id": 189126206,
       "title": "The First Thing I Set Up at Every Company: A Data Warehouse",
       "synced_at": "2026-02-09T12:00:00+00:00"
     },
     "meta-repository-pattern": {
-      "hash": "85ac540ab3ddfc1f",
+      "hash": "e0828ee583ec5fe2",
       "draft_id": 189129254,
       "title": "The Meta Repository Pattern: One Folder to Rule Them All",
       "synced_at": "2026-01-12T12:00:00+00:00"
     },
     "ai-powered-alert-summarizer": {
-      "hash": "4f11b91ef222be87",
+      "hash": "667a0e1278e5d3cf",
       "draft_id": 189129645,
       "title": "AI-Powered Alert Summarizer: Claude Reads My Logs So I Don't Have To",
       "synced_at": "2026-01-26T12:00:00+00:00"
     },
     "ai-reads-my-specs": {
-      "hash": "e7a74c9f1c8166df",
+      "hash": "648c79679d2bcea2",
       "draft_id": 189129649,
       "title": "AI Reads My Specs: Structured Development, Not Vibe Coding",
       "synced_at": "2025-11-24T12:00:00+00:00"
     },
     "aws-to-azure-migration": {
-      "hash": "2e3b5f838efc8164",
+      "hash": "11babac17886bf51",
       "draft_id": 189129651,
       "title": "Migrating from AWS to Azure: A Zero-Downtime Philosophy",
       "synced_at": "2025-12-01T12:00:00+00:00"
     },
     "company-docs-dna-of-the-business": {
-      "hash": "cd62394c9476f48d",
+      "hash": "d88188bf0500b44c",
       "draft_id": 189129652,
       "title": "Company Docs: The DNA of Every Business I Touch",
       "synced_at": "2026-01-05T12:00:00+00:00"
     },
     "devops-across-clouds-production-first": {
-      "hash": "5c2b6f33e07d8de0",
+      "hash": "9d213fe8c24110dc",
       "draft_id": 189129656,
       "title": "DevOps Across All Clouds: Why I'm Building Infrastructure for Every Startup",
       "synced_at": "2025-11-10T12:00:00+00:00"
     },
     "github-monday-integration": {
-      "hash": "01d5706d65d841a4",
+      "hash": "e7353f252be7afdf",
       "draft_id": 189129658,
       "title": "GitHub Meets Monday.com: Zero-Effort Task Tracking Through Git Commits",
       "synced_at": "2025-12-29T12:00:00+00:00"
     },
     "google-workspace-as-code": {
-      "hash": "15cc8734b10dfccf",
+      "hash": "96a2391596575f72",
       "draft_id": 189129661,
       "title": "Google Workspace as Code: Managing Users, Groups, and Aliases with Terraform",
       "synced_at": "2025-12-08T12:00:00+00:00"
     },
     "production-first-mindset-evolution": {
-      "hash": "da35fea5cd9a492b",
+      "hash": "995fcb484770b95c",
       "draft_id": 189129662,
       "title": "From Zero to a Thousand Clients: Why I Deploy to Production Every Day",
       "synced_at": "2025-11-03T12:00:00+00:00"
     },
     "sentry-configuration-as-code": {
-      "hash": "8e38626d0b25c1dd",
+      "hash": "c8001489cc0436c7",
       "draft_id": 189129664,
       "title": "Sentry Alerts, Filters, and Scrubbing: Programmatic Error Management",
       "synced_at": "2025-12-15T12:00:00+00:00"
     },
     "slack-configuration-as-code": {
-      "hash": "fd2e734b6c8f58cc",
+      "hash": "7f42ee55d51a3f87",
       "draft_id": 189129666,
       "title": "Slack Configuration as Code: Role-Based Channel Access Without the Clicking",
       "synced_at": "2026-02-02T12:00:00+00:00"
     },
     "specs-as-single-source-of-truth": {
-      "hash": "439fd9175e202a5e",
+      "hash": "878aff6c0fdc069e",
       "draft_id": 189129668,
       "title": "Specs as the Single Source of Truth: How I Write Once and Generate Everywhere",
       "synced_at": "2025-12-22T12:00:00+00:00"
     },
     "technology-complexity-race": {
-      "hash": "448170bfb64dcd68",
+      "hash": "2a306af0f8ba685f",
       "draft_id": 189129670,
       "title": "AI as an Extension of Myself: When Technology Complexity Outpaces Human Understanding",
       "synced_at": "2025-11-17T12:00:00+00:00"
     },
     "voice-analytics-revolution": {
-      "hash": "24cfdc972b601add",
+      "hash": "5a56c28a6fd03b66",
       "draft_id": 189129672,
       "title": "Voice Analytics Revolution: When Machines Finally Understand Human Speech",
       "synced_at": "2026-05-01T12:00:00+00:00"
     },
     "cloud-dev-machine-no-laptop-required": {
-      "hash": "45a47ad398b3c2e4",
+      "hash": "2174d3d5d7d70e41",
       "draft_id": 189563770,
       "title": "My Entire Development Runs in the Cloud. No Laptop Required.",
       "synced_at": "2026-03-01T16:00:00+00:00"
     },
     "substack-auto-sync-from-markdown-to-newsletter": {
-      "hash": "b2deef8ce6f6dc6e",
+      "hash": "24376812faf3d44c",
       "draft_id": 189585990,
       "title": "Every Blog Post I Write Automatically Publishes to Substack",
       "synced_at": "2026-03-01T20:00:00+00:00"
     },
     "spec-driven-design-system-evolution": {
-      "hash": "257bd09cbee5fbe6",
+      "hash": "ea4ba608b146fd6d",
       "draft_id": 191630010,
       "title": "How I Turned a Color Palette Generator Into a Professional Design System in One Session",
       "synced_at": "2026-03-20T22:00:00+00:00"
     },
     "design-system-lego-blocks": {
-      "hash": "5f277c727912a20c",
+      "hash": "f41d557419cc341b",
       "draft_id": 192140165,
       "title": "Design Systems as Lego Blocks: How I Built a Complete UI Library in One Session",
       "synced_at": "2026-03-25T12:00:00+00:00"
