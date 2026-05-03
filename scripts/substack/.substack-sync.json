@@ -149,6 +149,12 @@
       "draft_id": 193311732,
       "title": "44 PRs I Didn't Start",
       "synced_at": "2026-04-06T12:00:00+00:00"
+    },
+    "sentry-in-terraform": {
+      "hash": "649c3d7b62604c71",
+      "draft_id": 196271885,
+      "title": "Sentry in Terraform: One Module, Three Environments, Zero UI Clicks",
+      "synced_at": "2026-05-03T12:00:00+00:00"
     }
   }
 }
