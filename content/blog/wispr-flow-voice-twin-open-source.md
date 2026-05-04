@@ -201,7 +201,7 @@ That is the pattern I want to see more of. The corpus does not need a UI. It nee
 
 I have fifteen years of [Evernote](https://evernote.com) sitting in another archive. The same architecture works for any embeddable corpus, so the next step is an `import_evernote.py` that produces a second Chroma collection, gets clustered, gets visualized, and shows up in the explorer alongside the voice corpus. The interesting question is what happens when I overlay them: where does what I dictated last week echo what I wrote in 2014.
 
-The other obvious extension is the recurring-instruction detection. Every automation candidate the mirror layer surfaces is a target for an actual script. The list is honest, it is mine, it is dated, and it does not lie. The first ones I am scripting are the [git-deploy automation](/blog/sentry-in-terraform) for fast-forward, the Discord-message-Luca shortcut, and the GCP log triage routine.
+The other obvious extension is the recurring-instruction detection. Every automation candidate the mirror layer surfaces is a target for an actual script. The list is honest, it is mine, it is dated, and it does not lie. The first ones I am scripting are the git-deploy automation for fast-forward, the Discord-message-Luca shortcut, and the GCP log triage routine.
 
 If you have your own Wispr Flow corpus and want to see the shape of your year of voice, [the repo is here](https://github.com/Ideaplaces/wispr-flow-voice-twin). The quick start covers both the local-only path and the cloud path. PRs welcome, especially around new ingest sources beyond Wispr Flow and around the MCP tool surface.
 
