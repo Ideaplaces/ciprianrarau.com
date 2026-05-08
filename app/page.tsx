@@ -14,6 +14,7 @@ import { ACTIVE_COMPANIES } from '@/lib/data/companies';
 import { TRACK_RECORD } from '@/lib/data/track-record';
 import { getRecentPosts } from '@/lib/blog';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
@@ -39,22 +40,36 @@ function Hero() {
   return (
     <section className="pt-20 pb-24 md:pt-28 md:pb-32">
       <Container>
-        <div className="flex items-center gap-3 mb-8 text-sm uppercase tracking-widest text-foreground-muted font-mono">
-          <span className="inline-block h-px w-10 bg-secondary" />
-          <span>Ciprian (Chip) Rarau · Founder</span>
-        </div>
-        <h1 className="font-heading text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-8 max-w-4xl">
-          I run a portfolio of products.
-        </h1>
-        <p className="text-xl md:text-2xl leading-relaxed text-foreground-muted max-w-2xl mb-10">
-          Across my own ventures and the companies I build with, the same problems keep
-          showing up. Three instances of the same problem becomes a product.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Button href="#building">See what I&apos;m building</Button>
-          <Button href="/blog" variant="ghost">
-            Read the blog
-          </Button>
+        <div className="grid gap-10 md:gap-16 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="order-2 md:order-1">
+            <div className="flex items-center gap-3 mb-8 text-sm uppercase tracking-widest text-foreground-muted font-mono">
+              <span className="inline-block h-px w-10 bg-secondary" />
+              <span>Ciprian (Chip) Rarau · Founder</span>
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-8">
+              I run a portfolio of products.
+            </h1>
+            <p className="text-xl md:text-2xl leading-relaxed text-foreground-muted max-w-2xl mb-10">
+              Across my own ventures and the companies I build with, the same problems keep
+              showing up. Three instances of the same problem becomes a product.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button href="#building">See what I&apos;m building</Button>
+              <Button href="/blog" variant="ghost">
+                Read the blog
+              </Button>
+            </div>
+          </div>
+          <div className="order-1 md:order-2">
+            <Image
+              src="/chip.jpg"
+              alt="Ciprian (Chip) Rarau"
+              width={320}
+              height={320}
+              priority
+              className="rounded-2xl object-cover shadow-xl border border-border-light w-40 h-40 md:w-[320px] md:h-[320px]"
+            />
+          </div>
         </div>
       </Container>
     </section>
