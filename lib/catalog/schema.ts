@@ -115,16 +115,24 @@ export function fallbackCatalog(input: {
   slug: string;
   url: string;
   tagline?: string;
+  status?: ProductStatus;
+  description?: string;
+  category?: string;
+  features?: Feature[];
+  cta?: Cta;
 }): ProductCatalog {
   return {
     $schema: 1,
     name: input.name,
     slug: input.slug,
-    status: 'coming-soon',
+    status: input.status ?? 'coming-soon',
     url: input.url,
     tagline: input.tagline ?? 'Product information loading.',
     description:
+      input.description ??
       'This product catalog could not be loaded at build time. It will appear once the product endpoint is reachable.',
-    features: [],
+    category: input.category,
+    features: input.features ?? [],
+    cta: input.cta,
   };
 }

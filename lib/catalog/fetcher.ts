@@ -7,7 +7,14 @@
  * any extra plumbing.
  */
 
-import { ProductCatalog, fallbackCatalog, parseCatalog } from './schema';
+import {
+  Cta,
+  Feature,
+  ProductCatalog,
+  ProductStatus,
+  fallbackCatalog,
+  parseCatalog,
+} from './schema';
 
 export interface ProductManifestEntry {
   slug: string;
@@ -16,6 +23,11 @@ export interface ProductManifestEntry {
     name: string;
     url: string;
     tagline?: string;
+    status?: ProductStatus;
+    description?: string;
+    category?: string;
+    features?: Feature[];
+    cta?: Cta;
   };
 }
 
@@ -66,6 +78,37 @@ export const PRODUCT_MANIFEST: ProductManifestEntry[] = [
       url: 'https://hirescout.ideaplaces.com',
       tagline:
         'Pull your ATS pipeline, enrich every candidate, and rank them against the job you actually posted.',
+    },
+  },
+  {
+    slug: 'oneops',
+    catalogUrl: 'https://oneops.cloud/api/catalog',
+    fallback: {
+      name: 'OneOps',
+      url: 'https://oneops.cloud',
+      tagline: 'A manifesto for founders running scale-ups.',
+      status: 'live',
+      category: 'Manifesto + practice',
+      description:
+        'We are no longer writing code. We are summoning it. OneOps is the practice that makes the summoning reliable. Declare the company in code. Let AI flow into every space the structure reveals. Humans return to the work only humans can do.',
+      features: [
+        {
+          title: 'Predictable first',
+          body: 'Deterministic code as the default. Infrastructure, identity, secrets, source control all declared.',
+        },
+        {
+          title: 'AI second, in fixed roles',
+          body: 'AI deployed only where the specification declares it.',
+        },
+        {
+          title: 'Agents for the outliers',
+          body: 'Triggered by unpredictable events the deterministic system cannot handle.',
+        },
+      ],
+      cta: {
+        label: 'Read the manifesto',
+        href: 'https://oneops.cloud/manifesto',
+      },
     },
   },
 ];
