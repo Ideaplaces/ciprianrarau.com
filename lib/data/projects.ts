@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
       'One DevOps repo, one design system, shared CI/CD',
       'Founder',
     ],
-    href: 'https://ideaplaces.com',
+    href: '/projects',
   },
   {
     slug: 'mentorly',

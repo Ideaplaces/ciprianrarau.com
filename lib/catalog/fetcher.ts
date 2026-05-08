@@ -1,0 +1,123 @@
+/**
+ * Federated product catalog fetcher (mirror of ideaplaces-website/src/lib/catalog.ts).
+ *
+ * The PRODUCT_MANIFEST below MUST match ideaplaces.com's manifest. When you
+ * add or remove a product, change it in both places. The two sites read the
+ * same /api/catalog endpoints, so the rendered content stays in sync without
+ * any extra plumbing.
+ */
+
+import { ProductCatalog, fallbackCatalog, parseCatalog } from './schema';
+
+export interface ProductManifestEntry {
+  slug: string;
+  catalogUrl: string;
+  fallback: {
+    name: string;
+    url: string;
+    tagline?: string;
+  };
+}
+
+export const PRODUCT_MANIFEST: ProductManifestEntry[] = [
+  {
+    slug: 'styleguide',
+    catalogUrl: 'https://styleguide.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'Style Guide',
+      url: 'https://styleguide.ideaplaces.com',
+      tagline: 'Describe your brand, get a complete design system.',
+    },
+  },
+  {
+    slug: 'wealthplan',
+    catalogUrl: 'https://wealthplan.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'WealthPlan',
+      url: 'https://wealthplan.ideaplaces.com',
+      tagline:
+        'Canadian mortgage vs. investment simulator — find the strategy that builds the most wealth.',
+    },
+  },
+  {
+    slug: 'monday2github',
+    catalogUrl: 'https://monday2github.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'monday2github',
+      url: 'https://monday2github.ideaplaces.com',
+      tagline: 'Your Monday.com board updates itself as code ships.',
+    },
+  },
+  {
+    slug: 'c3',
+    catalogUrl: 'https://c3.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'C3',
+      url: 'https://c3.ideaplaces.com',
+      tagline:
+        'An open-source AI agent that runs on your dev machine and does your work while you sleep.',
+    },
+  },
+  {
+    slug: 'hirescout',
+    catalogUrl: 'https://hirescout.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'HireScout',
+      url: 'https://hirescout.ideaplaces.com',
+      tagline:
+        'Pull your ATS pipeline, enrich every candidate, and rank them against the job you actually posted.',
+    },
+  },
+];
+
+async function fetchWithTimeout(url: string, ms = 8000): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+  try {
+    return await fetch(url, {
+      signal: controller.signal,
+      next: { revalidate: 300 },
+      headers: { accept: 'application/json' },
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export async function fetchCatalog(slug: string): Promise<ProductCatalog> {
+  const entry = PRODUCT_MANIFEST.find((p) => p.slug === slug);
+  if (!entry) {
+    throw new Error(`Unknown product slug: ${slug}`);
+  }
+
+  try {
+    const res = await fetchWithTimeout(entry.catalogUrl);
+    if (!res.ok) {
+      console.warn(`[catalog] ${entry.catalogUrl} returned ${res.status}, using fallback`);
+      return fallbackCatalog({ slug: entry.slug, ...entry.fallback });
+    }
+    const json = await res.json();
+    const parsed = parseCatalog(json);
+    if (!parsed) {
+      console.warn(`[catalog] Invalid catalog from ${entry.catalogUrl}`);
+      return fallbackCatalog({ slug: entry.slug, ...entry.fallback });
+    }
+    if (parsed.slug !== entry.slug) {
+      console.warn(
+        `[catalog] Slug mismatch from ${entry.catalogUrl}: got "${parsed.slug}", expected "${entry.slug}"`,
+      );
+      return { ...parsed, slug: entry.slug };
+    }
+    return parsed;
+  } catch (err) {
+    console.warn(`[catalog] Falling back for ${slug}:`, (err as Error).message);
+    return fallbackCatalog({ slug: entry.slug, ...entry.fallback });
+  }
+}
+
+export async function fetchAllCatalogs(): Promise<ProductCatalog[]> {
+  const results = await Promise.all(
+    PRODUCT_MANIFEST.map((entry) => fetchCatalog(entry.slug)),
+  );
+  return results;
+}
