@@ -3,13 +3,13 @@ import { Footer } from '@/components/Footer';
 import { Container } from '@/components/Container';
 import { Section } from '@/components/Section';
 import { Button } from '@/components/Button';
-import { ProductCard } from '@/components/ProductCard';
+import { CatalogProductCard } from '@/components/CatalogProductCard';
 import { CompanyCard } from '@/components/CompanyCard';
 import { TrackRecordItem } from '@/components/TrackRecordItem';
 import { ProjectCarousel } from '@/components/ProjectCarousel';
 import { PostCard } from '@/components/PostCard';
 import { NewsletterForm } from '@/components/NewsletterForm';
-import { FEATURED_PRODUCTS, MORE_PRODUCTS } from '@/lib/data/products';
+import { fetchAllCatalogs } from '@/lib/catalog/fetcher';
 import { ACTIVE_COMPANIES } from '@/lib/data/companies';
 import { TRACK_RECORD } from '@/lib/data/track-record';
 import { getRecentPosts } from '@/lib/blog';
@@ -23,8 +23,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <FeaturedProducts />
-        <MoreProducts />
+        <ProductsInMotion />
         <Companies />
         <Portfolio />
         <BlogTeaser />
@@ -76,36 +75,19 @@ function Hero() {
   );
 }
 
-function FeaturedProducts() {
+async function ProductsInMotion() {
+  const catalogs = await fetchAllCatalogs();
   return (
     <Section
       id="building"
       eyebrow="What I'm building now"
-      title="Three products in motion"
-      intro="Each one started as a pattern I kept hitting across multiple companies. Three instances of the same problem becomes a product."
+      title="Products in motion"
+      intro="Each one started as a pattern I kept hitting across multiple companies. Three instances of the same problem becomes a product. Live from the IdeaPlaces catalog — adding a product to ideaplaces.com adds it here."
       size="wide"
     >
-      <div className="grid md:grid-cols-3 gap-5">
-        {FEATURED_PRODUCTS.map((p) => (
-          <ProductCard key={p.slug} product={p} featured />
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-function MoreProducts() {
-  return (
-    <Section
-      eyebrow="More from IdeaPlaces"
-      title="The list keeps growing"
-      intro="More products in flight. New ones land here as they ship."
-      size="wide"
-      className="bg-background-alt border-y border-border-light"
-    >
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {MORE_PRODUCTS.map((p) => (
-          <ProductCard key={p.slug} product={p} />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {catalogs.map((catalog) => (
+          <CatalogProductCard key={catalog.slug} catalog={catalog} />
         ))}
       </div>
       <div className="mt-10 text-sm text-foreground-muted">
