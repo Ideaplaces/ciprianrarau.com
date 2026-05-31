@@ -1,10 +1,14 @@
 /**
- * Federated product catalog fetcher (mirror of ideaplaces-website/src/lib/catalog.ts).
+ * Federated product catalog fetcher.
  *
- * The PRODUCT_MANIFEST below MUST match ideaplaces.com's manifest. When you
- * add or remove a product, change it in both places. The two sites read the
- * same /api/catalog endpoints, so the rendered content stays in sync without
- * any extra plumbing.
+ * Source of truth for "what products exist" lives on ideaplaces.com at
+ * `/api/manifest`. This file used to mirror the full PRODUCT_MANIFEST inline
+ * (with a comment begging future-me to keep both copies in sync); that was
+ * a duplication-prone foot-gun. Now we fetch the manifest at build time
+ * and fall back to a tiny hardcoded slug/url list only if ideaplaces.com is
+ * unreachable AND it's a brand-new build with nothing in the Next cache.
+ *
+ * Add a product → edit `ideaplaces-website/src/lib/catalog.ts` once.
  */
 
 import {
@@ -15,6 +19,8 @@ import {
   fallbackCatalog,
   parseCatalog,
 } from './schema';
+
+const MANIFEST_URL = 'https://ideaplaces.com/api/manifest';
 
 export interface ProductManifestEntry {
   slug: string;
@@ -31,133 +37,31 @@ export interface ProductManifestEntry {
   };
 }
 
-export const PRODUCT_MANIFEST: ProductManifestEntry[] = [
+// Last-resort fallback if BOTH ideaplaces.com is unreachable AND there's no
+// build cache. Just slugs + names + URLs — enough to render a card stub.
+// Real content (descriptions, features, status badges) comes from each
+// product's /api/catalog, which the per-entry fallback in fetchCatalog
+// handles independently.
+const OFFLINE_FALLBACK_MANIFEST: ProductManifestEntry[] = [
   {
     slug: 'styleguide',
     catalogUrl: 'https://styleguide.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'Style Guide',
-      url: 'https://styleguide.ideaplaces.com',
-      tagline: 'Describe your brand, get a complete design system.',
-    },
-  },
-  {
-    slug: 'wealthplan',
-    catalogUrl: 'https://wealthplan.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'WealthPlan',
-      url: 'https://wealthplan.ideaplaces.com',
-      tagline:
-        'Canadian mortgage vs. investment simulator — find the strategy that builds the most wealth.',
-    },
-  },
-  {
-    slug: 'monday2github',
-    catalogUrl: 'https://monday2github.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'monday2github',
-      url: 'https://monday2github.ideaplaces.com',
-      tagline: 'Your Monday.com board updates itself as code ships.',
-    },
+    fallback: { name: 'Style Guide', url: 'https://styleguide.ideaplaces.com' },
   },
   {
     slug: 'c3',
     catalogUrl: 'https://c3.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'C3',
-      url: 'https://c3.ideaplaces.com',
-      tagline:
-        'An open-source AI agent that runs on your dev machine and does your work while you sleep.',
-    },
+    fallback: { name: 'C3', url: 'https://c3.ideaplaces.com' },
   },
   {
-    slug: 'hirescout',
-    catalogUrl: 'https://hirescout.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'HireScout',
-      url: 'https://hirescout.ideaplaces.com',
-      tagline:
-        'Pull your ATS pipeline, enrich every candidate, and rank them against the job you actually posted.',
-    },
-  },
-  {
-    slug: 'impactpulse',
-    catalogUrl: 'https://impactpulse.catalyzeupdev.com/api/catalog',
-    fallback: {
-      name: 'Impact Pulse',
-      url: 'https://impactpulse.catalyzeupdev.com',
-      tagline: 'Measure program outcomes for nonprofits.',
-      status: 'coming-soon',
-      category: 'Nonprofit Tools',
-      description:
-        'A survey platform built for nonprofits to measure program outcomes. Collect participant feedback, track impact over time, and generate reports that funders actually want to see.',
-      cta: {
-        label: 'Learn more',
-        href: 'https://impactpulse.catalyzeupdev.com',
-      },
-    },
+    slug: 'monday2github',
+    catalogUrl: 'https://monday2github.ideaplaces.com/api/catalog',
+    fallback: { name: 'monday2github', url: 'https://monday2github.ideaplaces.com' },
   },
   {
     slug: 'digitizer',
     catalogUrl: 'https://digitizer.ideaplaces.com/api/catalog',
-    fallback: {
-      name: 'Digitizer',
-      url: 'https://digitizer.ideaplaces.com',
-      tagline: "If you can read it, it will be digitized. Even when you can't.",
-      status: 'live',
-      category: 'Document AI',
-      description:
-        'Drop in a PDF or image — printed, scanned, faxed, rotated, multilingual, even handwritten — get back clean structured JSON. A hybrid pipeline combines classical OCR with a vision-language model so each step uses the cheapest tool that solves it correctly. API-key authenticated and agent-ready.',
-      features: [
-        {
-          title: 'Handles anything you point at it',
-          body: 'Handwritten cursive, sideways scans, smudged receipts, faxes, multilingual invoices, free-form letters. No template, no schema, no labels required.',
-        },
-        {
-          title: 'Structured JSON, not OCR text',
-          body: 'Every field is named, typed, and tied to a bounding box on the source page. Items become tables, lists stay lists, prose stays prose.',
-        },
-        {
-          title: 'Agent-ready',
-          body: 'API-key authenticated. An LLM agent can upload a document, consume the JSON, and act on it without a browser in the loop.',
-        },
-      ],
-      cta: {
-        label: 'Try it with your PDF',
-        href: 'https://digitizer.ideaplaces.com',
-      },
-    },
-  },
-  {
-    slug: 'oneops',
-    catalogUrl: 'https://oneops.cloud/api/catalog',
-    fallback: {
-      name: 'OneOps',
-      url: 'https://oneops.cloud',
-      tagline: 'A manifesto for founders running scale-ups.',
-      status: 'live',
-      category: 'Manifesto + practice',
-      description:
-        'We are no longer writing code. We are summoning it. OneOps is the practice that makes the summoning reliable. Declare the company in code. Let AI flow into every space the structure reveals. Humans return to the work only humans can do.',
-      features: [
-        {
-          title: 'Predictable first',
-          body: 'Deterministic code as the default. Infrastructure, identity, secrets, source control all declared.',
-        },
-        {
-          title: 'AI second, in fixed roles',
-          body: 'AI deployed only where the specification declares it.',
-        },
-        {
-          title: 'Agents for the outliers',
-          body: 'Triggered by unpredictable events the deterministic system cannot handle.',
-        },
-      ],
-      cta: {
-        label: 'Read the manifesto',
-        href: 'https://oneops.cloud/manifesto',
-      },
-    },
+    fallback: { name: 'Digitizer', url: 'https://digitizer.ideaplaces.com' },
   },
 ];
 
@@ -175,12 +79,35 @@ async function fetchWithTimeout(url: string, ms = 8000): Promise<Response> {
   }
 }
 
-export async function fetchCatalog(slug: string): Promise<ProductCatalog> {
-  const entry = PRODUCT_MANIFEST.find((p) => p.slug === slug);
-  if (!entry) {
-    throw new Error(`Unknown product slug: ${slug}`);
-  }
+function isManifestEntry(v: unknown): v is ProductManifestEntry {
+  if (!v || typeof v !== 'object') return false;
+  const e = v as Record<string, unknown>;
+  if (typeof e.slug !== 'string' || typeof e.catalogUrl !== 'string') return false;
+  if (!e.fallback || typeof e.fallback !== 'object') return false;
+  const fb = e.fallback as Record<string, unknown>;
+  return typeof fb.name === 'string' && typeof fb.url === 'string';
+}
 
+async function fetchManifest(): Promise<ProductManifestEntry[]> {
+  try {
+    const res = await fetchWithTimeout(MANIFEST_URL);
+    if (!res.ok) {
+      console.warn(`[manifest] ${MANIFEST_URL} returned ${res.status}, using offline fallback`);
+      return OFFLINE_FALLBACK_MANIFEST;
+    }
+    const json = await res.json();
+    if (!Array.isArray(json) || !json.every(isManifestEntry)) {
+      console.warn('[manifest] response failed shape check, using offline fallback');
+      return OFFLINE_FALLBACK_MANIFEST;
+    }
+    return json;
+  } catch (err) {
+    console.warn('[manifest] fetch failed, using offline fallback:', (err as Error).message);
+    return OFFLINE_FALLBACK_MANIFEST;
+  }
+}
+
+async function fetchCatalogFromEntry(entry: ProductManifestEntry): Promise<ProductCatalog> {
   try {
     const res = await fetchWithTimeout(entry.catalogUrl);
     if (!res.ok) {
@@ -201,14 +128,21 @@ export async function fetchCatalog(slug: string): Promise<ProductCatalog> {
     }
     return parsed;
   } catch (err) {
-    console.warn(`[catalog] Falling back for ${slug}:`, (err as Error).message);
+    console.warn(`[catalog] Falling back for ${entry.slug}:`, (err as Error).message);
     return fallbackCatalog({ slug: entry.slug, ...entry.fallback });
   }
 }
 
+export async function fetchCatalog(slug: string): Promise<ProductCatalog> {
+  const manifest = await fetchManifest();
+  const entry = manifest.find((p) => p.slug === slug);
+  if (!entry) {
+    throw new Error(`Unknown product slug: ${slug}`);
+  }
+  return fetchCatalogFromEntry(entry);
+}
+
 export async function fetchAllCatalogs(): Promise<ProductCatalog[]> {
-  const results = await Promise.all(
-    PRODUCT_MANIFEST.map((entry) => fetchCatalog(entry.slug)),
-  );
-  return results;
+  const manifest = await fetchManifest();
+  return Promise.all(manifest.map(fetchCatalogFromEntry));
 }
