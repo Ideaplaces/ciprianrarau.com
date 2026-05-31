@@ -81,6 +81,37 @@ export const PRODUCT_MANIFEST: ProductManifestEntry[] = [
     },
   },
   {
+    slug: 'digitizer',
+    catalogUrl: 'https://digitizer.ideaplaces.com/api/catalog',
+    fallback: {
+      name: 'Digitizer',
+      url: 'https://digitizer.ideaplaces.com',
+      tagline: "If you can read it, it will be digitized. Even when you can't.",
+      status: 'live',
+      category: 'Document AI',
+      description:
+        'Drop in a PDF or image — printed, scanned, faxed, rotated, multilingual, even handwritten — get back clean structured JSON. A hybrid pipeline combines classical OCR with a vision-language model so each step uses the cheapest tool that solves it correctly. API-key authenticated and agent-ready.',
+      features: [
+        {
+          title: 'Handles anything you point at it',
+          body: 'Handwritten cursive, sideways scans, smudged receipts, faxes, multilingual invoices, free-form letters. No template, no schema, no labels required.',
+        },
+        {
+          title: 'Structured JSON, not OCR text',
+          body: 'Every field is named, typed, and tied to a bounding box on the source page. Items become tables, lists stay lists, prose stays prose.',
+        },
+        {
+          title: 'Agent-ready',
+          body: 'API-key authenticated. An LLM agent can upload a document, consume the JSON, and act on it without a browser in the loop.',
+        },
+      ],
+      cta: {
+        label: 'Try it with your PDF',
+        href: 'https://digitizer.ideaplaces.com',
+      },
+    },
+  },
+  {
     slug: 'oneops',
     catalogUrl: 'https://oneops.cloud/api/catalog',
     fallback: {
