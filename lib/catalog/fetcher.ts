@@ -81,6 +81,23 @@ export const PRODUCT_MANIFEST: ProductManifestEntry[] = [
     },
   },
   {
+    slug: 'impactpulse',
+    catalogUrl: 'https://impactpulse.catalyzeupdev.com/api/catalog',
+    fallback: {
+      name: 'Impact Pulse',
+      url: 'https://impactpulse.catalyzeupdev.com',
+      tagline: 'Measure program outcomes for nonprofits.',
+      status: 'coming-soon',
+      category: 'Nonprofit Tools',
+      description:
+        'A survey platform built for nonprofits to measure program outcomes. Collect participant feedback, track impact over time, and generate reports that funders actually want to see.',
+      cta: {
+        label: 'Learn more',
+        href: 'https://impactpulse.catalyzeupdev.com',
+      },
+    },
+  },
+  {
     slug: 'digitizer',
     catalogUrl: 'https://digitizer.ideaplaces.com/api/catalog',
     fallback: {
