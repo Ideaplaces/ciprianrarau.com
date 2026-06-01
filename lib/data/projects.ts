@@ -135,18 +135,4 @@ export const PROJECTS: Project[] = [
     ],
     href: '#',
   },
-  {
-    slug: 'oneops',
-    title: 'oneops',
-    subtitle: 'Cloud-ops side project',
-    image: '/projects/oneops.png',
-    era: 'present',
-    details: [
-      'Multi-cloud ops dashboard',
-      'Built alongside the day work',
-      'Open early access',
-      'Side project',
-    ],
-    href: 'https://oneops.cloud',
-  },
 ];
