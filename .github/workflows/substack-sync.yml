@@ -105,17 +105,16 @@ jobs:
             git push
           fi
 
-      - name: Notify Discord on failure
+      - name: Describe the failure
+        id: describe
         if: failure()
         env:
-          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_CIPRIANRARAU_PRODUCTION }}
           REASON: ${{ steps.azlogin.outcome == 'failure' && 'oidc' || steps.cookie.outputs.failure_reason || steps.sync.outputs.failure_reason }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           COMMIT_MSG: ${{ github.event.head_commit.message }}
           ACTOR: ${{ github.actor }}
         run: |
           python3 - <<'PY'
-          import json, os, urllib.request
+          import os
 
           reason = os.environ.get("REASON") or "unknown"
           cases = {
@@ -169,19 +168,19 @@ jobs:
           commit = commit[0] if commit else "(manual run)"
           desc += f"\n\n**Commit:** {commit}\n**By:** {os.environ.get('ACTOR','')}"
 
-          payload = {"embeds": [{
-              "title": f":x: {title}",
-              "description": desc,
-              "url": os.environ["RUN_URL"],
-              "color": color,
-              "footer": {"text": "ciprianrarau.com | substack-sync | runner chips-mac"},
-          }]}
-          req = urllib.request.Request(
-              os.environ["WEBHOOK"],
-              data=json.dumps(payload).encode(),
-              headers={"Content-Type": "application/json",
-                       # Discord 403s the default Python-urllib User-Agent.
-                       "User-Agent": "ideaplaces-ci/1.0"})
-          with urllib.request.urlopen(req) as r:
-              print("discord:", r.status)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"title={title}\n")
+              out.write(f"desc<<EOF_DESC\n{desc}\nEOF_DESC\n")
           PY
+
+      - name: Discord CI status
+        if: always()
+        uses: Ideaplaces/discord-ci-status@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_CIPRIANRARAU_PRODUCTION }}
+          bot-token: ${{ secrets.DISCORD_BOT_TOKEN }}
+          status: ${{ job.status }}
+          title: ${{ steps.describe.outputs.title || 'Substack sync failed' }}
+          description: ${{ steps.describe.outputs.desc }}
+          footer: ciprianrarau.com | substack-sync | runner chips-mac
+          mention: "<@908834861526175844>"
